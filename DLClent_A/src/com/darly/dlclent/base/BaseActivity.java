@@ -7,17 +7,18 @@
  */
 package com.darly.dlclent.base;
 
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.util.LogUtils;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
+
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.util.LogUtils;
 
 /**
  * @author zhangyh2 BaseActivity $ 下午2:33:01 TODO
  */
 public abstract class BaseActivity extends FragmentActivity {
+
 
 	/*
 	 * (non-Javadoc)
@@ -64,19 +65,19 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	/**
 	 * 
-	 * 下午2:42:02
-	 * 
-	 * @author zhangyh2 BaseFragment.java TODO 初始化坚挺事件
-	 */
-	protected abstract void initListener();
-
-	/**
-	 * 
 	 * 下午2:34:10
 	 * 
 	 * @author zhangyh2 BaseActivity.java TODO 加载数据
 	 */
 	protected abstract void loadData();
+
+	/**
+	 * 
+	 * 下午2:42:02
+	 * 
+	 * @author zhangyh2 BaseFragment.java TODO 初始化坚挺事件
+	 */
+	protected abstract void initListener();
 
 	/*
 	 * (non-Javadoc)
