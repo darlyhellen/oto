@@ -9,19 +9,31 @@
         android:targetSdkVersion="18" />
 
     <application
-        android:allowBackup="true"
         android:name="com.darly.dlclent.base.APP"
-        android:icon="@drawable/ic_launcher"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.darly.dlclent.ui.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.darly.dlclent.ui.welcome.Welcome"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.darly.dlclent.ui.welcome.GuideAnimActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.darly.dlclent.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
     </application>
 
