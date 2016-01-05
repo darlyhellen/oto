@@ -24,7 +24,8 @@ public enum APPEnum {
 	 */
 	DOWNLOADPATH(
 			"http://dlsw.baidu.com/sw-search-sp/soft/2e/10849/winrar521scp.1432703245.exe",
-			0), WIDTH("screen width", 0), HEIGHT("screen height", 0);
+			0), WIDTH("screen width", 0), HEIGHT("screen height", 0), CHECKISUPDATE(
+			"CHECKUPDATACACHE", 0), NOTUPDATE("",0), STORAGE_ROOT_DIR("dlclient",0);
 
 	public static final int DB_SELECT = 0x0001;
 

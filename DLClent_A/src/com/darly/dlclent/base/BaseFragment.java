@@ -10,6 +10,8 @@ package com.darly.dlclent.base;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.darly.dlclent.R;
+import com.darly.dlclent.common.ToastApp;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 
@@ -56,6 +58,9 @@ public abstract class BaseFragment extends Fragment {
 		LogUtils.customTagPrefix = "oop"; // 方便调试时过滤 adb logcat 输出
 		LogUtils.allowI = true; // 关闭 LogUtils.i(...) 的 adb log 输出
 		ViewUtils.inject(getActivity());// 注入view和事件
+		if (!APP.isNetworkConnected(getActivity())) {
+			ToastApp.showToast(getActivity(), R.string.neterror);
+		}
 	}
 
 	/**

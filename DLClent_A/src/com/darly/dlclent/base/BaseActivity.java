@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
+import com.darly.dlclent.R;
+import com.darly.dlclent.common.ToastApp;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 
@@ -53,7 +55,9 @@ public abstract class BaseActivity extends FragmentActivity {
 		LogUtils.customTagPrefix = "oop"; // 方便调试时过滤 adb logcat 输出
 		LogUtils.allowI = true; // 关闭 LogUtils.i(...) 的 adb log 输出
 		ViewUtils.inject(this);// 注入view和事件
-
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(this, R.string.neterror);
+		}
 	}
 
 	/**

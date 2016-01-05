@@ -1,5 +1,7 @@
 package com.darly.dlclent.common;
 
+import com.darly.dlclent.base.APP;
+
 import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -41,6 +43,32 @@ public class ToastApp {
 
 		if (toast == null) {
 			toast = Toast.makeText(context, msg, TOASTTIME);
+		} else {
+			toast.setText(msg);
+		}
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+	}
+
+	public static void showToast(String msg) {
+		if (!isShow)
+			return;
+
+		if (toast == null) {
+			toast = Toast.makeText(APP.getInstance(), msg, TOASTTIME);
+		} else {
+			toast.setText(msg);
+		}
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+	}
+
+	public static void showToast(int msg) {
+		if (!isShow)
+			return;
+
+		if (toast == null) {
+			toast = Toast.makeText(APP.getInstance(), msg, TOASTTIME);
 		} else {
 			toast.setText(msg);
 		}
