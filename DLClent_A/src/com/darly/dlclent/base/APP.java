@@ -12,6 +12,8 @@ import java.io.File;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.WindowManager;
@@ -148,6 +150,39 @@ public class APP extends Application {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @return 下午3:23:16
+	 * @author zhangyh2 APP.java TODO 获取XML文件中的版本信息，用于展示页面。
+	 */
+	public String getVersion() {
+		String version = "0.0.0";
+		try {
+			PackageInfo packageInfo = getPackageManager().getPackageInfo(
+					getPackageName(), 0);
+			version = packageInfo.versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return version;
+	}
+
+	/**
+	 * @return 下午3:24:51
+	 * @author zhangyh2 APP.java TODO 获取XML文件件中的版本号。
+	 */
+	public int getVersionCode() {
+		int version = 0;
+		try {
+			PackageInfo packageInfo = getPackageManager().getPackageInfo(
+					getPackageName(), 0);
+			version = packageInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return version;
 	}
 
 }

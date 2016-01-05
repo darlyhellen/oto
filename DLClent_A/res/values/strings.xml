@@ -10,4 +10,7 @@
     <string name="yes">确认</string>
     <string name="no">取消</string>
 
+    <!-- Welcome -->
+    <string name="start">进入应用</string>
+
 </resources>

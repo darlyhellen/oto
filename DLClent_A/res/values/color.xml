@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- welcome -->
+    <color name="white">#ffffff</color>
+    <color name="wel_text">#bebebe</color>
+    <color name="wel_back_color">#1e1e1e</color>
+    <color name="wel_click_color">#e1e1e1</color>
+
+</resources>
