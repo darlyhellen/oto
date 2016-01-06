@@ -28,6 +28,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  */
 public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 
+	public interface ClickCarouselistener {
+
+		public void clickCarousel(String url);
+
+	}
+
+	private ClickCarouselistener clickCarouselistener;
+
 	private Context context;
 	public static ViewPager pager;
 	private ImageView one;
@@ -179,6 +187,7 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 		switch (v.getId()) {
 		case R.id.carousel_onlyone:
 			// 一个轮播的点击事件。
+			clickCarouselistener.clickCarousel(data.get(0));
 			break;
 
 		default:
@@ -264,9 +273,14 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// 点击事件。
-				// 点击进入单聊模式
+				clickCarouselistener.clickCarousel(data.get(a));
 			}
 		});
+	}
+
+	public void setClickCarouselistener(
+			ClickCarouselistener clickCarouselistener) {
+		this.clickCarouselistener = clickCarouselistener;
 	}
 
 }

@@ -63,10 +63,10 @@ public class JsonUtil {
 						continue;
 					}
 					if (value instanceof Boolean) {
-						buff.append((Boolean) value);
+						buff.append(value);
 						buff.append(",");
 					} else if (value instanceof Number) {
-						buff.append((Number) value);
+						buff.append(value);
 						buff.append(",");
 					} else if (value instanceof Date) {
 						buff.append("\"");
