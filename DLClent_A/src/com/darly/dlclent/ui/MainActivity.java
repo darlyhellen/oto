@@ -30,6 +30,7 @@ import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.CheckUpdata;
 import com.darly.dlclent.model.CheckUpdataBase;
 import com.darly.dlclent.service.UpdateService;
+import com.darly.dlclent.ui.login.LoginActivity;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -37,9 +38,13 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OnClickListener {
+
+	@ViewInject(R.id.main_login_btn)
+	private Button btn;
 
 	/*
 	 * (non-Javadoc)
@@ -50,6 +55,7 @@ public class MainActivity extends BaseActivity {
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		checkVerson();
+
 	}
 
 	/*
@@ -71,7 +77,7 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void initListener() {
 		// TODO Auto-generated method stub
-
+		btn.setOnClickListener(this);
 	}
 
 	private AlertDialog alertDialog;
@@ -237,6 +243,24 @@ public class MainActivity extends BaseActivity {
 							calendar.get(Calendar.DAY_OF_YEAR));
 				}
 			});
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.main_login_btn:
+			startActivity(new Intent(this, LoginActivity.class));
+			break;
+
+		default:
+			break;
 		}
 	}
 
