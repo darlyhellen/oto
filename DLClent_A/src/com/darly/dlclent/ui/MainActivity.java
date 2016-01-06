@@ -1,17 +1,20 @@
 package com.darly.dlclent.ui;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
@@ -22,10 +25,12 @@ import com.darly.dlclent.common.HttpClient;
 import com.darly.dlclent.common.JsonUtil;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
+import com.darly.dlclent.model.BaseModel;
+import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.CheckUpdata;
 import com.darly.dlclent.model.CheckUpdataBase;
 import com.darly.dlclent.service.UpdateService;
-import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -102,13 +107,25 @@ public class MainActivity extends BaseActivity {
 							@Override
 							public void onFailure(HttpException arg0,
 									String arg1) {
-								ToastApp.showToast(R.string.neterror);
+								ToastApp.showToast(R.string.neterror_norespanse);
 							}
 						});
 			} else {
-				CheckUpdata re = new CheckUpdata("", 8, "", true);
-				CheckUpdataBase da = new CheckUpdataBase(200, "", re);
-				String jsonString = JsonUtil.pojo2Json(da);
+				String jsonString = null;
+				if (new Random().nextBoolean()) {
+					CheckUpdata re = new CheckUpdata(
+							"",
+							4,
+							"版本还行，\r\n弄个测试作为全职PHPer偶尔需要客串下Androider,最近公司的一个项目需要Android的客户端\r\n(主要图片特效处理及其上传)，自己就客串下Androider.之前有过Android开发经验所以做这个挺顺手的，\r\n几乎所有东西直接github中拿过来改改就用，不过在处理图片上传的时候选择了xUtils这个",
+							false);
+
+					CheckUpdataBase da = new CheckUpdataBase(200, "", re);
+					jsonString = JsonUtil.pojo2Json(da);
+				} else {
+					CheckUpdataBase da = new CheckUpdataBase(110, "用户信息出错",
+							null);
+					jsonString = JsonUtil.pojo2Json(da);
+				}
 				LogUtils.i(jsonString);
 				isUpdata(jsonString);
 			}
@@ -126,19 +143,20 @@ public class MainActivity extends BaseActivity {
 		if (datas == null) {
 			return;
 		}
-		CheckUpdataBase check = new Gson().fromJson(datas,
-				CheckUpdataBase.class);
-
-		if (check.code == 200) {
+		BaseModel<CheckUpdata> data = new BaseModelPaser<CheckUpdata>()
+				.paserJson(datas, new TypeToken<CheckUpdata>() {
+				});
+		if (data != null && data.getCode() == 200) {
+			LogUtils.i(data.toString());
 			int versionCode = APP.getInstance().getVersionCode();
-			if (check.data.version != 0 && check.data.version - versionCode > 0) {
+			if (data.getDataT().version != 0
+					&& data.getDataT().version - versionCode > 0) {
 				// 需要更新
-				showUpdateDialog(check.data);
+				showUpdateDialog(data.getDataT());
 			}
 		} else {
-			ToastApp.showToast(check.msg);
+			ToastApp.showToast(data.getMsg());
 		}
-
 	}
 
 	public void showUpdateDialog(final CheckUpdata data) {
@@ -174,6 +192,9 @@ public class MainActivity extends BaseActivity {
 
 		TextView descriptiontv = (TextView) window
 				.findViewById(R.id.description);
+		descriptiontv.setLayoutParams(new LayoutParams(APPEnum.WIDTH.getLen(),
+				APPEnum.WIDTH.getLen() / 3));
+		descriptiontv.setMovementMethod(ScrollingMovementMethod.getInstance());
 		if (data.description != null) {
 			descriptiontv.setText(data.description);
 		}

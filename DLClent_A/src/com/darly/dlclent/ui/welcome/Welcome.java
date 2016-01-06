@@ -64,7 +64,6 @@ public class Welcome extends BaseActivity implements AnimationListener {
 		// TODO Auto-generated method stub
 		tv.setText(APP.getInstance().getVersion());
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -74,9 +73,7 @@ public class Welcome extends BaseActivity implements AnimationListener {
 	@Override
 	protected void initListener() {
 		// TODO Auto-generated method stub
-
 	}
-
 
 	/**
 	 * 
@@ -151,22 +148,23 @@ public class Welcome extends BaseActivity implements AnimationListener {
 	}
 
 	private void applyRotation(float start, float end) {
-//		// 计算中心点
-//		float centerX = tv.getWidth() / 2.0f;
-//		float centerY = tv.getHeight() / 2.0f;
-//		AnimationSet set = new AnimationSet(true);
-//		AlphaAnimation alpha = new AlphaAnimation(0, 1);
-//		alpha.setDuration(2500);
-//		set.addAnimation(alpha);
-//
-//		Rotate3dAnimation rotation = new Rotate3dAnimation(start, end, centerX,
-//				centerY, 0f, false);
-//		rotation.setDuration(2500);
-//		rotation.setFillAfter(true);
-//		rotation.setInterpolator(new LinearInterpolator());
-//		set.addAnimation(rotation);
-//		// 设置监听
-//		tv.startAnimation(set);
+		// // 计算中心点
+		// float centerX = tv.getWidth() / 2.0f;
+		// float centerY = tv.getHeight() / 2.0f;
+		// AnimationSet set = new AnimationSet(true);
+		// AlphaAnimation alpha = new AlphaAnimation(0, 1);
+		// alpha.setDuration(2500);
+		// set.addAnimation(alpha);
+		//
+		// Rotate3dAnimation rotation = new Rotate3dAnimation(start, end,
+		// centerX,
+		// centerY, 0f, false);
+		// rotation.setDuration(2500);
+		// rotation.setFillAfter(true);
+		// rotation.setInterpolator(new LinearInterpolator());
+		// set.addAnimation(rotation);
+		// // 设置监听
+		// tv.startAnimation(set);
 	}
 
 }

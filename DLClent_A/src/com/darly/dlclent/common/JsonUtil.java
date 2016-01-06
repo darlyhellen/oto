@@ -52,7 +52,11 @@ public class JsonUtil {
 				if (f.getName().equals("data")) {
 
 					buff.append("\"" + "data" + "\":");
-					buff.append(pojo2Json(value));
+					if (value == null) {
+						buff.append("\"\"");
+					} else {
+						buff.append(pojo2Json(value));
+					}
 					buff.append(",");
 				} else {
 					buff.append("\"");
