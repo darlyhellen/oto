@@ -6,5 +6,12 @@
     <color name="wel_text">#2B2B2B</color>
     <color name="wel_back_color">#54FF9F</color>
     <color name="wel_click_color">#e1e1e1</color>
+    
+    <!-- popwindows -->
+    <color name="pop_back">#7a000000</color>
+    <color name="color_1">#f70000</color>
+    <color name="color_2">#dc6b6b</color>
+    <color name="color_3">#ffffff</color>
+    <color name="set_list_line">#888888</color>
 
 </resources>
