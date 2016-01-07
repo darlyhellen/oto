@@ -43,4 +43,10 @@
     <string name="login_contain_null">用户名密码不能包含空格</string>
     <string name="login_contain_mode">用户名不能包含表情</string>
 
+    <!-- MainActivity -->
+    <string name="footer_main">首页</string>
+    <string name="footer_list">列表</string>
+    <string name="footer_act">活动</string>
+    <string name="footer_center">设置</string>
+
 </resources>

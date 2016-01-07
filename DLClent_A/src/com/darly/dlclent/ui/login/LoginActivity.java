@@ -137,6 +137,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 		back.setVisibility(View.VISIBLE);
 		title.setText(R.string.login);
+		other.setVisibility(View.INVISIBLE);
 
 		// 设置用户名
 		name.setTarget("用户名称", "手机号/邮箱/QQ");

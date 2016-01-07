@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/action_settings"
         android:padding="10dp"
-        android:src="@drawable/ic_clean_text" 
+        android:src="@drawable/ic_back" 
         android:visibility="gone"/>
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/action_settings"
         android:padding="10dp"
-        android:src="@drawable/ic_clean_text" 
+        android:src="@drawable/ic_back" 
         android:visibility="gone"/>
 
 </LinearLayout>

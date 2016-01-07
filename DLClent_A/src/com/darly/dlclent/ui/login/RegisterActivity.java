@@ -58,6 +58,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		back.setVisibility(View.VISIBLE);
 		title.setText(R.string.regest);
+		other.setVisibility(View.INVISIBLE);
 
 		tel.setTarget("手机号", "手机号");
 		// 设置密码
