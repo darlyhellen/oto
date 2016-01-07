@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 import org.apache.http.message.BasicNameValuePair;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -21,6 +22,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.base.APP;
@@ -57,9 +60,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.act_login_login)
 	private Button login;
 
+	/**
+	 * 上午10:04:52 TODO 注册
+	 */
+	@ViewInject(R.id.act_login_regest)
+	private Button regest;
+
 	private boolean isUserName;
 
 	private boolean isPassWord;
+	@ViewInject(R.id.header_back)
+	private ImageView back;
+	@ViewInject(R.id.header_title)
+	private TextView title;
+	@ViewInject(R.id.header_other)
+	private ImageView other;
 
 	/*
 	 * (non-Javadoc)
@@ -99,6 +114,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					});
 
 			break;
+		case R.id.act_login_regest:
+			startActivity(new Intent(this, RegisterActivity.class));
+			finish();
+			break;
+		case R.id.header_back:
+			finish();
+			break;
 		default:
 			break;
 		}
@@ -112,6 +134,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+
+		back.setVisibility(View.VISIBLE);
+		title.setText(R.string.login);
+
 		// 设置用户名
 		name.setTarget("用户名称", "手机号/邮箱/QQ");
 		// 设置密码
@@ -121,6 +147,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		login.setBackgroundResource(R.drawable.btn_normal);
 		login.setTextColor(getResources().getColor(R.color.pop_back));
 		login.setClickable(false);
+
+		regest.setText(R.string.regest);
 
 	}
 
@@ -143,6 +171,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void initListener() {
 		// TODO Auto-generated method stub
+		regest.setOnClickListener(this);
+		back.setOnClickListener(this);
 		name.getText().addTextChangedListener(new TextWatcher() {
 
 			@Override

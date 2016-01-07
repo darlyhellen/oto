@@ -15,7 +15,7 @@
         android:orientation="vertical" >
 
         <com.darly.dlclent.widget.clearedit.LoginClearEdit
-            android:id="@+id/act_login_name"
+            android:id="@+id/act_pass_setpass"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp" />
@@ -26,37 +26,20 @@
             android:background="@color/wel_back_color" />
 
         <com.darly.dlclent.widget.clearedit.LoginClearEdit
-            android:id="@+id/act_login_pass"
+            android:id="@+id/act_pass_repass"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp" />
     </LinearLayout>
 
-    <TableRow
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/act_pass_register"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/act_login_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/btn_select"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/act_login_regest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/btn_select"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-    </TableRow>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_select"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
 </LinearLayout>

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- app -->
+    <color name="app_main_header_bg">#8B7500</color>
+
     <!-- welcome -->
     <color name="white">#ffffff</color>
     <color name="wel_text">#2B2B2B</color>
     <color name="wel_back_color">#54FF9F</color>
     <color name="wel_click_color">#e1e1e1</color>
-    
+
     <!-- popwindows -->
     <color name="pop_back">#7a000000</color>
     <color name="color_1">#f70000</color>
