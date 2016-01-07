@@ -8,6 +8,7 @@
 package com.darly.dlclent.ui.login;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -45,7 +46,13 @@ public class SetPassActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		title.setText(R.string.register_pass);
 		pass.setTarget("密         码", "请输入6-16位密码");
+		pass.getText().setInputType(
+				InputType.TYPE_CLASS_TEXT
+						| InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		repass.setTarget("二次密码", "请重新输入密码");
+		repass.getText().setInputType(
+				InputType.TYPE_CLASS_TEXT
+						| InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		register.setText(R.string.regest);
 
 		if (getIntent() != null) {

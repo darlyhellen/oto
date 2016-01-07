@@ -7,15 +7,18 @@
  */
 package com.darly.dlclent.ui.login;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.darly.dlclent.R;
+import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.widget.clearedit.LoginClearEdit;
 import com.darly.dlclent.widget.load.ProgressDialogUtil;
@@ -33,6 +36,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private LoginClearEdit code;
 	@ViewInject(R.id.act_register_register)
 	private Button register;
+	@ViewInject(R.id.act_register_clickcode)
+	private TextView getcode;
 
 	@ViewInject(R.id.header_back)
 	private ImageView back;
@@ -57,6 +62,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		tel.setTarget("手机号", "手机号");
 		// 设置密码
 		code.setTarget("验证码", "请输入您手机收到的验证码");
+		getcode.setText(R.string.register_code);
 
 		register.setText(R.string.register_next);
 	}
@@ -83,6 +89,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		back.setOnClickListener(this);
 		register.setOnClickListener(this);
+		getcode.setOnClickListener(this);
 	}
 
 	/*
@@ -105,10 +112,45 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		case R.id.header_back:
 			finish();
 			break;
+		case R.id.act_register_clickcode:
+			getcode.setClickable(false);
+			handler.sendEmptyMessage(APPEnum.DB_SELECT);
+			break;
 
 		default:
 			break;
 		}
 	}
+
+	private int time = 60;
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			switch (msg.what) {
+			case APPEnum.DB_SELECT:
+				// 点击获取验证码，修改显示文字。
+				if (time > 0) {
+					getcode.setText(time + "s");
+					handler.sendEmptyMessageDelayed(APPEnum.DB_INSERT, 1000);
+				} else {
+					getcode.setText(R.string.register_code_two);
+					getcode.setClickable(true);
+					time = 60;
+				}
+				break;
+			case APPEnum.DB_INSERT:
+				time--;
+				handler.sendEmptyMessage(APPEnum.DB_SELECT);
+				break;
+
+			default:
+				break;
+			}
+		}
+
+	};
 
 }
