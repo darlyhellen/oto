@@ -13,24 +13,28 @@ import java.util.List;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.adapter.FragmentCenterAdapter;
+import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
  * @author zhangyh2 FragmentMain $ 下午2:15:05 TODO
  */
-public class FragmentCenter extends BaseFragment implements OnItemClickListener {
+public class FragmentCenter extends BaseFragment implements
+		OnItemClickListener, OnClickListener {
 	private View rootView;
 	@ViewInject(R.id.header_back)
 	private ImageView back;
@@ -40,10 +44,15 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	private ImageView other;
 	@ViewInject(R.id.fragment_center_list)
 	private ListView lv;
+	@ViewInject(R.id.fragment_center_sec_list)
+	private ListView seclv;
 
 	private FragmentCenterAdapter adapter;
-
-	private View header;
+	private FragmentCenterAdapter secAdapter;
+	@ViewInject(R.id.center_header_icon)
+	private ImageView header_icon;
+	@ViewInject(R.id.center_header_name)
+	private TextView header_name;
 
 	/*
 	 * (non-Javadoc)
@@ -57,7 +66,6 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		rootView = inflater.inflate(R.layout.fragment_center, container, false);
-		header = inflater.inflate(R.layout.fragment_center_header, null);
 		ViewUtils.inject(this, rootView); // 注入view和事件
 		return rootView;
 	}
@@ -71,7 +79,8 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		title.setText(R.string.footer_center);
-
+		header_icon.setImageResource(R.drawable.icon);
+		header_name.setText("Admin");
 	}
 
 	/*
@@ -82,16 +91,24 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	@Override
 	protected void loadData() {
 		// TODO Auto-generated method stub
-		ImageView icon = (ImageView) header
-				.findViewById(R.id.center_header_icon);
-		icon.setImageResource(R.drawable.icon);
-		TextView name = (TextView) header.findViewById(R.id.center_header_name);
-		name.setText("Admin");
+
+		LayoutParams lp = new LayoutParams(APPEnum.WIDTH.getLen(),
+				LayoutParams.WRAP_CONTENT);
+		lv.setLayoutParams(lp);
+		seclv.setLayoutParams(lp);
 		adapter = new FragmentCenterAdapter(getData(),
 				R.layout.fragment_center_item, getActivity());
-		lv.addHeaderView(header);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
+		secAdapter = new FragmentCenterAdapter(getSecData("test", 10),
+				R.layout.fragment_center_item, getActivity());
+		seclv.setAdapter(secAdapter);
+
+		ViewPropertyAnimator animator = seclv.animate();
+		animator.setStartDelay(0);
+		animator.setDuration(0);
+		animator.translationXBy(APPEnum.WIDTH.getLen());
+		animator.start();
 
 	}
 
@@ -115,6 +132,20 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 		return data;
 	}
 
+	/**
+	 * 下午3:31:29
+	 * 
+	 * @author zhangyh2 FragmentCenter.java TODO
+	 */
+	private List<String> getSecData(String name, int len) {
+		// TODO Auto-generated method stub
+		List<String> data = new ArrayList<String>();
+		for (int i = 0; i < len; i++) {
+			data.add(name + i);
+		}
+		return data;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -123,7 +154,7 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	@Override
 	protected void initListener() {
 		// TODO Auto-generated method stub
-
+		back.setOnClickListener(this);
 	}
 
 	/*
@@ -137,7 +168,53 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-		LogUtils.i(position + "");
+		// 点击进行横向移动并弹出菜单。
+		back.setVisibility(View.VISIBLE);
+		String name = (String) parent.getItemAtPosition(position);
+		rightToleftAnim(lv);
+		rightToleftAnim(seclv);
+		secAdapter.setData(getSecData(name, position));
+	}
+
+	/**
+	 * 
+	 * 下午5:04:50
+	 * 
+	 * @author zhangyh2 FragmentCenter.java TODO
+	 */
+	private void rightToleftAnim(View view) {
+		ViewPropertyAnimator animator = view.animate();
+		animator.setStartDelay(100);
+		animator.setDuration(500);
+		animator.translationXBy((int) (-(float) view.getWidth()));
+		animator.start();
+	}
+
+	/**
+	 * 
+	 * 下午5:04:50
+	 * 
+	 * @author zhangyh2 FragmentCenter.java TODO
+	 */
+	private void leftTorightAnim(View view) {
+		ViewPropertyAnimator animator = view.animate();
+		animator.setStartDelay(100);
+		animator.setDuration(500);
+		animator.translationXBy((int) ((float) view.getWidth()));
+		animator.start();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		leftTorightAnim(lv);
+		leftTorightAnim(seclv);
+		back.setVisibility(View.INVISIBLE);
 	}
 
 }

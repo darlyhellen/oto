@@ -6,11 +6,25 @@
 
     <include layout="@layout/main_header" />
 
-    <ListView
-        android:id="@+id/fragment_center_list"
+    <include layout="@layout/fragment_center_header" />
+
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null" >
-    </ListView>
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/fragment_center_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/fragment_center_sec_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null" >
+        </ListView>
+    </RelativeLayout>
 
 </LinearLayout>
