@@ -56,6 +56,7 @@ public class FragmentMain extends BaseFragment {
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		title.setText(R.string.footer_main);
 	}
 
 	/*

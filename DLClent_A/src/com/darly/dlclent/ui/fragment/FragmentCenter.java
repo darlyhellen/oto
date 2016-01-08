@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.base.BaseFragment;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
  * @author zhangyh2
@@ -25,7 +28,12 @@ import com.lidroid.xutils.ViewUtils;
  */
 public class FragmentCenter extends BaseFragment {
 	private View rootView;
-
+	@ViewInject(R.id.header_back)
+	private ImageView back;
+	@ViewInject(R.id.header_title)
+	private TextView title;
+	@ViewInject(R.id.header_other)
+	private ImageView other;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -50,6 +58,7 @@ public class FragmentCenter extends BaseFragment {
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		title.setText(R.string.footer_center);
 	}
 
 
