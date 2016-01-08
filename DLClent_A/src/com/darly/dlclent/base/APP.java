@@ -57,10 +57,13 @@ public class APP extends Application {
 		if (APPEnum.WIDTH.getLen() == 0 || APPEnum.HEIGHT.getLen() == 0) {
 			getParamsWithWH();
 		}
+		// 创建文件夹
+		creatFile();
 		// 初始化数据库。创建完成数据库。当数据库存在且版本为变化时，此方法执行无效。
 		DBUtilsHelper.getInstance().getDb();
 		// 初始化Imageloader
 		initImageLoader();
+
 	}
 
 	/**
@@ -183,6 +186,32 @@ public class APP extends Application {
 			e.printStackTrace();
 		}
 		return version;
+	}
+
+	/**
+	 * 
+	 * 下午6:02:54
+	 * 
+	 * @author Zhangyuhui BaseActivity.java TODO 建立文件夹
+	 */
+	private void creatFile() {
+		// TODO Auto-generated method stub
+		File boot = new File(APPEnum.ROOT);
+		if (!boot.exists()) {
+			boot.mkdir();
+		}
+		File radio = new File(APPEnum.MAINRADIO);
+		if (!radio.exists()) {
+			radio.mkdir();
+		}
+		File image = new File(APPEnum.IMAGE);
+		if (!image.exists()) {
+			image.mkdir();
+		}
+		File log = new File(APPEnum.LOG);
+		if (!log.exists()) {
+			log.mkdir();
+		}
 	}
 
 }

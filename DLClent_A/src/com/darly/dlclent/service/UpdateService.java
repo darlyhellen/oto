@@ -122,15 +122,12 @@ public class UpdateService extends Service {
 					long length = entity.getContentLength();
 					InputStream is = entity.getContent();
 					if (is != null) {
-						File rootFile = new File(
-								APPEnum.STORAGE_ROOT_DIR.getDec(), "download");
+						File rootFile = new File(APPEnum.ROOT, "download");
 						if (!rootFile.exists() && !rootFile.isDirectory())
 							rootFile.mkdir();
 
-						tempFile = new File(
-								APPEnum.STORAGE_ROOT_DIR.getDec(),
-								"/download/"
-										+ url.substring(url.lastIndexOf("/") + 1));
+						tempFile = new File(APPEnum.ROOT, "/download/"
+								+ url.substring(url.lastIndexOf("/") + 1));
 						if (tempFile.exists())
 							tempFile.delete();
 						tempFile.createNewFile();

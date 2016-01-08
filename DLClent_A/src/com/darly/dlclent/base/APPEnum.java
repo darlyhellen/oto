@@ -43,7 +43,11 @@ public enum APPEnum {
 	public static final String ROOT = Environment.getExternalStorageDirectory()
 			.getAbsolutePath() + "/dlclient/";
 
-	public static final String MAINRADIO = "mainimage/";
+	public static final String MAINRADIO = ROOT + "mainimage/";
+
+	public static final String IMAGE = ROOT + "image/";
+
+	public static final String LOG = ROOT + "log/";
 
 	private String dec;
 

@@ -93,7 +93,7 @@ public class CheckVersonHelper {
 				String jsonString = null;
 				if (new Random().nextBoolean()) {
 					CheckUpdata re = new CheckUpdata(
-							"",
+							"http://gdown.baidu.com/data/wisegame/d3fb5622fe942850/QQ_320.apk",
 							4,
 							"版本还行，\r\n弄个测试作为全职PHPer偶尔需要客串下Androider,最近公司的一个项目需要Android的客户端\r\n(主要图片特效处理及其上传)，自己就客串下Androider.之前有过Android开发经验所以做这个挺顺手的，\r\n几乎所有东西直接github中拿过来改改就用，不过在处理图片上传的时候选择了xUtils这个",
 							false);
@@ -183,13 +183,13 @@ public class CheckVersonHelper {
 			@Override
 			public void onClick(View v) {
 				alertDialog.dismiss();
-				// checkISupdate();
-				// update(lastestUrl);
 				Intent intent = new Intent(context, UpdateService.class);
 				intent.putExtra("url", data.LastestUrl);
 				context.startService(intent);
+				LogUtils.i("UpdateService is run");
 				if (data.Force) {
-					context.finish();
+					System.exit(0);
+					// context.finish();
 				}
 			}
 		});

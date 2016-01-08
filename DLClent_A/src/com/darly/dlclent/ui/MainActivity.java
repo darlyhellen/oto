@@ -19,7 +19,6 @@ import com.darly.dlclent.ui.fragment.FragmentAct;
 import com.darly.dlclent.ui.fragment.FragmentCenter;
 import com.darly.dlclent.ui.fragment.FragmentList;
 import com.darly.dlclent.ui.fragment.FragmentMain;
-import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
