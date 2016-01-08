@@ -43,6 +43,8 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 
 	private FragmentCenterAdapter adapter;
 
+	private View header;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -55,6 +57,7 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		rootView = inflater.inflate(R.layout.fragment_center, container, false);
+		header = inflater.inflate(R.layout.fragment_center_header, null);
 		ViewUtils.inject(this, rootView); // 注入view和事件
 		return rootView;
 	}
@@ -68,6 +71,7 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		title.setText(R.string.footer_center);
+
 	}
 
 	/*
@@ -78,8 +82,14 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	@Override
 	protected void loadData() {
 		// TODO Auto-generated method stub
+		ImageView icon = (ImageView) header
+				.findViewById(R.id.center_header_icon);
+		icon.setImageResource(R.drawable.icon);
+		TextView name = (TextView) header.findViewById(R.id.center_header_name);
+		name.setText("Admin");
 		adapter = new FragmentCenterAdapter(getData(),
 				R.layout.fragment_center_item, getActivity());
+		lv.addHeaderView(header);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(this);
 
@@ -93,9 +103,15 @@ public class FragmentCenter extends BaseFragment implements OnItemClickListener 
 	private List<String> getData() {
 		// TODO Auto-generated method stub
 		List<String> data = new ArrayList<String>();
-		for (int i = 0; i < 4; i++) {
-			data.add(i + "---");
-		}
+		data.add("账户信息");
+		data.add("地址管理");
+		data.add("我的订单");
+		data.add("物流中心");
+		data.add("浏览记录");
+		data.add("收藏夹");
+		data.add("礼品卡");
+		data.add("余额");
+		data.add("现金券");
 		return data;
 	}
 
