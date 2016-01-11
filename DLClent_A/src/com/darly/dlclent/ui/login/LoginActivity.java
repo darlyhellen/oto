@@ -106,7 +106,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			if (url == null || url.length() == 0) {
 				String jsonString = null;
 				if (new Random().nextBoolean()) {
-					UserInfoData user = new UserInfoData("Admin", "http",
+					UserInfoData user = new UserInfoData(
+							"Admin",
+							"http://pic13.nipic.com/20110424/818468_090858462000_2.jpg",
 							"13891431454", "男", "610123198610036773", "70.0",
 							"1jl32k412n341k234h1i324uh");
 					BaseModel<UserInfoData> mo = new BaseModel<UserInfoData>(

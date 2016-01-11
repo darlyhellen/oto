@@ -33,7 +33,6 @@ import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.CheckUpdata;
-import com.darly.dlclent.model.CheckUpdataBase;
 import com.darly.dlclent.service.UpdateService;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.exception.HttpException;
@@ -57,6 +56,7 @@ public class CheckVersonHelper {
 
 	/**
 	 * 下午4:00:34
+	 * 
 	 * @author zhangyh2 MainActivity.java TODO 检查版本更新
 	 */
 	public void checkVerson() {
@@ -97,11 +97,12 @@ public class CheckVersonHelper {
 							"版本还行，\r\n弄个测试作为全职PHPer偶尔需要客串下Androider,最近公司的一个项目需要Android的客户端\r\n(主要图片特效处理及其上传)，自己就客串下Androider.之前有过Android开发经验所以做这个挺顺手的，\r\n几乎所有东西直接github中拿过来改改就用，不过在处理图片上传的时候选择了xUtils这个",
 							false);
 
-					CheckUpdataBase da = new CheckUpdataBase(200, "", re);
+					BaseModel<CheckUpdata> da = new BaseModel<CheckUpdata>(200,
+							"", re);
 					jsonString = JsonUtil.pojo2Json(da);
 				} else {
-					CheckUpdataBase da = new CheckUpdataBase(110, "用户信息出错",
-							null);
+					BaseModel<CheckUpdata> da = new BaseModel<CheckUpdata>(110,
+							"用户信息出错", null);
 					jsonString = JsonUtil.pojo2Json(da);
 				}
 				LogUtils.i(jsonString);

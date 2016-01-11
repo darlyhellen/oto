@@ -31,9 +31,13 @@ import com.darly.dlclent.adapter.FragmentCenterSecAdapter;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
 import com.darly.dlclent.common.SharePreferHelp;
+import com.darly.dlclent.model.BaseModel;
+import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.SecMenuModel;
+import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -65,6 +69,8 @@ public class FragmentCenter extends BaseFragment implements
 
 	private int outListSelect;
 
+	private BaseModel<UserInfoData> model;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,8 +98,19 @@ public class FragmentCenter extends BaseFragment implements
 		title.setText(R.string.footer_center);
 		header_bg.setLayoutParams(new LinearLayout.LayoutParams(APPEnum.WIDTH
 				.getLen(), (int) (APPEnum.WIDTH.getLen() / 2.66)));
-		header_icon.setImageResource(R.drawable.icon);
-		header_name.setText("Admin");
+
+		model = new BaseModelPaser<UserInfoData>().paserJson(
+				SharePreferHelp.getValue(APPEnum.USERINFO.getDec(), null),
+				new TypeToken<UserInfoData>() {
+				});
+		if (model.getData().getIcon() != null
+				&& model.getData().getIcon().length() > 0) {
+			imageLoader.displayImage(model.getData().getIcon().trim(), header_icon,
+					options);
+		} else {
+			header_icon.setImageResource(R.drawable.icon);
+		}
+		header_name.setText(model.getData().getName());
 	}
 
 	/*
@@ -308,11 +325,12 @@ public class FragmentCenter extends BaseFragment implements
 			rightToleftAnim(seclv);
 			data.add(new SecMenuModel("返回上层菜单", null));
 			// 这组数据应该从网络上获取下来。
-			data.add(new SecMenuModel("姓名", "Admin"));
-			data.add(new SecMenuModel("手机号码", transformMobile("13891431454")));
-			data.add(new SecMenuModel("性别", "男"));
-			data.add(new SecMenuModel("身份证号",
-					transformIDcard("610123198610036773")));
+			data.add(new SecMenuModel("姓名", model.getData().getName()));
+			data.add(new SecMenuModel("手机号码", transformMobile(model.getData()
+					.getTel())));
+			data.add(new SecMenuModel("性别", model.getData().getSex()));
+			data.add(new SecMenuModel("身份证号", transformIDcard(model.getData()
+					.getIdCard())));
 			secAdapter.setData(data);
 			outListSelect = position;
 			break;
@@ -349,7 +367,7 @@ public class FragmentCenter extends BaseFragment implements
 			rightToleftAnim(seclv);
 			// 这组数据应该从网络上获取下来。
 			data.add(new SecMenuModel("返回上层菜单", null));
-			data.add(new SecMenuModel("余额", "79.0¥"));
+			data.add(new SecMenuModel("余额", model.getData().getMoney() + "¥"));
 			data.add(new SecMenuModel("现金券", null));
 			secAdapter.setData(data);
 			outListSelect = position;
