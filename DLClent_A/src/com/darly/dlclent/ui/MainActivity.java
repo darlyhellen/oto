@@ -159,10 +159,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		// TODO Auto-generated method stub
-		rb_main.setTextColor(getResources().getColor(R.color.set_list_line));
-		rb_list.setTextColor(getResources().getColor(R.color.set_list_line));
-		rb_act.setTextColor(getResources().getColor(R.color.set_list_line));
-		rb_center.setTextColor(getResources().getColor(R.color.set_list_line));
+		rb_main.setTextColor(getResources().getColor(R.color.pop_back));
+		rb_list.setTextColor(getResources().getColor(R.color.pop_back));
+		rb_act.setTextColor(getResources().getColor(R.color.pop_back));
+		rb_center.setTextColor(getResources().getColor(R.color.pop_back));
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		hideFragments(ft);

@@ -27,12 +27,13 @@ import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.adapter.FragmentCenterAdapter;
+import com.darly.dlclent.adapter.FragmentCenterSecAdapter;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
+import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.ui.MainActivity;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
@@ -53,7 +54,7 @@ public class FragmentCenter extends BaseFragment implements
 	private ListView seclv;
 
 	private FragmentCenterAdapter adapter;
-	private FragmentCenterAdapter secAdapter;
+	private FragmentCenterSecAdapter secAdapter;
 	@ViewInject(R.id.center_header_bg)
 	private LinearLayout header_bg;
 	@ViewInject(R.id.center_header_icon)
@@ -111,8 +112,9 @@ public class FragmentCenter extends BaseFragment implements
 				R.layout.fragment_center_item, getActivity());
 		lv.setAdapter(adapter);
 
-		secAdapter = new FragmentCenterAdapter(new ArrayList<String>(),
-				R.layout.fragment_center_item, getActivity());
+		secAdapter = new FragmentCenterSecAdapter(
+				new ArrayList<SecMenuModel>(),
+				R.layout.fragment_center_sec_item, getActivity());
 		seclv.setAdapter(secAdapter);
 
 		ViewPropertyAnimator animator = seclv.animate();
@@ -158,8 +160,7 @@ public class FragmentCenter extends BaseFragment implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				String name = (String) parent.getItemAtPosition(position);
-				thrOutListToCheckMenu(name, position);
+				thrOutListToCheckMenu(position);
 			}
 		});
 	}
@@ -170,7 +171,7 @@ public class FragmentCenter extends BaseFragment implements
 	 *            上午9:58:37
 	 * @author zhangyh2 FragmentCenter.java TODO 通过外层选框，来确定内层ListView选项，进行跳转页面。
 	 */
-	protected void thrOutListToCheckMenu(String name, int position) {
+	protected void thrOutListToCheckMenu(int position) {
 		// TODO Auto-generated method stub
 		switch (outListSelect) {
 		case 0:
@@ -279,8 +280,6 @@ public class FragmentCenter extends BaseFragment implements
 		default:
 			break;
 		}
-
-		LogUtils.i(name);
 	}
 
 	/*
@@ -296,18 +295,18 @@ public class FragmentCenter extends BaseFragment implements
 		// TODO Auto-generated method stub
 		// 点击进行横向移动并弹出菜单。
 
-		List<String> data = new ArrayList<String>();
+		List<SecMenuModel> data = new ArrayList<SecMenuModel>();
 		switch (position) {
 		case 0:
 			// 账户信息
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
-			data.add("返回上层菜单");
-			data.add("图像");
-			data.add("姓名");
-			data.add("手机号码");
-			data.add("性别");
-			data.add("身份证号");
+			data.add(new SecMenuModel("返回上层菜单", null));
+			data.add(new SecMenuModel("姓名", "Admin"));
+			data.add(new SecMenuModel("手机号码", transformMobile("13891431454")));
+			data.add(new SecMenuModel("性别", "男"));
+			data.add(new SecMenuModel("身份证号",
+					transformIDcard("610123198610036773")));
 			secAdapter.setData(data);
 			outListSelect = position;
 			break;
@@ -332,9 +331,9 @@ public class FragmentCenter extends BaseFragment implements
 			// 我的收藏
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
-			data.add("返回上层菜单");
-			data.add("收藏夹");
-			data.add("礼品卡");
+			data.add(new SecMenuModel("返回上层菜单", null));
+			data.add(new SecMenuModel("收藏夹", null));
+			data.add(new SecMenuModel("礼品卡", null));
 			secAdapter.setData(data);
 			outListSelect = position;
 			break;
@@ -342,9 +341,9 @@ public class FragmentCenter extends BaseFragment implements
 			// 我的钱包
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
-			data.add("返回上层菜单");
-			data.add("余额");
-			data.add("现金券");
+			data.add(new SecMenuModel("返回上层菜单", null));
+			data.add(new SecMenuModel("余额", "79.0¥"));
+			data.add(new SecMenuModel("现金券", null));
 			secAdapter.setData(data);
 			outListSelect = position;
 			break;
@@ -353,10 +352,10 @@ public class FragmentCenter extends BaseFragment implements
 			// 设置
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
-			data.add("返回上层菜单");
-			data.add("修改密码");
-			data.add("清空缓存");
-			data.add("退出登录");
+			data.add(new SecMenuModel("返回上层菜单", null));
+			data.add(new SecMenuModel("修改密码", null));
+			data.add(new SecMenuModel("清空缓存", null));
+			data.add(new SecMenuModel("退出登录", "exit"));
 			secAdapter.setData(data);
 			outListSelect = position;
 			break;
@@ -402,6 +401,26 @@ public class FragmentCenter extends BaseFragment implements
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
+	}
+
+	private String transformIDcard(String iDcard) {
+		if (iDcard.length() != 18) {
+			return iDcard;
+		}
+		String str1 = iDcard.substring(0, 6);
+		String str2 = "********";
+		String str3 = iDcard.substring(14);
+		return str1 + str2 + str3;
+	}
+
+	private String transformMobile(String mobilephone) {
+		if (mobilephone.length() != 11) {
+			return mobilephone;
+		}
+		String str1 = mobilephone.substring(0, 3);
+		String str2 = "****";
+		String str3 = mobilephone.substring(7);
+		return str1 + str2 + str3;
 	}
 
 }
