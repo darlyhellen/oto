@@ -37,6 +37,7 @@ import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
+import com.darly.dlclent.widget.roundedimage.RoundedImageView;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -63,7 +64,7 @@ public class FragmentCenter extends BaseFragment implements
 	@ViewInject(R.id.center_header_bg)
 	private LinearLayout header_bg;
 	@ViewInject(R.id.center_header_icon)
-	private ImageView header_icon;
+	private RoundedImageView header_icon;
 	@ViewInject(R.id.center_header_name)
 	private TextView header_name;
 
@@ -99,14 +100,16 @@ public class FragmentCenter extends BaseFragment implements
 		header_bg.setLayoutParams(new LinearLayout.LayoutParams(APPEnum.WIDTH
 				.getLen(), (int) (APPEnum.WIDTH.getLen() / 2.66)));
 
+		header_icon.setLayoutParams(new LinearLayout.LayoutParams(APPEnum.WIDTH
+				.getLen() / 5, APPEnum.WIDTH.getLen() / 5));
 		model = new BaseModelPaser<UserInfoData>().paserJson(
 				SharePreferHelp.getValue(APPEnum.USERINFO.getDec(), null),
 				new TypeToken<UserInfoData>() {
 				});
 		if (model.getData().getIcon() != null
 				&& model.getData().getIcon().length() > 0) {
-			imageLoader.displayImage(model.getData().getIcon().trim(), header_icon,
-					options);
+			imageLoader.displayImage(model.getData().getIcon().trim(),
+					header_icon, options);
 		} else {
 			header_icon.setImageResource(R.drawable.icon);
 		}
