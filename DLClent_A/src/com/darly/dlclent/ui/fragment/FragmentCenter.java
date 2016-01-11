@@ -30,6 +30,7 @@ import com.darly.dlclent.adapter.FragmentCenterAdapter;
 import com.darly.dlclent.adapter.FragmentCenterSecAdapter;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
+import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.ui.MainActivity;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
@@ -260,6 +261,10 @@ public class FragmentCenter extends BaseFragment implements
 						// TODO Auto-generated method stub
 						leftTorightAnim(lv);
 						leftTorightAnim(seclv);
+						// 退出前先将几个状态进行修改。
+						SharePreferHelp.putValue(APPEnum.ISLOGIN.getDec(),
+								false);
+						SharePreferHelp.remove(APPEnum.USERINFO.getDec());
 						dialg.cancel();
 						// 调回首页
 
@@ -302,7 +307,7 @@ public class FragmentCenter extends BaseFragment implements
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
 			data.add(new SecMenuModel("返回上层菜单", null));
-			//这组数据应该从网络上获取下来。
+			// 这组数据应该从网络上获取下来。
 			data.add(new SecMenuModel("姓名", "Admin"));
 			data.add(new SecMenuModel("手机号码", transformMobile("13891431454")));
 			data.add(new SecMenuModel("性别", "男"));
@@ -342,7 +347,7 @@ public class FragmentCenter extends BaseFragment implements
 			// 我的钱包
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
-			//这组数据应该从网络上获取下来。
+			// 这组数据应该从网络上获取下来。
 			data.add(new SecMenuModel("返回上层菜单", null));
 			data.add(new SecMenuModel("余额", "79.0¥"));
 			data.add(new SecMenuModel("现金券", null));
