@@ -58,7 +58,9 @@ public class CleanCache {
 				}
 			}
 		}
-		dir.delete();
+		if (dir.isFile()) {
+			dir.delete();
+		}
 		// 目录此时为空，可以删除
 		return true;
 	}
