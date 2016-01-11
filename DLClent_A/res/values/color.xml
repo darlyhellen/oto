@@ -16,5 +16,6 @@
     <color name="color_2">#dc6b6b</color>
     <color name="color_3">#ffffff</color>
     <color name="set_list_line">#888888</color>
+    <color name="bg_white">#FFf8f8f8</color>
 
 </resources>

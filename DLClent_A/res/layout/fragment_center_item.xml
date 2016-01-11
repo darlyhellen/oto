@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_weight="1"
-        android:background="@color/wel_back_color"
+        android:background="@drawable/btn_normal"
         android:gravity="center"
         android:orientation="horizontal" >
 
@@ -22,7 +22,6 @@
             android:id="@+id/center_item_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:contentDescription="@string/action_settings" />
 
         <TextView
@@ -34,7 +33,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:contentDescription="@string/action_settings"
             android:src="@drawable/ic_right" />
     </TableRow>
