@@ -49,4 +49,8 @@
     <string name="footer_act">活动</string>
     <string name="footer_center">设置</string>
 
+    <!-- FragmentCenter -->
+    <string name="set_cache_succ">缓存清理完成！</string>
+    <string name="set_cache_fail">清理缓存失败，需要手动删除文件</string>
+
 </resources>

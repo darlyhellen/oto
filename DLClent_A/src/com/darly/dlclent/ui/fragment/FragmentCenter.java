@@ -30,6 +30,7 @@ import com.darly.dlclent.adapter.FragmentCenterAdapter;
 import com.darly.dlclent.adapter.FragmentCenterSecAdapter;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
+import com.darly.dlclent.common.CleanCache;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
@@ -267,6 +268,20 @@ public class FragmentCenter extends BaseFragment implements
 				break;
 			case 2:
 				// 清空缓存
+				final LoginOutDialg clean = new LoginOutDialg(getActivity());
+				clean.setTitle("温馨提示");
+				clean.setContent("是否确认退出应用?");
+				clean.setSure("确认");
+				clean.getSure().setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						CleanCache.cleanCach();
+						clean.cancel();
+					}
+				});
+				clean.setConsel("取消");
 				break;
 			case 3:
 				// 退出登录
