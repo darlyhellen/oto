@@ -1,24 +1,24 @@
 /**
- * 上午11:38:28
+ * 下午4:26:44
  * @author zhangyh2
  * $
- * BaseModel.java
+ * CheckUpdata.java
  * TODO
  */
 package com.darly.dlclent.model;
 
 /**
- * @author zhangyh2 BaseModel $ 上午11:38:28 TODO 所有请求的基础类。
+ * @author zhangyh2 CheckUpdata $ 下午4:26:44 TODO
  */
-public class BaseModel<T> {
+public class UserInfoDataBase {
 
-	private int code;
+	public int code;
 
-	private String msg;
+	public String msg;
 
-	private T data;
+	public UserInfoData data;
 
-	public BaseModel(int code, String msg, T data) {
+	public UserInfoDataBase(int code, String msg, UserInfoData data) {
 		this.code = code;
 		this.msg = msg;
 		this.data = data;
@@ -40,11 +40,11 @@ public class BaseModel<T> {
 		this.msg = msg;
 	}
 
-	public T getData() {
+	public UserInfoData getData() {
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setData(UserInfoData data) {
 		this.data = data;
 	}
 

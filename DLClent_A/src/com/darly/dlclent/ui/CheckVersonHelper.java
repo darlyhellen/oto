@@ -127,10 +127,10 @@ public class CheckVersonHelper {
 		if (data != null && data.getCode() == 200) {
 			LogUtils.i(data.toString());
 			int versionCode = APP.getInstance().getVersionCode();
-			if (data.getDataT().version != 0
-					&& data.getDataT().version - versionCode > 0) {
+			if (data.getData().version != 0
+					&& data.getData().version - versionCode > 0) {
 				// 需要更新
-				showUpdateDialog(data.getDataT());
+				showUpdateDialog(data.getData());
 			}
 		} else {
 			ToastApp.showToast(data.getMsg());

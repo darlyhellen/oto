@@ -9,6 +9,7 @@ package com.darly.dlclent.ui.login;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,13 +28,21 @@ import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.base.APP;
+import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
+import com.darly.dlclent.common.JsonUtil;
+import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
+import com.darly.dlclent.model.BaseModel;
+import com.darly.dlclent.model.BaseModelPaser;
+import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.widget.clearedit.LoginClearEdit;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -93,26 +102,45 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				return;
 			}
 			login.setClickable(false);
-			List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
-			params.add(new BasicNameValuePair("username", username));
-			params.add(new BasicNameValuePair("paseword", paseword));
-			HttpClient.post("", params.toString(),
-					new RequestCallBack<String>() {
+			String url = "";
+			if (url == null || url.length() == 0) {
+				String jsonString = null;
+				if (new Random().nextBoolean()) {
+					UserInfoData user = new UserInfoData("Admin", "http",
+							"13891431454", "男", "610123198610036773", "70.0",
+							"1jl32k412n341k234h1i324uh");
+					BaseModel<UserInfoData> mo = new BaseModel<UserInfoData>(
+							200, "", user);
+					jsonString = JsonUtil.pojo2Json(mo);
+				} else {
+					BaseModel<UserInfoData> mo = new BaseModel<UserInfoData>(
+							110, "用户名或密码错误", null);
+					jsonString = JsonUtil.pojo2Json(mo);
+				}
+				LogUtils.i(jsonString);
+				isLogin(jsonString);
+			} else {
+				List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
+				params.add(new BasicNameValuePair("username", username));
+				params.add(new BasicNameValuePair("paseword", paseword));
+				HttpClient.post("", params.toString(),
+						new RequestCallBack<String>() {
 
-						@Override
-						public void onSuccess(ResponseInfo<String> arg0) {
-							// TODO Auto-generated method stub
-							login.setClickable(true);
-						}
+							@Override
+							public void onSuccess(ResponseInfo<String> arg0) {
+								// TODO Auto-generated method stub
+								login.setClickable(true);
+							}
 
-						@Override
-						public void onFailure(HttpException arg0, String arg1) {
-							// TODO Auto-generated method stub
-							login.setClickable(true);
-							ToastApp.showToast(R.string.neterror_norespanse);
-						}
-					});
-
+							@Override
+							public void onFailure(HttpException arg0,
+									String arg1) {
+								// TODO Auto-generated method stub
+								login.setClickable(true);
+								ToastApp.showToast(R.string.neterror_norespanse);
+							}
+						});
+			}
 			break;
 		case R.id.act_login_regest:
 			startActivity(new Intent(this, RegisterActivity.class));
@@ -123,6 +151,33 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			break;
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * 下午3:06:27
+	 * 
+	 * @author zhangyh2 TODO 判断用户是否成功登录，数据是否返回
+	 */
+	private void isLogin(String datas) {
+		// TODO Auto-generated method stub
+		if (datas == null) {
+			login.setClickable(true);
+			return;
+		}
+		BaseModel<UserInfoData> data = new BaseModelPaser<UserInfoData>()
+				.paserJson(datas, new TypeToken<UserInfoData>() {
+				});
+		if (data != null && data.getCode() == 200) {
+			LogUtils.i(data.toString());
+			// 登录成功
+			SharePreferHelp.putValue(APPEnum.ISLOGIN.getDec(), true);
+			SharePreferHelp.putValue(APPEnum.USERINFO.getDec(), datas);
+			// 结束Login
+			finish();
+		} else {
+			login.setClickable(true);
+			ToastApp.showToast(data.getMsg());
 		}
 	}
 

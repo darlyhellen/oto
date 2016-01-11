@@ -2,6 +2,7 @@ package com.darly.dlclent.ui;
 
 import java.util.Calendar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,13 +13,16 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.darly.dlclent.R;
+import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.SDCardUtils;
+import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.ui.fragment.FragmentAct;
 import com.darly.dlclent.ui.fragment.FragmentCenter;
 import com.darly.dlclent.ui.fragment.FragmentList;
 import com.darly.dlclent.ui.fragment.FragmentMain;
+import com.darly.dlclent.ui.login.LoginActivity;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -201,14 +205,19 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			}
 			break;
 		case R.id.main_footer_center:
-			rb_center.setTextColor(getResources().getColor(R.color.white));
-			if (center != null) {
-				if (center.isVisible())
-					return;
-				ft.show(center);
+			if (!SharePreferHelp.getValue(APPEnum.ISLOGIN.getDec(), false)) {
+				startActivity(new Intent(this, LoginActivity.class));
+				rb_main.setChecked(true);
 			} else {
-				center = new FragmentCenter();
-				ft.add(R.id.main_frame, center);
+				rb_center.setTextColor(getResources().getColor(R.color.white));
+				if (center != null) {
+					if (center.isVisible())
+						return;
+					ft.show(center);
+				} else {
+					center = new FragmentCenter();
+					ft.add(R.id.main_frame, center);
+				}
 			}
 			break;
 		default:

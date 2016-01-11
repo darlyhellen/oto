@@ -302,6 +302,7 @@ public class FragmentCenter extends BaseFragment implements
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
 			data.add(new SecMenuModel("返回上层菜单", null));
+			//这组数据应该从网络上获取下来。
 			data.add(new SecMenuModel("姓名", "Admin"));
 			data.add(new SecMenuModel("手机号码", transformMobile("13891431454")));
 			data.add(new SecMenuModel("性别", "男"));
@@ -341,6 +342,7 @@ public class FragmentCenter extends BaseFragment implements
 			// 我的钱包
 			rightToleftAnim(lv);
 			rightToleftAnim(seclv);
+			//这组数据应该从网络上获取下来。
 			data.add(new SecMenuModel("返回上层菜单", null));
 			data.add(new SecMenuModel("余额", "79.0¥"));
 			data.add(new SecMenuModel("现金券", null));
