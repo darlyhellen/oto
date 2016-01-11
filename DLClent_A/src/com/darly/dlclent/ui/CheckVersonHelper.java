@@ -57,7 +57,6 @@ public class CheckVersonHelper {
 
 	/**
 	 * 下午4:00:34
-	 * 
 	 * @author zhangyh2 MainActivity.java TODO 检查版本更新
 	 */
 	public void checkVerson() {
