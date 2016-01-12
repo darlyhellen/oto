@@ -183,9 +183,7 @@ public class FragmentCenter extends BaseFragment implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				SecMenuModel model = (SecMenuModel) parent
-						.getItemAtPosition(position);
-				thrOutListToCheckMenu(model, position);
+				thrOutListToCheckMenu(position);
 			}
 		});
 	}
@@ -197,7 +195,7 @@ public class FragmentCenter extends BaseFragment implements
 	 * @author zhangyh2 FragmentCenter.java TODO 通过外层选框，来确定内层ListView选项，进行跳转页面。
 	 * @param model2
 	 */
-	protected void thrOutListToCheckMenu(SecMenuModel datas, int position) {
+	protected void thrOutListToCheckMenu(int position) {
 		// TODO Auto-generated method stub
 		switch (outListSelect) {
 		case 0:
@@ -210,25 +208,25 @@ public class FragmentCenter extends BaseFragment implements
 				break;
 			case 1:
 				// 姓名
-				intent.putExtra("name", datas.getValue());
+				intent.putExtra("name", model.getData().getName());
 				intent.putExtra("requestCode", APPEnum.CENTER_NAME);
 				startActivityForResult(intent, APPEnum.CENTER_NAME);
 				break;
 			case 2:
 				// 手机号码
-				intent.putExtra("tel", datas.getValue());
+				intent.putExtra("tel", model.getData().getTel());
 				intent.putExtra("requestCode", APPEnum.CENTER_TEL);
 				startActivityForResult(intent, APPEnum.CENTER_TEL);
 				break;
 			case 3:
 				// 性别
-				intent.putExtra("sex", datas.getValue());
+				intent.putExtra("sex", model.getData().getSex());
 				intent.putExtra("requestCode", APPEnum.CENTER_SEX);
 				startActivityForResult(intent, APPEnum.CENTER_SEX);
 				break;
 			case 4:
 				// 身份证号码
-				intent.putExtra("card", datas.getValue());
+				intent.putExtra("card", model.getData().getIdCard());
 				intent.putExtra("requestCode", APPEnum.CENTER_CARD);
 				startActivityForResult(intent, APPEnum.CENTER_CARD);
 				break;

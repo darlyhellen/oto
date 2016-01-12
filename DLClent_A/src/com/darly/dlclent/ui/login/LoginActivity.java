@@ -101,16 +101,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				ToastApp.showToast(R.string.neterror);
 				return;
 			}
+			if (username == null || username.length() == 0 || paseword == null
+					|| paseword.length() == 0) {
+				ToastApp.showToast("用户名密码不为空");
+				return;
+			}
 			login.setClickable(false);
 			String url = "";
 			if (url == null || url.length() == 0) {
 				String jsonString = null;
 				if (new Random().nextBoolean()) {
 					UserInfoData user = new UserInfoData(
-							"Admin",
+							username,
 							"http://pic13.nipic.com/20110424/818468_090858462000_2.jpg",
 							"13891431454", "男", "610123198610036773", "70.0",
-							"1jl32k412n341k234h1i324uh");
+							paseword);
 					BaseModel<UserInfoData> mo = new BaseModel<UserInfoData>(
 							200, "", user);
 					jsonString = JsonUtil.pojo2Json(mo);

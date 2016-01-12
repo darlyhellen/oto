@@ -52,5 +52,7 @@
     <!-- FragmentCenter -->
     <string name="set_cache_succ">缓存清理完成！</string>
     <string name="set_cache_fail">清理缓存失败，需要手动删除文件</string>
+    <string name="reset_info_man">男</string>
+    <string name="reset_info_women">女</string>
 
 </resources>

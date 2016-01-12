@@ -6,6 +6,8 @@
 package com.darly.dlclent.ui.resetuserinfo;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,20 +16,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
+import com.darly.dlclent.common.IDCardUtils;
 import com.darly.dlclent.common.JsonUtil;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.UserInfoData;
+import com.darly.dlclent.widget.clearedit.ClearEditText;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -49,13 +54,19 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.header_btn)
 	private Button btn;
 
-	@ViewInject(R.id.reset_info_cart)
-	private TextView cart;
 	@ViewInject(R.id.reset_info_result)
-	private EditText result;
+	private ClearEditText result;
+	@ViewInject(R.id.reset_info_rg)
+	private RadioGroup rg;
+	@ViewInject(R.id.reset_info_boy)
+	private RadioButton boy;
+	@ViewInject(R.id.reset_info_girl)
+	private RadioButton girl;
 	private String data;
 
 	private int requestCode;
+
+	private UserInfoData odInfo;
 
 	/*
 	 * (non-Javadoc)
@@ -69,6 +80,12 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 		btn.setVisibility(View.VISIBLE);
 		btn.setText("保存");
 		requestCode = getIntent().getIntExtra("requestCode", 0);
+
+		BaseModel<UserInfoData> info = new BaseModelPaser<UserInfoData>()
+				.paserJson(SharePreferHelp.getValue(APPEnum.USERINFO.getDec(),
+						null), new TypeToken<UserInfoData>() {
+				});
+		odInfo = info.getData();
 	}
 
 	/*
@@ -82,29 +99,41 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 		switch (requestCode) {
 		case APPEnum.CENTER_NAME:
 			title.setText("修改用户名");
-			cart.setText("姓名");
 			data = getIntent().getStringExtra("name");
+			result.setText(data);
+			result.setVisibility(View.VISIBLE);
+			rg.setVisibility(View.GONE);
 			break;
 		case APPEnum.CENTER_TEL:
 			title.setText("修改手机号码");
-			cart.setText("手机号码");
 			data = getIntent().getStringExtra("tel");
+			result.setText(data);
+			result.setVisibility(View.VISIBLE);
+			rg.setVisibility(View.GONE);
 			break;
 		case APPEnum.CENTER_SEX:
 			title.setText("修改用户性别");
-			cart.setText("性别");
 			data = getIntent().getStringExtra("sex");
+			result.setVisibility(View.GONE);
+			rg.setVisibility(View.VISIBLE);
+			if (data.equals("男")) {
+				boy.setChecked(true);
+			} else {
+				girl.setChecked(true);
+			}
 			break;
 		case APPEnum.CENTER_CARD:
 			title.setText("修改身份证号");
-			cart.setText("身份证号");
 			data = getIntent().getStringExtra("card");
+			result.setText(data);
+			result.setVisibility(View.VISIBLE);
+			rg.setVisibility(View.GONE);
 			break;
 
 		default:
 			break;
 		}
-		result.setText(data);
+
 	}
 
 	/*
@@ -134,8 +163,40 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.header_btn:
 			// 保存
-			btn.setClickable(false);
-			saveData();
+			String resul = result.getText().toString().trim();
+			switch (requestCode) {
+			case APPEnum.CENTER_NAME:
+				Pattern pattern = Pattern
+						.compile("([^\\._\\w\\u4e00-\\u9fa5])*");
+				Matcher matcher = pattern.matcher(resul);
+				String newName = matcher.replaceAll("");
+				result.setText(newName);
+				if (newName.length() > 6 || newName.length() == 0) {
+					ToastApp.showToast("请输入6位以下的姓名");
+				} else {
+					saveData();
+				}
+				break;
+			case APPEnum.CENTER_TEL:
+				if (resul.length() != 11) {
+					ToastApp.showToast("请输入正确的手机号");
+				} else {
+					saveData();
+				}
+				break;
+			case APPEnum.CENTER_SEX:
+				saveData();
+				break;
+			case APPEnum.CENTER_CARD:
+				if (!IDCardUtils.IDCardValidate(resul).equals("")) {
+					ToastApp.showToast("请输入正确的身份证号");
+				} else {
+					saveData();
+				}
+				break;
+			default:
+				break;
+			}
 			break;
 
 		default:
@@ -151,31 +212,41 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 	private void saveData() {
 		// TODO Auto-generated method stub
 		String resul = result.getText().toString().trim();
+		btn.setClickable(false);
 		String url = "";
-		JSONObject param = new JSONObject();
-		try {
-			switch (requestCode) {
-			case APPEnum.CENTER_NAME:
-				param.put("name", resul);
-				break;
-			case APPEnum.CENTER_TEL:
-				param.put("tel", resul);
-				break;
-			case APPEnum.CENTER_SEX:
-				param.put("sex", resul);
-				break;
-			case APPEnum.CENTER_CARD:
-				param.put("card", resul);
-				break;
-			default:
-				break;
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		if (url != null && url.length() > 0) {
+			JSONObject param = new JSONObject();
+			try {
+				switch (requestCode) {
+				case APPEnum.CENTER_NAME:
+					param.put("name", resul);
+					break;
+				case APPEnum.CENTER_TEL:
+					param.put("tel", resul);
+					break;
+				case APPEnum.CENTER_SEX:
+					switch (rg.getCheckedRadioButtonId()) {
+					case R.id.reset_info_boy:
+						param.put("sex", boy.getText().toString());
+						break;
+					case R.id.reset_info_girl:
+						param.put("sex", girl.getText().toString());
+						break;
+
+					default:
+						break;
+					}
+					break;
+				case APPEnum.CENTER_CARD:
+					param.put("card", resul);
+					break;
+				default:
+					break;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			HttpClient.post(url, param.toString(),
 					new RequestCallBack<String>() {
 
@@ -193,43 +264,51 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 					});
 		} else {
 			// 造假数据
-			BaseModel<UserInfoData> base = new BaseModelPaser<UserInfoData>()
-					.paserJson(SharePreferHelp.getValue(
-							APPEnum.USERINFO.getDec(), null),
-							new TypeToken<UserInfoData>() {
-							});
 			String jsonString = null;
 			if (new Random().nextBoolean()) {
 				UserInfoData user = null;
 				switch (requestCode) {
 				case APPEnum.CENTER_NAME:
-					user = new UserInfoData(resul, base.getData().getIcon(),
-							base.getData().getTel(), base.getData().getSex(),
-							base.getData().getIdCard(), base.getData()
-									.getMoney(), base.getData().getToken());
+					user = new UserInfoData(resul, odInfo.getIcon(),
+							odInfo.getTel(), odInfo.getSex(),
+							odInfo.getIdCard(), odInfo.getMoney(),
+							odInfo.getToken());
 					break;
 				case APPEnum.CENTER_TEL:
-					user = new UserInfoData(base.getData().getName(), base
-							.getData().getIcon(), resul, base.getData()
-							.getSex(), base.getData().getIdCard(), base
-							.getData().getMoney(), base.getData().getToken());
+					user = new UserInfoData(odInfo.getName(), odInfo.getIcon(),
+							resul, odInfo.getSex(), odInfo.getIdCard(),
+							odInfo.getMoney(), odInfo.getToken());
+
 					break;
 				case APPEnum.CENTER_SEX:
-					user = new UserInfoData(base.getData().getName(), base
-							.getData().getIcon(), base.getData().getTel(),
-							resul, base.getData().getIdCard(), base.getData()
-									.getMoney(), base.getData().getToken());
+					switch (rg.getCheckedRadioButtonId()) {
+					case R.id.reset_info_boy:
+						user = new UserInfoData(odInfo.getName(),
+								odInfo.getIcon(), odInfo.getTel(), boy
+										.getText().toString(),
+								odInfo.getIdCard(), odInfo.getMoney(),
+								odInfo.getToken());
+						break;
+					case R.id.reset_info_girl:
+						user = new UserInfoData(odInfo.getName(),
+								odInfo.getIcon(), odInfo.getTel(), girl
+										.getText().toString(),
+								odInfo.getIdCard(), odInfo.getMoney(),
+								odInfo.getToken());
+						break;
+
+					default:
+						break;
+					}
 					break;
 				case APPEnum.CENTER_CARD:
-					user = new UserInfoData(base.getData().getName(), base
-							.getData().getIcon(), base.getData().getTel(), base
-							.getData().getSex(), resul, base.getData()
-							.getMoney(), base.getData().getToken());
+					user = new UserInfoData(odInfo.getName(), odInfo.getIcon(),
+							odInfo.getTel(), odInfo.getSex(), resul,
+							odInfo.getMoney(), odInfo.getToken());
 					break;
 				default:
 					break;
 				}
-
 				BaseModel<UserInfoData> mo = new BaseModel<UserInfoData>(200,
 						"", user);
 				jsonString = JsonUtil.pojo2Json(mo);
