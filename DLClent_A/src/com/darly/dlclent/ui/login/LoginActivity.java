@@ -132,6 +132,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							public void onSuccess(ResponseInfo<String> arg0) {
 								// TODO Auto-generated method stub
 								login.setClickable(true);
+								isLogin(arg0.result);
 							}
 
 							@Override

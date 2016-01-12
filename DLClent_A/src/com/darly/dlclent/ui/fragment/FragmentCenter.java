@@ -445,7 +445,7 @@ public class FragmentCenter extends BaseFragment implements
 		ViewPropertyAnimator animator = view.animate();
 		animator.setStartDelay(50);
 		animator.setDuration(250);
-		animator.translationXBy((int) (view.getWidth()));
+		animator.translationXBy((view.getWidth()));
 		animator.start();
 	}
 

@@ -23,6 +23,7 @@ import com.darly.dlclent.ui.fragment.FragmentCenter;
 import com.darly.dlclent.ui.fragment.FragmentList;
 import com.darly.dlclent.ui.fragment.FragmentMain;
 import com.darly.dlclent.ui.login.LoginActivity;
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -70,10 +71,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		new CheckVersonHelper(this).checkVerson();
-
-		getRadioGroup();
-		timest();
-
+		if (getRadioGroup()) {
+			timest();
+		}
 	}
 
 	/**
@@ -90,9 +90,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		final int start = 17 * 60 + 20;//  起始时间 17:20的分钟数
 		final int end = 19 * 60;//  结束时间 19:00的分钟数
 		if (minuteOfDay >= start && minuteOfDay <= end) {
-			System.out.println("在外围内");
+			LogUtils.i("在时间区间内");
 		} else {
-			System.out.println("在外围外");
+			LogUtils.i("在时间区间外");
 		}
 	}
 
@@ -169,9 +169,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		rb_center.setTextColor(getResources().getColor(R.color.pop_back));
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
-		hideFragments(ft);
+		
 		switch (checkedId) {
 		case R.id.main_footer_main:
+			hideFragments(ft);
 			rb_main.setTextColor(getResources().getColor(R.color.white));
 			if (main != null) {
 				if (main.isVisible())
@@ -183,6 +184,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			}
 			break;
 		case R.id.main_footer_list:
+			hideFragments(ft);
 			rb_list.setTextColor(getResources().getColor(R.color.white));
 			if (list != null) {
 				if (list.isVisible())
@@ -194,6 +196,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			}
 			break;
 		case R.id.main_footer_act:
+			hideFragments(ft);
 			rb_act.setTextColor(getResources().getColor(R.color.white));
 			if (act != null) {
 				if (act.isVisible())
@@ -209,6 +212,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 				startActivity(new Intent(this, LoginActivity.class));
 				rb_main.setChecked(true);
 			} else {
+				hideFragments(ft);
 				rb_center.setTextColor(getResources().getColor(R.color.white));
 				if (center != null) {
 					if (center.isVisible())
