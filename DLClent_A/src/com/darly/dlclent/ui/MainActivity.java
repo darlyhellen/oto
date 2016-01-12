@@ -223,7 +223,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		default:
 			break;
 		}
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 	}
 

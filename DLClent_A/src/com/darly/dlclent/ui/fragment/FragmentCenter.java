@@ -37,6 +37,7 @@ import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
+import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
 import com.darly.dlclent.widget.roundedimage.RoundedImageView;
 import com.google.gson.reflect.TypeToken;
@@ -182,7 +183,9 @@ public class FragmentCenter extends BaseFragment implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				thrOutListToCheckMenu(position);
+				SecMenuModel model = (SecMenuModel) parent
+						.getItemAtPosition(position);
+				thrOutListToCheckMenu(model, position);
 			}
 		});
 	}
@@ -192,31 +195,42 @@ public class FragmentCenter extends BaseFragment implements
 	 * @param position
 	 *            上午9:58:37
 	 * @author zhangyh2 FragmentCenter.java TODO 通过外层选框，来确定内层ListView选项，进行跳转页面。
+	 * @param model2
 	 */
-	protected void thrOutListToCheckMenu(int position) {
+	protected void thrOutListToCheckMenu(SecMenuModel datas, int position) {
 		// TODO Auto-generated method stub
 		switch (outListSelect) {
 		case 0:
 			// 账户信息
+			Intent intent = new Intent(getActivity(), ResetInfoActivity.class);
 			switch (position) {
 			case 0:
 				leftTorightAnim(lv);
 				leftTorightAnim(seclv);
 				break;
 			case 1:
-				// 头像
+				// 姓名
+				intent.putExtra("name", datas.getValue());
+				intent.putExtra("requestCode", APPEnum.CENTER_NAME);
+				startActivityForResult(intent, APPEnum.CENTER_NAME);
 				break;
 			case 2:
-				// 姓名
+				// 手机号码
+				intent.putExtra("tel", datas.getValue());
+				intent.putExtra("requestCode", APPEnum.CENTER_TEL);
+				startActivityForResult(intent, APPEnum.CENTER_TEL);
 				break;
 			case 3:
-				// 手机号码
+				// 性别
+				intent.putExtra("sex", datas.getValue());
+				intent.putExtra("requestCode", APPEnum.CENTER_SEX);
+				startActivityForResult(intent, APPEnum.CENTER_SEX);
 				break;
 			case 4:
-				// 性别
-				break;
-			case 5:
 				// 身份证号码
+				intent.putExtra("card", datas.getValue());
+				intent.putExtra("requestCode", APPEnum.CENTER_CARD);
+				startActivityForResult(intent, APPEnum.CENTER_CARD);
 				break;
 			default:
 				break;
@@ -464,6 +478,37 @@ public class FragmentCenter extends BaseFragment implements
 		String str2 = "****";
 		String str3 = mobilephone.substring(7);
 		return str1 + str2 + str3;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.support.v4.app.Fragment#onActivityResult(int, int,
+	 * android.content.Intent)
+	 */
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == APPEnum.CENTER_CHANGE) {
+			model = new BaseModelPaser<UserInfoData>().paserJson(
+					SharePreferHelp.getValue(APPEnum.USERINFO.getDec(), null),
+					new TypeToken<UserInfoData>() {
+					});
+			List<SecMenuModel> datasList = new ArrayList<SecMenuModel>();
+			datasList.add(new SecMenuModel("返回上层菜单", null));
+			// 这组数据应该从网络上获取下来。
+			datasList.add(new SecMenuModel("姓名", model.getData().getName()));
+			datasList.add(new SecMenuModel("手机号码", transformMobile(model
+					.getData().getTel())));
+			datasList.add(new SecMenuModel("性别", model.getData().getSex()));
+			datasList.add(new SecMenuModel("身份证号", transformIDcard(model
+					.getData().getIdCard())));
+			secAdapter.setData(datasList);
+			// 修改标题位置的用户信息。
+			header_name.setText(model.getData().getName());
+		}
+
 	}
 
 }
