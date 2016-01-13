@@ -11,9 +11,12 @@ import java.util.Random;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.adapter.AddressAdapter;
+import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
 import com.darly.dlclent.common.JsonUtil;
@@ -40,7 +44,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @author zhangyh2 AddressActivity 上午11:12:19 TODO 地址列表功能模块。
  */
 @ContentView(R.layout.activity_address)
-public class AddressActivity extends BaseActivity implements OnClickListener {
+public class AddressActivity extends BaseActivity implements OnClickListener,
+		OnItemClickListener {
 	@ViewInject(R.id.header_back)
 	private ImageView back;
 	@ViewInject(R.id.header_title)
@@ -56,6 +61,8 @@ public class AddressActivity extends BaseActivity implements OnClickListener {
 
 	private AddressAdapter adapter;
 
+	private boolean choseAddress;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -66,8 +73,15 @@ public class AddressActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		title.setText("地址列表");
 		back.setVisibility(View.VISIBLE);
-		btn.setVisibility(View.VISIBLE);
 		btn.setText("编辑");
+		choseAddress = getIntent().getBooleanExtra("", false);
+		if (choseAddress) {
+			// 选择地址
+			btn.setVisibility(View.INVISIBLE);
+		} else {
+			// 编辑地址
+			btn.setVisibility(View.VISIBLE);
+		}
 		addnew.setText("新增地址");
 	}
 
@@ -163,6 +177,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		back.setOnClickListener(this);
 		addnew.setOnClickListener(this);
+		lv.setOnItemClickListener(this);
 	}
 
 	/*
@@ -179,10 +194,35 @@ public class AddressActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.address_addnew:
 			// 新增地址。
+			Intent intent = new Intent(this, NewAddressActivity.class);
+			intent.putExtra("NewAddressActivity", true);
+			startActivityForResult(intent, APPEnum.ADDRESS);
 			break;
 		default:
 			break;
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget
+	 * .AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
+		if (choseAddress) {
+			// 选择地址
+		} else {
+			// 编辑地址
+			Intent intent = new Intent(this, NewAddressActivity.class);
+			intent.putExtra("NewAddressActivity", false);
+			startActivityForResult(intent, APPEnum.ADDRESS);
+		}
+
 	}
 
 }

@@ -46,6 +46,8 @@ public enum APPEnum {
 	public static final int CENTER_CARD = 0x0014;
 	public static final int CENTER_CHANGE = 0x0014;
 
+	public static final int ADDRESS = 0x0024;
+
 	public static final String ROOT = Environment.getExternalStorageDirectory()
 			.getAbsolutePath() + "/dlclient/";
 
