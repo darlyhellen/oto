@@ -37,6 +37,7 @@ import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
+import com.darly.dlclent.ui.address.AddressActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetPasswordAcitvity;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
@@ -370,7 +371,7 @@ public class FragmentCenter extends BaseFragment implements
 
 		case 1:
 			// 地址管理 跳转页面
-
+			startActivity(new Intent(getActivity(), AddressActivity.class));
 			break;
 		case 2:
 			// 我的订单 跳转页面

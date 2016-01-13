@@ -8,9 +8,11 @@
 package com.darly.dlclent.common;
 
 import android.annotation.SuppressLint;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -50,12 +52,26 @@ public class JsonUtil {
 				Object value = clazz.getDeclaredMethod(methodName).invoke(obj,
 						null);
 				if (f.getName().equals("data")) {
-
 					buff.append("\"" + "data" + "\":");
 					if (value == null) {
 						buff.append("\"\"");
 					} else {
-						buff.append(pojo2Json(value));
+						if (value instanceof ArrayList<?>) {
+							ArrayList<?> v = (ArrayList<?>) value;
+							buff.append("[");
+							int size = v.size();
+							for (Object object : v) {
+								buff.append(pojo2Json(object));
+								buff.append(",");
+							}
+							if (size > 0) {
+								buff.delete(buff.length() - 1, buff.length());
+							}
+							buff.append("]");
+						} else {
+							buff.append(pojo2Json(value));
+						}
+
 					}
 					buff.append(",");
 				} else {
