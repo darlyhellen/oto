@@ -38,6 +38,7 @@ import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
+import com.darly.dlclent.ui.resetuserinfo.ResetPasswordAcitvity;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
 import com.darly.dlclent.widget.roundedimage.RoundedImageView;
 import com.google.gson.reflect.TypeToken;
@@ -277,6 +278,8 @@ public class FragmentCenter extends BaseFragment implements
 				break;
 			case 1:
 				// 修改密码
+				startActivity(new Intent(getActivity(),
+						ResetPasswordAcitvity.class));
 				break;
 			case 2:
 				// 清空缓存

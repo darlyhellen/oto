@@ -55,4 +55,9 @@
     <string name="reset_info_man">男</string>
     <string name="reset_info_women">女</string>
 
+    <!-- ResetPasswordActivity -->
+    <string name="pass_contain_null">密码不能包含空格</string>
+    <string name="pass_contain_wrong">密码必须大于5位并小于21位</string>
+    <string name="pass_compare_wrong">两次密码输入不一致</string>
+
 </resources>

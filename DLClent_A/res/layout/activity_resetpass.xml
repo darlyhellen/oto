@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_header" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <com.darly.dlclent.widget.clearedit.ClearEditText
+            android:id="@+id/reset_pass_old"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/app_login_shape"
+            android:padding="10dp"
+            android:textColor="@color/wel_text"
+            android:textSize="@dimen/textview_normal" />
+
+        <com.darly.dlclent.widget.clearedit.ClearEditText
+            android:id="@+id/reset_pass_new"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/app_login_shape"
+            android:padding="10dp"
+            android:textColor="@color/wel_text"
+            android:textSize="@dimen/textview_normal" />
+
+        <com.darly.dlclent.widget.clearedit.ClearEditText
+            android:id="@+id/reset_pass_renew"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/app_login_shape"
+            android:padding="10dp"
+            android:textColor="@color/wel_text"
+            android:textSize="@dimen/textview_normal" />
+
+        <Button
+            android:id="@+id/reset_pass_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/btn_select" />
+    </LinearLayout>
+
+</LinearLayout>
