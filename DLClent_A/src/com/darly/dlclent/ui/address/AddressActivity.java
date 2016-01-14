@@ -7,7 +7,6 @@ package com.darly.dlclent.ui.address;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.json.JSONObject;
 
@@ -93,6 +92,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 	@Override
 	protected void loadData() {
 		// TODO Auto-generated method stub
+		data = new ArrayList<AddressModel>();
 		adapter = new AddressAdapter(data, R.layout.item_activity_address, this);
 		lv.setAdapter(adapter);
 
@@ -124,23 +124,10 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 
 		} else {
 			// 制造假数据
-			String jsonString = null;
 			List<AddressModel> lis = new ArrayList<AddressModel>();
-			if (new Random().nextBoolean()) {
-				AddressModel user = new AddressModel(1, "阿三", "13891431441",
-						"河北");
-				lis.add(user);
-				AddressModel users = new AddressModel(2, "阿三2", "13891431441",
-						"河南");
-				lis.add(users);
-				BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
-						200, "", lis);
-				jsonString = JsonUtil.pojo2Json(mo);
-			} else {
-				BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
-						110, "地址获取失败", lis);
-				jsonString = JsonUtil.pojo2Json(mo);
-			}
+			BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
+					100, "用户暂无地址", lis);
+			String jsonString = JsonUtil.pojo2Json(mo);
 			LogUtils.i(jsonString);
 			setList(jsonString);
 		}
@@ -225,4 +212,24 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int,
+	 * android.content.Intent)
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent datas) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, datas);
+		if (resultCode == APPEnum.ADDRESS) {
+			// 新增地址
+			AddressModel addressModel = (AddressModel) datas
+					.getSerializableExtra("AddressModel");
+			data.add(data.size(), addressModel);
+			adapter.setData(data);
+		}
+
+	}
 }

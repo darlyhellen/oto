@@ -5,10 +5,17 @@
  */
 package com.darly.dlclent.model;
 
+import java.io.Serializable;
+
 /**
  * @author zhangyh2 AddressModel 上午11:27:39 TODO
  */
-public class AddressModel {
+public class AddressModel implements Serializable {
+
+	/**上午11:18:05
+	 * TODO
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 
@@ -16,9 +23,9 @@ public class AddressModel {
 
 	private String tel;
 
-	private String addr;
+	private UserAddress addr;
 
-	public AddressModel(int id, String name, String tel, String addr) {
+	public AddressModel(int id, String name, String tel, UserAddress addr) {
 		this.id = id;
 		this.name = name;
 		this.tel = tel;
@@ -49,11 +56,11 @@ public class AddressModel {
 		this.tel = tel;
 	}
 
-	public String getAddr() {
+	public UserAddress getAddr() {
 		return addr;
 	}
 
-	public void setAddr(String addr) {
+	public void setAddr(UserAddress addr) {
 		this.addr = addr;
 	}
 

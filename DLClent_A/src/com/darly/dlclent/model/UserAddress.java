@@ -5,10 +5,17 @@
  */
 package com.darly.dlclent.model;
 
+import java.io.Serializable;
+
 /**
  * @author zhangyh2 UserAddress 下午4:41:29 TODO
  */
-public class UserAddress {
+public class UserAddress implements Serializable {
+
+	/**上午11:18:19
+	 * TODO
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String province;
 

@@ -57,7 +57,8 @@ public class AddressAdapter extends ParentAdapter<AddressModel> {
 
 		hocker.name.setText(t.getName());
 		hocker.tel.setText(t.getTel());
-		hocker.addr.setText(t.getAddr());
+		hocker.addr.setText(t.getAddr().getProvince() + t.getAddr().getCity()
+				+ t.getAddr().getDistrict());
 
 		return view;
 	}

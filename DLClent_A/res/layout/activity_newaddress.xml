@@ -6,6 +6,64 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_header" />
-    
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/app_login_shape"
+        android:orientation="vertical" >
+
+        <com.darly.dlclent.widget.clearedit.ClearEditText
+            android:id="@+id/new_addr_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:padding="4dp"
+            android:textSize="@dimen/textview_normal" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/wel_back_color" />
+
+        <com.darly.dlclent.widget.clearedit.ClearEditText
+            android:id="@+id/new_addr_tel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:padding="4dp"
+            android:textSize="@dimen/textview_normal" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/wel_back_color" />
+
+        <TextView
+            android:id="@+id/new_addr_addr"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:padding="4dp"
+            android:textSize="@dimen/textview_normal" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/wel_back_color" />
+
+        <com.darly.dlclent.widget.clearedit.ClearEditText
+            android:id="@+id/new_addr_code"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:padding="4dp"
+            android:textSize="@dimen/textview_normal" />
+    </LinearLayout>
+
 </LinearLayout>
