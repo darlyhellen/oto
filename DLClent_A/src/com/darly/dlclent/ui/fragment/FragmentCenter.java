@@ -37,6 +37,7 @@ import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
+import com.darly.dlclent.ui.VersionActivity;
 import com.darly.dlclent.ui.address.AddressActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetPasswordAcitvity;
@@ -300,6 +301,10 @@ public class FragmentCenter extends BaseFragment implements
 				clean.setConsel("取消");
 				break;
 			case 3:
+				// 版本更新
+				startActivity(new Intent(getActivity(), VersionActivity.class));
+				break;
+			case 4:
 				// 退出登录
 				final LoginOutDialg dialg = new LoginOutDialg(getActivity());
 				dialg.setTitle("温馨提示");
@@ -414,6 +419,7 @@ public class FragmentCenter extends BaseFragment implements
 			data.add(new SecMenuModel("返回上层菜单", null));
 			data.add(new SecMenuModel("修改密码", null));
 			data.add(new SecMenuModel("清空缓存", null));
+			data.add(new SecMenuModel("版本更新", null));
 			data.add(new SecMenuModel("退出登录", "exit"));
 			secAdapter.setData(data);
 			outListSelect = position;
