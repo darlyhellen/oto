@@ -62,6 +62,8 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 
 	private boolean choseAddress;
 
+	private int changePosition;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -73,7 +75,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 		title.setText("地址列表");
 		back.setVisibility(View.VISIBLE);
 		btn.setText("编辑");
-		choseAddress = getIntent().getBooleanExtra("", false);
+		choseAddress = getIntent().getBooleanExtra("choseAddress", false);
 		if (choseAddress) {
 			// 选择地址
 			btn.setVisibility(View.INVISIBLE);
@@ -201,11 +203,18 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
+		AddressModel model = (AddressModel) parent.getItemAtPosition(position);
 		if (choseAddress) {
 			// 选择地址
+			Intent intent = new Intent(this, NewAddressActivity.class);
+			intent.putExtra("CHAGEADDRESS", model);
+			setResult(APPEnum.ADDRESS, intent);
+			finish();
 		} else {
 			// 编辑地址
+			changePosition = position;
 			Intent intent = new Intent(this, NewAddressActivity.class);
+			intent.putExtra("CHAGEADDRESS", model);
 			intent.putExtra("NewAddressActivity", false);
 			startActivityForResult(intent, APPEnum.ADDRESS);
 		}
@@ -223,13 +232,25 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 			Intent datas) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, datas);
-		if (resultCode == APPEnum.ADDRESS) {
+		if (resultCode == APPEnum.ADDRESS_NEW) {
 			// 新增地址
 			AddressModel addressModel = (AddressModel) datas
 					.getSerializableExtra("AddressModel");
-			data.add(data.size(), addressModel);
+			if (data.size() == 0) {
+				Intent intent = new Intent(this, NewAddressActivity.class);
+				intent.putExtra("CHAGEADDRESS", addressModel);
+				setResult(APPEnum.ADDRESS, intent);
+				finish();
+			} else {
+				data.add(data.size(), addressModel);
+				adapter.setData(data);
+			}
+		} else if (resultCode == APPEnum.ADDRESS_CHA) {
+			AddressModel addressModel = (AddressModel) datas
+					.getSerializableExtra("AddressModel");
+			data.remove(changePosition);
+			data.add(changePosition, addressModel);
 			adapter.setData(data);
 		}
-
 	}
 }

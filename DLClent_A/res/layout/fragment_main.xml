@@ -3,7 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <include layout="@layout/main_header"/>
+
+    <include layout="@layout/main_header" />
+
+    <TextView
+        android:id="@+id/fragment_main_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:background="@drawable/app_login_shape"
+        android:padding="4dp" />
 
 </LinearLayout>

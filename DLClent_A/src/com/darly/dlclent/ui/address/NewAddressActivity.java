@@ -61,6 +61,8 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 
 	private UserAddress address;
 
+	private AddressModel admodel;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -83,10 +85,23 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 
 		btn.setText("保存");
 
-		name.setHint("请输入姓名");
-		tel.setHint("请输入手机号码");
-		addr.setHint("请选择地区");
-		code.setHint("请输入区号");
+		admodel = (AddressModel) getIntent().getSerializableExtra(
+				"CHAGEADDRESS");
+		if (admodel != null) {
+			address = admodel.getAddr();
+			name.setText(admodel.getName());
+			tel.setText(admodel.getTel());
+			addr.setText(admodel.getAddr().getProvince()
+					+ admodel.getAddr().getCity()
+					+ admodel.getAddr().getDistrict());
+			code.setText(admodel.getAddr().getZipcode());
+		} else {
+			name.setHint("请输入姓名");
+			tel.setHint("请输入手机号码");
+			addr.setHint("请选择地区");
+			code.setHint("请输入区号");
+		}
+
 	}
 
 	/*
@@ -186,16 +201,17 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 		if (address == null) {
 			return;
 		}
-		
-		AddressModel model = new AddressModel(0, sName, sTel, address);
+
+		AddressModel model = new AddressModel(Integer.parseInt(sCode), sName,
+				sTel, address);
 		Intent intent = new Intent(this, AddressActivity.class);
 		intent.putExtra("AddressModel", model);
 		if (newAddress) {
 			// 新增地址
-			setResult(APPEnum.ADDRESS, intent);
+			setResult(APPEnum.ADDRESS_NEW, intent);
 		} else {
 			// 修改地址
-			setResult(APPEnum.ADDRESS, intent);
+			setResult(APPEnum.ADDRESS_CHA, intent);
 		}
 	}
 
