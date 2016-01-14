@@ -22,6 +22,7 @@ import com.darly.dlclent.R;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.PaserProvice;
+import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.db.DBUtilsHelper;
 import com.darly.dlclent.model.AddressModel;
 import com.darly.dlclent.model.ProvinceModel;
@@ -53,7 +54,7 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 	@ViewInject(R.id.new_addr_tel)
 	private ClearEditText tel;
 	@ViewInject(R.id.new_addr_code)
-	private ClearEditText code;
+	private TextView code;
 	@ViewInject(R.id.new_addr_addr)
 	private TextView addr;
 
@@ -114,7 +115,6 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 	@Override
 	protected void loadData() {
 		// TODO Auto-generated method stub
-
 		try {
 			province = PaserProvice.paserPro(getResources().getAssets().open(
 					"province_data.xml"));
@@ -175,6 +175,7 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 			popCity.pop.dismiss();
 			addr.setText(address.getProvince() + address.getCity()
 					+ address.getDistrict());
+			code.setText(address.getZipcode());
 			break;
 		default:
 			break;
@@ -190,21 +191,23 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 		// TODO Auto-generated method stub
 		String sName = name.getText().toString().trim();
 		if (sName == null || sName.length() == 0) {
+			ToastApp.showToast("请输入姓名");
 			return;
 		}
 		String sTel = tel.getText().toString().trim();
-		if (sTel == null || sTel.length() == 0) {
-			return;
-		}
-		String sCode = code.getText().toString().trim();
-		if (sCode == null || sCode.length() == 0) {
+		if (sTel == null || sTel.length() != 11) {
+			ToastApp.showToast("请输入正确的手机号");
 			return;
 		}
 		if (address == null) {
+			ToastApp.showToast("请选择省市区");
 			return;
 		}
-
-		AddressModel model = new AddressModel(admodel.getId(), sName, sTel,
+		int id = 0;
+		if (admodel != null) {
+			id = admodel.getId();
+		}
+		AddressModel model = new AddressModel(id, sName, sTel,
 				address.getProvince(), address.getCity(),
 				address.getDistrict(), address.getZipcode());
 		try {

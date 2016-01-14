@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@null"
+            android:digits="0123456789"
             android:padding="4dp"
             android:textSize="@dimen/textview_normal" />
 
@@ -56,7 +57,7 @@
             android:layout_height="0.5dp"
             android:background="@color/wel_back_color" />
 
-        <com.darly.dlclent.widget.clearedit.ClearEditText
+        <TextView
             android:id="@+id/new_addr_code"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
