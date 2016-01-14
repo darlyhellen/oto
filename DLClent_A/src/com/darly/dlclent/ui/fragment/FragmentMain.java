@@ -123,7 +123,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener {
 			AddressModel addressModel = (AddressModel) data
 					.getSerializableExtra("CHAGEADDRESS");
 			tv.setText(addressModel.getName() + addressModel.getTel()
-					+ addressModel.getAddr().getProvince());
+					+ addressModel.getProvince());
 		}
 	}
 

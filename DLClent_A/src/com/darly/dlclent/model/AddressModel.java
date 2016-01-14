@@ -12,8 +12,8 @@ import java.io.Serializable;
  */
 public class AddressModel implements Serializable {
 
-	/**上午11:18:05
-	 * TODO
+	/**
+	 * 上午11:18:05 TODO
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -23,13 +23,32 @@ public class AddressModel implements Serializable {
 
 	private String tel;
 
-	private UserAddress addr;
+	private String province;
 
-	public AddressModel(int id, String name, String tel, UserAddress addr) {
+	private String city;
+
+	private String district;
+
+	private String zipcode;
+
+	/**
+	 * 下午2:34:06
+	 * 
+	 * @author zhangyh2
+	 */
+	public AddressModel() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public AddressModel(int id, String name, String tel, String province,
+			String city, String district, String zipcode) {
 		this.id = id;
 		this.name = name;
 		this.tel = tel;
-		this.addr = addr;
+		this.province = province;
+		this.city = city;
+		this.district = district;
+		this.zipcode = zipcode;
 	}
 
 	public int getId() {
@@ -56,12 +75,40 @@ public class AddressModel implements Serializable {
 		this.tel = tel;
 	}
 
-	public UserAddress getAddr() {
-		return addr;
+	public String getProvince() {
+		return province;
 	}
 
-	public void setAddr(UserAddress addr) {
-		this.addr = addr;
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

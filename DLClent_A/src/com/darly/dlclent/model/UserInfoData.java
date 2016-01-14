@@ -24,6 +24,15 @@ public class UserInfoData {
 
 	private String token;
 
+	/**
+	 * 下午2:34:29
+	 * 
+	 * @author zhangyh2
+	 */
+	public UserInfoData() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public UserInfoData(String name, String icon, String tel, String sex,
 			String idCard, String money, String token) {
 		this.name = name;

@@ -12,8 +12,8 @@ import java.io.Serializable;
  */
 public class UserAddress implements Serializable {
 
-	/**上午11:18:19
-	 * TODO
+	/**
+	 * 上午11:18:19 TODO
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +24,15 @@ public class UserAddress implements Serializable {
 	private String district;
 
 	private String zipcode;
+
+	/**
+	 * 下午2:34:15
+	 * 
+	 * @author zhangyh2
+	 */
+	public UserAddress() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public UserAddress(String province, String city, String district,
 			String zipcode) {

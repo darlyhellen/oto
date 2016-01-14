@@ -28,11 +28,13 @@ import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
 import com.darly.dlclent.common.JsonUtil;
 import com.darly.dlclent.common.ToastApp;
+import com.darly.dlclent.db.DBUtilsHelper;
 import com.darly.dlclent.model.AddressModel;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
 import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -129,10 +131,25 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 
 		} else {
 			// 制造假数据
-			List<AddressModel> lis = new ArrayList<AddressModel>();
-			BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
-					100, "用户暂无地址", lis);
-			String jsonString = JsonUtil.pojo2Json(mo);
+			String jsonString = null;
+			List<AddressModel> lis = null;
+			try {
+				lis = DBUtilsHelper.getInstance().getDb()
+						.findAll(AddressModel.class);
+			} catch (DbException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (lis == null) {
+				lis = new ArrayList<AddressModel>();
+				BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
+						100, "用户暂无地址", lis);
+				jsonString = JsonUtil.pojo2Json(mo);
+			} else {
+				BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
+						200, "", lis);
+				jsonString = JsonUtil.pojo2Json(mo);
+			}
 			LogUtils.i(jsonString);
 			setList(jsonString);
 		}
@@ -233,15 +250,24 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-		AddressModel model = (AddressModel) parent.getItemAtPosition(position);
-		if (choseAddress && !btnSelect) {
-			// 选择地址
-			Intent intent = new Intent(this, NewAddressActivity.class);
-			intent.putExtra("CHAGEADDRESS", model);
-			setResult(APPEnum.ADDRESS, intent);
-			finish();
+		final AddressModel model = (AddressModel) parent
+				.getItemAtPosition(position);
+		changePosition = position;
+		if (choseAddress) {
+			if (!btnSelect) {
+				// 选择地址
+				Intent intent = new Intent(this, NewAddressActivity.class);
+				intent.putExtra("CHAGEADDRESS", model);
+				setResult(APPEnum.ADDRESS, intent);
+				finish();
+			} else {
+				// 编辑地址
+				Intent intent = new Intent(this, NewAddressActivity.class);
+				intent.putExtra("CHAGEADDRESS", model);
+				intent.putExtra("NewAddressActivity", false);
+				startActivityForResult(intent, APPEnum.ADDRESS);
+			}
 		} else {
-			changePosition = position;
 			if (!btnSelect) {
 				// 编辑地址
 				Intent intent = new Intent(this, NewAddressActivity.class);
@@ -259,8 +285,15 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						data.remove(changePosition);
-						adapter.setData(data);
+						try {
+							DBUtilsHelper.getInstance().getDb().delete(model);
+							data = DBUtilsHelper.getInstance().getDb()
+									.findAll(AddressModel.class);
+							adapter.setData(data);
+						} catch (DbException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						clean.cancel();
 					}
 				});

@@ -22,10 +22,12 @@ import com.darly.dlclent.R;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.PaserProvice;
+import com.darly.dlclent.db.DBUtilsHelper;
 import com.darly.dlclent.model.AddressModel;
 import com.darly.dlclent.model.ProvinceModel;
 import com.darly.dlclent.model.UserAddress;
 import com.darly.dlclent.widget.clearedit.ClearEditText;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -88,13 +90,13 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 		admodel = (AddressModel) getIntent().getSerializableExtra(
 				"CHAGEADDRESS");
 		if (admodel != null) {
-			address = admodel.getAddr();
+			address = new UserAddress(admodel.getProvince(), admodel.getCity(),
+					admodel.getDistrict(), admodel.getZipcode());
 			name.setText(admodel.getName());
 			tel.setText(admodel.getTel());
-			addr.setText(admodel.getAddr().getProvince()
-					+ admodel.getAddr().getCity()
-					+ admodel.getAddr().getDistrict());
-			code.setText(admodel.getAddr().getZipcode());
+			addr.setText(admodel.getProvince() + admodel.getCity()
+					+ admodel.getDistrict());
+			code.setText(admodel.getZipcode());
 		} else {
 			name.setHint("请输入姓名");
 			tel.setHint("请输入手机号码");
@@ -202,15 +204,26 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 			return;
 		}
 
-		AddressModel model = new AddressModel(0, sName, sTel, address);
-		Intent intent = new Intent(this, AddressActivity.class);
-		intent.putExtra("AddressModel", model);
-		if (newAddress) {
-			// 新增地址
-			setResult(APPEnum.ADDRESS_NEW, intent);
-		} else {
-			// 修改地址
-			setResult(APPEnum.ADDRESS_CHA, intent);
+		AddressModel model = new AddressModel(admodel.getId(), sName, sTel,
+				address.getProvince(), address.getCity(),
+				address.getDistrict(), address.getZipcode());
+		try {
+			DBUtilsHelper.getInstance().getDb()
+					.createTableIfNotExist(AddressModel.class);
+			Intent intent = new Intent(this, AddressActivity.class);
+			intent.putExtra("AddressModel", model);
+			if (newAddress) {
+				// 新增地址
+				setResult(APPEnum.ADDRESS_NEW, intent);
+				DBUtilsHelper.getInstance().getDb().save(model);
+			} else {
+				// 修改地址
+				setResult(APPEnum.ADDRESS_CHA, intent);
+				DBUtilsHelper.getInstance().getDb().update(model);
+			}
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
