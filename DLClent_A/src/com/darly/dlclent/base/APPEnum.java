@@ -41,14 +41,26 @@ public enum APPEnum {
 	public static final int DB_REQUST = 0x0005;
 
 	public static final int CENTER_NAME = 0x0011;
+
 	public static final int CENTER_TEL = 0x0012;
+
 	public static final int CENTER_SEX = 0x0013;
+
 	public static final int CENTER_CARD = 0x0014;
+
 	public static final int CENTER_CHANGE = 0x0014;
 
 	public static final int ADDRESS = 0x0024;
+
 	public static final int ADDRESS_NEW = 0x0021;
+
 	public static final int ADDRESS_CHA = 0x0022;
+
+	public static final int REQUESTCODE_CAM = 0x1001;
+
+	public static final int REQUESTCODE_CAP = 0x1002;
+
+	public static final int REQUESTCODE_CUT = 0x1003;
 
 	public static final String ROOT = Environment.getExternalStorageDirectory()
 			.getAbsolutePath() + "/dlclient/";
@@ -58,6 +70,10 @@ public enum APPEnum {
 	public static final String IMAGE = ROOT + "image/";
 
 	public static final String LOG = ROOT + "log/";
+
+	public static final String HEAD = ROOT + "head.png";
+
+	public static String capUri;
 
 	private String dec;
 

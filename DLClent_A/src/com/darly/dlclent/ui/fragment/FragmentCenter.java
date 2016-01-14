@@ -7,10 +7,13 @@
  */
 package com.darly.dlclent.ui.fragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +35,7 @@ import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
 import com.darly.dlclent.common.CleanCache;
 import com.darly.dlclent.common.SharePreferHelp;
+import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.SecMenuModel;
@@ -41,10 +45,12 @@ import com.darly.dlclent.ui.VersionActivity;
 import com.darly.dlclent.ui.address.AddressActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetPasswordAcitvity;
+import com.darly.dlclent.widget.image.PhotoPop;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
 import com.darly.dlclent.widget.roundedimage.RoundedImageView;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 /**
@@ -77,6 +83,11 @@ public class FragmentCenter extends BaseFragment implements
 
 	private BaseModel<UserInfoData> model;
 
+	/**
+	 * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
+	 */
+	private PhotoPop pop;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -106,7 +117,7 @@ public class FragmentCenter extends BaseFragment implements
 				.getLen(), (int) (APPEnum.WIDTH.getLen() / 2.66)));
 
 		header_icon.setLayoutParams(new LinearLayout.LayoutParams(APPEnum.WIDTH
-				.getLen() / 5, APPEnum.WIDTH.getLen() / 5));
+				.getLen() / 6, APPEnum.WIDTH.getLen() / 6));
 		model = new BaseModelPaser<UserInfoData>().paserJson(
 				SharePreferHelp.getValue(APPEnum.USERINFO.getDec(), null),
 				new TypeToken<UserInfoData>() {
@@ -119,6 +130,8 @@ public class FragmentCenter extends BaseFragment implements
 			header_icon.setImageResource(R.drawable.icon);
 		}
 		header_name.setText(model.getData().getName());
+
+		pop = new PhotoPop(getActivity());
 	}
 
 	/*
@@ -180,6 +193,7 @@ public class FragmentCenter extends BaseFragment implements
 		// TODO Auto-generated method stub
 		back.setOnClickListener(this);
 		lv.setOnItemClickListener(this);
+		header_icon.setOnClickListener(this);
 		seclv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -465,7 +479,16 @@ public class FragmentCenter extends BaseFragment implements
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.center_header_icon:
+			// 替换顶部图片
+			ToastApp.showToast("替换顶部图片");
+			pop.show(v);
+			break;
 
+		default:
+			break;
+		}
 	}
 
 	private String transformIDcard(String iDcard) {
@@ -497,6 +520,7 @@ public class FragmentCenter extends BaseFragment implements
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
+		LogUtils.i("FragmentCenter进入onActivityResult");
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == APPEnum.CENTER_CHANGE) {
 			model = new BaseModelPaser<UserInfoData>().paserJson(
@@ -515,6 +539,31 @@ public class FragmentCenter extends BaseFragment implements
 			secAdapter.setData(datasList);
 			// 修改标题位置的用户信息。
 			header_name.setText(model.getData().getName());
+		} else if (requestCode == APPEnum.REQUESTCODE_CUT) {
+			// 裁剪
+			if (data != null) {
+				Bundle extras = data.getExtras();
+				Bitmap head = extras.getParcelable("data");
+				header_icon.setImageBitmap(head);
+			}
+		} else if (requestCode == APPEnum.REQUESTCODE_CAM
+				|| requestCode == APPEnum.REQUESTCODE_CAP) {
+
+			// 拍照或相册
+			String head_path = null;
+			if (data == null) {
+				if (pop == null) {
+					head_path = APPEnum.capUri;
+				} else {
+					head_path = pop.PopStringActivityResult(null,
+							APPEnum.REQUESTCODE_CAP);
+				}
+			} else {
+				head_path = pop.PopStringActivityResult(data,
+						APPEnum.REQUESTCODE_CAM);
+			}
+			File temp = new File(head_path);
+			pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
 		}
 
 	}
