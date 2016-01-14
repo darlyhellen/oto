@@ -202,8 +202,7 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 			return;
 		}
 
-		AddressModel model = new AddressModel(Integer.parseInt(sCode), sName,
-				sTel, address);
+		AddressModel model = new AddressModel(0, sName, sTel, address);
 		Intent intent = new Intent(this, AddressActivity.class);
 		intent.putExtra("AddressModel", model);
 		if (newAddress) {

@@ -31,6 +31,7 @@ import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.model.AddressModel;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
+import com.darly.dlclent.widget.loginout.LoginOutDialg;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -64,6 +65,8 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 
 	private int changePosition;
 
+	private boolean btnSelect;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -74,14 +77,14 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 		// TODO Auto-generated method stub
 		title.setText("地址列表");
 		back.setVisibility(View.VISIBLE);
-		btn.setText("编辑");
+		btn.setVisibility(View.VISIBLE);
 		choseAddress = getIntent().getBooleanExtra("choseAddress", false);
 		if (choseAddress) {
 			// 选择地址
-			btn.setVisibility(View.INVISIBLE);
+			btn.setText("选择");
 		} else {
 			// 编辑地址
-			btn.setVisibility(View.VISIBLE);
+			btn.setText("编辑");
 		}
 		addnew.setText("新增地址");
 	}
@@ -167,6 +170,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 		back.setOnClickListener(this);
 		addnew.setOnClickListener(this);
 		lv.setOnItemClickListener(this);
+		btn.setOnClickListener(this);
 	}
 
 	/*
@@ -187,6 +191,32 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 			intent.putExtra("NewAddressActivity", true);
 			startActivityForResult(intent, APPEnum.ADDRESS);
 			break;
+		case R.id.header_btn:
+			// 进行页面编辑，还是进行页面选择
+			if (choseAddress) {
+				// 选择。编辑
+				if (!btnSelect) {
+					// 选择->编辑 ,用户点击列表进行修改。
+					btn.setText("编辑");
+					btnSelect = true;
+				} else {
+					// 编辑->选择 用户点击列表进行选择
+					btn.setText("选择");
+					btnSelect = false;
+				}
+			} else {
+				// 编辑。删除
+				if (!btnSelect) {
+					// 编辑->删除
+					btn.setText("删除");
+					btnSelect = true;
+				} else {
+					// 删除->编辑
+					btn.setText("编辑");
+					btnSelect = false;
+				}
+			}
+			break;
 		default:
 			break;
 		}
@@ -204,19 +234,39 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 			long id) {
 		// TODO Auto-generated method stub
 		AddressModel model = (AddressModel) parent.getItemAtPosition(position);
-		if (choseAddress) {
+		if (choseAddress && !btnSelect) {
 			// 选择地址
 			Intent intent = new Intent(this, NewAddressActivity.class);
 			intent.putExtra("CHAGEADDRESS", model);
 			setResult(APPEnum.ADDRESS, intent);
 			finish();
 		} else {
-			// 编辑地址
 			changePosition = position;
-			Intent intent = new Intent(this, NewAddressActivity.class);
-			intent.putExtra("CHAGEADDRESS", model);
-			intent.putExtra("NewAddressActivity", false);
-			startActivityForResult(intent, APPEnum.ADDRESS);
+			if (!btnSelect) {
+				// 编辑地址
+				Intent intent = new Intent(this, NewAddressActivity.class);
+				intent.putExtra("CHAGEADDRESS", model);
+				intent.putExtra("NewAddressActivity", false);
+				startActivityForResult(intent, APPEnum.ADDRESS);
+			} else {
+				// 进行地址删除
+				final LoginOutDialg clean = new LoginOutDialg(this);
+				clean.setTitle("温馨提示");
+				clean.setContent("是否删除此地址?");
+				clean.setSure("确认");
+				clean.getSure().setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						data.remove(changePosition);
+						adapter.setData(data);
+						clean.cancel();
+					}
+				});
+				clean.setConsel("取消");
+			}
+
 		}
 
 	}
@@ -236,7 +286,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 			// 新增地址
 			AddressModel addressModel = (AddressModel) datas
 					.getSerializableExtra("AddressModel");
-			if (data.size() == 0) {
+			if (data.size() == 0 && choseAddress) {
 				Intent intent = new Intent(this, NewAddressActivity.class);
 				intent.putExtra("CHAGEADDRESS", addressModel);
 				setResult(APPEnum.ADDRESS, intent);
