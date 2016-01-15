@@ -6,13 +6,22 @@
 
     <include layout="@layout/main_header" />
 
-    <TextView
-        android:id="@+id/fragment_main_tv"
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:background="@drawable/app_login_shape"
-        android:padding="4dp" />
+        android:layout_height="fill_parent"
+        layout="@layout/no_net_fresh" />
+
+    <LinearLayout
+        android:id="@+id/main_fragment_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <com.darly.dlclent.widget.xlistview.XListView
+            android:id="@+id/main_fragment_xlist"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </com.darly.dlclent.widget.xlistview.XListView>
+    </LinearLayout>
 
 </LinearLayout>

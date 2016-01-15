@@ -74,6 +74,29 @@ public class JsonUtil {
 
 					}
 					buff.append(",");
+				}else if (f.getName().equals("menu")) {
+					buff.append("\"" + "menu" + "\":");
+					if (value == null) {
+						buff.append("\"\"");
+					} else {
+						if (value instanceof ArrayList<?>) {
+							ArrayList<?> v = (ArrayList<?>) value;
+							buff.append("[");
+							int size = v.size();
+							for (Object object : v) {
+								buff.append(pojo2Json(object));
+								buff.append(",");
+							}
+							if (size > 0) {
+								buff.delete(buff.length() - 1, buff.length());
+							}
+							buff.append("]");
+						} else {
+							buff.append(pojo2Json(value));
+						}
+
+					}
+					buff.append(",");
 				} else {
 					buff.append("\"");
 					buff.append(f.getName());

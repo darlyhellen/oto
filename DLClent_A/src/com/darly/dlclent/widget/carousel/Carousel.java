@@ -1,6 +1,7 @@
 package com.darly.dlclent.widget.carousel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.os.Message;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.base.APPEnum;
+import com.darly.dlclent.model.MainCarouselModel;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -30,7 +32,7 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 
 	public interface ClickCarouselistener {
 
-		public void clickCarousel(String url);
+		public void clickCarousel(MainCarouselModel url);
 
 	}
 
@@ -46,7 +48,7 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 
 	public View view;
 
-	private ArrayList<String> data;
+	private List<MainCarouselModel> data;
 
 	public static int contents;
 
@@ -61,14 +63,13 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 	 */
 	private static final double ASPECTRATIO = 2.66;
 
-	public Carousel(Context context, ArrayList<String> data,
+	public Carousel(Context context, List<MainCarouselModel> data,
 			ImageLoader imageLoader, DisplayImageOptions options,
 			ImageHandler<T> imagehandler) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.data = data;
 		this.imageLoader = imageLoader;
-
 		this.options = options;
 		this.imagehandler = imagehandler;
 		init();
@@ -112,7 +113,8 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 			layout.setVisibility(View.GONE);
 			one.setVisibility(View.VISIBLE);
 			if (lent == 1) {
-				imageLoader.displayImage(data.get(lent - 1), one, options);
+				imageLoader.displayImage(data.get(lent - 1).getIcon(), one,
+						options);
 				one.setOnClickListener(this);
 			} else {
 				imageLoader.displayImage(null, one, options);
@@ -124,9 +126,9 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 			layout.setVisibility(View.VISIBLE);
 			one.setVisibility(View.GONE);
 			// 当两个图片时，循环加载一次。
-			ArrayList<String> datas = new ArrayList<String>();
+			ArrayList<MainCarouselModel> datas = new ArrayList<MainCarouselModel>();
 			for (int i = 0, l = data.size(); i < l; i++) {
-				for (String home : data) {
+				for (MainCarouselModel home : data) {
 					datas.add(home);
 				}
 			}
@@ -154,7 +156,7 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 
 	}
 
-	private void setCarou(ArrayList<String> data) {
+	private void setCarou(List<MainCarouselModel> data) {
 		// TODO Auto-generated method stub
 
 		View homeView = LayoutInflater.from(context).inflate(
@@ -162,11 +164,11 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 		LinearLayout linearLayout = (LinearLayout) homeView
 				.findViewById(R.id.viewpager_item_image);
 		pager.addView(linearLayout);
-		for (String url : data) {
+		for (MainCarouselModel url : data) {
 			ImageView iv = new ImageView(context);
 			iv.setScaleType(ScaleType.FIT_XY);
 			iv.setClickable(true);
-			imageLoader.displayImage(url, iv, options);
+			imageLoader.displayImage(url.getIcon(), iv, options);
 			linearLayout.addView(iv);
 			viewlist.add(iv);
 			ImageView slid = new ImageView(context);
