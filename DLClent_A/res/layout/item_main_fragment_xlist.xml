@@ -3,61 +3,91 @@
     xmlns:app="http://schemas.android.com/apk/res/com.darly.dlclent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
-
-    <com.darly.dlclent.widget.roundedimage.RoundedImageView
-        android:id="@+id/xlist_round_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:scaleType="center"
-        android:src="@drawable/icon"
-        app:riv_border_color="@color/wel_click_color"
-        app:riv_border_width="2dp"
-        app:riv_corner_radius="20dp" />
+    android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/xlist_title"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:orientation="vertical" >
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="fill_parent"
+            android:layout_margin="4dp"
+            android:background="@color/pop_back" />
 
         <TextView
-            android:id="@+id/xlist_name"
+            android:id="@+id/xlist_title_name"
             android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/action_settings"
+            android:textSize="@dimen/textview_normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/xlist_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+
+        <com.darly.dlclent.widget.roundedimage.RoundedImageView
+            android:id="@+id/xlist_round_image"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="@string/neterror_norespanse" />
+            android:scaleType="center"
+            android:src="@drawable/icon"
+            app:riv_border_color="@color/wel_click_color"
+            app:riv_border_width="2dp"
+            app:riv_corner_radius="20dp" />
 
         <LinearLayout
-            android:id="@+id/xlist_pro"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-        </LinearLayout>
-
-        <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp" >
+            android:layout_margin="4dp"
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/xlist_price"
-                android:layout_width="0dp"
+                android:id="@+id/xlist_name"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/yes" />
+                android:layout_margin="4dp"
+                android:text="@string/neterror_norespanse" />
 
-            <TextView
-                android:id="@+id/xlist_original"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/xlist_pro"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:text="@string/yes"
-                android:textColor="@color/wel_back_color" />
-        </TableRow>
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp" >
+
+                <TextView
+                    android:id="@+id/xlist_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/yes" />
+
+                <TextView
+                    android:id="@+id/xlist_original"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/yes"
+                    android:textColor="@color/wel_back_color" />
+            </TableRow>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

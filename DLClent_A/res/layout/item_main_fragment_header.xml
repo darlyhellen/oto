@@ -9,11 +9,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
-    <GridView
+    <com.darly.dlclent.widget.grid.GridViewInList
         android:id="@+id/fragment_main_header_grid"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:numColumns="5" >
-    </GridView>
+    </com.darly.dlclent.widget.grid.GridViewInList>
 
 </LinearLayout>

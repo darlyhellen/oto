@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -43,6 +42,7 @@ import com.darly.dlclent.model.MainMessageModel;
 import com.darly.dlclent.widget.carousel.Carousel;
 import com.darly.dlclent.widget.carousel.Carousel.ClickCarouselistener;
 import com.darly.dlclent.widget.carousel.ImageHandler;
+import com.darly.dlclent.widget.grid.GridViewInList;
 import com.darly.dlclent.widget.load.ProgressDialogUtil;
 import com.darly.dlclent.widget.xlistview.XListView;
 import com.google.gson.Gson;
@@ -90,7 +90,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	/**
 	 * 下午2:34:37 TODO 菜单集合
 	 */
-	private GridView header_grid;
+	private GridViewInList header_grid;
 	private GridAdapter grid_adapter;
 
 	@ViewInject(R.id.main_fragment_xlist)
@@ -155,7 +155,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 
 		header_cousel = (RelativeLayout) headerView
 				.findViewById(R.id.fragment_main_header_cars);
-		header_grid = (GridView) headerView
+		header_grid = (GridViewInList) headerView
 				.findViewById(R.id.fragment_main_header_grid);
 
 		LayoutParams cou = new LayoutParams(APPEnum.WIDTH.getLen(),
@@ -366,12 +366,15 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 				String json = null;
 				if (new Random().nextBoolean()) {
 					for (int i = 0; i < IMAGES.length; i++) {
-						if (i < 4) {
+						if (i == 0) {
 							data.add(new MainMessageModel(i, "特卖", "商品" + i,
-									IMAGES[i], i * 110, i * 100, i));
+									IMAGES[i], i * 110, i * 100, i, "标题"));
+						} else if (i == 5) {
+							data.add(new MainMessageModel(i, "本周商品", "商品" + i,
+									IMAGES[i], i * 110, i * 100, i, "标题"));
 						} else {
 							data.add(new MainMessageModel(i, "本周商品", "商品" + i,
-									IMAGES[i], i * 110, i * 100, i));
+									IMAGES[i], i * 110, i * 100, i, "商品"));
 						}
 						menu.add(new MainMenuModel(i, "菜单" + i, url, IMAGES[i]));
 					}

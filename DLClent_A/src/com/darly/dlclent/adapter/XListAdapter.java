@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
@@ -62,6 +63,12 @@ public class XListAdapter extends ParentAdapter<MainMessageModel> {
 		if (view == null) {
 			view = LayoutInflater.from(context).inflate(resID, null);
 			hocker = new ViewHocker();
+			hocker.title = (LinearLayout) view.findViewById(R.id.xlist_title);
+			hocker.title_name = (TextView) view
+					.findViewById(R.id.xlist_title_name);
+
+			hocker.content = (LinearLayout) view
+					.findViewById(R.id.xlist_content);
 			hocker.iv = (RoundedImageView) view
 					.findViewById(R.id.xlist_round_image);
 			LayoutParams lp = new LayoutParams(APPEnum.WIDTH.getLen() / 6,
@@ -74,17 +81,42 @@ public class XListAdapter extends ParentAdapter<MainMessageModel> {
 		} else {
 			hocker = (ViewHocker) view.getTag();
 		}
-		imageLoader.displayImage(t.getUrl(), hocker.iv, options);
-
-		hocker.name.setText(t.getName());
-
-		hocker.price.setText(t.getPrice() + "¥");
-
-		hocker.original.setText(t.getOriginal() + "¥");
+		if ("标题".equals(t.getType())) {
+			hocker.title.setVisibility(View.VISIBLE);
+			hocker.content.setVisibility(View.GONE);
+			hocker.title_name.setText(t.getTitle());
+		} else {
+			hocker.title.setVisibility(View.GONE);
+			hocker.content.setVisibility(View.VISIBLE);
+			imageLoader.displayImage(t.getUrl(), hocker.iv, options);
+			hocker.name.setText(t.getName());
+			hocker.price.setText(t.getPrice() + "¥");
+			hocker.original.setText(t.getOriginal() + "¥");
+		}
 		return view;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.BaseAdapter#isEnabled(int)
+	 */
+	@Override
+	public boolean isEnabled(int position) {
+		// TODO Auto-generated method stub
+		if ("标题".equals(getItem(position).getType())) {
+			return false;
+		}
+		return super.isEnabled(position);
+	}
+
 	class ViewHocker {
+		LinearLayout title;
+
+		TextView title_name;
+
+		LinearLayout content;
+
 		RoundedImageView iv;
 
 		TextView name;

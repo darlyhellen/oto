@@ -25,8 +25,10 @@ public class MainMessageModel {
 
 	private long commodityID;
 
+	private String type;
+
 	public MainMessageModel(int id, String title, String name, String url,
-			double price, double original, long commodityID) {
+			double price, double original, long commodityID, String type) {
 		this.id = id;
 		this.title = title;
 		this.name = name;
@@ -34,6 +36,7 @@ public class MainMessageModel {
 		this.price = price;
 		this.original = original;
 		this.commodityID = commodityID;
+		this.type = type;
 	}
 
 	public int getId() {
@@ -90,6 +93,14 @@ public class MainMessageModel {
 
 	public void setCommodityID(long commodityID) {
 		this.commodityID = commodityID;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

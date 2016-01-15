@@ -7,19 +7,19 @@ package com.darly.dlclent.adapter;
 
 import java.util.List;
 
-import com.darly.dlclent.R;
-import com.darly.dlclent.base.APPEnum;
-import com.darly.dlclent.model.MainMenuModel;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
+
+import com.darly.dlclent.R;
+import com.darly.dlclent.base.APPEnum;
+import com.darly.dlclent.model.MainMenuModel;
+import com.darly.dlclent.widget.roundedimage.RoundedImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * @author zhangyh2 GridAdapter 下午2:36:55 TODO
@@ -62,7 +62,8 @@ public class GridAdapter extends ParentAdapter<MainMenuModel> {
 		if (view == null) {
 			view = LayoutInflater.from(context).inflate(resID, null);
 			hocker = new ViewHocker();
-			hocker.iv = (ImageView) view.findViewById(R.id.grid_header_image);
+			hocker.iv = (RoundedImageView) view
+					.findViewById(R.id.grid_header_image);
 			LayoutParams lp = new LayoutParams(APPEnum.WIDTH.getLen() / 8,
 					APPEnum.WIDTH.getLen() / 8);
 			hocker.iv.setLayoutParams(lp);
@@ -78,7 +79,7 @@ public class GridAdapter extends ParentAdapter<MainMenuModel> {
 	}
 
 	class ViewHocker {
-		ImageView iv;
+		RoundedImageView iv;
 
 		TextView tv;
 	}
