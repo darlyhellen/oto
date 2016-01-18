@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.darly.dlclent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/comment_floor_padding" >
+    android:padding="10dp" >
 
-    <ImageView
+    <com.darly.dlclent.widget.roundedimage.RoundedImageView
         android:id="@id/floor_avater"
-        android:layout_width="@dimen/user_avater_size"
-        android:layout_height="@dimen/user_avater_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="8.0dip"
-        android:contentDescription="@string/user_avater"
-        android:padding="2.0dip"
-        android:src="@drawable/biz_pc_account_usr_icon" />
+        android:layout_marginRight="4dp"
+        android:contentDescription="@string/action_settings"
+        android:padding="4dp"
+        android:src="@drawable/icon"
+        app:riv_border_color="@color/wel_click_color"
+        app:riv_border_width="2dp"
+        app:riv_corner_radius="100dp" />
 
     <TextView
         android:id="@id/floor_date"
@@ -42,15 +46,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/floor_avater"
-        android:layout_marginTop="5.0dip"
-        android:background="@drawable/biz_tie_comment_floor_bg" />
+        android:layout_marginTop="4dp"
+        android:background="@color/bg_white" />
 
     <TextView
         android:id="@id/floor_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sub_floors"
-        android:layout_marginTop="5.0dip"
+        android:layout_marginTop="4dp"
         android:textAppearance="@style/comment_floor_content_style" />
 
 </RelativeLayout>

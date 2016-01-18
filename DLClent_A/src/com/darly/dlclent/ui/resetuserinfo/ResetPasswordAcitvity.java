@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
 import com.darly.dlclent.common.JsonUtil;
@@ -287,6 +288,10 @@ public class ResetPasswordAcitvity extends BaseActivity implements
 		}
 		if (!newPass.equals(rePass)) {
 			ToastApp.showToast(R.string.pass_compare_wrong);
+			return;
+		}
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
 			return;
 		}
 		btn.setClickable(false);

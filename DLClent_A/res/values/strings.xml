@@ -60,8 +60,12 @@
     <string name="pass_contain_wrong">密码必须大于5位并小于21位</string>
     <string name="pass_compare_wrong">两次密码输入不一致</string>
     <string name="wheel_chose_city">请选择城市</string>
-    
-    <string name="user_avater">avater</string>
+
+    <color name="container_bg">#EEEEEE</color>
+    <color name="comment_floor_date">#ff808080</color>
+    <color name="comment_floor_username">#ff5191d2</color>
+    <color name="comment_floor_content">#ff545454</color>
+
     <string name="show_hidden_comment">展开隐藏楼层</string>
 
 </resources>

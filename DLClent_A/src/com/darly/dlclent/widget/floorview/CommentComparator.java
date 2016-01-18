@@ -24,9 +24,9 @@ public class CommentComparator implements Comparator < Comment > {
     @Override
     public int compare ( Comment cmt1, Comment cmt2 ) {
         if ( cmt1.getDate ().after ( cmt2.getDate () ) ) {
-            return -1 ;
-        }else {
             return 1 ;
+        }else {
+            return -1 ;
         }
     }
 

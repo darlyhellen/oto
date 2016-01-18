@@ -19,9 +19,4 @@
     <color name="bg_white">#FFf8f8f8</color>
     
     
-    <color name="container_bg">#EEEEEE</color>
-    <color name="comment_floor_date">#ff808080</color>
-    <color name="comment_floor_username">#ff5191d2</color>
-    <color name="comment_floor_content">#ff545454</color>
-
 </resources>

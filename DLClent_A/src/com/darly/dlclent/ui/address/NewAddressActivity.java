@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.PaserProvice;
@@ -203,6 +204,14 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 			ToastApp.showToast("请选择省市区");
 			return;
 		}
+		
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		}
+		//缺少上传服务器请求代码块
+		
+		
 		int id = 0;
 		if (admodel != null) {
 			id = admodel.getId();

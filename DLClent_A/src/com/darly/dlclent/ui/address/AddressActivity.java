@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.adapter.AddressAdapter;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
@@ -102,7 +103,10 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 		data = new ArrayList<AddressModel>();
 		adapter = new AddressAdapter(data, R.layout.item_activity_address, this);
 		lv.setAdapter(adapter);
-
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		}
 		String url = "";
 		if (url != null && url.length() > 0) {
 			// 进行网络请求

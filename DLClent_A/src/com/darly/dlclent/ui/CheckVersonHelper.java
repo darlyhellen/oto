@@ -61,6 +61,10 @@ public class CheckVersonHelper {
 	 */
 	public void checkVerson() {
 		// TODO Auto-generated method stub
+		if (!APP.isNetworkConnected(context)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		}
 		if (SharePreferHelp.getValue(APPEnum.NOTUPDATE.getDec(), 0) <= Calendar
 				.getInstance().get(Calendar.DAY_OF_YEAR)) {
 

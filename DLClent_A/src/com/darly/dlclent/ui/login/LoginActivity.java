@@ -263,6 +263,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				ToastApp.showToast("用户名密码不为空");
 				return;
 			}
+			if (!APP.isNetworkConnected(this)) {
+				ToastApp.showToast(R.string.neterror);
+				return;
+			}
 			login.setClickable(false);
 			String url = "";
 			if (url == null || url.length() == 0) {

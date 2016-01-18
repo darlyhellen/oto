@@ -27,8 +27,10 @@ import com.darly.dlclent.R;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class FloorView extends LinearLayout {
 
-	/* private int floorNum ; */
-	private int density;
+	/**
+	 * 下午2:33:20 TODO 调整每个楼层的边距
+	 */
+	private int density = 5;
 	private Drawable drawer;
 	private SubComments datas;
 	private SubFloorFactory factory;
@@ -66,7 +68,6 @@ public class FloorView extends LinearLayout {
 
 	private void init(Context context) {
 		this.setOrientation(LinearLayout.VERTICAL);
-		density = (int) (3.0F * context.getResources().getDisplayMetrics().density);
 	}
 
 	public void init() {

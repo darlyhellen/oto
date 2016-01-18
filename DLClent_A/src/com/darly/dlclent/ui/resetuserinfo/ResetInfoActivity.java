@@ -22,6 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
@@ -211,6 +212,10 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 	 */
 	private void saveData() {
 		// TODO Auto-generated method stub
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		}
 		String resul = result.getText().toString().trim();
 		btn.setClickable(false);
 		String url = "";
