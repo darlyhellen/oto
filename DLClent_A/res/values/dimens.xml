@@ -6,5 +6,15 @@
     <dimen name="textview_large">20sp</dimen>
     <dimen name="textview_normal">16sp</dimen>
     <dimen name="textview_small">12sp</dimen>
+    
+    
+     <dimen name="user_avater_size">24.0dip</dimen>
+    <dimen name="comment_floor_padding">16.0dip</dimen>
+    <dimen name="comment_floor_normal_num">11.0sp</dimen>
+    <dimen name="comment_floor_username">13.0sp</dimen>
+    <dimen name="comment_floor_content">17.0sp</dimen>
+    <dimen name="comment_floor_lineSpacing">3.0dip</dimen>
+    
+    <dimen name="comment_sub_floor_padding">10.0dip</dimen>
 
 </resources>

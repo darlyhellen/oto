@@ -43,6 +43,7 @@ import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
 import com.darly.dlclent.ui.VersionActivity;
 import com.darly.dlclent.ui.address.AddressActivity;
+import com.darly.dlclent.ui.comment.CommentWithFloorActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetPasswordAcitvity;
 import com.darly.dlclent.widget.image.PhotoPop;
@@ -402,7 +403,8 @@ public class FragmentCenter extends BaseFragment implements
 			break;
 		case 4:
 			// 浏览记录 跳转页面
-
+			startActivity(new Intent(getActivity(),
+					CommentWithFloorActivity.class));
 			break;
 		case 5:
 			// 我的收藏
