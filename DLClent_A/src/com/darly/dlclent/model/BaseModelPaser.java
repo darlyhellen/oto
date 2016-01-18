@@ -51,7 +51,8 @@ public class BaseModelPaser<T> {
 				return new BaseModel<T>(code, msg, t);
 			} catch (Exception e) {
 				// TODO: handle exception
-				LogUtils.i("解析出错" + e.getMessage());
+				LogUtils.i("解析出错");
+				e.printStackTrace();
 			}
 
 		}

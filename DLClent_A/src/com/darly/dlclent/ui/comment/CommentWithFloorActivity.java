@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,14 +25,24 @@ import com.darly.dlclent.R;
 import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
+import com.darly.dlclent.common.HttpClient;
+import com.darly.dlclent.common.JsonUtil;
+import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
+import com.darly.dlclent.model.BaseModel;
+import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.widget.floorview.Comment;
 import com.darly.dlclent.widget.floorview.CommentComparator;
 import com.darly.dlclent.widget.floorview.DateFormatUtils;
 import com.darly.dlclent.widget.floorview.FloorView;
 import com.darly.dlclent.widget.floorview.SubComments;
 import com.darly.dlclent.widget.floorview.SubFloorFactory;
+import com.darly.dlclent.widget.load.ProgressDialogUtil;
 import com.darly.dlclent.widget.roundedimage.RoundedImageView;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -53,7 +64,8 @@ public class CommentWithFloorActivity extends BaseActivity implements
 
 	private LinearLayout container;
 	private LayoutInflater inflater;
-	private List<Comment> datas;
+
+	private ProgressDialogUtil load;
 
 	/**
 	 * 下午3:06:14 TODO 用户头像集合
@@ -80,13 +92,11 @@ public class CommentWithFloorActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		inflater = this.getLayoutInflater();
 		container = (LinearLayout) findViewById(R.id.container);
-
+		load = new ProgressDialogUtil(this);
 		back.setVisibility(View.VISIBLE);
 		title.setText("仿网易评论楼层");
 		other.setVisibility(View.INVISIBLE);
-		if (!APP.isNetworkConnected(this)) {
-			ToastApp.showToast(this, R.string.neterror);
-		}
+
 	}
 
 	/*
@@ -97,31 +107,27 @@ public class CommentWithFloorActivity extends BaseActivity implements
 	@Override
 	protected void loadData() {
 		// TODO Auto-generated method stub
-		datas = new ArrayList<Comment>();
+		List<Comment> datas = new ArrayList<Comment>();
 		int id = 2;
 		for (int i = 0; i < IMAGES.length; i++) {
 			Comment useCom = null;
 			switch (i) {
 			case 0:
 				useCom = new Comment(i, id, "测试数据——" + i, "user" + i,
-						IMAGES[i], new Date());
+						IMAGES[i], DateFormatUtils.format(new Date()));
 				break;
 			case 8:
 			case 9:
 				continue;
 			default:
 				useCom = new Comment(id, i, i + 2, "测试数据——" + i, "user" + i,
-						IMAGES[i], new Date(), i + 1);
+						IMAGES[i], DateFormatUtils.format(new Date()), i + 1);
 				break;
 			}
 			datas.add(useCom);
 		}
 		Collections.sort(datas, CommentComparator.getInstance());
-		for (Comment cmt : datas) {
-			LogUtils.i("开始 添加一条");
-			addComment(cmt);
-			LogUtils.i("结束 添加一条");
-		}
+		startCommon(datas);
 	}
 
 	/*
@@ -157,8 +163,9 @@ public class CommentWithFloorActivity extends BaseActivity implements
 	 * 上午11:29:20
 	 * 
 	 * @author zhangyh2 TODO
+	 * @param list
 	 */
-	private void addComment(Comment cmt) {
+	private void addComment(Comment cmt, List<Comment> list) {
 		// TODO Auto-generated method stub
 		ViewGroup floor = (ViewGroup) inflater.inflate(
 				R.layout.comment_list_item, null);
@@ -171,7 +178,8 @@ public class CommentWithFloorActivity extends BaseActivity implements
 				.findViewById(R.id.floor_avater);
 		floor_icon.setLayoutParams(new LayoutParams(APPEnum.WIDTH.getLen() / 8,
 				APPEnum.WIDTH.getLen() / 8));
-		floor_date.setText(DateFormatUtils.formatPretty(cmt.getDate()));
+		floor_date.setText(DateFormatUtils.formatPretty(DateFormatUtils
+				.parse(cmt.getDate())));
 		floor_username.setText(cmt.getUserName());
 		floor_content.setText(cmt.getContent());
 		imageLoader.displayImage(cmt.getIcon(), floor_icon);
@@ -179,7 +187,7 @@ public class CommentWithFloorActivity extends BaseActivity implements
 		if (cmt.getParentId() != Comment.NULL_PARENT) {
 
 			SubComments cmts = new SubComments(addSubFloors(cmt.getParentId(),
-					cmt.getFloorNum() - 1));
+					cmt.getFloorNum() - 1, list));
 			subFloors.setComments(cmts);
 			subFloors.setFactory(new SubFloorFactory());
 			subFloors.setBoundDrawer(this.getResources().getDrawable(
@@ -195,14 +203,16 @@ public class CommentWithFloorActivity extends BaseActivity implements
 	 * 上午11:29:51
 	 * 
 	 * @author zhangyh2 TODO
+	 * @param list2
 	 */
-	private List<Comment> addSubFloors(long parentId, int num) {
+	private List<Comment> addSubFloors(long parentId, int num,
+			List<Comment> data) {
 		// TODO Auto-generated method stub
 		if (num == 0)
 			return null;
 		Comment[] cmts;
 		cmts = new Comment[num];
-		for (Comment cmt : datas) {
+		for (Comment cmt : data) {
 			if (cmt.getId() == parentId)
 				cmts[0] = cmt;
 			if (cmt.getParentId() == parentId && cmt.getFloorNum() <= num)
@@ -214,4 +224,82 @@ public class CommentWithFloorActivity extends BaseActivity implements
 		}
 		return list;
 	}
+
+	/**
+	 * 下午4:37:27
+	 * 
+	 * @author zhangyh2 TODO 进行网络请求数据
+	 * @param datas
+	 */
+	private void startCommon(List<Comment> datas) {
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		} else {
+			if (load != null && !load.isShowing()) {
+				load.setMessage(R.string.xlistview_header_hint_loading);
+				load.show();
+			}
+			String url = "";
+			if (url != null && url.length() > 0) {
+				// 网络请求
+				HttpClient.get(this, url, null, new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						// TODO Auto-generated method stub
+						paserFloor(arg0.result);
+					}
+
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						// TODO Auto-generated method stub
+					}
+				});
+
+			} else {
+				// 轮播假数据
+				String json = null;
+				boolean time = false/*new Random().nextBoolean()*/;
+				if (time) {
+					BaseModel<List<Comment>> model = new BaseModel<List<Comment>>(
+							200, "", datas);
+					json = JsonUtil.pojo2Json(model);
+				} else {
+					BaseModel<List<Comment>> model = new BaseModel<List<Comment>>(
+							110, "网络数据不存在", null);
+					json = JsonUtil.pojo2Json(model);
+				}
+				paserFloor(json);
+			}
+
+		}
+	}
+
+	/**
+	 * 下午4:35:37
+	 * 
+	 * @author zhangyh2 TODO 返回数据进行解析
+	 */
+	private void paserFloor(String json) {
+		// TODO Auto-generated method stub
+		load.dismiss();
+		if (json == null) {
+			return;
+		}
+		LogUtils.i(json);
+		BaseModel<List<Comment>> data = new BaseModelPaser<List<Comment>>()
+				.paserJson(json, new TypeToken<List<Comment>>() {
+				});
+		if (data != null && data.getCode() == 200) {
+			SharePreferHelp.putValue(APPEnum.FLOOR.getDec(), json);
+			for (Comment cmt : data.getData()) {
+				addComment(cmt, data.getData());
+			}
+		} else {
+			paserFloor(SharePreferHelp.getValue(APPEnum.FLOOR.getDec(), null));
+			ToastApp.showToast(data.getMsg());
+		}
+	}
+
 }

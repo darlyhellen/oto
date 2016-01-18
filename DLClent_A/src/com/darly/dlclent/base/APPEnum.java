@@ -29,7 +29,7 @@ public enum APPEnum {
 			0), WIDTH("screen width", 0), HEIGHT("screen height", 0), CHECKISUPDATE(
 			"CHECKUPDATACACHE", 0), NOTUPDATE("", 0), STORAGE_ROOT_DIR(
 			"dlclient", 0), ISLOGIN("islogin", 0), USERINFO("userinfo", 0), CARSOUL(
-			"carsoul", 0), MAINMMSG("mainmsg", 0);
+			"carsoul", 0), MAINMMSG("mainmsg", 0), FLOOR("commentFloor",0);
 
 	public static final int DB_SELECT = 0x0001;
 

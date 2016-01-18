@@ -73,7 +73,7 @@ public class FloorView extends LinearLayout {
 	public void init() {
 		if (null == datas.iterator())
 			return;
-		if (datas.getFloorNum() < 7) {
+		if (datas.getFloorNum() < 6) {
 			for (Iterator<Comment> iterator = datas.iterator(); iterator
 					.hasNext();) {
 				View view = factory.buildSubFloor(iterator.next(), this);

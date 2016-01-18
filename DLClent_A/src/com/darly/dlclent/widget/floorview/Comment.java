@@ -3,7 +3,6 @@
  */
 package com.darly.dlclent.widget.floorview;
 
-import java.util.Date;
 
 /**
  * @author zhangyh2 Comment 下午2:42:38 TODO 评论信息实例类
@@ -43,14 +42,23 @@ public class Comment {
 	/**
 	 * 下午2:42:09 TODO 发布时间
 	 */
-	private Date date;
+	private String date;
 	/**
 	 * 下午2:42:17 TODO 楼层
 	 */
 	private int floorNum;
 
+	/**
+	 * 下午4:49:10
+	 * 
+	 * @author zhangyh2
+	 */
+	public Comment() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Comment(long userId, long id, String content, String userName,
-			String icon, Date date) {
+			String icon, String date) {
 		this.userId = userId;
 		this.id = id;
 		this.content = content;
@@ -62,7 +70,7 @@ public class Comment {
 	}
 
 	public Comment(long parent_id, long user_id, long ID, String content,
-			String userName, String icon, Date date, int floorNum) {
+			String userName, String icon, String date, int floorNum) {
 		this.parentId = parent_id;
 		this.userId = user_id;
 		this.id = ID;
@@ -77,20 +85,40 @@ public class Comment {
 		return parentId;
 	}
 
+	public void setParentId(long parentId) {
+		this.parentId = parentId;
+	}
+
 	public long getUserId() {
 		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public long getId() {
 		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getContent() {
 		return content;
 	}
 
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public String getUserName() {
 		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getIcon() {
@@ -101,11 +129,24 @@ public class Comment {
 		this.icon = icon;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public int getFloorNum() {
 		return floorNum;
 	}
+
+	public void setFloorNum(int floorNum) {
+		this.floorNum = floorNum;
+	}
+
+	public static long getNullParent() {
+		return NULL_PARENT;
+	}
+
 }

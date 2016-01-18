@@ -6,28 +6,31 @@ package com.darly.dlclent.widget.floorview;
 import java.util.Comparator;
 
 /**
- * @ClassName: 	CommentComparator
+ * @ClassName: CommentComparator
  * @Description:TODO
- * @author 	JohnnyShieh
- * @date	Feb 14, 2014		5:29:36 PM
+ * @author JohnnyShieh
+ * @date Feb 14, 2014 5:29:36 PM
  */
-public class CommentComparator implements Comparator < Comment > {
-    
-    private static CommentComparator comparator = null ;
-    
-    private CommentComparator () {}
-    
-    public static CommentComparator getInstance () {
-        return ( comparator == null ) ? ( comparator = new CommentComparator () ) : comparator ;
-    }
+public class CommentComparator implements Comparator<Comment> {
 
-    @Override
-    public int compare ( Comment cmt1, Comment cmt2 ) {
-        if ( cmt1.getDate ().after ( cmt2.getDate () ) ) {
-            return 1 ;
-        }else {
-            return -1 ;
-        }
-    }
+	private static CommentComparator comparator = null;
+
+	private CommentComparator() {
+	}
+
+	public static CommentComparator getInstance() {
+		return (comparator == null) ? (comparator = new CommentComparator())
+				: comparator;
+	}
+
+	@Override
+	public int compare(Comment cmt1, Comment cmt2) {
+		if (DateFormatUtils.parse(cmt1.getDate()).after(
+				DateFormatUtils.parse(cmt2.getDate()))) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
 
 }
