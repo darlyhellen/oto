@@ -34,7 +34,7 @@ public class MainMessageModel {
 	/**
 	 * 上午10:40:14 TODO 展示图片
 	 */
-	private List<String> showinfo;
+	private List<DetailsGoodsShow> showinfo;
 
 	/**
 	 * 上午10:40:02 TODO 几组属性参数
@@ -57,7 +57,7 @@ public class MainMessageModel {
 
 	public MainMessageModel(int id, String title, String name,
 			String description, String url, double price, double original,
-			long commodityID, String type, List<String> showinfo,
+			long commodityID, String type, List<DetailsGoodsShow> showinfo,
 			List<DetailsGoodsPro> data) {
 		this.id = id;
 		this.title = title;
@@ -144,11 +144,11 @@ public class MainMessageModel {
 		this.type = type;
 	}
 
-	public List<String> getShowinfo() {
+	public List<DetailsGoodsShow> getShowinfo() {
 		return showinfo;
 	}
 
-	public void setShowinfo(List<String> showinfo) {
+	public void setShowinfo(List<DetailsGoodsShow> showinfo) {
 		this.showinfo = showinfo;
 	}
 

@@ -14,14 +14,21 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
+import com.darly.dlclent.adapter.DetailsGoodsAdapter;
 import com.darly.dlclent.base.APP;
+import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
 import com.darly.dlclent.common.JsonUtil;
@@ -30,6 +37,7 @@ import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.DetailsGoodsPro;
 import com.darly.dlclent.model.DetailsGoodsProperty;
+import com.darly.dlclent.model.DetailsGoodsShow;
 import com.darly.dlclent.model.MainMessageModel;
 import com.darly.dlclent.widget.load.ProgressDialogUtil;
 import com.google.gson.reflect.TypeToken;
@@ -45,7 +53,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @author zhangyh2 GoodsDetailActivity 上午9:53:51 TODO 商品详情展示页面，并附加评论
  */
 @ContentView(R.layout.activity_goods_details)
-public class GoodsDetailActivity extends BaseActivity {
+public class GoodsDetailActivity extends BaseActivity implements
+		OnClickListener, OnPageChangeListener {
 
 	@ViewInject(R.id.header_back)
 	private ImageView back;
@@ -59,8 +68,29 @@ public class GoodsDetailActivity extends BaseActivity {
 	private RelativeLayout imagecontent;
 	@ViewInject(R.id.details_viewpager)
 	private ViewPager detail_vp;
+
+	private List<ImageView> imageData = new ArrayList<ImageView>();
+	private DetailsGoodsAdapter adapter;
 	@ViewInject(R.id.details_ll)
 	private LinearLayout detail_tap;
+	private List<ImageView> slide = new ArrayList<ImageView>();
+
+	@ViewInject(R.id.details_info_name)
+	private TextView name;
+	@ViewInject(R.id.details_info_descrip)
+	private TextView description;
+	@ViewInject(R.id.details_info_price)
+	private TextView price;
+	@ViewInject(R.id.details_info_original)
+	private TextView original;
+
+	@ViewInject(R.id.goods_card_cards)
+	private ImageView card;
+	@ViewInject(R.id.goods_card_collect)
+	private ImageView love;
+	private boolean isCollect;
+	@ViewInject(R.id.goods_card_buy)
+	private Button shop;
 
 	private ProgressDialogUtil load;
 
@@ -95,6 +125,8 @@ public class GoodsDetailActivity extends BaseActivity {
 		// other预留的是分享按钮
 		other.setVisibility(View.INVISIBLE);
 		title.setText("商品详情");
+		imagecontent.setLayoutParams(new LayoutParams(APPEnum.WIDTH.getLen(),
+				(int) (APPEnum.WIDTH.getLen() / 2.6)));
 	}
 
 	/*
@@ -105,6 +137,8 @@ public class GoodsDetailActivity extends BaseActivity {
 	@Override
 	protected void loadData() {
 		// TODO 根据商品ID请求整个商品参数
+		adapter = new DetailsGoodsAdapter(imageData);
+		detail_vp.setAdapter(adapter);
 		getGoodsPar();
 	}
 
@@ -119,6 +153,7 @@ public class GoodsDetailActivity extends BaseActivity {
 			ToastApp.showToast(R.string.neterror);
 		} else {
 			load.setMessage(R.string.xlistview_header_hint_loading);
+			load.show();
 			String url = "";
 			if (url != null && url.length() > 0) {
 				// 进行网络请求
@@ -149,14 +184,13 @@ public class GoodsDetailActivity extends BaseActivity {
 						});
 			} else {
 				// 制造假数据
-				List<String> menu = new ArrayList<String>();
+				List<DetailsGoodsShow> menu = new ArrayList<DetailsGoodsShow>();
 				List<DetailsGoodsPro> prs = new ArrayList<DetailsGoodsPro>();
 				String json = null;
 				if (new Random().nextBoolean()) {
 					for (int i = 0; i < IMAGES.length; i++) {
-						menu.add(IMAGES[i]);
+						menu.add(new DetailsGoodsShow(IMAGES[i], "123" + i));
 					}
-
 					for (int i = 0; i < 2; i++) {
 						if (i == 0) {
 							List<DetailsGoodsProperty> prop = new ArrayList<DetailsGoodsProperty>();
@@ -175,11 +209,10 @@ public class GoodsDetailActivity extends BaseActivity {
 									prop);
 							prs.add(pro);
 						}
-
 					}
 					MainMessageModel data = new MainMessageModel(100023,
 							"宝贝详情", "至尊画笔", "产于华山之巅，吸食日月精华，有长生之效。", null,
-							90000000.00, 99999999.00, 35551, null, menu, prs);
+							90000, 99999, 35551, null, menu, prs);
 
 					BaseModel<MainMessageModel> base = new BaseModel<MainMessageModel>(
 							200, "", data);
@@ -189,6 +222,7 @@ public class GoodsDetailActivity extends BaseActivity {
 							110, "网络数据不存在", null);
 					json = JsonUtil.pojo2Json(base);
 				}
+				load.dismiss();
 				loadGoodsDetail(json);
 			}
 		}
@@ -211,6 +245,39 @@ public class GoodsDetailActivity extends BaseActivity {
 				});
 		if (data != null && data.getCode() == 200) {
 			// 设置用户主界面
+			title.setText(data.getData().getTitle());
+			name.setText(data.getData().getName());
+			description.setText(data.getData().getDescription());
+			price.setText("现价:" + data.getData().getPrice() + "¥");
+			original.setText("原价:" + data.getData().getOriginal() + "¥");
+
+			int cout = data.getData().getShowinfo().size();
+			for (DetailsGoodsShow i : data.getData().getShowinfo()) {
+				ImageView iv = new ImageView(this);
+				imageLoader.displayImage(i.getUrl(), iv, options);
+				iv.setScaleType(ScaleType.FIT_XY);
+				imageData.add(iv);
+				if (cout > 1) {
+					ImageView slid = new ImageView(this);
+					LinearLayout.LayoutParams lsp = new LinearLayout.LayoutParams(
+							android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+							android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+					lsp.setMargins(10, 10, 10, 20);
+					slid.setLayoutParams(lsp);
+					slid.setBackgroundResource(R.drawable.ic_banner_button);
+					detail_tap.addView(slid);
+					slide.add(slid);
+				}
+			}
+			if (detail_tap.getChildCount() > 0) {
+				detail_tap.getChildAt(0).setBackgroundResource(
+						R.drawable.ic_banner_button_press);
+			}
+			adapter.setViewlist(imageData);
+
+			// 设置底部菜单
+			card.setImageResource(R.drawable.shoping_cart_select);
+			shop.setText("购买商品");
 		} else {
 			ToastApp.showToast(data.getMsg());
 		}
@@ -224,7 +291,99 @@ public class GoodsDetailActivity extends BaseActivity {
 	@Override
 	protected void initListener() {
 		// TODO Auto-generated method stub
+		back.setOnClickListener(this);
+		detail_vp.setOnPageChangeListener(this);
 
+		card.setOnClickListener(this);
+		love.setOnClickListener(this);
+		shop.setOnClickListener(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.header_back:
+			finish();
+			break;
+		case R.id.goods_card_cards:
+			// 点击跳转到购物车
+			LogUtils.i("goods_card_cards");
+			break;
+		case R.id.goods_card_collect:
+			// 点击假如收藏
+			if (isCollect) {
+				// 没哟收藏
+				isCollect = false;
+				love.setImageResource(R.drawable.ic_uncollect);
+			} else {
+				// 收藏
+				love.setImageResource(R.drawable.ic_collect);
+				isCollect = true;
+			}
+
+			LogUtils.i("goods_card_collect");
+
+			break;
+		case R.id.goods_card_buy:
+			// 点击加入购物车
+			LogUtils.i("goods_card_buy");
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.support.v4.view.ViewPager.OnPageChangeListener#
+	 * onPageScrollStateChanged(int)
+	 */
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.support.v4.view.ViewPager.OnPageChangeListener#onPageScrolled
+	 * (int, float, int)
+	 */
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.support.v4.view.ViewPager.OnPageChangeListener#onPageSelected
+	 * (int)
+	 */
+	@Override
+	public void onPageSelected(int position) {
+		// TODO Auto-generated method stub
+		// 更改豆豆色彩
+		for (int i = 0; i < slide.size(); i++) {
+			if (i == position % slide.size()) {
+				slide.get(i).setBackgroundResource(
+						R.drawable.ic_banner_button_press);
+			} else {
+				slide.get(i).setBackgroundResource(R.drawable.ic_banner_button);
+			}
+		}
 	}
 
 }

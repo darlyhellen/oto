@@ -281,7 +281,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 					json = JsonUtil.pojo2Json(model);
 				} else {
 					BaseModel<List<MainCarouselModel>> model = new BaseModel<List<MainCarouselModel>>(
-							110, "网络数据不存在", list);
+							110, "网络数据不存在", null);
 					json = JsonUtil.pojo2Json(model);
 				}
 				loadC = true;
@@ -389,7 +389,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 					json = JsonUtil.pojo2Json(base);
 				} else {
 					MainMessageBase base = new MainMessageBase(110, "网络数据不存在",
-							data, menu);
+							null, null);
 					json = JsonUtil.pojo2Json(base);
 				}
 				loadM = true;

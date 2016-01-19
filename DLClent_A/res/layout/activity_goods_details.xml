@@ -1,31 +1,49 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
+    android:background="@color/white" >
 
-    <include layout="@layout/main_header" />
+    <LinearLayout
+        android:id="@+id/details_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/details_images"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        <include layout="@layout/main_header" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/details_viewpager"
+        <RelativeLayout
+            android:id="@+id/details_images"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:id="@+id/details_ll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-        </LinearLayout>
-    </RelativeLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/details_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-</LinearLayout>
+            <LinearLayout
+                android:id="@+id/details_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <include        android:id="@+id/details_title_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/details_title"
+        layout="@layout/details_goods_info" />
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        layout="@layout/details_goods_card" />
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/details_info_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/action_settings"
+        android:textSize="@dimen/textview_lnnear" />
+
+    <TextView
+        android:id="@+id/details_info_descrip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/action_settings"
+        android:textColor="@color/comment_floor_date"
+        android:textSize="@dimen/textview_normal" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/details_info_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/action_settings"
+            android:textSize="@dimen/textview_lnnear" />
+
+        <TextView
+            android:id="@+id/details_info_original"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/action_settings"
+            android:textColor="@color/comment_floor_date"
+            android:textSize="@dimen/textview_normal" />
+    </TableRow>
+
+</LinearLayout>
