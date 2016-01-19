@@ -75,6 +75,7 @@ public class XListAdapter extends ParentAdapter<MainMessageModel> {
 					APPEnum.WIDTH.getLen() / 6);
 			hocker.iv.setLayoutParams(lp);
 			hocker.name = (TextView) view.findViewById(R.id.xlist_name);
+			hocker.descrip = (TextView) view.findViewById(R.id.xlist_descrip);
 			hocker.price = (TextView) view.findViewById(R.id.xlist_price);
 			hocker.original = (TextView) view.findViewById(R.id.xlist_original);
 			view.setTag(hocker);
@@ -90,6 +91,7 @@ public class XListAdapter extends ParentAdapter<MainMessageModel> {
 			hocker.content.setVisibility(View.VISIBLE);
 			imageLoader.displayImage(t.getUrl(), hocker.iv, options);
 			hocker.name.setText(t.getName());
+			hocker.descrip.setText(t.getDescription());
 			hocker.price.setText(t.getPrice() + "¥");
 			hocker.original.setText(t.getOriginal() + "¥");
 		}
@@ -120,6 +122,8 @@ public class XListAdapter extends ParentAdapter<MainMessageModel> {
 		RoundedImageView iv;
 
 		TextView name;
+
+		TextView descrip;
 
 		TextView price;
 

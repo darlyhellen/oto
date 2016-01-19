@@ -12,13 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,6 +42,7 @@ import com.darly.dlclent.model.MainCarouselModel;
 import com.darly.dlclent.model.MainMenuModel;
 import com.darly.dlclent.model.MainMessageBase;
 import com.darly.dlclent.model.MainMessageModel;
+import com.darly.dlclent.ui.detail.GoodsDetailActivity;
 import com.darly.dlclent.widget.carousel.Carousel;
 import com.darly.dlclent.widget.carousel.Carousel.ClickCarouselistener;
 import com.darly.dlclent.widget.carousel.ImageHandler;
@@ -58,7 +62,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @author zhangyh2 FragmentMain $ 下午2:15:05 TODO
  */
 public class FragmentMain extends BaseFragment implements OnClickListener,
-		ClickCarouselistener {
+		ClickCarouselistener, OnItemClickListener {
 
 	private View rootView;
 	@ViewInject(R.id.header_back)
@@ -200,6 +204,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	protected void initListener() {
 		// TODO Auto-generated method stub
 		view.setOnClickListener(this);
+		xlist.setOnItemClickListener(this);
 	}
 
 	/*
@@ -367,14 +372,15 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 				if (new Random().nextBoolean()) {
 					for (int i = 0; i < IMAGES.length; i++) {
 						if (i == 0) {
-							data.add(new MainMessageModel(i, "特卖", "商品" + i,
-									IMAGES[i], i * 110, i * 100, i, "标题"));
+							data.add(new MainMessageModel(i, "特卖", null, null,
+									null, 0, 0, 0, "标题"));
 						} else if (i == 5) {
-							data.add(new MainMessageModel(i, "本周商品", "商品" + i,
-									IMAGES[i], i * 110, i * 100, i, "标题"));
+							data.add(new MainMessageModel(i, "本周商品", null,
+									null, null, 0, 0, 0, "标题"));
 						} else {
-							data.add(new MainMessageModel(i, "本周商品", "商品" + i,
-									IMAGES[i], i * 110, i * 100, i, "商品"));
+							data.add(new MainMessageModel(i, null, "商品" + i,
+									"描述商品信息" + i, IMAGES[i], i * 110, i * 100,
+									i, "商品"));
 						}
 						menu.add(new MainMenuModel(i, "菜单" + i, url, IMAGES[i]));
 					}
@@ -439,6 +445,24 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	public void clickCarousel(MainCarouselModel url) {
 		// TODO Auto-generated method stub
 		LogUtils.i(url.getTitle());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget
+	 * .AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO 商品条目点击事件
+		MainMessageModel mainMessageModel = (MainMessageModel) parent
+				.getItemAtPosition(position);
+		Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
+		intent.putExtra("CommodityID", mainMessageModel.getCommodityID());
+		startActivity(intent);
 	}
 
 }

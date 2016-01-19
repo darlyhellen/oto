@@ -7,13 +7,13 @@
  */
 package com.darly.dlclent.common;
 
-import android.annotation.SuppressLint;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import android.annotation.SuppressLint;
 
 /**
  * @author zhangyh2 JsonUtil $ 下午4:53:43 TODO

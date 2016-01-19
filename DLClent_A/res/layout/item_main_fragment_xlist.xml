@@ -9,23 +9,40 @@
         android:id="@+id/xlist_title"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="horizontal" >
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <View
-            android:layout_width="10dp"
-            android:layout_height="fill_parent"
-            android:layout_margin="4dp"
-            android:background="@color/pop_back" />
-
-        <TextView
-            android:id="@+id/xlist_title_name"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_margin="4dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/action_settings"
-            android:textSize="@dimen/textview_normal" />
+            android:layout_height="1dp"
+            android:background="@color/wel_back_color" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="fill_parent"
+                android:layout_margin="4dp"
+                android:background="@color/pop_back" />
+
+            <TextView
+                android:id="@+id/xlist_title_name"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="4dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/action_settings"
+                android:textSize="@dimen/textview_normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/wel_back_color" />
     </LinearLayout>
 
     <LinearLayout
@@ -57,6 +74,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="@string/neterror_norespanse" />
+
+            <TextView
+                android:id="@+id/xlist_descrip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:textColor="@color/comment_floor_date"
+                android:text="@string/consel" />
 
             <LinearLayout
                 android:id="@+id/xlist_pro"
