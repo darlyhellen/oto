@@ -26,6 +26,7 @@ import com.darly.dlclent.ui.login.LoginActivity;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.update.UmengUpdateAgent;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements OnClickListener,
@@ -70,7 +71,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		new CheckVersonHelper(this).checkVerson();
+		// new CheckVersonHelper(this).checkVerson();
+		// 考虑到用户流量的限制，目前我们默认在Wi-Fi接入情况下才进行自动提醒。如需要在任意网络环境下都进行更新自动提醒，
+		// 则请在update调用之前添加以下代码：UmengUpdateAgent.setUpdateOnlyWifi(false)。
+		// 特别提示：针对机顶盒等可能不支持或者没有无线网络的设备， 请同样添加上述代码。
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(this);
 		if (getRadioGroup()) {
 			timest();
 		}
@@ -169,7 +175,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		rb_center.setTextColor(getResources().getColor(R.color.pop_back));
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
-		
+
 		switch (checkedId) {
 		case R.id.main_footer_main:
 			hideFragments(ft);
