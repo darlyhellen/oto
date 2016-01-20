@@ -17,11 +17,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -212,7 +212,8 @@ public class GoodsDetailActivity extends BaseActivity implements
 					}
 					MainMessageModel data = new MainMessageModel(100023,
 							"宝贝详情", "至尊画笔", "产于华山之巅，吸食日月精华，有长生之效。", null,
-							90000, 99999, 35551, null, menu, prs);
+							90000, 99999, 35551, null,
+							new Random().nextBoolean() + "", menu, prs);
 
 					BaseModel<MainMessageModel> base = new BaseModel<MainMessageModel>(
 							200, "", data);
@@ -276,6 +277,13 @@ public class GoodsDetailActivity extends BaseActivity implements
 			adapter.setViewlist(imageData);
 
 			// 设置底部菜单
+			if ("true".equals(data.getData().getCollect())) {
+				isCollect = true;
+				love.setImageResource(R.drawable.ic_collect);
+			} else {
+				isCollect = false;
+				love.setImageResource(R.drawable.ic_uncollect);
+			}
 			card.setImageResource(R.drawable.shoping_cart_select);
 			shop.setText("购买商品");
 		} else {
@@ -316,19 +324,20 @@ public class GoodsDetailActivity extends BaseActivity implements
 			LogUtils.i("goods_card_cards");
 			break;
 		case R.id.goods_card_collect:
+			love.setClickable(false);
+			if (!APP.isNetworkConnected(this)) {
+				ToastApp.showToast(R.string.neterror);
+				love.setClickable(true);
+				return;
+			}
 			// 点击假如收藏
 			if (isCollect) {
-				// 没哟收藏
-				isCollect = false;
-				love.setImageResource(R.drawable.ic_uncollect);
+				// 取消收藏逻辑
+				conselCollect();
 			} else {
-				// 收藏
-				love.setImageResource(R.drawable.ic_collect);
-				isCollect = true;
+				// 添加收藏逻辑
+				sureCollect();
 			}
-
-			LogUtils.i("goods_card_collect");
-
 			break;
 		case R.id.goods_card_buy:
 			// 点击加入购物车
@@ -337,6 +346,138 @@ public class GoodsDetailActivity extends BaseActivity implements
 
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * 上午11:32:23
+	 * 
+	 * @author zhangyh2 TODO 添加收藏逻辑
+	 */
+	private void sureCollect() {
+		// TODO Auto-generated method stub
+		String url = "";
+		if (url != null && url.length() > 0) {
+			// 网络请求
+			RequestParams params = new RequestParams();
+			params.addBodyParameter("commodityID", commodityID + "");
+			HttpClient.get(this, url, null, new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> arg0) {
+					// TODO Auto-generated method stub
+					collectTrue(arg0.result);
+				}
+
+				@Override
+				public void onFailure(HttpException arg0, String arg1) {
+					// TODO Auto-generated method stub
+					love.setClickable(true);
+					ToastApp.showToast(R.string.neterror);
+				}
+			});
+
+		} else {
+			// 轮播假数据
+			String json = null;
+			if (new Random().nextBoolean()) {
+				BaseModel<Object> model = new BaseModel<Object>(200, "添加收藏成功",
+						"");
+				json = JsonUtil.pojo2Json(model);
+			} else {
+				BaseModel<Object> model = new BaseModel<Object>(110, "添加收藏失败",
+						null);
+				json = JsonUtil.pojo2Json(model);
+			}
+			collectTrue(json);
+		}
+	}
+
+	/**
+	 * 上午11:43:39
+	 * 
+	 * @author zhangyh2 TODO 收藏成功解析
+	 */
+	protected void collectTrue(String result) {
+		// TODO Auto-generated method stub
+		love.setClickable(true);
+		if (result == null) {
+			return;
+		}
+		BaseModel<Object> model = new BaseModelPaser<Object>().paserJson(
+				result, new TypeToken<Object>() {
+				});
+		ToastApp.showToast(model.getMsg());
+		if (model.getCode() == 200) {
+			// 收藏
+			love.setImageResource(R.drawable.ic_collect);
+			isCollect = true;
+		}
+	}
+
+	/**
+	 * 上午11:32:19
+	 * 
+	 * @author zhangyh2 TODO取消收藏逻辑
+	 */
+	private void conselCollect() {
+		// TODO Auto-generated method stub
+		String url = "";
+		if (url != null && url.length() > 0) {
+			// 网络请求
+			RequestParams params = new RequestParams();
+			params.addBodyParameter("commodityID", commodityID + "");
+			HttpClient.get(this, url, null, new RequestCallBack<String>() {
+
+				@Override
+				public void onSuccess(ResponseInfo<String> arg0) {
+					// TODO Auto-generated method stub
+					uncollectTrue(arg0.result);
+				}
+
+				@Override
+				public void onFailure(HttpException arg0, String arg1) {
+					// TODO Auto-generated method stub
+					ToastApp.showToast(R.string.neterror);
+					love.setClickable(true);
+				}
+			});
+
+		} else {
+			// 轮播假数据
+			String json = null;
+			if (new Random().nextBoolean()) {
+				BaseModel<Object> model = new BaseModel<Object>(200, "取消收藏成功",
+						"");
+				json = JsonUtil.pojo2Json(model);
+			} else {
+				BaseModel<Object> model = new BaseModel<Object>(110, "取消收藏失败",
+						null);
+				json = JsonUtil.pojo2Json(model);
+			}
+			uncollectTrue(json);
+		}
+	}
+
+	/**
+	 * 上午11:44:29
+	 * 
+	 * @author zhangyh2 TODO 取消收藏網絡請求成功。
+	 */
+	protected void uncollectTrue(String result) {
+		// TODO Auto-generated method stub
+		love.setClickable(true);
+		if (result == null) {
+			return;
+		}
+		BaseModel<Object> model = new BaseModelPaser<Object>().paserJson(
+				result, new TypeToken<Object>() {
+				});
+		ToastApp.showToast(model.getMsg());
+		if (model.getCode() == 200) {
+			// 没哟收藏
+			isCollect = false;
+			love.setImageResource(R.drawable.ic_uncollect);
 		}
 	}
 

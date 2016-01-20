@@ -31,6 +31,8 @@ public class MainMessageModel {
 
 	private String type;
 
+	private String collect;
+
 	/**
 	 * 上午10:40:14 TODO 展示图片
 	 */
@@ -57,8 +59,8 @@ public class MainMessageModel {
 
 	public MainMessageModel(int id, String title, String name,
 			String description, String url, double price, double original,
-			long commodityID, String type, List<DetailsGoodsShow> showinfo,
-			List<DetailsGoodsPro> data) {
+			long commodityID, String type, String collect,
+			List<DetailsGoodsShow> showinfo, List<DetailsGoodsPro> data) {
 		this.id = id;
 		this.title = title;
 		this.name = name;
@@ -68,6 +70,7 @@ public class MainMessageModel {
 		this.original = original;
 		this.commodityID = commodityID;
 		this.type = type;
+		this.collect = collect;
 		this.showinfo = showinfo;
 		this.data = data;
 	}
@@ -142,6 +145,14 @@ public class MainMessageModel {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCollect() {
+		return collect;
+	}
+
+	public void setCollect(String collect) {
+		this.collect = collect;
 	}
 
 	public List<DetailsGoodsShow> getShowinfo() {

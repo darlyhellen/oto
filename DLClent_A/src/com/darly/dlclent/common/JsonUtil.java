@@ -7,15 +7,14 @@
  */
 package com.darly.dlclent.common;
 
-import android.annotation.SuppressLint;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.lidroid.xutils.util.LogUtils;
+import android.annotation.SuppressLint;
+
 
 /**
  * @author zhangyh2 JsonUtil $ 下午4:53:43 TODO
@@ -47,14 +46,12 @@ public class JsonUtil {
 		StringBuilder buff = new StringBuilder();
 		buff.append("{");
 		for (Field f : fields) {
-
 			try {
 				String methodName = "get" + transform(f.getName());
 				@SuppressWarnings("unchecked")
 				Object value = clazz.getDeclaredMethod(methodName).invoke(obj,
 						null);
 				if (f.getName().equals("data")) {
-
 					if (value != null) {
 						buff.append("\"" + "data" + "\":");
 						if (value instanceof ArrayList<?>) {

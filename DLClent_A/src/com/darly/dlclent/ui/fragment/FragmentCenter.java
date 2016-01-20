@@ -43,6 +43,7 @@ import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
 import com.darly.dlclent.ui.VersionActivity;
 import com.darly.dlclent.ui.address.AddressActivity;
+import com.darly.dlclent.ui.collect.CollectActivity;
 import com.darly.dlclent.ui.comment.CommentWithFloorActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetPasswordAcitvity;
@@ -261,6 +262,7 @@ public class FragmentCenter extends BaseFragment implements
 				break;
 			case 1:
 				// 收藏
+				startActivity(new Intent(getActivity(), CollectActivity.class));
 				break;
 			case 2:
 				// 礼品卡

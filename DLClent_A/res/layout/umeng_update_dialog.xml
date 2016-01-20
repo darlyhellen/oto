@@ -90,6 +90,7 @@
 
             <Button
                 android:id="@+id/umeng_update_id_ok"
+                style="@style/AppBaseTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -103,6 +104,7 @@
 
             <Button
                 android:id="@+id/umeng_update_id_cancel"
+                style="@style/AppBaseTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -116,6 +118,7 @@
 
             <Button
                 android:id="@+id/umeng_update_id_ignore"
+                style="@style/AppBaseTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
