@@ -268,7 +268,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				return;
 			}
 			login.setClickable(false);
-			String url = "";
+			String url = "http://10.0.2.2:8080/DLService/api/login";
 			if (url == null || url.length() == 0) {
 				String jsonString = null;
 				if (new Random().nextBoolean()) {
@@ -291,7 +291,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 				params.add(new BasicNameValuePair("username", username));
 				params.add(new BasicNameValuePair("paseword", paseword));
-				HttpClient.post("", params.toString(),
+				HttpClient.post(url, params.toString(),
 						new RequestCallBack<String>() {
 
 							@Override
@@ -305,6 +305,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							public void onFailure(HttpException arg0,
 									String arg1) {
 								// TODO Auto-generated method stub
+								arg0.printStackTrace();
+								LogUtils.i(arg1);
 								login.setClickable(true);
 								ToastApp.showToast(R.string.neterror_norespanse);
 							}

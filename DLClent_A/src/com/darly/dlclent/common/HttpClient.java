@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import org.apache.http.entity.StringEntity;
 
 import android.content.Context;
+import android.util.Base64;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.HttpHandler;
@@ -27,6 +28,14 @@ public class HttpClient {
 		params.addHeader("Content-Type", "application/json;charset=UTF-8");
 		params.addHeader("Accept", "application/json");
 		params.addHeader("charset", "utf-8");
+		
+		String k = System.currentTimeMillis() + "";
+		String t = "5ansdf9euneb0e" + k;
+		String token = Base64.encodeToString(t.getBytes(), 0);
+		String key = Base64.encodeToString(k.getBytes(), 0);
+		params.addHeader("token", token);
+		params.addHeader("key", key);
+		
 		try {
 			StringEntity se = new StringEntity(s, "utf-8");
 			params.setBodyEntity(se);
@@ -79,6 +88,14 @@ public class HttpClient {
 			RequestCallBack<String> callBack) {
 		params.addHeader("Content-Type", "application/json");
 		params.addHeader("Accept", "application/json");
+		
+		String k = System.currentTimeMillis() + "";
+		String t = "5ansdf9euneb0e" + k;
+		String token = Base64.encodeToString(t.getBytes(), 0);
+		String key = Base64.encodeToString(k.getBytes(), 0);
+		params.addHeader("token", token);
+		params.addHeader("key", key);
+		
 		httpUtils.configTimeout(5 * 1000);
 		httpUtils.configResponseTextCharset("utf-8");
 		httpUtils.configCurrentHttpCacheExpiry(500);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.darly.dlclent"
-    android:versionCode="2"
+    android:versionCode="3"
     android:versionName="1.0.1" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -123,6 +123,12 @@
         <!-- 收藏夹页面 -->
         <activity
             android:name="com.darly.dlclent.ui.collect.CollectActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 礼品卡页面 -->
+        <activity
+            android:name="com.darly.dlclent.ui.collect.CardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
