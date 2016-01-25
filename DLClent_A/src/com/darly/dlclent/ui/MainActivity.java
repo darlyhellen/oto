@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RadioButton;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.darly.dlclent.R;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.SDCardUtils;
@@ -26,7 +28,12 @@ import com.darly.dlclent.ui.login.LoginActivity;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.onlineconfig.OnlineConfigAgent;
+import com.umeng.update.UmengDialogButtonListener;
 import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements OnClickListener,
@@ -72,13 +79,70 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		// new CheckVersonHelper(this).checkVerson();
+
+		startCheck();
+
+		if (getRadioGroup()) {
+			timest();
+		}
+	}
+
+	/**
+	 * 下午3:01:16
+	 * 
+	 * @author zhangyh2 TODO 版本更新
+	 */
+	protected void startCheck() {
+		// TODO Auto-generated method stub
 		// 考虑到用户流量的限制，目前我们默认在Wi-Fi接入情况下才进行自动提醒。如需要在任意网络环境下都进行更新自动提醒，
 		// 则请在update调用之前添加以下代码：UmengUpdateAgent.setUpdateOnlyWifi(false)。
 		// 特别提示：针对机顶盒等可能不支持或者没有无线网络的设备， 请同样添加上述代码。
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
+
+		OnlineConfigAgent.getInstance().updateOnlineConfig(this);
+		OnlineConfigAgent.getInstance().setDebugMode(true);
+		String upgrade_mode = OnlineConfigAgent.getInstance().getConfigParams(
+				this, "updata");
+		LogUtils.i("获取的参数" + upgrade_mode);
+		if (TextUtils.isEmpty(upgrade_mode)) {
+			return;
+		}
+		String[] upgrade_mode_array = upgrade_mode.split(",");
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
-		if (getRadioGroup()) {
-			timest();
+		UmengUpdateAgent.forceUpdate(this);// 这行如果是强制更新就一定加上
+		for (String mode : upgrade_mode_array) {
+			String versionName = APP.getInstance().getVersion();
+			versionName = versionName + "f";
+
+			if (mode.equals(versionName)) {
+				// 进入强制更新
+				UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+
+					@Override
+					public void onUpdateReturned(int updateStatus,
+							UpdateResponse updateResponse) {
+
+					}
+				});
+				UmengUpdateAgent
+						.setDialogListener(new UmengDialogButtonListener() {
+							@Override
+							public void onClick(int status) {
+
+								switch (status) {
+								case UpdateStatus.Update:
+								default:
+									// 退出应用
+									ToastApp.showToast("请等待升级完成后再次使用，谢谢合作！");
+									MainActivity.this.finish();
+								}
+							}
+						});
+				break;
+			} else {
+				UmengUpdateAgent.update(this);
+			}
 		}
 	}
 

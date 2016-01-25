@@ -305,7 +305,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			return;
 		}
 		// 开始解析轮播
-		LogUtils.i(result);
+//		LogUtils.i(result);
 		BaseModel<List<MainCarouselModel>> data = new BaseModelPaser<List<MainCarouselModel>>()
 				.paserJson(result, new TypeToken<List<MainCarouselModel>>() {
 				});
@@ -413,7 +413,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			return;
 		}
 		// 开始解析
-		LogUtils.i(result);
+//		LogUtils.i(result);
 		MainMessageBase data = new Gson().fromJson(result,
 				MainMessageBase.class);
 		if (data != null && data.getCode() == 200) {
