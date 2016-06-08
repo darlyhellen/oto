@@ -1,0 +1,15 @@
+body {
+	background-image: url(/shtr/html/images/base_list_divider_drawable.png);
+	background-repeat: repeat;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+}
+
+dd {
+	background-image:
+		url("/shtr/html/images/big_selecter_disable_unselected_icon.png");
+	background-size: 100% 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}

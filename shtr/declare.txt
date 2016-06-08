@@ -1,0 +1,76 @@
+2016.3.28
+	学习理解SSM框架，并根据Maven生成服务器项目，并进行对应架包的下载。
+
+2016.3.29
+	继续根据昨日项目进行修改，学习，下载安装MySQL数据库，以前使用的Mongo数据库，替换为现在的MySql
+	使用mybatis-generator进行对应表格生成，并实现map映射。
+	
+2016.4.1
+	经最近几天测试。一个Controller完全可以满足所有接口使用。
+	一个Service也可以满足所有数据库使用
+	关键点：生成Map文件和对应数据库。
+	
+2016.4.5
+	编辑完整可用的用户登录接口
+	POST请求参数，使用@RequestBody方法进行提取，必须有对应的参数类型，否则提取无效
+	客户端采取此种方式进行传递参数
+	JSONObject ob = new JSONObject();
+			try {
+				ob.put("username", username);
+				ob.put("password", paseword);
+				ob.put("sim", getTelNum());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	服务端采取
+	@RequestBody Map<String, String> names
+	进行参数接收。
+	
+2016.4.6
+	新增几个接口。并对其进行完善。包括注册登录，登出接口。并对客户端进行修改。
+	存在一个问题，数据库新增或插入。出现乱码。后续解决
+	
+2016.4.7
+	客户端上传图片，服务端对图片进行保存。
+	
+2016.4.11
+	服务器完善请求，将用户的Token进行匹配。看看是否正常
+	
+2016.4.13
+	服务端添加HTML页面
+	
+2016.4.15
+	服务端添加移动支付SDK
+	
+   1 SDK已经对加签验签逻辑做了封装，使用SDK可直接调用API。
+   2 确定接口对应的类
+    例如接口名：alipay.offline.material.image.upload
+    在SDK中对应的类为：每个单词首字母大写，并去掉分隔符（“.”），末尾加上Request（或Response）
+    如上接口名对应的类为：
+    AlipayOfflineMaterialImageUploadRequest（请求类）
+    AlipayOfflineMaterialImageUploadResponse（响应类）
+    具体调用方式见下方各语言。
+	
+	
+    集成支付宝接口需要引入的文件是：
+    alipay-sdk-java*.jar
+    commons-logging-1.1.1.jar
+    若进一步了解代码实现请引入文件：
+    alipay-sdk-java*-source.jar
+    commons-logging-1.1.1-sources.jar
+    
+    
+2016.4.20
+	开始添加对视频进行的加载和处理，
+	服务端添加视频对应数据库和接口
+	
+2016.4.21
+	服务端新增公司首页表单，client_comp_homepage,
+	字段comp_action为展示不同功能标签，0为顶部任务，1为中部专区，2为底部广告
+	字段comp_discription为是否免费，1为免费，1为收费
+	字段comp_url为对应跳跃关系表，当字段含有http跳转webview页面，含有类名，跳转对应类，其他提示功能未开放
+	
+	
+	

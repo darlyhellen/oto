@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="refresh" content="0.1;url=/shtr/html/show.html">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="/shtr/html/css/body.css">
+<script src="/shtr/html/jquery/jquery-1.12.3.js" type="text/javascript"></script>
+<script src="/shtr/html/jquery/jquery-1.12.3.min.js"></script>
+<script src="/shtr/html/js/frame.js" type="text/javascript"></script>
+
+<title>后台管理页面</title>
+</head>
+<frameset rows="120px,100%" border="1">
+	<frame id="title" noresize src="/shtr/html/bodytitle.html"
+		scrolling="no" name="titleframe">
+	<frameset cols="150px,*" border="1">
+		<frame id="left" scrolling="no" noresize
+			src="/shtr/html/bodytable.html" name="leftframe">
+		<frame id="right" name="rightframe" src="/shtr/html/contenct.html">
+	</frameset>
+</frameset>
+</html>

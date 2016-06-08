@@ -1,0 +1,93 @@
+2016.1.22
+	添加服务端,服务端无法接收到用户的请求响应。不知道是哪里出现问题。
+	
+2016.1.28
+	对服务器端的框架进行研究，并针对服务器和数据库这方面进行了解。
+2016.1.29
+	对服务器端的SSI框架进行研究，并针对服务器和数据库这方面进行了解。
+	一、框架下载  
+	1、Struts2
+	2、Spring
+	3、mybatis
+	mybatis-spring
+	二、创建项目， 
+	添加struts包
+	添加spring包
+	添加ibatis包
+	三、配置struts
+	1、配置struts核心过滤器。
+	打开web.xml，配置struts核心过滤器和过滤器映射。
+	2、建立BaseAction。  
+	新建包com.dl.service.action，在其中建立类BaseAction，继承ActionSupport类。
+	3、编写测试struts的Action。  
+	在包com.dl.service.action中建立LoginAction类，继承BaseAction，作为简单的struts测试。
+	4、配置action。  
+	在struts.xml文件中，添加对LoginAction的配置。  
+	5、建立测试jsp页面  
+	新建测试jsp页面welcome.jsp。
+	6、配置spring  
+	打开applicationContext.xml文件，配置spring，添加action bean。  
+	
+	7、配置Spring监听器  
+	打开web.xml，添加Spring监听器。
+	
+	8、配置tomcat并启动，在浏览器中输入http://localhost:8686/DLService/login.action   
+   	则页面会显示Welcome HsingHsu。
+   	
+2016.2.25
+	在服务端添加注册接口。
+2016.2.26
+	将MongoDB添加到服务端，用户注册后，信息保存到数据库，进行长久保存。
+	
+2016.3.1
+	尝试做网页管理后台，对HTML不太了解。做了一个页面。
+	将服务端应用发布到Tomcat里面，以后直接打开Tomcat就可以使用。
+
+2016.3.2
+	完善用户修改信息的功能模块，直接修改后台数据库信息。
+	修改用户地址接口，添加列表接口，CRUD接口。删除接口暂时不进行使用。
+	
+2016.3.3
+	整理服务端Mongo数据库操作。
+	添加HTML页面。对应首页按钮页面
+	
+2016.3.7
+	添加活动主题列表。并添加分页查询。方便以后商品进行分页。
+	
+2016.3.16
+	想办法将云通讯添加到服务端
+	
+2016.3.23
+	客户端进行了用户图像设置功能，服务端对此功能进行完善，添加服务端图片上传功能模块。并进行数据库信息更新。
+	
+2016.3.24
+	修改客户上传图片，的图片名称，方便保存到数据库。并返回给用户
+	
+2016.3.25
+	提议，下周添加用户是否在线列表展示。和公司项目一致。接口请求，使用用户是否在线的状态
+	
+2016.3.28
+	尝试了解SSM三大框架整合(Spring+SpringMVC+MyBatis)
+	
+2016.4.5
+	添加Json.jar包，将所有POST数据JSON，进行解析
+   
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

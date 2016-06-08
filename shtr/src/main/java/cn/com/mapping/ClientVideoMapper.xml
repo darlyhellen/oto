@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.dao.ClientVideoMapper">
+	<resultMap id="BaseResultMap" type="cn.com.bean.ClientVideo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="video_name" property="videoName" jdbcType="VARCHAR" />
+		<result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+		<result column="video_image" property="videoImage" jdbcType="VARCHAR" />
+		<result column="video_descripe" property="videoDescripe"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, video_name, video_url, video_image, video_descripe
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from client_video
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="cn.com.bean.ClientVideo">
+		select * from client_video
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from client_video
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.com.bean.ClientVideo">
+		insert into client_video (id, video_name, video_url,
+		video_image, video_descripe)
+		values (#{id,jdbcType=INTEGER}, #{videoName,jdbcType=VARCHAR},
+		#{videoUrl,jdbcType=VARCHAR},
+		#{videoImage,jdbcType=VARCHAR}, #{videoDescripe,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.com.bean.ClientVideo">
+		insert into client_video
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="videoName != null">
+				video_name,
+			</if>
+			<if test="videoUrl != null">
+				video_url,
+			</if>
+			<if test="videoImage != null">
+				video_image,
+			</if>
+			<if test="videoDescripe != null">
+				video_descripe,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="videoName != null">
+				#{videoName,jdbcType=VARCHAR},
+			</if>
+			<if test="videoUrl != null">
+				#{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="videoImage != null">
+				#{videoImage,jdbcType=VARCHAR},
+			</if>
+			<if test="videoDescripe != null">
+				#{videoDescripe,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.com.bean.ClientVideo">
+		update client_video
+		<set>
+			<if test="videoName != null">
+				video_name = #{videoName,jdbcType=VARCHAR},
+			</if>
+			<if test="videoUrl != null">
+				video_url = #{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="videoImage != null">
+				video_image = #{videoImage,jdbcType=VARCHAR},
+			</if>
+			<if test="videoDescripe != null">
+				video_descripe = #{videoDescripe,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.com.bean.ClientVideo">
+		update client_video
+		set video_name = #{videoName,jdbcType=VARCHAR},
+		video_url = #{videoUrl,jdbcType=VARCHAR},
+		video_image = #{videoImage,jdbcType=VARCHAR},
+		video_descripe = #{videoDescripe,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

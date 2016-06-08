@@ -1,0 +1,12 @@
+body {
+	background-image: url(/shtr/html/images/shadow_left.png);
+	background-size: 100% 100%;
+	overflow: hidden;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+	overflow: hidden;
+}
+
+img {
+	border-radius:100px;
+}

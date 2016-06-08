@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.dao.ClientCompHomePageMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.bean.ClientCompHomePage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comp_icon" property="compIcon" jdbcType="VARCHAR" />
+    <result column="comp_firstname" property="compFirstname" jdbcType="VARCHAR" />
+    <result column="comp_secname" property="compSecname" jdbcType="VARCHAR" />
+    <result column="comp_description" property="compDescription" jdbcType="INTEGER" />
+    <result column="comp_url" property="compUrl" jdbcType="VARCHAR" />
+    <result column="comp_action" property="compAction" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, comp_icon, comp_firstname, comp_secname, comp_description, comp_url, comp_action
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from client_comp_homepage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="cn.com.bean.ClientCompHomePage">
+		select * from client_comp_homepage
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from client_comp_homepage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.bean.ClientCompHomePage" >
+    insert into client_comp_homepage (id, comp_icon, comp_firstname, 
+      comp_secname, comp_description, comp_url, 
+      comp_action)
+    values (#{id,jdbcType=INTEGER}, #{compIcon,jdbcType=VARCHAR}, #{compFirstname,jdbcType=VARCHAR}, 
+      #{compSecname,jdbcType=VARCHAR}, #{compDescription,jdbcType=INTEGER}, #{compUrl,jdbcType=VARCHAR}, 
+      #{compAction,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bean.ClientCompHomePage" >
+    insert into client_comp_homepage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="compIcon != null" >
+        comp_icon,
+      </if>
+      <if test="compFirstname != null" >
+        comp_firstname,
+      </if>
+      <if test="compSecname != null" >
+        comp_secname,
+      </if>
+      <if test="compDescription != null" >
+        comp_description,
+      </if>
+      <if test="compUrl != null" >
+        comp_url,
+      </if>
+      <if test="compAction != null" >
+        comp_action,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="compIcon != null" >
+        #{compIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="compFirstname != null" >
+        #{compFirstname,jdbcType=VARCHAR},
+      </if>
+      <if test="compSecname != null" >
+        #{compSecname,jdbcType=VARCHAR},
+      </if>
+      <if test="compDescription != null" >
+        #{compDescription,jdbcType=INTEGER},
+      </if>
+      <if test="compUrl != null" >
+        #{compUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="compAction != null" >
+        #{compAction,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bean.ClientCompHomePage" >
+    update client_comp_homepage
+    <set >
+      <if test="compIcon != null" >
+        comp_icon = #{compIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="compFirstname != null" >
+        comp_firstname = #{compFirstname,jdbcType=VARCHAR},
+      </if>
+      <if test="compSecname != null" >
+        comp_secname = #{compSecname,jdbcType=VARCHAR},
+      </if>
+      <if test="compDescription != null" >
+        comp_description = #{compDescription,jdbcType=INTEGER},
+      </if>
+      <if test="compUrl != null" >
+        comp_url = #{compUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="compAction != null" >
+        comp_action = #{compAction,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bean.ClientCompHomePage" >
+    update client_comp_homepage
+    set comp_icon = #{compIcon,jdbcType=VARCHAR},
+      comp_firstname = #{compFirstname,jdbcType=VARCHAR},
+      comp_secname = #{compSecname,jdbcType=VARCHAR},
+      comp_description = #{compDescription,jdbcType=INTEGER},
+      comp_url = #{compUrl,jdbcType=VARCHAR},
+      comp_action = #{compAction,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

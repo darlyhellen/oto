@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+	function lod() {
+		if (window.javajs) {
+			document.write("调用完成1");
+		} else {
+			document.write("调用完成2");
+		}
+	}
+	function init() {
+		document.write("调用完成");
+	}
+</script>
+</head>
+<body>
+	<div align="center"></div>
+	<div align="center">
+		<input value="调用Android方法" type="button" name="调用Android方法"
+			id="btnSubmit" onclick="window.javajs.initLoad()" />
+	</div>
+	<br>
+	<div align="center">
+		<input value="调用本HTML方法" type="button" name="调用本HTML方法" id="btnSubmit"
+			onclick="lod()" />
+	</div>
+	<br>
+	<div align="center">
+		<p id="ida"></p>
+
+	</div>
+</body>
+<script src="js/exa.js">
+	
+</script>
+</html>

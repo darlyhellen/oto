@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns=http://www.w3.org/2001/xhtml>
+<head>
+<meta charset="UTF-8">
+<title>后台管理首页</title>
+<style type="text/css">
+.onecenter {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<h4 align="center">
+		<font color="#55994433">用户登录</font>
+	</h4>
+	<div>
+		<div align="center">
+			<form action="showindex" method="post">
+				用户名称: <input type="text" id="username" name="user_name" /><br /> <br />
+				用户密码: <input type="text" id="userpass" name="user_pass" /><br /> <br />
+				<input type="submit" value="提交" />
+			</form>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	function miss(){
+		alert("密码错误");
+		window.back();
+	}
+	
+	function error(){
+		alert("用户不存在");
+		window.back();
+	}
+</script>
+</html>

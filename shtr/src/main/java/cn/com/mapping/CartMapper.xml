@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.dao.CartMapper">
+	<resultMap id="BaseResultMap" type="cn.com.bean.Cart">
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		user_id, user_name
+	</sql>
+	<insert id="insert" parameterType="cn.com.bean.Cart">
+		insert into
+		collection_cart_list_v (user_id, user_name)
+		values
+		(#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="cn.com.bean.Cart">
+		select * from collection_cart_list_v
+	</select>
+
+	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from collection_cart_list_v
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insertSelective" parameterType="cn.com.bean.Cart">
+		insert into collection_cart_list_v
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

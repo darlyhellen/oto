@@ -1,0 +1,6 @@
+创建型模式
+design.patterns.Creational.AbstractFactory------抽象工厂模式（一个商品一个工厂）
+design.patterns.Creational.Builder--------------建造者模式（一个商品内多个工厂）
+design.patterns.Creational.factorymethod--------工厂模式（一个工厂生产多个商品）
+design.patterns.Creational.Prototype------------原型模式（复制商品）
+design.patterns.Creational.singleton------------单例模式（唯一商品）

@@ -1,0 +1,1 @@
+document.getElementById("ida").innerHTML = "this is a test";

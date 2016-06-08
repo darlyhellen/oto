@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.dao.DetailsGoodsPropertyMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.bean.DetailsGoodsProperty" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="design" property="design" jdbcType="VARCHAR" />
+    <result column="proID" property="proid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, design, proID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_goods_property
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="cn.com.bean.DetailsGoodsProperty">
+		select * from user_goods_property
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_goods_property
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.bean.DetailsGoodsProperty" >
+    insert into user_goods_property (id, name, design, 
+      proID)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{design,jdbcType=VARCHAR}, 
+      #{proid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bean.DetailsGoodsProperty" >
+    insert into user_goods_property
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="design != null" >
+        design,
+      </if>
+      <if test="proid != null" >
+        proID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="design != null" >
+        #{design,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null" >
+        #{proid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bean.DetailsGoodsProperty" >
+    update user_goods_property
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="design != null" >
+        design = #{design,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null" >
+        proID = #{proid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bean.DetailsGoodsProperty" >
+    update user_goods_property
+    set name = #{name,jdbcType=VARCHAR},
+      design = #{design,jdbcType=VARCHAR},
+      proID = #{proid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

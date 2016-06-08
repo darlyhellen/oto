@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css"
+	href="/shtr/html/css/titlebody.css">
+
+<script>
+	function javaCtrJS() {
+		if (window.javajs) {
+			console.log("result:%s", "点击按钮Android调用JS方法---成功");
+		} else {
+			console.log("result:%s", "点击按钮Android调用JS方法---失败");
+		}
+	}
+
+	function jsCtrJava() {
+		console.log("result:%s", "点击按钮调用Android方法--成功");
+		window.javajs.initLoad();
+	}
+</script>
+</head>
+
+<body>
+
+	<div align="center">
+
+		<input value="调用Android方法" type="button" name="调用Android方法"
+			id="btnSubmit" onclick="window.javajs.initLoad()" />
+
+		<button onclick="jsCtrJava()">点击按钮调用Android方法</button>
+	</div>
+	<div align="center">
+		<button onclick="javaCtrJS()">点击按钮Android调用JS方法</button>
+	</div>
+</body>
+</html>

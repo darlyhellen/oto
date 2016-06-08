@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.dao.UserEcAccountMapper">
+	<resultMap id="BaseResultMap" type="cn.com.bean.UserEcAccount">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="userTel" property="usertel" jdbcType="VARCHAR" />
+		<result column="subAccountSid" property="subaccountsid"
+			jdbcType="VARCHAR" />
+		<result column="voipAccount" property="voipaccount" jdbcType="VARCHAR" />
+		<result column="dateCreated" property="datecreated" jdbcType="VARCHAR" />
+		<result column="voipPwd" property="voippwd" jdbcType="VARCHAR" />
+		<result column="subToken" property="subtoken" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, userTel, subAccountSid, voipAccount, dateCreated,
+		voipPwd, subToken
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user_ecaccount
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByTel" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from user_ecaccount
+		where usertel = #{tel,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="cn.com.bean.UserEcAccount">
+		select * from user_ecaccount
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		user_ecaccount
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.com.bean.UserEcAccount">
+		insert into user_ecaccount
+		(
+		userTel, subAccountSid,
+		voipAccount, dateCreated, voipPwd,
+		subToken)
+		values ( #{usertel,jdbcType=VARCHAR},
+		#{subaccountsid,jdbcType=VARCHAR},
+		#{voipaccount,jdbcType=VARCHAR},
+		#{datecreated,jdbcType=VARCHAR}, #{voippwd,jdbcType=VARCHAR},
+		#{subtoken,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.com.bean.UserEcAccount">
+		insert into user_ecaccount
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="usertel != null">
+				userTel,
+			</if>
+			<if test="subaccountsid != null">
+				subAccountSid,
+			</if>
+			<if test="voipaccount != null">
+				voipAccount,
+			</if>
+			<if test="datecreated != null">
+				dateCreated,
+			</if>
+			<if test="voippwd != null">
+				voipPwd,
+			</if>
+			<if test="subtoken != null">
+				subToken,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="usertel != null">
+				#{usertel,jdbcType=VARCHAR},
+			</if>
+			<if test="subaccountsid != null">
+				#{subaccountsid,jdbcType=VARCHAR},
+			</if>
+			<if test="voipaccount != null">
+				#{voipaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="datecreated != null">
+				#{datecreated,jdbcType=VARCHAR},
+			</if>
+			<if test="voippwd != null">
+				#{voippwd,jdbcType=VARCHAR},
+			</if>
+			<if test="subtoken != null">
+				#{subtoken,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.com.bean.UserEcAccount">
+		update user_ecaccount
+		<set>
+			<if test="usertel != null">
+				userTel = #{usertel,jdbcType=VARCHAR},
+			</if>
+			<if test="subaccountsid != null">
+				subAccountSid = #{subaccountsid,jdbcType=VARCHAR},
+			</if>
+			<if test="voipaccount != null">
+				voipAccount = #{voipaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="datecreated != null">
+				dateCreated = #{datecreated,jdbcType=VARCHAR},
+			</if>
+			<if test="voippwd != null">
+				voipPwd = #{voippwd,jdbcType=VARCHAR},
+			</if>
+			<if test="subtoken != null">
+				subToken = #{subtoken,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.com.bean.UserEcAccount">
+		update
+		user_ecaccount
+		set userTel = #{usertel,jdbcType=VARCHAR},
+		subAccountSid
+		= #{subaccountsid,jdbcType=VARCHAR},
+		voipAccount =
+		#{voipaccount,jdbcType=VARCHAR},
+		dateCreated =
+		#{datecreated,jdbcType=VARCHAR},
+		voipPwd =
+		#{voippwd,jdbcType=VARCHAR},
+		subToken = #{subtoken,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

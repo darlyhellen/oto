@@ -1,0 +1,8 @@
+结构型模式
+design.patterns.structural.Adapter--------适配器模式（一个商品转换成满足另一个条件（接口）的商品）
+design.patterns.structural.Decorator------装饰模式（一个商品动态添加一些属性）
+design.patterns.structural.Proxy----------代理模式（一个商品进行修饰,不对原始对象进行修改的前提下完成修饰）
+design.patterns.structural.Facade---------外观模式（一组商品存放到一个箱子中，用户只看箱子）
+design.patterns.structural.Bridge---------桥接模式（一组商品通过不同的参数进行调用商品方法）
+design.patterns.structural.Composite------组合模式（树形商品可以使用）
+design.patterns.structural.Flyweight------享元模式（不了解）

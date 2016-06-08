@@ -1,0 +1,4 @@
+﻿#theme_version参数是客户端主题进行修改的版本号
+theme_version = 0.0.0009
+#home_version参数是客户端首页的版本号，服务器进行修改数据后，版本号必须修改。
+home_version = 0.0.9
