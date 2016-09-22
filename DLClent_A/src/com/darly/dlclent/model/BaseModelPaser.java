@@ -47,9 +47,19 @@ public class BaseModelPaser<T> {
 				int code = jsonObject.getInt("code");
 				String msg = jsonObject.getString("msg");
 				if (code == 200) {
-					String data = jsonObject.getString("data");
-					T t = new Gson().fromJson(data, token.getType());
-					return new BaseModel<T>(code, msg, t);
+					String data = null;
+					try {
+						data = jsonObject.getString("data");
+					} catch (Exception e) {
+						// TODO: handle exception
+						data = null;
+					}
+					if (data !=null) {
+						T t = new Gson().fromJson(data, token.getType());
+						return new BaseModel<T>(code, msg, t);
+					}else {
+						return new BaseModel<T>(code, msg, null);
+					}
 				} else {
 					return new BaseModel<T>(code, msg, null);
 				}

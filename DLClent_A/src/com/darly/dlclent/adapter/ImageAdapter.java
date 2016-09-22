@@ -2,15 +2,24 @@ package com.darly.dlclent.adapter;
 
 import java.util.List;
 
+import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
+
+import com.darly.dlclent.R;
+import com.darly.dlclent.widget.pathanim.FllowerAnimation;
 
 public class ImageAdapter extends PagerAdapter {
 	private List<View> list;
+	
+	private Context context;
 
-	public ImageAdapter(List<View> list) {
+	public ImageAdapter(List<View> list,Context context) {
 		this.list = list;
+		this.context = context;
 	}
 
 	@Override
@@ -60,6 +69,15 @@ public class ImageAdapter extends PagerAdapter {
 	 * @param view
 	 */
 	private void ViewShowAnim(View view) {
+		RelativeLayout rel = (RelativeLayout) view
+				.findViewById( R.id.guide_one);
+		FllowerAnimation fllowerAnimation = new FllowerAnimation(context);
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		fllowerAnimation.setLayoutParams(params);
+		rel.addView(fllowerAnimation);
+		fllowerAnimation.startAnimation();
+		
 //		ImageView iv = (ImageView) view.findViewById(R.id.anim_iv);
 //		Animation showAnim = new RotateAnimation(0f, 359f,
 //				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,

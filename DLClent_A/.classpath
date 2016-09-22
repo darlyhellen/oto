@@ -2,8 +2,35 @@
 <classpath>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="../"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre7/lib/rt.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.3.jar"/>
+	<classpathentry kind="lib" path="libs/nineoldandroids-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/okio-1.6.0.jar"/>
+	<classpathentry kind="lib" path="libs/picasso-2.3.1.jar"/>
+	<classpathentry kind="lib" path="libs/prettytime-3.2.4.Final.jar"/>
+	<classpathentry kind="lib" path="libs/umeng-analytics-v5.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/umeng-onlineconfig_v1.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/umeng-update-v2.6.0.1.jar"/>
+	<classpathentry kind="lib" path="libs/xUtils-2.6.14.jar"/>
+	<classpathentry kind="lib" path="libs/Yuntx_IMLib_v5.1.9r.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.utility"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

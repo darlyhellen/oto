@@ -18,9 +18,8 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.base.APPEnum;
+import com.darly.dlclent.common.ImageLoaderUtil;
 import com.darly.dlclent.model.MainCarouselModel;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * @author zhangyuhui 此类生成与20150629，主要功能为，首页轮播效果图。当然为区分首页轮播效果的图片张数。
@@ -43,9 +42,6 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 	private ImageView one;
 	private LinearLayout layout;
 
-	private ImageLoader imageLoader;
-	private DisplayImageOptions options;
-
 	public View view;
 
 	private List<MainCarouselModel> data;
@@ -64,13 +60,10 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 	private static final double ASPECTRATIO = 2.66;
 
 	public Carousel(Context context, List<MainCarouselModel> data,
-			ImageLoader imageLoader, DisplayImageOptions options,
 			ImageHandler<T> imagehandler) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.data = data;
-		this.imageLoader = imageLoader;
-		this.options = options;
 		this.imagehandler = imagehandler;
 		init();
 	}
@@ -100,7 +93,7 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 			pager.setVisibility(View.GONE);
 			layout.setVisibility(View.GONE);
 			one.setVisibility(View.VISIBLE);
-			imageLoader.displayImage(null, one, options);
+			ImageLoaderUtil.getInstance().loadImageNor(null, one);
 			return;
 		} else {
 			lent = data.size();
@@ -113,11 +106,11 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 			layout.setVisibility(View.GONE);
 			one.setVisibility(View.VISIBLE);
 			if (lent == 1) {
-				imageLoader.displayImage(data.get(lent - 1).getIcon(), one,
-						options);
+				ImageLoaderUtil.getInstance().loadImageNor(
+						data.get(lent - 1).getIcon(), one);
 				one.setOnClickListener(this);
 			} else {
-				imageLoader.displayImage(null, one, options);
+				ImageLoaderUtil.getInstance().loadImageNor(null, one);
 			}
 
 		} else if (lent == 2) {
@@ -168,7 +161,7 @@ public class Carousel<T> implements OnPageChangeListener, OnClickListener {
 			ImageView iv = new ImageView(context);
 			iv.setScaleType(ScaleType.FIT_XY);
 			iv.setClickable(true);
-			imageLoader.displayImage(url.getIcon(), iv, options);
+			ImageLoaderUtil.getInstance().loadImageNor(url.getIcon(), iv);
 			linearLayout.addView(iv);
 			viewlist.add(iv);
 			ImageView slid = new ImageView(context);

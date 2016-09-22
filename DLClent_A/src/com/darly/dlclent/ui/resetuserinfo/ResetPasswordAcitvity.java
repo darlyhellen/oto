@@ -350,13 +350,14 @@ public class ResetPasswordAcitvity extends BaseActivity implements
 			btn.setClickable(true);
 			return;
 		}
+		LogUtils.i(json);
 		BaseModel<ResetPassWord> data = new BaseModelPaser<ResetPassWord>()
 				.paserJson(json, new TypeToken<ResetPassWord>() {
 				});
 		if (data != null && data.getCode() == 200) {
 			ToastApp.showToast(data.getData().getMsg());
 			if (data.getData().getReLogin()) {
-				Intent intent =  new Intent(this, LoginActivity.class);
+				Intent intent = new Intent(this, LoginActivity.class);
 				intent.putExtra("ResetPass", true);
 				startActivity(intent);
 			}

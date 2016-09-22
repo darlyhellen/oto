@@ -24,6 +24,23 @@ public class UserInfoData {
     private String token;
 
     private String login;
+    /**
+     * TODO:用户执照图片链接
+     */
+    private String certificate;
+    /**
+     * TODO:用户科室
+     */
+    private String section;
+
+    /**
+     * TODO:用户职称
+     */
+    private String title;
+    /**
+     * TODO:生成日期
+     */
+    private String createdate;
     
     /** 下午4:33:40
 	 * @author zhangyh2
@@ -146,4 +163,36 @@ public class UserInfoData {
     public void setLogin(String login) {
         this.login = login == null ? null : login.trim();
     }
+
+
+	public String getCertificate() {
+		return certificate;
+	}
+
+
+	public void setCertificate(String certificate) {
+		this.certificate = certificate == null ? null : certificate.trim();
+	}
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section == null ? null : section.trim();
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title == null ? null : title.trim();
+	}
+
+	public String getCreatedate() {
+		return createdate;
+	}
+
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate == null ? null : createdate.trim();
+	}
+    
+    
 }

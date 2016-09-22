@@ -1,7 +1,7 @@
 package com.darly.ndkclient;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -10,9 +10,10 @@ public class MainActivity extends Activity {
 	private TextView tv;
 	
 	static {
-		System.loadLibrary("NDKClient");
+		System.loadLibrary("ndkClient");
 	}
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

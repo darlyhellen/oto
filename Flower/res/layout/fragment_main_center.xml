@@ -1,0 +1,110 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <com.hellen.widget.header.HeaderView
+        android:id="@+id/center_headerview"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" >
+    </com.hellen.widget.header.HeaderView>
+
+    <com.hellen.flower.view.CenterUserView
+        android:id="@+id/center_userview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.hellen.flower.view.CenterUserView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/center_baogao"
+                style="@style/CenterTextView"
+                android:drawableLeft="@drawable/ic_center_declare"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:text="@string/baogao" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="50dp"
+                android:background="@color/app_background" />
+
+            <TextView
+                android:id="@+id/center_yuyue"
+                style="@style/CenterTextView"
+                android:drawableLeft="@drawable/ic_center_reservation"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:text="@string/yuyue" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/app_background" />
+
+            <TextView
+                android:id="@+id/center_yijian"
+                style="@style/CenterTextView"
+                android:drawableLeft="@drawable/ic_center_feedback"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:text="@string/yijian" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="50dp"
+                android:background="@color/app_background" />
+
+            <TextView
+                android:id="@+id/center_shezhi"
+                style="@style/CenterTextView"
+                android:drawableLeft="@drawable/ic_center_setting"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:text="@string/shezhi" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/app_background" />
+
+            <TextView
+                android:id="@+id/center_gengxin"
+                style="@style/CenterTextView"
+                android:drawableLeft="@drawable/ic_center_update"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:text="@string/gengxin" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="50dp"
+                android:background="@color/app_background" />
+
+            <TextView
+                android:id="@+id/center_guanyu"
+                style="@style/CenterTextView"
+                android:drawableLeft="@drawable/ic_center_about_us"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:text="@string/guanyu" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/app_background" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

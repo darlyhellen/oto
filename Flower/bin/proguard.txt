@@ -1,0 +1,407 @@
+# view res/layout/carousel_viewpager.xml #generated:14
+# view res/layout/umeng_comm_comment_main_layout.xml #generated:55
+# view res/layout/umeng_comm_community_frag_layout.xml #generated:12
+# view res/layout/umeng_comm_imagepicker_photopreview.xml #generated:7
+# view res/layout/umeng_comm_img_browser_layout.xml #generated:7
+# view res/layout/umeng_comm_topic_detail_layout.xml #generated:32
+-keep class android.support.v4.view.ViewPager { <init>(...); }
+
+# view res/layout/umeng_comm_search.xml #generated:19
+# view res/layout/umeng_search_topic.xml #generated:16
+-keep class android.support.v7.widget.RecyclerView { <init>(...); }
+
+# view AndroidManifest.xml #generated:119
+-keep class com.alipay.sdk.app.H5PayActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:125
+-keep class com.alipay.sdk.auth.AuthActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:138
+-keep class com.amap.api.location.APSService { <init>(...); }
+
+# view AndroidManifest.xml #generated:47
+-keep class com.hellen.base.APP { <init>(...); }
+
+# view AndroidManifest.xml #generated:78
+-keep class com.hellen.flower.AutoNavActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:90
+-keep class com.hellen.flower.CircleActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class com.hellen.flower.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:297
+-keep class com.hellen.flower.WBShareActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:82
+-keep class com.hellen.flower.WebViewActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:132
+-keep class com.hellen.flower.broadcast.BaseCastReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:94
+-keep class com.hellen.flower.camera.CameraActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:86
+-keep class com.hellen.flower.flatbuffer.FlatBufferActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.hellen.flower.login.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
+-keep class com.hellen.flower.login.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class com.hellen.flower.login.SetPassActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:104
+-keep class com.hellen.flower.service.MainService { <init>(...); }
+
+# view AndroidManifest.xml #generated:109
+-keep class com.hellen.flower.service.UpdateService { <init>(...); }
+
+# view AndroidManifest.xml #generated:98
+-keep class com.hellen.flower.userinfo.ChangeUserInfoActivity { <init>(...); }
+
+# view res/layout/fragment_main_center.xml #generated:16
+-keep class com.hellen.flower.view.CenterUserView { <init>(...); }
+
+# view res/layout/activity_change_userinfo.xml #generated:16
+# view res/layout/activity_change_userinfo.xml #generated:23
+# view res/layout/activity_change_userinfo.xml #generated:30
+# view res/layout/activity_change_userinfo.xml #generated:37
+# view res/layout/activity_change_userinfo.xml #generated:44
+-keep class com.hellen.flower.view.UserInfoView { <init>(...); }
+
+# view AndroidManifest.xml #generated:53
+-keep class com.hellen.flower.wel.WelcomeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:279
+-keep class com.hellen.flower.wxapi.WXEntryActivity { <init>(...); }
+
+# view res/layout/activity_camera.xml #generated:20
+-keep class com.hellen.widget.camera.CamSufaceView { <init>(...); }
+
+# view res/layout/activity_camera.xml #generated:25
+-keep class com.hellen.widget.camera.LineSufaceView { <init>(...); }
+
+# view res/layout/activity_circle.xml #generated:10
+# view res/layout/circle_pouple.xml #generated:9
+-keep class com.hellen.widget.circlemenu.CircleMenuLayout { <init>(...); }
+
+# view res/layout/activity_login.xml #generated:29
+# view res/layout/activity_login.xml #generated:43
+# view res/layout/login_clear_edit.xml #generated:15
+-keep class com.hellen.widget.clearedit.ClearEditText { <init>(...); }
+
+# view res/layout/activity_register.xml #generated:30
+# view res/layout/activity_register.xml #generated:54
+# view res/layout/activity_setpass.xml #generated:24
+# view res/layout/activity_setpass.xml #generated:35
+-keep class com.hellen.widget.clearedit.LoginClearEdit { <init>(...); }
+
+# view res/layout/activity_autonav.xml #generated:10
+# view res/layout/activity_camera.xml #generated:10
+# view res/layout/activity_change_userinfo.xml #generated:10
+# view res/layout/activity_login.xml #generated:10
+# view res/layout/activity_register.xml #generated:11
+# view res/layout/activity_setpass.xml #generated:11
+# view res/layout/activity_webview.xml #generated:10
+# view res/layout/fragment_main.xml #generated:50
+# view res/layout/fragment_main_center.xml #generated:10
+# view res/layout/fragment_main_ornamental.xml #generated:16
+# view res/layout/fragment_main_succulent.xml #generated:16
+# view res/layout/fragment_main_venusaur.xml #generated:16
+-keep class com.hellen.widget.header.HeaderView { <init>(...); }
+
+# view res/layout/fragment_main_ornamental.xml #generated:55
+# view res/layout/fragment_main_succulent.xml #generated:50
+# view res/layout/fragment_main_venusaur.xml #generated:50
+-keep class com.hellen.widget.listview.WholeListView { <init>(...); }
+
+# view res/layout/fragment_main.xml #generated:10
+-keep class com.hellen.widget.scroll.ScrollHeaderView { <init>(...); }
+
+# view res/layout/main_footer.xml #generated:13
+# view res/layout/main_footer.xml #generated:17
+# view res/layout/main_footer.xml #generated:22
+# view res/layout/main_footer.xml #generated:26
+# view res/layout/main_footer.xml #generated:9
+-keep class com.hellen.widget.theme.ButtonRadio { <init>(...); }
+
+# view res/layout/activity_webview.xml #generated:16
+-keep class com.hellen.widget.webview.ScrollWebView { <init>(...); }
+
+# view res/layout/fragment_main_ornamental.xml #generated:27
+-keep class com.hellen.widget.xlistview.XListView { <init>(...); }
+
+# view AndroidManifest.xml #generated:114
+-keep class com.hellen.wxapi.WXEntryActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:116
+-keep class com.hellen.wxapi.WXPayEntryActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:307
+-keep class com.sina.weibo.sdk.component.WeiboSdkBrowser { <init>(...); }
+
+# view AndroidManifest.xml #generated:273
+-keep class com.tencent.connect.common.AssistActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:260
+-keep class com.tencent.tauth.AuthActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:229
+-keep class com.umeng.comm.ui.activities.FeedDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:176
+-keep class com.umeng.comm.ui.activities.FeedsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:161
+-keep class com.umeng.comm.ui.activities.FindActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:286
+-keep class com.umeng.comm.ui.activities.FollowedTopicActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:213
+-keep class com.umeng.comm.ui.activities.ForwardActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:234
+-keep class com.umeng.comm.ui.activities.GuideActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:256
+-keep class com.umeng.comm.ui.activities.LocationFeedActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:288
+-keep class com.umeng.comm.ui.activities.NewMsgActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:287
+-keep class com.umeng.comm.ui.activities.NotificationActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:200
+-keep class com.umeng.comm.ui.activities.PostFeedActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:185
+-keep class com.umeng.comm.ui.activities.RelativeUserActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:219
+-keep class com.umeng.comm.ui.activities.SearchActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:225
+-keep class com.umeng.comm.ui.activities.SearchTopicActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:170
+-keep class com.umeng.comm.ui.activities.TopicDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:207
+-keep class com.umeng.comm.ui.activities.TopicPickActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:166
+-keep class com.umeng.comm.ui.activities.UserInfoActivity { <init>(...); }
+
+# view res/layout/umeng_comm_post_feed_layout.xml #generated:76
+-keep class com.umeng.comm.ui.widgets.FeedEditText { <init>(...); }
+
+# view AndroidManifest.xml #generated:285
+-keep class com.umeng.common.ui.activities.AlbumActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:313
+-keep class com.umeng.common.ui.activities.BrowserActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:244
+-keep class com.umeng.common.ui.activities.LoginSimplifyActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:294
+-keep class com.umeng.common.ui.activities.MessageChatActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:249
+-keep class com.umeng.common.ui.activities.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:243
+-keep class com.umeng.common.ui.activities.SettingActivity { <init>(...); }
+
+# view res/layout/umeng_comm_comment_layout.xml #generated:113
+# view res/layout/umeng_comm_post_feed_layout.xml #generated:359
+-keep class com.umeng.common.ui.emoji.EmojiBorad { <init>(...); }
+
+# view res/layout/umeng_comm_comment_message_lv_item.xml #generated:72
+# view res/layout/umeng_comm_emoji_item.xml #generated:18
+# view res/layout/umeng_comm_feed_detail_content_layout.xml #generated:166
+# view res/layout/umeng_comm_feed_detail_content_layout.xml #generated:188
+# view res/layout/umeng_comm_feed_lv_item.xml #generated:101
+# view res/layout/umeng_comm_feed_lv_item.xml #generated:171
+# view res/layout/umeng_comm_post_feed_layout.xml #generated:138
+# view res/layout/umeng_comm_received_comment_item.xml #generated:107
+# view res/layout/umeng_comm_received_comment_item.xml #generated:142
+# view res/layout/umeng_comm_received_comment_item.xml #generated:56
+-keep class com.umeng.common.ui.emoji.EmojiTextView { <init>(...); }
+
+# view AndroidManifest.xml #generated:293
+-keep class com.umeng.common.ui.imagepicker.PhotoPreviewActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:292
+-keep class com.umeng.common.ui.imagepicker.PhotoSelectorActivity { <init>(...); }
+
+# view res/layout/umeng_comm_imagepicker_view_photopreview.xml #generated:20
+-keep class com.umeng.common.ui.polites.GestureImageView { <init>(...); }
+
+# view res/layout/umeng_comm_active_user_layout.xml #generated:25
+# view res/layout/umeng_comm_album_layout.xml #generated:40
+# view res/layout/umeng_comm_category_recommend.xml #generated:30
+# view res/layout/umeng_comm_feed_detail.xml #generated:84
+# view res/layout/umeng_comm_feeds_frgm_layout.xml #generated:79
+# view res/layout/umeng_comm_focus_topic.xml #generated:60
+# view res/layout/umeng_comm_followed_user_layout.xml #generated:27
+# view res/layout/umeng_comm_friends_frag.xml #generated:24
+# view res/layout/umeng_comm_nearby_user_layout.xml #generated:34
+# view res/layout/umeng_comm_notify_fragment.xml #generated:27
+# view res/layout/umeng_comm_received_comment_layout.xml #generated:29
+# view res/layout/umeng_comm_recommend_user_layout.xml #generated:30
+# view res/layout/umeng_comm_topic_recommend.xml #generated:30
+# view res/layout/umeng_comm_topic_search.xml #generated:25
+-keep class com.umeng.common.ui.widgets.BaseView { <init>(...); }
+
+# view res/layout/umeng_comm_message_chat_fragment.xml #generated:7
+-keep class com.umeng.common.ui.widgets.ChatInputView { <init>(...); }
+
+# view res/layout/umeng_comm_pic_clip.xml #generated:36
+# view res/layout/umeng_commm_pic_clip.xml #generated:41
+-keep class com.umeng.common.ui.widgets.ClipImageLayout { <init>(...); }
+
+# view res/layout/umeng_comm_comment_layout.xml #generated:46
+-keep class com.umeng.common.ui.widgets.CommentEditText { <init>(...); }
+
+# view res/layout/umeng_comm_search.xml #generated:36
+# view res/layout/umeng_comm_search.xml #generated:51
+# view res/layout/umeng_search_topic.xml #generated:22
+-keep class com.umeng.common.ui.widgets.EmptyView { <init>(...); }
+
+# view res/layout/umeng_comm_fragment_title.xml #generated:45
+-keep class com.umeng.common.ui.widgets.MainIndicator { <init>(...); }
+
+# view res/layout/umeng_comm_album_layout.xml #generated:22
+# view res/layout/umeng_comm_followed_user_layout.xml #generated:9
+# view res/layout/umeng_comm_nearby_user_layout.xml #generated:15
+-keep class com.umeng.common.ui.widgets.RefreshGvLayout { <init>(...); }
+
+# view res/layout/umeng_comm_active_user_layout.xml #generated:7
+# view res/layout/umeng_comm_at_friends_layout.xml #generated:128
+# view res/layout/umeng_comm_category_recommend.xml #generated:11
+# view res/layout/umeng_comm_feed_detail_fragment.xml #generated:107
+# view res/layout/umeng_comm_feed_detail_fragment.xml #generated:129
+# view res/layout/umeng_comm_feeds_frgm_layout.xml #generated:48
+# view res/layout/umeng_comm_focus_topic.xml #generated:41
+# view res/layout/umeng_comm_message_chat_fragment.xml #generated:22
+# view res/layout/umeng_comm_notify_fragment.xml #generated:7
+# view res/layout/umeng_comm_received_comment_layout.xml #generated:10
+# view res/layout/umeng_comm_recommend_user_layout.xml #generated:11
+# view res/layout/umeng_comm_topic_recommend.xml #generated:11
+# view res/layout/umeng_comm_topic_search.xml #generated:7
+# view res/layout/umeng_comm_topic_select.xml #generated:8
+-keep class com.umeng.common.ui.widgets.RefreshLvLayout { <init>(...); }
+
+# view res/layout/umeng_comm_category_item.xml #generated:8
+# view res/layout/umeng_comm_recommendtopic_item.xml #generated:9
+-keep class com.umeng.common.ui.widgets.RoundCornerImageView { <init>(...); }
+
+# view res/layout/umeng_comm_active_user_item.xml #generated:9
+# view res/layout/umeng_comm_at_friend_lv_item.xml #generated:8
+# view res/layout/umeng_comm_comment_message_lv_item.xml #generated:20
+# view res/layout/umeng_comm_feed_detail_content_layout.xml #generated:20
+# view res/layout/umeng_comm_feed_like_layout.xml #generated:5
+# view res/layout/umeng_comm_feed_lv_item.xml #generated:28
+# view res/layout/umeng_comm_find_layout.xml #generated:39
+# view res/layout/umeng_comm_find_layout.xml #generated:79
+# view res/layout/umeng_comm_followed_topic_lv_item.xml #generated:8
+# view res/layout/umeng_comm_friends_item.xml #generated:13
+# view res/layout/umeng_comm_friends_lv_item.xml #generated:8
+# view res/layout/umeng_comm_like_user_item.xml #generated:7
+# view res/layout/umeng_comm_message_chat_lv_item.xml #generated:16
+# view res/layout/umeng_comm_message_chat_lv_item.xml #generated:64
+# view res/layout/umeng_comm_message_session_item.xml #generated:7
+# view res/layout/umeng_comm_msg_comment_item.xml #generated:12
+# view res/layout/umeng_comm_my_msg_item_layout.xml #generated:9
+# view res/layout/umeng_comm_nearby_user_lv_item.xml #generated:8
+# view res/layout/umeng_comm_notify_item.xml #generated:7
+# view res/layout/umeng_comm_received_comment_item.xml #generated:9
+# view res/layout/umeng_comm_relative_user_gallery_item.xml #generated:7
+# view res/layout/umeng_comm_setting_activity.xml #generated:14
+# view res/layout/umeng_comm_user_info_layout.xml #generated:94
+-keep class com.umeng.common.ui.widgets.RoundImageView { <init>(...); }
+
+# view res/layout/umeng_comm_img_browser_item_layout.xml #generated:6
+-keep class com.umeng.common.ui.widgets.ScaleImageView { <init>(...); }
+
+# view res/layout/umeng_comm_account_setting.xml #generated:17
+# view res/layout/umeng_comm_image_selected_item.xml #generated:6
+# view res/layout/umeng_comm_imagepicker_photo_item.xml #generated:7
+# view res/layout/umeng_comm_message_session_item.xml #generated:17
+# view res/layout/umeng_comm_msg_comment_item.xml #generated:82
+# view res/layout/umeng_comm_select_images_gv_item.xml #generated:8
+# view res/layout/umeng_comm_user_info_layout.xml #generated:103
+-keep class com.umeng.common.ui.widgets.SquareImageView { <init>(...); }
+
+# view res/layout/umeng_comm_push_setting.xml #generated:22
+# view res/layout/umeng_comm_setting_activity.xml #generated:79
+-keep class com.umeng.common.ui.widgets.SwitchButton { <init>(...); }
+
+# view res/layout/umeng_comm_comment_reply_stub.xml #generated:74
+# view res/layout/umeng_comm_msg_comment_item.xml #generated:51
+-keep class com.umeng.common.ui.widgets.TextViewFixTouchConsume { <init>(...); }
+
+# view res/layout/umeng_comm_topic_detail_layout.xml #generated:25
+-keep class com.umeng.common.ui.widgets.TopicIndicator { <init>(...); }
+
+# view res/layout/umeng_comm_comment_main_layout.xml #generated:9
+-keep class com.umeng.common.ui.widgets.ViewPagerIndicator { <init>(...); }
+
+# view res/layout/umeng_comm_images_gv.xml #generated:6
+-keep class com.umeng.common.ui.widgets.WrapperGridView { <init>(...); }
+
+# view res/layout/umeng_comm_listview.xml #generated:2
+# view res/layout/umeng_comm_msg_comment.xml #generated:2
+-keep class com.umeng.common.ui.widgets.WrapperListView { <init>(...); }
+
+# view AndroidManifest.xml #generated:190
+-keep class com.umeng.community.login.DefaultLoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:255
+-keep class com.umeng.community.login.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:195
+-keep class com.umeng.community.login.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:344
+-keep class com.umeng.message.ElectionReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:336
+-keep class com.umeng.message.MessageReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:317
+-keep class com.umeng.message.NotificationProxyBroadcastReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:321
+-keep class com.umeng.message.SystemReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:391
+-keep class com.umeng.message.UmengDownloadResourceService { <init>(...); }
+
+# view AndroidManifest.xml #generated:359
+-keep class com.umeng.message.UmengIntentService { <init>(...); }
+
+# view AndroidManifest.xml #generated:353
+-keep class com.umeng.message.UmengMessageBootReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:374
+-keep class com.umeng.message.UmengMessageCallbackHandlerService { <init>(...); }
+
+# view AndroidManifest.xml #generated:363
+-keep class com.umeng.message.UmengMessageIntentReceiverService { <init>(...); }
+
+# view AndroidManifest.xml #generated:394
+-keep class com.umeng.message.local.UmengLocalNotificationService { <init>(...); }
+
+# view res/layout/umeng_socialize_post_share.xml #generated:2
+# view sw550dp-large-v13\res/layout-sw550dp-large-v13/umeng_socialize_post_share.xml #generated:2
+-keep class com.umeng.socialize.editorpage.KeyboardListenRelativeLayout { <init>(...); }
+

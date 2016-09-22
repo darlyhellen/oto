@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:background="@color/app_background"
+    android:orientation="vertical" >
+
+    <com.hellen.widget.header.HeaderView
+        android:id="@+id/userinfo_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" >
+    </com.hellen.widget.header.HeaderView>
+
+    <com.hellen.flower.view.UserInfoView
+        android:id="@+id/userinfo_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+    </com.hellen.flower.view.UserInfoView>
+
+    <com.hellen.flower.view.UserInfoView
+        android:id="@+id/userinfo_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp" >
+    </com.hellen.flower.view.UserInfoView>
+
+    <com.hellen.flower.view.UserInfoView
+        android:id="@+id/userinfo_tel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp" >
+    </com.hellen.flower.view.UserInfoView>
+
+    <com.hellen.flower.view.UserInfoView
+        android:id="@+id/userinfo_sex"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp" >
+    </com.hellen.flower.view.UserInfoView>
+
+    <com.hellen.flower.view.UserInfoView
+        android:id="@+id/userinfo_idcard"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp" >
+    </com.hellen.flower.view.UserInfoView>
+
+</LinearLayout>

@@ -8,6 +8,9 @@ package com.darly.dlclent.ui.address;
 import java.io.IOException;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +25,10 @@ import com.darly.dlclent.R;
 import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
+import com.darly.dlclent.base.ConsHttpUrl;
+import com.darly.dlclent.common.HttpClient;
 import com.darly.dlclent.common.PaserProvice;
+import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.db.DBUtilsHelper;
 import com.darly.dlclent.model.AddressModel;
@@ -204,18 +210,39 @@ public class NewAddressActivity extends BaseActivity implements OnClickListener 
 			ToastApp.showToast("请选择省市区");
 			return;
 		}
-		
-		if (!APP.isNetworkConnected(this)) {
-			ToastApp.showToast(R.string.neterror);
-			return;
-		}
-		//缺少上传服务器请求代码块
-		
-		
-		int id = 0;
+		String id = "";
 		if (admodel != null) {
 			id = admodel.getId();
 		}
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		} else {
+			// 缺少上传服务器请求代码块
+			JSONObject ob = new JSONObject();
+			try {
+				if (newAddress) {
+					ob.put("flag", "0");
+				} else {
+					ob.put("flag", "1");
+				}
+				ob.put("_id", id);
+				ob.put("id", id);
+				ob.put("name", sName);
+				ob.put("tel", sTel);
+				ob.put("province", address.getProvince());
+				ob.put("city", address.getCity());
+				ob.put("district", address.getDistrict());
+				ob.put("zipcode", address.getZipcode());
+				ob.put("usertel", SharePreferHelp.getValue(
+						APPEnum.USERTEL.getDec(), null));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			HttpClient.post(ConsHttpUrl.USERADDRESS, ob.toString(), null);
+		}
+
 		AddressModel model = new AddressModel(id, sName, sTel,
 				address.getProvince(), address.getCity(),
 				address.getDistrict(), address.getZipcode());

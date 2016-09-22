@@ -1,0 +1,190 @@
+# view res/layout/umeng_comm_comment_main_layout.xml #generated:55
+# view res/layout/umeng_comm_community_frag_layout.xml #generated:12
+# view res/layout/umeng_comm_imagepicker_photopreview.xml #generated:7
+# view res/layout/umeng_comm_img_browser_layout.xml #generated:7
+# view res/layout/umeng_comm_topic_detail_layout.xml #generated:32
+-keep class android.support.v4.view.ViewPager { <init>(...); }
+
+# view res/layout/umeng_comm_search.xml #generated:19
+# view res/layout/umeng_search_topic.xml #generated:16
+-keep class android.support.v7.widget.RecyclerView { <init>(...); }
+
+# view res/layout/umeng_comm_post_feed_layout.xml #generated:76
+-keep class com.umeng.comm.ui.widgets.FeedEditText { <init>(...); }
+
+# view res/layout/umeng_comm_comment_layout.xml #generated:113
+# view res/layout/umeng_comm_post_feed_layout.xml #generated:359
+-keep class com.umeng.common.ui.emoji.EmojiBorad { <init>(...); }
+
+# view res/layout/umeng_comm_comment_message_lv_item.xml #generated:72
+# view res/layout/umeng_comm_emoji_item.xml #generated:18
+# view res/layout/umeng_comm_feed_detail_content_layout.xml #generated:166
+# view res/layout/umeng_comm_feed_detail_content_layout.xml #generated:188
+# view res/layout/umeng_comm_feed_lv_item.xml #generated:101
+# view res/layout/umeng_comm_feed_lv_item.xml #generated:171
+# view res/layout/umeng_comm_post_feed_layout.xml #generated:138
+# view res/layout/umeng_comm_received_comment_item.xml #generated:107
+# view res/layout/umeng_comm_received_comment_item.xml #generated:142
+# view res/layout/umeng_comm_received_comment_item.xml #generated:56
+-keep class com.umeng.common.ui.emoji.EmojiTextView { <init>(...); }
+
+# view res/layout/umeng_comm_imagepicker_view_photopreview.xml #generated:20
+-keep class com.umeng.common.ui.polites.GestureImageView { <init>(...); }
+
+# view res/layout/umeng_comm_active_user_layout.xml #generated:25
+# view res/layout/umeng_comm_album_layout.xml #generated:40
+# view res/layout/umeng_comm_category_recommend.xml #generated:30
+# view res/layout/umeng_comm_feed_detail.xml #generated:84
+# view res/layout/umeng_comm_feeds_frgm_layout.xml #generated:79
+# view res/layout/umeng_comm_focus_topic.xml #generated:60
+# view res/layout/umeng_comm_followed_user_layout.xml #generated:27
+# view res/layout/umeng_comm_friends_frag.xml #generated:24
+# view res/layout/umeng_comm_nearby_user_layout.xml #generated:34
+# view res/layout/umeng_comm_notify_fragment.xml #generated:27
+# view res/layout/umeng_comm_received_comment_layout.xml #generated:29
+# view res/layout/umeng_comm_recommend_user_layout.xml #generated:30
+# view res/layout/umeng_comm_topic_recommend.xml #generated:30
+# view res/layout/umeng_comm_topic_search.xml #generated:25
+-keep class com.umeng.common.ui.widgets.BaseView { <init>(...); }
+
+# view res/layout/umeng_comm_message_chat_fragment.xml #generated:7
+-keep class com.umeng.common.ui.widgets.ChatInputView { <init>(...); }
+
+# view res/layout/umeng_comm_pic_clip.xml #generated:36
+# view res/layout/umeng_commm_pic_clip.xml #generated:41
+-keep class com.umeng.common.ui.widgets.ClipImageLayout { <init>(...); }
+
+# view res/layout/umeng_comm_comment_layout.xml #generated:46
+-keep class com.umeng.common.ui.widgets.CommentEditText { <init>(...); }
+
+# view res/layout/umeng_comm_search.xml #generated:36
+# view res/layout/umeng_comm_search.xml #generated:51
+# view res/layout/umeng_search_topic.xml #generated:22
+-keep class com.umeng.common.ui.widgets.EmptyView { <init>(...); }
+
+# view res/layout/umeng_comm_fragment_title.xml #generated:45
+-keep class com.umeng.common.ui.widgets.MainIndicator { <init>(...); }
+
+# view res/layout/umeng_comm_album_layout.xml #generated:22
+# view res/layout/umeng_comm_followed_user_layout.xml #generated:9
+# view res/layout/umeng_comm_nearby_user_layout.xml #generated:15
+-keep class com.umeng.common.ui.widgets.RefreshGvLayout { <init>(...); }
+
+# view res/layout/umeng_comm_active_user_layout.xml #generated:7
+# view res/layout/umeng_comm_at_friends_layout.xml #generated:128
+# view res/layout/umeng_comm_category_recommend.xml #generated:11
+# view res/layout/umeng_comm_feed_detail_fragment.xml #generated:107
+# view res/layout/umeng_comm_feed_detail_fragment.xml #generated:129
+# view res/layout/umeng_comm_feeds_frgm_layout.xml #generated:48
+# view res/layout/umeng_comm_focus_topic.xml #generated:41
+# view res/layout/umeng_comm_message_chat_fragment.xml #generated:22
+# view res/layout/umeng_comm_notify_fragment.xml #generated:7
+# view res/layout/umeng_comm_received_comment_layout.xml #generated:10
+# view res/layout/umeng_comm_recommend_user_layout.xml #generated:11
+# view res/layout/umeng_comm_topic_recommend.xml #generated:11
+# view res/layout/umeng_comm_topic_search.xml #generated:7
+# view res/layout/umeng_comm_topic_select.xml #generated:8
+-keep class com.umeng.common.ui.widgets.RefreshLvLayout { <init>(...); }
+
+# view res/layout/umeng_comm_category_item.xml #generated:8
+# view res/layout/umeng_comm_recommendtopic_item.xml #generated:9
+-keep class com.umeng.common.ui.widgets.RoundCornerImageView { <init>(...); }
+
+# view res/layout/umeng_comm_active_user_item.xml #generated:9
+# view res/layout/umeng_comm_at_friend_lv_item.xml #generated:8
+# view res/layout/umeng_comm_comment_message_lv_item.xml #generated:20
+# view res/layout/umeng_comm_feed_detail_content_layout.xml #generated:20
+# view res/layout/umeng_comm_feed_like_layout.xml #generated:5
+# view res/layout/umeng_comm_feed_lv_item.xml #generated:28
+# view res/layout/umeng_comm_find_layout.xml #generated:39
+# view res/layout/umeng_comm_find_layout.xml #generated:79
+# view res/layout/umeng_comm_followed_topic_lv_item.xml #generated:8
+# view res/layout/umeng_comm_friends_item.xml #generated:13
+# view res/layout/umeng_comm_friends_lv_item.xml #generated:8
+# view res/layout/umeng_comm_like_user_item.xml #generated:7
+# view res/layout/umeng_comm_message_chat_lv_item.xml #generated:16
+# view res/layout/umeng_comm_message_chat_lv_item.xml #generated:64
+# view res/layout/umeng_comm_message_session_item.xml #generated:7
+# view res/layout/umeng_comm_msg_comment_item.xml #generated:12
+# view res/layout/umeng_comm_my_msg_item_layout.xml #generated:9
+# view res/layout/umeng_comm_nearby_user_lv_item.xml #generated:8
+# view res/layout/umeng_comm_notify_item.xml #generated:7
+# view res/layout/umeng_comm_received_comment_item.xml #generated:9
+# view res/layout/umeng_comm_relative_user_gallery_item.xml #generated:7
+# view res/layout/umeng_comm_setting_activity.xml #generated:14
+# view res/layout/umeng_comm_user_info_layout.xml #generated:94
+-keep class com.umeng.common.ui.widgets.RoundImageView { <init>(...); }
+
+# view res/layout/umeng_comm_img_browser_item_layout.xml #generated:6
+-keep class com.umeng.common.ui.widgets.ScaleImageView { <init>(...); }
+
+# view res/layout/umeng_comm_account_setting.xml #generated:17
+# view res/layout/umeng_comm_image_selected_item.xml #generated:6
+# view res/layout/umeng_comm_imagepicker_photo_item.xml #generated:7
+# view res/layout/umeng_comm_message_session_item.xml #generated:17
+# view res/layout/umeng_comm_msg_comment_item.xml #generated:82
+# view res/layout/umeng_comm_select_images_gv_item.xml #generated:8
+# view res/layout/umeng_comm_user_info_layout.xml #generated:103
+-keep class com.umeng.common.ui.widgets.SquareImageView { <init>(...); }
+
+# view res/layout/umeng_comm_push_setting.xml #generated:22
+# view res/layout/umeng_comm_setting_activity.xml #generated:79
+-keep class com.umeng.common.ui.widgets.SwitchButton { <init>(...); }
+
+# view res/layout/umeng_comm_comment_reply_stub.xml #generated:74
+# view res/layout/umeng_comm_msg_comment_item.xml #generated:51
+-keep class com.umeng.common.ui.widgets.TextViewFixTouchConsume { <init>(...); }
+
+# view res/layout/umeng_comm_topic_detail_layout.xml #generated:25
+-keep class com.umeng.common.ui.widgets.TopicIndicator { <init>(...); }
+
+# view res/layout/umeng_comm_comment_main_layout.xml #generated:9
+-keep class com.umeng.common.ui.widgets.ViewPagerIndicator { <init>(...); }
+
+# view res/layout/umeng_comm_images_gv.xml #generated:6
+-keep class com.umeng.common.ui.widgets.WrapperGridView { <init>(...); }
+
+# view res/layout/umeng_comm_listview.xml #generated:2
+# view res/layout/umeng_comm_msg_comment.xml #generated:2
+-keep class com.umeng.common.ui.widgets.WrapperListView { <init>(...); }
+
+# view AndroidManifest.xml #generated:61
+-keep class com.umeng.message.ElectionReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:53
+-keep class com.umeng.message.MessageReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:34
+-keep class com.umeng.message.NotificationProxyBroadcastReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
+-keep class com.umeng.message.RegistrationReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:38
+-keep class com.umeng.message.SystemReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:132
+-keep class com.umeng.message.UmengDownloadResourceService { <init>(...); }
+
+# view AndroidManifest.xml #generated:100
+-keep class com.umeng.message.UmengIntentService { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class com.umeng.message.UmengMessageBootReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:114
+-keep class com.umeng.message.UmengMessageCallbackHandlerService { <init>(...); }
+
+# view AndroidManifest.xml #generated:103
+-keep class com.umeng.message.UmengMessageIntentReceiverService { <init>(...); }
+
+# view AndroidManifest.xml #generated:83
+-keep class com.umeng.message.UmengService { <init>(...); }
+
+# view AndroidManifest.xml #generated:135
+-keep class com.umeng.message.local.UmengLocalNotificationService { <init>(...); }
+
+# view res/layout/umeng_socialize_post_share.xml #generated:2
+# view sw550dp-large-v13\res/layout-sw550dp-large-v13/umeng_socialize_post_share.xml #generated:2
+-keep class com.umeng.socialize.editorpage.KeyboardListenRelativeLayout { <init>(...); }
+

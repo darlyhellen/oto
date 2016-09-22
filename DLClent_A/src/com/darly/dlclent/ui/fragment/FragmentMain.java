@@ -8,21 +8,24 @@
 package com.darly.dlclent.ui.fragment;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,31 +35,42 @@ import com.darly.dlclent.adapter.XListAdapter;
 import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
+import com.darly.dlclent.base.ConsHttpUrl;
 import com.darly.dlclent.common.HttpClient;
-import com.darly.dlclent.common.JsonUtil;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.model.MainCarouselModel;
-import com.darly.dlclent.model.MainMenuModel;
 import com.darly.dlclent.model.MainMessageBase;
 import com.darly.dlclent.model.MainMessageModel;
 import com.darly.dlclent.ui.detail.GoodsDetailActivity;
+import com.darly.dlclent.ui.video.VideoListActivity;
+import com.darly.dlclent.ui.web.WebViewActivity;
 import com.darly.dlclent.widget.carousel.Carousel;
 import com.darly.dlclent.widget.carousel.Carousel.ClickCarouselistener;
 import com.darly.dlclent.widget.carousel.ImageHandler;
 import com.darly.dlclent.widget.grid.GridViewInList;
 import com.darly.dlclent.widget.load.ProgressDialogUtil;
+import com.darly.dlclent.widget.share.CustomShareBoard;
 import com.darly.dlclent.widget.xlistview.XListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.umeng.socialize.bean.SocializeConfig;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.UMSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
+import com.umeng.socialize.weixin.media.CircleShareContent;
+import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
 /**
  * @author zhangyh2 FragmentMain $ 下午2:15:05 TODO
@@ -69,8 +83,8 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	private ImageView back;
 	@ViewInject(R.id.header_title)
 	private TextView title;
-	@ViewInject(R.id.header_other)
-	private ImageView other;
+	@ViewInject(R.id.header_btn)
+	private Button btn;
 	// 没有网络情况下，展示页面
 	@ViewInject(R.id.not_net_fresh)
 	private LinearLayout fresh;
@@ -107,24 +121,15 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 
 	private boolean loadM;
 
-	private static final String[] IMAGES = new String[] {
-			"http://pic2.ooopic.com/01/01/17/53bOOOPIC4e.jpg",
-			"http://pic2.ooopic.com/01/01/17/39bOOOPICe8.jpg",
-			"http://pic13.nipic.com/20110424/818468_090858462000_2.jpg",
-			"http://thumbs.dreamstime.com/z/%C9%BD%C2%B7%BE%B6-20729104.jpg",
-			"http://image.72xuan.com/cases/100305/600_600/1003051017041241.jpg",
-			"http://pica.nipic.com/2007-11-14/20071114114452315_2.jpg",
-			"http://md.cuncun8.com/media/cc8/upload/68192031/0c67e362be347607a877697f46c5f773/101104142242_2026.jpg",
-			"http://pic16.nipic.com/20110824/8169416_135754121000_2.jpg",
-			"http://b.hiphotos.bdimg.com/album/w%3D2048/sign=79f7b0c594cad1c8d0bbfb274b066509/5366d0160924ab18de9241dd34fae6cd7a890b57.jpg",
-			"http://pic2.ooopic.com/01/01/18/42bOOOPIC6c.jpg" };
-
 	/**
 	 * TODO轮播开始循环使用的Handler
 	 */
 	WeakReference<FragmentMain> weak = new WeakReference<FragmentMain>(this);
 	public ImageHandler<FragmentMain> imagehandler = new ImageHandler<FragmentMain>(
 			weak);
+
+	private UMSocialService mController = UMServiceFactory
+			.getUMSocialService(APPEnum.STORAGE_ROOT_DIR.getDec());
 
 	/*
 	 * (non-Javadoc)
@@ -152,6 +157,9 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		title.setText(R.string.footer_main);
+		btn.setVisibility(View.VISIBLE);
+		btn.setText("分享");
+		back.setVisibility(View.INVISIBLE);
 		load = new ProgressDialogUtil(getActivity());
 		// 设置参数
 		iv.setImageResource(R.drawable.ic_me_press);
@@ -169,6 +177,10 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 
 		xlist.addHeaderView(headerView);
 
+		loadingCorsel();
+
+		loadingMsg();
+
 	}
 
 	/*
@@ -180,19 +192,13 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	protected void loadData() {
 		// TODO Auto-generated method stub
 		grid_adapter = new GridAdapter(null,
-				R.layout.item_main_fragment_header_grid, getActivity(),
-				imageLoader, options);
+				R.layout.item_main_fragment_header_grid, getActivity());
 
 		header_grid.setAdapter(grid_adapter);
 
 		adapter = new XListAdapter(null, R.layout.item_main_fragment_xlist,
-				getActivity(), imageLoader, options);
-
+				getActivity());
 		xlist.setAdapter(adapter);
-
-		loadingCorsel();
-
-		loadingMsg();
 	}
 
 	/*
@@ -205,6 +211,8 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 		// TODO Auto-generated method stub
 		view.setOnClickListener(this);
 		xlist.setOnItemClickListener(this);
+		header_grid.setOnItemClickListener(this);
+		btn.setOnClickListener(this);
 	}
 
 	/*
@@ -222,10 +230,81 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			loadingCorsel();
 			loadingMsg();
 			break;
-
+		case R.id.header_btn:
+			// 进行分享设置
+			CustomShareBoard board = new CustomShareBoard(getActivity());
+			board.showAtLocation(getActivity().getWindow().getDecorView(),
+					Gravity.BOTTOM, 0, 0);
+			addWXPlatform();
+			setShareContent();
+			break;
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * @功能描述 : 添加微信平台分享
+	 * @return
+	 */
+	private void addWXPlatform() {
+		// 注意：在微信授权的时候，必须传递appSecret
+		// wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
+		String appId = "wx5933eee9aa4d543c";
+		String appSecret = "7c4930e15f74011c4ab2916a29555e28";
+		// 添加微信平台
+
+		UMWXHandler wxHandler = new UMWXHandler(getActivity(), appId, appSecret);
+		wxHandler.addToSocialSDK();
+		wxHandler.showCompressToast(false);
+		// 支持微信朋友圈
+		UMWXHandler wxCircleHandler = new UMWXHandler(getActivity(), appId,
+				appSecret);
+		wxCircleHandler.setToCircle(true);
+		wxCircleHandler.addToSocialSDK();
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		LogUtils.i("onActivityResult");
+		UMSsoHandler ssoHandler = SocializeConfig.getSocializeConfig()
+				.getSsoHandler(requestCode);
+		if (ssoHandler != null) {
+			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
+	}
+
+	/**
+	 * 根据不同的平台设置不同的分享内容</br>
+	 */
+	private void setShareContent() {
+
+		UMImage urlImage = new UMImage(getActivity(),
+				"http://www.umeng.com/images/pic/social/integrated_3.png");
+
+		// 微信分享
+		WeiXinShareContent weixinContent = new WeiXinShareContent();
+		weixinContent
+				.setShareContent("来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-微信。http://www.umeng.com/social");
+		weixinContent.setTitle("友盟社会化分享组件-微信");
+		weixinContent.setTargetUrl("http://www.umeng.com/social");
+		weixinContent.setShareMedia(urlImage);
+		mController.setShareMedia(weixinContent);
+
+		// 设置微信圈分享的内容
+		CircleShareContent circleMedia = new CircleShareContent();
+		circleMedia
+				.setShareContent("来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-朋友圈。http://www.umeng.com/social");
+		circleMedia.setTitle("友盟社会化分享组件-朋友圈");
+		circleMedia.setShareMedia(urlImage);
+		circleMedia.setTargetUrl("http://www.umeng.com/social");
+		mController.setShareMedia(circleMedia);
+
+		UMImage image = new UMImage(getActivity(),
+				BitmapFactory.decodeResource(getResources(), R.drawable.icon));
+		image.setTitle("thumb title");
+		image.setThumb("http://www.umeng.com/images/pic/social/integrated_3.png");
 	}
 
 	/**
@@ -246,47 +325,55 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			}
 			fresh.setVisibility(View.GONE);
 			content.setVisibility(View.VISIBLE);
-			String url = "";
-			if (url != null && url.length() > 0) {
-				// 网络请求
-				HttpClient.get(getActivity(), url, null,
-						new RequestCallBack<String>() {
 
-							@Override
-							public void onSuccess(ResponseInfo<String> arg0) {
-								// TODO Auto-generated method stub
-								loadC = true;
-								loadCoursel(arg0.result);
-							}
+			// List<BasicNameValuePair> params = new
+			// ArrayList<BasicNameValuePair>();
+			// params.add(new BasicNameValuePair("bannar", "1"));
+			// OKClient.getAsyn(params,ConsHttpUrl.USERHOME, new
+			// ResultCallback<String>() {
+			//
+			// @Override
+			// public void onError(Request request, Exception e) {
+			// // TODO Auto-generated method stub
+			// loadC = true;
+			// loadCoursel(SharePreferHelp.getValue(
+			// APPEnum.CARSOUL.getDec(), null));
+			// }
+			//
+			// @Override
+			// public void onResponse(String response) {
+			// // TODO Auto-generated method stub
+			// loadC = true;
+			// loadCoursel(response);
+			// }
+			// });
 
-							@Override
-							public void onFailure(HttpException arg0,
-									String arg1) {
-								// TODO Auto-generated method stub
-								loadC = true;
-							}
-						});
+			RequestParams params = new RequestParams();
+			params.addQueryStringParameter("bannar", "1");
+			// 网络请求
+			HttpClient.get(getActivity(), ConsHttpUrl.HOMEBANNARNEW/*
+																	 * ConsHttpUrl.
+																	 * USERHOME
+																	 */,
+					params, new RequestCallBack<String>() {
 
-			} else {
-				// 轮播假数据
-				List<MainCarouselModel> list = new ArrayList<MainCarouselModel>();
-				String json = null;
-				if (new Random().nextBoolean()) {
-					for (int i = 0; i < IMAGES.length; i++) {
-						list.add(new MainCarouselModel(i, url, "show" + i,
-								IMAGES[i]));
-					}
-					BaseModel<List<MainCarouselModel>> model = new BaseModel<List<MainCarouselModel>>(
-							200, "", list);
-					json = JsonUtil.pojo2Json(model);
-				} else {
-					BaseModel<List<MainCarouselModel>> model = new BaseModel<List<MainCarouselModel>>(
-							110, "网络数据不存在", null);
-					json = JsonUtil.pojo2Json(model);
-				}
-				loadC = true;
-				loadCoursel(json);
-			}
+						@Override
+						public void onSuccess(ResponseInfo<String> arg0) {
+							// TODO Auto-generated method stub
+							loadC = true;
+							LogUtils.i("new");
+							loadCoursel(arg0.result);
+						}
+
+						@Override
+						public void onFailure(HttpException arg0, String arg1) {
+							// TODO Auto-generated method stub
+							loadC = true;
+							LogUtils.i("old");
+							loadCoursel(SharePreferHelp.getValue(
+									APPEnum.CARSOUL.getDec(), null));
+						}
+					});
 
 		}
 	}
@@ -305,7 +392,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			return;
 		}
 		// 开始解析轮播
-//		LogUtils.i(result);
+		LogUtils.i(result);
 		BaseModel<List<MainCarouselModel>> data = new BaseModelPaser<List<MainCarouselModel>>()
 				.paserJson(result, new TypeToken<List<MainCarouselModel>>() {
 				});
@@ -313,8 +400,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			// 设置轮播
 			SharePreferHelp.putValue(APPEnum.CARSOUL.getDec(), result);
 			Carousel<FragmentMain> carous = new Carousel<FragmentMain>(
-					getActivity(), data.getData(), imageLoader, options,
-					imagehandler);
+					getActivity(), data.getData(), imagehandler);
 			header_cousel.addView(carous.view);
 			carous.setClickCarouselistener(this);
 		} else {
@@ -343,58 +429,33 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			}
 			fresh.setVisibility(View.GONE);
 			content.setVisibility(View.VISIBLE);
-			String url = "";
-			if (url != null && url.length() > 0) {
-				// 网络请求
-				HttpClient.get(getActivity(), url, null,
-						new RequestCallBack<String>() {
+			// 网络请求
+			RequestParams params = new RequestParams();
+			params.addQueryStringParameter("goods", "1");
+			params.addQueryStringParameter("page", "1");
+			HttpClient.get(getActivity(), ConsHttpUrl.HOMEGOODSNEW/*
+																 * ConsHttpUrl.
+																 * USERHOME
+																 */, params,
+					new RequestCallBack<String>() {
 
-							@Override
-							public void onSuccess(ResponseInfo<String> arg0) {
-								// TODO Auto-generated method stub
-								loadM = true;
-								loadCoursel(arg0.result);
-							}
-
-							@Override
-							public void onFailure(HttpException arg0,
-									String arg1) {
-								// TODO Auto-generated method stub
-								loadM = true;
-							}
-						});
-
-			} else {
-				// 假数据
-				List<MainMessageModel> data = new ArrayList<MainMessageModel>();
-				List<MainMenuModel> menu = new ArrayList<MainMenuModel>();
-				String json = null;
-				if (new Random().nextBoolean()) {
-					for (int i = 0; i < IMAGES.length; i++) {
-						if (i == 0) {
-							data.add(new MainMessageModel(i, "特卖", null, null,
-									null, 0, 0, 0, "标题"));
-						} else if (i == 5) {
-							data.add(new MainMessageModel(i, "本周商品", null,
-									null, null, 0, 0, 0, "标题"));
-						} else {
-							data.add(new MainMessageModel(i, null, "商品" + i,
-									"描述商品信息" + i, IMAGES[i], i * 110, i * 100,
-									i, "商品"));
+						@Override
+						public void onSuccess(ResponseInfo<String> arg0) {
+							// TODO Auto-generated method stub
+							loadM = true;
+							LogUtils.i("new");
+							loadMsg(arg0.result);
 						}
-						menu.add(new MainMenuModel(i, "菜单" + i, url, IMAGES[i]));
-					}
-					MainMessageBase base = new MainMessageBase(200, "", data,
-							menu);
-					json = JsonUtil.pojo2Json(base);
-				} else {
-					MainMessageBase base = new MainMessageBase(110, "网络数据不存在",
-							null, null);
-					json = JsonUtil.pojo2Json(base);
-				}
-				loadM = true;
-				loadMsg(json);
-			}
+
+						@Override
+						public void onFailure(HttpException arg0, String arg1) {
+							// TODO Auto-generated method stub
+							loadM = true;
+							LogUtils.i("old");
+							loadMsg(SharePreferHelp.getValue(
+									APPEnum.MAINMMSG.getDec(), null));
+						}
+					});
 
 		}
 	}
@@ -413,7 +474,7 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 			return;
 		}
 		// 开始解析
-//		LogUtils.i(result);
+		LogUtils.i(result);
 		MainMessageBase data = new Gson().fromJson(result,
 				MainMessageBase.class);
 		if (data != null && data.getCode() == 200) {
@@ -444,7 +505,24 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	@Override
 	public void clickCarousel(MainCarouselModel url) {
 		// TODO Auto-generated method stub
-		LogUtils.i(url.getTitle());
+		startActivity(new Intent(getActivity(), VideoListActivity.class));
+		// HttpClient.post(ConsHttpUrl.USERHOME, "",
+		// new RequestCallBack<String>() {
+		//
+		// @Override
+		// public void onSuccess(ResponseInfo<String> arg0) {
+		// // TODO Auto-generated method stub
+		// LogUtils.i(arg0.result);
+		// }
+		//
+		// @Override
+		// public void onFailure(HttpException arg0, String arg1) {
+		// // TODO Auto-generated method stub
+		// arg0.printStackTrace();
+		// LogUtils.i(arg1);
+		// ToastApp.showToast(R.string.neterror_norespanse);
+		// }
+		// });
 	}
 
 	/*
@@ -458,11 +536,25 @@ public class FragmentMain extends BaseFragment implements OnClickListener,
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO 商品条目点击事件
-		MainMessageModel mainMessageModel = (MainMessageModel) parent
-				.getItemAtPosition(position);
-		Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
-		intent.putExtra("CommodityID", mainMessageModel.getCommodityID());
-		startActivity(intent);
-	}
+		if (parent instanceof ListView) {
+			MainMessageModel mainMessageModel = (MainMessageModel) parent
+					.getItemAtPosition(position);
+			if (mainMessageModel == null) {
+				return;
+			}
+			Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
+			intent.putExtra("CommodityID", mainMessageModel.getCommodityID());
+			startActivity(intent);
+		}
+		if (parent instanceof GridView) {
+			Intent intent = new Intent(getActivity(), WebViewActivity.class);
+			if (position % 2 == 0) {
+				intent.putExtra("url", ConsHttpUrl.SHOW_LOAD);
+			} else {
+				intent.putExtra("url", ConsHttpUrl.SHOW_LOAD1);
+			}
+			startActivity(intent);
+		}
 
+	}
 }

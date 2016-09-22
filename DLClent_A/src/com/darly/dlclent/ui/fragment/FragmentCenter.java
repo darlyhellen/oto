@@ -8,12 +8,16 @@
 package com.darly.dlclent.ui.fragment;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,20 +28,25 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.adapter.FragmentCenterAdapter;
 import com.darly.dlclent.adapter.FragmentCenterSecAdapter;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseFragment;
+import com.darly.dlclent.base.ConsHttpUrl;
 import com.darly.dlclent.common.CleanCache;
+import com.darly.dlclent.common.HttpClient;
+import com.darly.dlclent.common.HttpUploadFile;
+import com.darly.dlclent.common.ImageLoaderUtil;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
+import com.darly.dlclent.model.ECUserFriends;
 import com.darly.dlclent.model.SecMenuModel;
 import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.ui.MainActivity;
@@ -45,13 +54,28 @@ import com.darly.dlclent.ui.VersionActivity;
 import com.darly.dlclent.ui.address.AddressActivity;
 import com.darly.dlclent.ui.collect.CollectActivity;
 import com.darly.dlclent.ui.comment.CommentWithFloorActivity;
+import com.darly.dlclent.ui.order.MyOrderActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetInfoActivity;
 import com.darly.dlclent.ui.resetuserinfo.ResetPasswordAcitvity;
+import com.darly.dlclent.ui.sweetalert.SweetAlertActivity;
+import com.darly.dlclent.ui.web.WebViewActivity;
 import com.darly.dlclent.widget.image.PhotoPop;
+import com.darly.dlclent.widget.listview.WholeListView;
+import com.darly.dlclent.widget.load.ProgressDialogUtil;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
 import com.darly.dlclent.widget.roundedimage.RoundedImageView;
+import com.darly.im.common.utils.ToastUtil;
+import com.darly.im.core.ClientUser;
+import com.darly.im.storage.ContactSqlManager;
+import com.darly.im.ui.SDKCoreHelper;
+import com.darly.im.ui.contact.ECContacts;
+import com.darly.im.ui.settings.SettingsActivity;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -68,9 +92,9 @@ public class FragmentCenter extends BaseFragment implements
 	@ViewInject(R.id.header_other)
 	private ImageView other;
 	@ViewInject(R.id.fragment_center_list)
-	private ListView lv;
+	private WholeListView lv;
 	@ViewInject(R.id.fragment_center_sec_list)
-	private ListView seclv;
+	private WholeListView seclv;
 
 	private FragmentCenterAdapter adapter;
 	private FragmentCenterSecAdapter secAdapter;
@@ -89,6 +113,10 @@ public class FragmentCenter extends BaseFragment implements
 	 * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
 	 */
 	private PhotoPop pop;
+
+	private LoginOutDialg dialg;
+
+	private ProgressDialogUtil util;
 
 	/*
 	 * (non-Javadoc)
@@ -126,14 +154,19 @@ public class FragmentCenter extends BaseFragment implements
 				});
 		if (model.getData().getIcon() != null
 				&& model.getData().getIcon().length() > 0) {
-			imageLoader.displayImage(model.getData().getIcon().trim(),
-					header_icon, options);
+			ImageLoaderUtil.getInstance().loadImageNor(
+					model.getData().getIcon().trim(), header_icon);
 		} else {
 			header_icon.setImageResource(R.drawable.icon);
 		}
 		header_name.setText(model.getData().getName());
 
 		pop = new PhotoPop(getActivity());
+
+		model = new BaseModelPaser<UserInfoData>().paserJson(
+				SharePreferHelp.getValue(APPEnum.USERINFO.getDec(), null),
+				new TypeToken<UserInfoData>() {
+				});
 	}
 
 	/*
@@ -177,7 +210,7 @@ public class FragmentCenter extends BaseFragment implements
 		data.add("账户信息");
 		data.add("地址管理");
 		data.add("我的订单");
-		data.add("物流中心");
+		data.add("物流中心 ");
 		data.add("浏览记录");
 		data.add("我的收藏");
 		data.add("我的钱包");
@@ -232,10 +265,10 @@ public class FragmentCenter extends BaseFragment implements
 				startActivityForResult(intent, APPEnum.CENTER_NAME);
 				break;
 			case 2:
-				// 手机号码
-				intent.putExtra("tel", model.getData().getTel());
-				intent.putExtra("requestCode", APPEnum.CENTER_TEL);
-				startActivityForResult(intent, APPEnum.CENTER_TEL);
+				// 手机号码 暂时不能进行修改，后台自动进行修改
+				// intent.putExtra("tel", model.getData().getTel());
+				// intent.putExtra("requestCode", APPEnum.CENTER_TEL);
+				// startActivityForResult(intent, APPEnum.CENTER_TEL);
 				break;
 			case 3:
 				// 性别
@@ -266,6 +299,8 @@ public class FragmentCenter extends BaseFragment implements
 				break;
 			case 2:
 				// 礼品卡
+				startActivity(new Intent(getActivity(),
+						SweetAlertActivity.class));
 				break;
 			default:
 				break;
@@ -304,7 +339,7 @@ public class FragmentCenter extends BaseFragment implements
 				// 清空缓存
 				final LoginOutDialg clean = new LoginOutDialg(getActivity());
 				clean.setTitle("温馨提示");
-				clean.setContent("是否确认退出应用?");
+				clean.setContent("是否清除缓存?");
 				clean.setSure("确认");
 				clean.getSure().setOnClickListener(new OnClickListener() {
 
@@ -318,12 +353,16 @@ public class FragmentCenter extends BaseFragment implements
 				clean.setConsel("取消");
 				break;
 			case 3:
+				// 消息设置 跳转消息设置页面
+				startActivity(new Intent(getActivity(), SettingsActivity.class));
+				break;
+			case 4:
 				// 版本更新
 				startActivity(new Intent(getActivity(), VersionActivity.class));
 				break;
-			case 4:
+			case 5:
 				// 退出登录
-				final LoginOutDialg dialg = new LoginOutDialg(getActivity());
+				dialg = new LoginOutDialg(getActivity());
 				dialg.setTitle("温馨提示");
 				dialg.setContent("是否确认退出应用?");
 				dialg.setSure("确认");
@@ -332,20 +371,7 @@ public class FragmentCenter extends BaseFragment implements
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						leftTorightAnim(lv);
-						leftTorightAnim(seclv);
-						// 退出前先将几个状态进行修改。
-						SharePreferHelp.putValue(APPEnum.ISLOGIN.getDec(),
-								false);
-						SharePreferHelp.remove(APPEnum.USERINFO.getDec());
-						dialg.cancel();
-						// 调回首页
-
-						Intent intent = new Intent(getActivity(),
-								MainActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
-
+						loginOut();
 					}
 				});
 				dialg.setConsel("取消");
@@ -357,6 +383,79 @@ public class FragmentCenter extends BaseFragment implements
 
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * 下午1:53:51
+	 * 
+	 * @author zhangyh2 TODO 用户退出登录的操作
+	 */
+	protected void loginOut() {
+		// TODO Auto-generated method stub
+		if (!APP.isNetworkConnected(getActivity())) {
+			ToastApp.showToast(R.string.neterror);
+		} else {
+			util = new ProgressDialogUtil(getActivity());
+			util.setMessage("正在退出登录...");
+			util.show();
+			RequestParams params = new RequestParams();
+			params.addQueryStringParameter("tel", model.getData().getTel());
+			HttpClient.get(getActivity(), ConsHttpUrl.USERLOGINOUT, params,
+					new RequestCallBack<String>() {
+
+						@Override
+						public void onSuccess(ResponseInfo<String> arg0) {
+							// TODO Auto-generated method stub
+
+							util.dismiss();
+							// 这里需要添加返回错误的情况
+							if (arg0.result == null) {
+								ToastApp.showToast(R.string.neterror);
+								return;
+							} else {
+								LogUtils.i(arg0.result);
+								BaseModel<UserInfoData> data = new BaseModelPaser<UserInfoData>()
+										.paserJson(arg0.result,
+												new TypeToken<UserInfoData>() {
+												});
+								if (data.getCode() == 200) {
+									leftTorightAnim(lv);
+									leftTorightAnim(seclv);
+									// 退出前先将几个状态进行修改。
+									SharePreferHelp.putValue(
+											APPEnum.ISLOGIN.getDec(), false);
+									SharePreferHelp.remove(APPEnum.USERVOIP
+											.getDec());
+									SharePreferHelp.remove(APPEnum.USERINFO
+											.getDec());
+									SharePreferHelp.remove(APPEnum.TOKEN
+											.getDec());
+									SharePreferHelp.remove(APPEnum.USERTEL
+											.getDec());
+									dialg.cancel();
+									// 调回首页
+									// 用户退出，关闭云通讯退出。
+									SDKCoreHelper.logout(false);
+									Intent intent = new Intent(getActivity(),
+											MainActivity.class);
+									intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+									startActivity(intent);
+								} else {
+									ToastApp.showToast(data.getMsg());
+								}
+
+							}
+
+						}
+
+						@Override
+						public void onFailure(HttpException arg0, String arg1) {
+							// TODO Auto-generated method stub
+							util.dismiss();
+							ToastApp.showToast(R.string.neterror);
+						}
+					});
 		}
 	}
 
@@ -397,11 +496,13 @@ public class FragmentCenter extends BaseFragment implements
 			break;
 		case 2:
 			// 我的订单 跳转页面
-
+			startActivity(new Intent(getActivity(), MyOrderActivity.class));
 			break;
 		case 3:
 			// 物流中心 跳转页面
-
+			Intent intent = new Intent(getActivity(), WebViewActivity.class);
+			intent.putExtra("url", ConsHttpUrl.TEST_JSP);
+			startActivity(intent);
 			break;
 		case 4:
 			// 浏览记录 跳转页面
@@ -437,6 +538,7 @@ public class FragmentCenter extends BaseFragment implements
 			data.add(new SecMenuModel("返回上层菜单", null));
 			data.add(new SecMenuModel("修改密码", null));
 			data.add(new SecMenuModel("清空缓存", null));
+			data.add(new SecMenuModel("消息设置", null));
 			data.add(new SecMenuModel("版本更新", null));
 			data.add(new SecMenuModel("退出登录", "exit"));
 			secAdapter.setData(data);
@@ -496,6 +598,9 @@ public class FragmentCenter extends BaseFragment implements
 	}
 
 	private String transformIDcard(String iDcard) {
+		if (iDcard == null) {
+			return "";
+		}
 		if (iDcard.length() != 18) {
 			return iDcard;
 		}
@@ -506,6 +611,9 @@ public class FragmentCenter extends BaseFragment implements
 	}
 
 	private String transformMobile(String mobilephone) {
+		if (mobilephone == null) {
+			return "";
+		}
 		if (mobilephone.length() != 11) {
 			return mobilephone;
 		}
@@ -524,7 +632,7 @@ public class FragmentCenter extends BaseFragment implements
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-		LogUtils.i("FragmentCenter进入onActivityResult");
+		LogUtils.i("onActivityResult");
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == APPEnum.CENTER_CHANGE) {
 			model = new BaseModelPaser<UserInfoData>().paserJson(
@@ -549,6 +657,8 @@ public class FragmentCenter extends BaseFragment implements
 				Bundle extras = data.getExtras();
 				Bitmap head = extras.getParcelable("data");
 				header_icon.setImageBitmap(head);
+				// 发送到服务器，并获取图片地址
+				uploadImage(head);
 			}
 		} else if (requestCode == APPEnum.REQUESTCODE_CAM
 				|| requestCode == APPEnum.REQUESTCODE_CAP) {
@@ -566,10 +676,160 @@ public class FragmentCenter extends BaseFragment implements
 				head_path = pop.PopStringActivityResult(data,
 						APPEnum.REQUESTCODE_CAM);
 			}
+			if (head_path == null) {
+				return;
+			}
+			LogUtils.i(head_path);
 			File temp = new File(head_path);
 			pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
 		}
 
 	}
 
+	/**
+	 * 下午2:25:57
+	 * 
+	 * @author zhangyh2 TODO 获取bitmap 将BitMap整理为二进制编码进行传递到服务端。
+	 * @param head
+	 */
+	private void uploadImage(Bitmap head) {
+		// TODO Auto-generated method stub
+		util = new ProgressDialogUtil(getActivity());
+		util.setMessage("正在更新图像...");
+		util.show();
+		saveBitmap(head);
+		final File file = new File(APPEnum.HEAD);
+		if (file.exists()) {
+			new Asy(file).execute();
+		}
+	}
+
+	class Asy extends AsyncTask<Object, Object, String> {
+
+		private File file;
+
+		public Asy(File file) {
+			this.file = file;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected String doInBackground(Object... params) {
+			// TODO Auto-generated method stub
+			List<File> files = new ArrayList<File>();
+			files.add(file);
+			return HttpUploadFile.uploadFiles(ConsHttpUrl.UPLOADICON, model
+					.getData().getTel(), files);/*
+												 * HttpUploadFile.uploadFile(file
+												 * )
+												 */
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			LogUtils.i(result);
+			util.cancel();
+			BaseModel<UserInfoData> data = new BaseModelPaser<UserInfoData>()
+					.paserJson(result, new TypeToken<UserInfoData>() {
+					});
+			if (data.getCode() == 200) {
+				SharePreferHelp.putValue(APPEnum.USERINFO.getDec(), result);
+				ToastApp.showToast("上传成功");
+				// 获取用户信息
+				RequestParams params = new RequestParams();
+				params.addQueryStringParameter("friendName", model.getData()
+						.getName());
+				HttpClient.get(getActivity(), ConsHttpUrl.SEARCHUSER, params,
+						new RequestCallBack<String>() {
+
+							@Override
+							public void onSuccess(ResponseInfo<String> arg0) {
+								// TODO Auto-generated method stub
+								upDataUserInfo(arg0.result);
+							}
+
+							@Override
+							public void onFailure(HttpException arg0,
+									String arg1) {
+								// TODO Auto-generated method stub
+								util.dismiss();
+								ToastUtil.showMessage(R.string.neterror);
+							}
+						});
+
+			} else {
+				ToastApp.showToast("上传失败");
+			}
+		}
+	}
+
+	/**
+	 * 上午11:09:09
+	 * 
+	 * @author zhangyh2 TODO 根据服务端接口，获取到用户资料。可能为一条记录，也可能为多条记录。
+	 */
+	protected void upDataUserInfo(String result) {
+		// TODO Auto-generated method stub
+		util.dismiss();
+		if (result == null) {
+			return;
+		}
+		// 开始解析轮播
+		LogUtils.i(result);
+		BaseModel<List<ECUserFriends>> data = new BaseModelPaser<List<ECUserFriends>>()
+				.paserJson(result, new TypeToken<List<ECUserFriends>>() {
+				});
+		if (data != null && data.getCode() == 200) {
+			// 设置轮播
+			for (ECUserFriends friend : data.getData()) {
+				// 将搜索到的好友，展示到列表页面
+				ClientUser clientUser = new ClientUser(friend.getTel());
+				clientUser.setUserId(friend.getVoipAccount());
+				clientUser.setPassword(friend.getVoipPwd());
+				clientUser.setAppKey(ConsHttpUrl.APPKEY);
+				clientUser.setAppToken(ConsHttpUrl.APPTOKEN);
+				clientUser.setUserName(friend.getName());
+				ECContacts cos = new ECContacts();
+				cos.setNickname(friend.getName());
+				cos.setContactid(friend.getVoipAccount());
+				cos.setClientUser(clientUser, friend.getTel(), friend.getIcon());
+				ContactSqlManager.insertContact(cos,
+						("男".equals(friend.getSex()) ? 1 : 0), true);
+			}
+		} else {
+			ToastApp.showToast(data.getMsg());
+		}
+	}
+
+	/** 保存方法 */
+	public void saveBitmap(Bitmap bm) {
+		File f = new File(APPEnum.HEAD);
+		if (f.exists()) {
+			f.delete();
+		}
+		try {
+			FileOutputStream out = new FileOutputStream(f);
+			bm.compress(Bitmap.CompressFormat.PNG, 90, out);
+			out.flush();
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }

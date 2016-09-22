@@ -7,24 +7,25 @@
  */
 package com.darly.dlclent.base;
 
-import android.graphics.Bitmap.Config;
+import io.vov.vitamio.Vitamio;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.Window;
 
-import com.darly.dlclent.R;
+import com.darly.dlclent.poll.ThreadPoolManager;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author zhangyh2 BaseActivity $ 下午2:33:01 TODO
  */
 public abstract class BaseActivity extends FragmentActivity {
 
-	protected ImageLoader imageLoader = ImageLoader.getInstance();
-	protected DisplayImageOptions options;
+	protected ThreadPoolManager manager;
 
 	/*
 	 * (non-Javadoc)
@@ -35,6 +36,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		Vitamio.isInitialized(this);
 		super.onCreate(savedInstanceState);
 
 		initGlobalVariable();
@@ -54,18 +56,12 @@ public abstract class BaseActivity extends FragmentActivity {
 	 * @author zhangyh2 BaseActivity.java TODO
 	 *         初始化全局的一些变量。而且做好的静态变量。每个Activity里面的变量由自己来进行定义。
 	 */
-	@SuppressWarnings("deprecation")
 	private void initGlobalVariable() {
 		// TODO Auto-generated method stub
-		LogUtils.customTagPrefix = "oop"; // 方便调试时过滤 adb logcat 输出
+		LogUtils.customTagPrefix = "DLClient_A"; // 方便调试时过滤 adb logcat 输出
 		LogUtils.allowI = true; // 关闭 LogUtils.i(...) 的 adb log 输出
 		ViewUtils.inject(this);// 注入view和事件
-		// 设置参数，加载每个图片的详细参数和是否存储、缓存的问题。
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.ic_launcher)
-				.showImageForEmptyUri(R.drawable.ic_launcher)
-				.showImageOnFail(R.drawable.ic_launcher).cacheInMemory(true)
-				.bitmapConfig(Config.RGB_565).cacheOnDisc(true).build();
+		manager = ThreadPoolManager.getInstance(ThreadPoolManager.TYPE_FIFO, 5);
 	}
 
 	/**
@@ -100,6 +96,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
 	/*
@@ -111,5 +108,28 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	public FragmentManager fragmentManager;
+	public String TAG = "";
+
+	/*
+	 * 在fragment的管理类中，我们要实现这部操作，而他的主要作用是，当D这个activity回传数据到
+	 * 这里碎片管理器下面的fragnment中时，往往会经过这个管理器中的onActivityResult的方法。
+	 */
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		/* 在这里，我们通过碎片管理器中的Tag，就是每个碎片的名称，来获取对应的fragment */
+		Fragment f = fragmentManager.findFragmentByTag(TAG);
+		/* 然后在碎片中调用重写的onActivityResult方法 */
+		if (f == null) {
+			onActivityResult(requestCode, resultCode, data);
+		} else {
+			f.onActivityResult(requestCode, resultCode, data);
+		}
+		LogUtils.i("onActivityResult");
+
 	}
 }

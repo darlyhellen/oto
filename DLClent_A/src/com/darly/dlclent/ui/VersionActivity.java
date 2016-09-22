@@ -139,6 +139,7 @@ public class VersionActivity extends BaseActivity implements OnClickListener {
 		if (datas == null) {
 			return;
 		}
+		LogUtils.i(datas);
 		BaseModel<CheckUpdata> data = new BaseModelPaser<CheckUpdata>()
 				.paserJson(datas, new TypeToken<CheckUpdata>() {
 				});

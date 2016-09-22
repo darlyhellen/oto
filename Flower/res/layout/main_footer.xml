@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_footer_group"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:background="@color/app_main_header_bg"
+    android:orientation="horizontal" >
+
+    <com.hellen.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_main"
+        style="@style/RadioBase" />
+
+    <com.hellen.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_act"
+        style="@style/RadioBase" />
+
+    <com.hellen.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_conversion"
+        style="@style/RadioBase"
+        android:padding="4dp" />
+
+    <com.hellen.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_list"
+        style="@style/RadioBase" />
+
+    <com.hellen.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_center"
+        style="@style/RadioBase" />
+
+</RadioGroup>

@@ -1,0 +1,1803 @@
+android.support.annotation.AnimRes
+android.support.annotation.AnimatorRes
+android.support.annotation.AnyRes
+android.support.annotation.ArrayRes
+android.support.annotation.AttrRes
+android.support.annotation.BinderThread
+android.support.annotation.BoolRes
+android.support.annotation.CallSuper
+android.support.annotation.CheckResult
+android.support.annotation.ColorInt
+android.support.annotation.ColorRes
+android.support.annotation.DimenRes
+android.support.annotation.DrawableRes
+android.support.annotation.FloatRange
+android.support.annotation.FractionRes
+android.support.annotation.IdRes
+android.support.annotation.IntDef
+android.support.annotation.IntRange
+android.support.annotation.IntegerRes
+android.support.annotation.InterpolatorRes
+android.support.annotation.Keep
+android.support.annotation.LayoutRes
+android.support.annotation.MainThread
+android.support.annotation.MenuRes
+android.support.annotation.NonNull
+android.support.annotation.Nullable
+android.support.annotation.PluralsRes
+android.support.annotation.RawRes
+android.support.annotation.RequiresPermission
+android.support.annotation.RequiresPermission$Read
+android.support.annotation.RequiresPermission$Write
+android.support.annotation.Size
+android.support.annotation.StringDef
+android.support.annotation.StringRes
+android.support.annotation.StyleRes
+android.support.annotation.StyleableRes
+android.support.annotation.TransitionRes
+android.support.annotation.UiThread
+android.support.annotation.VisibleForTesting
+android.support.annotation.WorkerThread
+android.support.annotation.XmlRes
+com.amap.api.fence.Fence:
+    public void a(long)
+com.amap.api.location.AMapLocation:
+    public static final int LOCATION_SUCCESS
+    public static final int ERROR_CODE_INVALID_PARAMETER
+    public static final int ERROR_CODE_FAILURE_WIFI_INFO
+    public static final int ERROR_CODE_FAILURE_LOCATION_PARAMETER
+    public static final int ERROR_CODE_FAILURE_CONNECTION
+    public static final int ERROR_CODE_FAILURE_PARSER
+    public static final int ERROR_CODE_FAILURE_LOCATION
+    public static final int ERROR_CODE_FAILURE_AUTH
+    public static final int ERROR_CODE_UNKNOWN
+    public static final int ERROR_CODE_FAILURE_INIT
+    public static final int ERROR_CODE_SERVICE_FAIL
+    public static final int ERROR_CODE_FAILURE_CELL
+    public static final int ERROR_CODE_FAILURE_LOCATION_PERMISSION
+    public static final int LOCATION_TYPE_GPS
+    public static final int LOCATION_TYPE_SAME_REQ
+    public static final int LOCATION_TYPE_FAST
+    public static final int LOCATION_TYPE_FIX_CACHE
+    public static final int LOCATION_TYPE_WIFI
+    public static final int LOCATION_TYPE_CELL
+    public static final int LOCATION_TYPE_AMAP
+    public static final int LOCATION_TYPE_OFFLINE
+    public java.lang.String getLocationDetail()
+    public java.lang.String getRoad()
+    public java.lang.String getPoiName()
+    public int getSatellites()
+    public boolean isOffset()
+com.amap.api.location.AMapLocationClient:
+    public AMapLocationClient(android.content.Context,android.content.Intent)
+    public void stopLocation()
+    public void addGeoFenceAlert(java.lang.String,double,double,float,long,android.app.PendingIntent)
+    public void removeGeoFenceAlert(android.app.PendingIntent,java.lang.String)
+    public void removeGeoFenceAlert(android.app.PendingIntent)
+    public com.amap.api.location.AMapLocation getLastKnownLocation()
+    public void startAssistantLocation()
+    public void stopAssistantLocation()
+    public java.lang.String getVersion()
+    public static void setApiKey(java.lang.String)
+    public boolean isStarted()
+    public void unRegisterLocationListener(com.amap.api.location.AMapLocationListener)
+    public void onDestroy()
+com.amap.api.location.AMapLocationClientOption:
+    public com.amap.api.location.AMapLocationClientOption setKillProcess(boolean)
+    public com.amap.api.location.AMapLocationClientOption setGpsFirst(boolean)
+    public void setHttpTimeOut(long)
+    public com.amap.api.location.AMapLocationClientOption setOffset(boolean)
+    public void setLocationCacheEnable(boolean)
+com.amap.api.location.CoordUtil:
+    public CoordUtil()
+com.amap.api.location.CoordinateConverter
+com.amap.api.location.CoordinateConverter$1
+com.amap.api.location.CoordinateConverter$CoordType
+com.amap.api.location.DPoint:
+    public void setLongitude(double)
+    public void setLatitude(double)
+com.amap.api.location.LocationManagerBase:
+    public abstract void stopLocation()
+    public abstract void addGeoFenceAlert(java.lang.String,double,double,float,long,android.app.PendingIntent)
+    public abstract void removeGeoFenceAlert(android.app.PendingIntent,java.lang.String)
+    public abstract void removeGeoFenceAlert(android.app.PendingIntent)
+    public abstract com.amap.api.location.AMapLocation getLastKnownLocation()
+    public abstract void startAssistantLocation()
+    public abstract void stopAssistantLocation()
+    public abstract boolean isStarted()
+    public abstract void unRegisterLocationListener(com.amap.api.location.AMapLocationListener)
+    public abstract void onDestroy()
+com.autonavi.aps.amapapi.model.AmapLoc:
+    public AmapLoc(com.autonavi.aps.amapapi.model.AmapLoc)
+    public android.location.Location toBuiltInLocation()
+    public void setBuiltInLocationAdjust(android.location.Location)
+    public double getAltitude()
+    public float getSpeed()
+    public float getBearing()
+    public java.lang.String getCens()
+    public java.lang.String getFloor()
+    public void setCoord(int)
+    public boolean hasAltitude()
+    public boolean hasAccuracy()
+    public boolean hasBearing()
+    public boolean hasSpeed()
+com.google.flatbuffers.Constants
+com.google.flatbuffers.FlatBufferBuilder:
+    int object_start
+    39:78:public FlatBufferBuilder(java.nio.ByteBuffer)
+    89:100:public com.google.flatbuffers.FlatBufferBuilder init(java.nio.ByteBuffer)
+    125:133:static java.nio.ByteBuffer growByteBuffer(java.nio.ByteBuffer)
+    142:142:public int offset()
+    151:152:public void pad(int)
+    166:177:public void prep(int,int)
+    185:185:public void putBoolean(boolean)
+    193:193:public void putByte(byte)
+    201:201:public void putShort(short)
+    209:209:public void putInt(int)
+    217:217:public void putLong(long)
+    225:225:public void putFloat(float)
+    233:233:public void putDouble(double)
+    241:241:public void addBoolean(boolean)
+    248:248:public void addByte(byte)
+    255:255:public void addShort(short)
+    262:262:public void addInt(int)
+    269:269:public void addLong(long)
+    276:276:public void addFloat(float)
+    283:283:public void addDouble(double)
+    291:295:public void addOffset(int)
+    341:346:public void startVector(int,int,int)
+    356:360:public int endVector()
+    371:376:public int createString(java.lang.String)
+    386:391:public int createString(java.nio.ByteBuffer)
+    399:403:public void finished()
+    410:412:public void notNested()
+    422:424:public void Nested(int)
+    468:474:public void startObject(int)
+    485:485:public void addBoolean(int,boolean,boolean)
+    496:496:public void addByte(int,byte,int)
+    507:507:public void addShort(int,short,int)
+    518:518:public void addInt(int,int,int)
+    529:529:public void addLong(int,long,long)
+    540:540:public void addFloat(int,float,double)
+    551:551:public void addDouble(int,double,double)
+    562:562:public void addOffset(int,int,int)
+    572:576:public void addStruct(int,int,int)
+    585:586:public void slot(int)
+    595:644:public int endObject()
+    655:661:public void required(int,int)
+    670:674:public void finish(int)
+    684:692:public void finish(int,java.lang.String)
+    703:704:public com.google.flatbuffers.FlatBufferBuilder forceDefaults(boolean)
+    713:714:public java.nio.ByteBuffer dataBuffer()
+    727:728:private int dataStart()
+    741:745:public byte[] sizedByteArray(int,int)
+    754:754:public byte[] sizedByteArray()
+com.google.flatbuffers.Struct
+com.google.flatbuffers.Table:
+    39:39:public java.nio.ByteBuffer getByteBuffer()
+    121:127:protected java.nio.ByteBuffer __vector_as_bytebuffer(int,int)
+    138:141:protected com.google.flatbuffers.Table __union(com.google.flatbuffers.Table,int)
+    151:157:protected static boolean __has_identifier(java.nio.ByteBuffer,java.lang.String)
+com.hellen.base.APP:
+    107:119:public static java.lang.String getCurProcessName(android.content.Context)
+    129:161:public java.lang.String getDeviceInfo(android.content.Context)
+    205:214:public boolean getLoggingSwitch()
+    219:228:public boolean getAlphaSwitch()
+com.hellen.base.BaseActivity:
+    173:181:public void receiverRegister(java.lang.String[],com.hellen.flower.broadcast.BaseCastReceiver)
+    184:188:public void receiverConsel(com.hellen.flower.broadcast.BaseCastReceiver)
+com.hellen.base.ConsHttpUrl
+com.hellen.base.ConsMVP:
+    public static final int DB_SELECT
+    public static final int DB_INSERT
+    public static final int DB_UPDATA
+    public static final int DB_DELETE
+    public static final int DB_REQUST
+    public static final int CENTER_NAME
+    public static final int CENTER_TEL
+    public static final int CENTER_SEX
+    public static final int CENTER_CARD
+    public static final int CENTER_CHANGE
+    public static final int ADDRESS
+    public static final int ADDRESS_NEW
+    public static final int ADDRESS_CHA
+    public static final int REQUESTCODE_CAM
+    public static final int REQUESTCODE_CAP
+    public static final int REQUESTCODE_CUT
+    public static java.lang.String capUri
+    95:96:public void setDec(java.lang.String)
+com.hellen.base.SystemBarTintManager:
+    public static final int DEFAULT_TINT_COLOR
+    private boolean mNavBarTintEnabled
+    153:157:public void setNavigationBarTintEnabled(boolean)
+    166:168:public void setTintColor(int)
+    177:179:public void setTintResource(int,int)
+    188:190:public void setTintDrawable(android.graphics.drawable.Drawable)
+    199:201:public void setTintAlpha(float)
+    210:213:public void setStatusBarTintColor(int)
+    236:239:public void setStatusBarTintDrawable(android.graphics.drawable.Drawable)
+    249:253:public void setStatusBarAlpha(float)
+    262:265:public void setNavigationBarTintColor(int)
+    275:278:public void setNavigationBarTintResource(int)
+    288:291:public void setNavigationBarTintDrawable(android.graphics.drawable.Drawable)
+    301:305:public void setNavigationBarAlpha(float)
+    314:314:public com.hellen.base.SystemBarTintManager$SystemBarConfig getConfig()
+    323:323:public boolean isStatusBarTintEnabled()
+    332:332:public boolean isNavBarTintEnabled()
+com.hellen.base.SystemBarTintManager$SystemBarConfig:
+    private static final java.lang.String STATUS_BAR_HEIGHT_RES_NAME
+    private static final java.lang.String NAV_BAR_HEIGHT_RES_NAME
+    private static final java.lang.String NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME
+    private static final java.lang.String NAV_BAR_WIDTH_RES_NAME
+    private static final java.lang.String SHOW_NAV_BAR_RES_NAME
+    519:519:public int getActionBarHeight()
+    565:566:public int getPixelInsetTop(boolean)
+    576:579:public int getPixelInsetBottom()
+    590:593:public int getPixelInsetRight()
+com.hellen.bean.Bannar:
+    26:27:public void setUrl(java.lang.String)
+    34:35:public void setTitle(java.lang.String)
+    38:38:public java.lang.String getIcon()
+    42:43:public void setIcon(java.lang.String)
+    50:51:public void setType(java.lang.String)
+com.hellen.bean.BaseModel:
+    32:33:public void setCode(int)
+    40:41:public void setMsg(java.lang.String)
+    48:49:public void setData(java.lang.Object)
+com.hellen.bean.Main_Flower:
+    private java.lang.Integer id
+    private java.lang.String description
+    private java.lang.String goup
+    private java.lang.String type
+    private java.lang.String temp
+    21:21:public java.lang.Integer getId()
+    25:26:public void setId(java.lang.Integer)
+    29:29:public java.lang.String getDescription()
+    33:34:public void setDescription(java.lang.String)
+    41:42:public void setName(java.lang.String)
+    49:50:public void setIcon(java.lang.String)
+    57:58:public void setUrl(java.lang.String)
+    61:61:public java.lang.String getGoup()
+    65:66:public void setGoup(java.lang.String)
+    69:69:public java.lang.String getType()
+    73:74:public void setType(java.lang.String)
+    77:77:public java.lang.String getTemp()
+    81:82:public void setTemp(java.lang.String)
+com.hellen.bean.UserInfo:
+    private java.lang.Integer id
+    private java.lang.String name
+    private java.lang.String pass
+    private java.lang.String sim
+    private java.lang.String icon
+    private java.lang.String idcard
+    private java.lang.Double money
+    private java.lang.String same
+    private java.lang.String sex
+    private java.lang.String tel
+    private java.lang.String login
+    42:56:public UserInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Double,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    59:59:public java.lang.Integer getId()
+    63:64:public void setId(java.lang.Integer)
+    67:67:public java.lang.String getName()
+    71:72:public void setName(java.lang.String)
+    75:75:public java.lang.String getPass()
+    79:80:public void setPass(java.lang.String)
+    83:83:public java.lang.String getSim()
+    87:88:public void setSim(java.lang.String)
+    91:91:public java.lang.String getIcon()
+    95:96:public void setIcon(java.lang.String)
+    99:99:public java.lang.String getIdcard()
+    103:104:public void setIdcard(java.lang.String)
+    107:107:public java.lang.Double getMoney()
+    111:112:public void setMoney(java.lang.Double)
+    115:115:public java.lang.String getSame()
+    119:120:public void setSame(java.lang.String)
+    123:123:public java.lang.String getSex()
+    127:128:public void setSex(java.lang.String)
+    131:131:public java.lang.String getTel()
+    135:136:public void setTel(java.lang.String)
+    143:144:public void setToken(java.lang.String)
+    147:147:public java.lang.String getLogin()
+    151:152:public void setLogin(java.lang.String)
+com.hellen.bean.flatmodel.Friend
+com.hellen.bean.flatmodel.People:
+    9:9:public static com.hellen.bean.flatmodel.People getRootAsPeople(java.nio.ByteBuffer)
+    13:14:public static com.hellen.bean.flatmodel.People getRootAsPeople(java.nio.ByteBuffer,com.hellen.bean.flatmodel.People)
+    29:29:public java.nio.ByteBuffer idAsByteBuffer()
+    33:34:public long index()
+    38:39:public java.lang.String guid()
+    43:43:public java.nio.ByteBuffer guidAsByteBuffer()
+    52:52:public java.nio.ByteBuffer nameAsByteBuffer()
+    56:57:public java.lang.String gender()
+    61:61:public java.nio.ByteBuffer genderAsByteBuffer()
+    65:66:public java.lang.String company()
+    70:70:public java.nio.ByteBuffer companyAsByteBuffer()
+    74:75:public java.lang.String email()
+    79:79:public java.nio.ByteBuffer emailAsByteBuffer()
+    83:83:public com.hellen.bean.flatmodel.Friend friends(int)
+    87:88:public com.hellen.bean.flatmodel.Friend friends(com.hellen.bean.flatmodel.Friend,int)
+    92:93:public int friendsLength()
+    99:108:public static int createPeople(com.google.flatbuffers.FlatBufferBuilder,int,long,int,int,int,int,int,int)
+    112:113:public static void startPeople(com.google.flatbuffers.FlatBufferBuilder)
+    116:117:public static void addId(com.google.flatbuffers.FlatBufferBuilder,int)
+    120:121:public static void addIndex(com.google.flatbuffers.FlatBufferBuilder,long)
+    124:125:public static void addGuid(com.google.flatbuffers.FlatBufferBuilder,int)
+    128:129:public static void addName(com.google.flatbuffers.FlatBufferBuilder,int)
+    132:133:public static void addGender(com.google.flatbuffers.FlatBufferBuilder,int)
+    136:137:public static void addCompany(com.google.flatbuffers.FlatBufferBuilder,int)
+    140:141:public static void addEmail(com.google.flatbuffers.FlatBufferBuilder,int)
+    144:145:public static void addFriends(com.google.flatbuffers.FlatBufferBuilder,int)
+    148:151:public static int createFriendsVector(com.google.flatbuffers.FlatBufferBuilder,int[])
+    156:157:public static void startFriendsVector(com.google.flatbuffers.FlatBufferBuilder,int)
+    160:161:public static int endPeople(com.google.flatbuffers.FlatBufferBuilder)
+com.hellen.bean.flatmodel.PeopleList:
+    39:41:public static int createPeopleList(com.google.flatbuffers.FlatBufferBuilder,int)
+    45:46:public static void startPeopleList(com.google.flatbuffers.FlatBufferBuilder)
+    49:50:public static void addPeoples(com.google.flatbuffers.FlatBufferBuilder,int)
+    53:56:public static int createPeoplesVector(com.google.flatbuffers.FlatBufferBuilder,int[])
+    61:62:public static void startPeoplesVector(com.google.flatbuffers.FlatBufferBuilder,int)
+    65:66:public static int endPeopleList(com.google.flatbuffers.FlatBufferBuilder)
+    71:72:public static void finishPeopleListBuffer(com.google.flatbuffers.FlatBufferBuilder,int)
+com.hellen.bean.jsonmodel.FriendJson
+com.hellen.bean.jsonmodel.PeopleJson
+com.hellen.bean.jsonmodel.PeopleListJson:
+    public java.util.ArrayList peoples
+com.hellen.biz.LoginInterface:
+    public abstract void login_out(java.lang.String,java.lang.String,com.hellen.base.BaseListener)
+com.hellen.biz.RegisterInterface$RegisterBiz:
+    public abstract void doSomething(com.hellen.base.BaseListener)
+com.hellen.biz.imp.Login:
+    216:217:public void login_out(java.lang.String,java.lang.String,com.hellen.base.BaseListener)
+com.hellen.biz.imp.Register:
+    28:29:public void doSomething(com.hellen.base.BaseListener)
+com.hellen.common.AndroidService
+com.hellen.common.CircleBitmapDisplayer
+com.hellen.common.CircleDrawable
+com.hellen.common.CleanCache
+com.hellen.common.FindByteFromRES:
+    12:12:public FindByteFromRES()
+com.hellen.common.HttpClient:
+    private static final java.lang.String APPSYS_STRING
+    18:20:private HttpClient()
+com.hellen.common.HttpUploadFile
+com.hellen.common.IDCardUtils
+com.hellen.common.ImageLoaderUtil:
+    98:109:private com.nostra13.universalimageloader.core.DisplayImageOptions getOptions()
+    138:139:public void loadImage(java.lang.String,android.widget.ImageView)
+com.hellen.common.ImageUtils
+com.hellen.common.ImageUtils$ImageSize
+com.hellen.common.JsonUtil
+com.hellen.common.LogApp:
+    13:13:public LogApp()
+    32:35:public static void e(java.lang.String)
+    44:47:public static void d(java.lang.String,java.lang.String)
+    50:53:public static void w(java.lang.String)
+com.hellen.common.NetUtils
+com.hellen.common.NetUtils$1
+com.hellen.common.NetUtils$2
+com.hellen.common.NetworkReachabilityUtil:
+    9:9:public NetworkReachabilityUtil()
+    26:45:public static com.hellen.common.NetworkReachabilityUtil$NetworkType getNetworkType(android.content.Context)
+com.hellen.common.NetworkReachabilityUtil$NetworkType
+com.hellen.common.SDCardUtils:
+    17:19:private SDCardUtils()
+    67:74:public static long getFreeBytes(java.lang.String)
+    82:82:public static java.lang.String getRootDirectoryPath()
+com.hellen.common.SPUtils
+com.hellen.common.SPUtils$SharedPreferencesCompat
+com.hellen.common.SharePreferHelp:
+    19:19:public SharePreferHelp()
+    33:37:public static void putValue(java.lang.String,int)
+    46:51:public static void putValue(java.lang.String,java.lang.Long)
+    86:89:public static int getValue(java.lang.String,int)
+    99:102:public static long getValue(java.lang.String,long)
+    137:142:public static void remove(java.lang.String)
+com.hellen.common.ToastApp:
+    private static final int TOASTTIME
+    16:16:public ToastApp()
+    28:38:public static void showToast(android.content.Context,java.lang.String)
+    41:51:public static void showToast(android.content.Context,int)
+com.hellen.common.UserException
+com.hellen.common.UserException$1
+com.hellen.common.UserException$1$1
+com.hellen.common.UserExceptionManager
+com.hellen.flower.BuildConfig
+com.hellen.flower.MainActivity:
+    221:221:protected void loadTheme(java.lang.String)
+com.hellen.flower.R:
+    10:10:public R()
+com.hellen.flower.broadcast.BaseCastReceiver:
+    public static final java.lang.String ACTION_TEST
+    public static final java.lang.String ACTION_LOGIN
+    public static final java.lang.String ACTION_NAV
+    public static final java.lang.String SERVICE_RESTART
+com.hellen.flower.login.LoginActivity:
+    public android.widget.TextView tv
+com.hellen.presenter.FragmentMainPresenter:
+    176:185:public void setWholeList(com.hellen.adapter.WholeListAdapter)
+com.hellen.widget.carousel.ImageHandler:
+    public static final int MSG_UPDATE_IMAGE
+    public static final int MSG_KEEP_SILENT
+    public static final int MSG_BREAK_SILENT
+    public static final int MSG_PAGE_CHANGED
+    public static final long MSG_DELAY
+com.hellen.widget.circlemenu.CircleMenuLayout:
+    private static final float RADIO_DEFAULT_CHILD_DIMENSION
+    private static final float RADIO_PADDING_LAYOUT
+    private static final int FLINGABLE_VALUE
+    private static final int NOCLICK_VALUE
+com.hellen.widget.dialog.ShowLoading:
+    29:32:public ShowLoading(android.content.Context,int)
+    54:60:public void setMessage(java.lang.CharSequence)
+com.hellen.widget.loginout.LoginOutDialg
+com.hellen.widget.loginout.LoginOutDialg$1
+com.hellen.widget.xlistview.XListView:
+    private static final int SCROLLBACK_HEADER
+    private static final int SCROLLBACK_FOOTER
+    private static final int SCROLL_DURATION
+    private static final int PULL_LOAD_MORE_DELTA
+    private static final float OFFSET_RADIO
+    171:175:public void stopRefresh()
+    181:185:public void stopLoadMore()
+com.hellen.widget.xlistview.XListViewFooter:
+    public static final int STATE_NORMAL
+    public static final int STATE_READY
+    public static final int STATE_LOADING
+    73:75:public void normal()
+    81:83:public void loading()
+com.hellen.widget.xlistview.XListViewHeader:
+    public static final int STATE_NORMAL
+    public static final int STATE_READY
+    public static final int STATE_REFRESHING
+com.loc.a:
+    public com.amap.api.location.AMapLocation getLastKnownLocation()
+    public boolean isStarted()
+    public void addGeoFenceAlert(java.lang.String,double,double,float,long,android.app.PendingIntent)
+    public void removeGeoFenceAlert(android.app.PendingIntent,java.lang.String)
+    public void removeGeoFenceAlert(android.app.PendingIntent)
+    public void startAssistantLocation()
+    public void stopAssistantLocation()
+    public void unRegisterLocationListener(com.amap.api.location.AMapLocationListener)
+    public void onDestroy()
+com.loc.c:
+    public static com.amap.api.location.AMapLocation a(org.json.JSONObject)
+com.loc.ce:
+    public java.lang.String a()
+com.loc.f:
+    public synchronized com.amap.api.location.AMapLocation a()
+    private synchronized com.amap.api.location.AMapLocation d()
+com.loc.g:
+    public static com.amap.api.location.DPoint b(android.content.Context,com.amap.api.location.DPoint)
+    public static double a(double,double)
+    public static double b(double,double)
+    private static com.amap.api.location.DPoint c(double,double)
+    public static com.amap.api.location.DPoint a(com.amap.api.location.DPoint)
+    private static double a(double)
+    private static double b(double)
+    private static com.amap.api.location.DPoint d(double,double)
+    private static double a(double,int)
+    private static com.amap.api.location.DPoint a(com.amap.api.location.DPoint,int)
+    private static com.amap.api.location.DPoint a(double,double,double,double)
+com.ta.utdid2.aid.AidManager
+com.ta.utdid2.aid.AidRequester
+com.ta.utdid2.aid.AidRequester$a
+com.ta.utdid2.aid.AidStorageController
+com.ta.utdid2.android.utils.AESUtils:
+    public static final java.lang.String TAG
+    12:12:public AESUtils()
+    76:76:public static java.lang.String toHex(java.lang.String)
+    80:80:public static java.lang.String fromHex(java.lang.String)
+com.ta.utdid2.android.utils.Base64:
+    public static final int DEFAULT
+    public static final int NO_PADDING
+    public static final int NO_WRAP
+    public static final int CRLF
+    public static final int URL_SAFE
+    public static final int NO_CLOSE
+    489:492:public static java.lang.String encodeToString(byte[],int,int,int)
+com.ta.utdid2.android.utils.Base64$a:
+    public abstract boolean a(byte[],int,int,boolean)
+    public abstract int a(int)
+com.ta.utdid2.android.utils.Base64$b:
+    private static final int e
+    private static final int f
+    261:261:public int a(int)
+com.ta.utdid2.android.utils.Base64$c:
+    public static final int c
+    620:620:public int a(int)
+com.ta.utdid2.android.utils.DebugUtils
+com.ta.utdid2.android.utils.IntUtils:
+    3:3:public IntUtils()
+    19:30:public static byte[] getBytes(byte[],int)
+com.ta.utdid2.android.utils.NetworkUtils
+com.ta.utdid2.android.utils.PhoneInfoUtils:
+    9:9:public PhoneInfoUtils()
+com.ta.utdid2.android.utils.SharedPreferenceHelper
+com.ta.utdid2.android.utils.StringUtils:
+    3:3:public StringUtils()
+    12:35:public static java.lang.String convertObjectToString(java.lang.Object)
+com.ta.utdid2.android.utils.SystemUtils
+com.ta.utdid2.android.utils.TimeUtils
+com.ta.utdid2.core.persistent.MySharedPreferences:
+    public abstract int getInt(java.lang.String,int)
+    public abstract float getFloat(java.lang.String,float)
+    public abstract boolean getBoolean(java.lang.String,boolean)
+    public abstract boolean contains(java.lang.String)
+    public abstract void registerOnSharedPreferenceChangeListener(com.ta.utdid2.core.persistent.MySharedPreferences$OnSharedPreferenceChangeListener)
+    public abstract void unregisterOnSharedPreferenceChangeListener(com.ta.utdid2.core.persistent.MySharedPreferences$OnSharedPreferenceChangeListener)
+com.ta.utdid2.core.persistent.MySharedPreferences$MyEditor:
+    public abstract com.ta.utdid2.core.persistent.MySharedPreferences$MyEditor remove(java.lang.String)
+com.ta.utdid2.core.persistent.PersistentConfiguration:
+    private static final java.lang.String KEY_TIMESTAMP
+    private static final java.lang.String KEY_TIMESTAMP2
+    248:257:public void putInt(java.lang.String,int)
+    272:281:public void putBoolean(java.lang.String,boolean)
+    284:293:public void putFloat(java.lang.String,float)
+    308:317:public void remove(java.lang.String)
+    320:342:public void reload()
+    345:355:public void clear()
+    432:438:public int getInt(java.lang.String)
+    442:448:public long getLong(java.lang.String)
+    452:458:public float getFloat(java.lang.String)
+    462:468:public boolean getBoolean(java.lang.String)
+    472:478:public java.util.Map getAll()
+com.ta.utdid2.core.persistent.TransactionXMLFile:
+    public static final int MODE_WORLD_WRITEABLE
+    public static final int MODE_WORLD_READABLE
+    public static final int MODE_PRIVATE
+com.ta.utdid2.core.persistent.TransactionXMLFile$MySharedPreferencesImpl:
+    167:170:public void registerOnSharedPreferenceChangeListener(com.ta.utdid2.core.persistent.MySharedPreferences$OnSharedPreferenceChangeListener)
+    174:177:public void unregisterOnSharedPreferenceChangeListener(com.ta.utdid2.core.persistent.MySharedPreferences$OnSharedPreferenceChangeListener)
+    194:197:public int getInt(java.lang.String,int)
+    208:211:public float getFloat(java.lang.String,float)
+    215:218:public boolean getBoolean(java.lang.String,boolean)
+    222:224:public boolean contains(java.lang.String)
+com.ta.utdid2.core.persistent.TransactionXMLFile$MySharedPreferencesImpl$EditorImpl:
+    267:270:public com.ta.utdid2.core.persistent.MySharedPreferences$MyEditor remove(java.lang.String)
+com.ta.utdid2.core.persistent.a:
+    private static final int b
+com.ta.utdid2.core.persistent.b:
+    20:20:b()
+    24:29:public static void a(org.xmlpull.v1.XmlPullParser)
+    33:40:public static final int a(java.lang.CharSequence,java.lang.String[],int)
+    45:53:public static final boolean a(java.lang.CharSequence,boolean)
+    58:96:public static final int a(java.lang.CharSequence,int)
+    101:104:public static final int a(java.lang.String,int)
+    108:134:public static final int a(java.lang.CharSequence)
+    178:185:public static final void a(java.util.List,java.io.OutputStream)
+    479:481:public static final java.util.ArrayList b(java.io.InputStream)
+    787:799:public static final void a(org.xmlpull.v1.XmlPullParser,java.lang.String)
+    805:808:public static final void b(org.xmlpull.v1.XmlPullParser)
+com.ta.utdid2.device.Device:
+    19:19:long getCheckSum()
+com.ta.utdid2.device.DeviceInfo:
+    static final byte UTDID_VERSION_CODE
+    10:10:public DeviceInfo()
+com.ta.utdid2.device.UTDevice:
+    10:10:public UTDevice()
+com.ta.utdid2.device.UTUtdid:
+    private static final java.lang.String HMAC_KEY
+    static final java.lang.String UM_SETTINGS_STORAGE
+    static final java.lang.String UM_SETTINGS_STORAGE_NEW
+    private static final java.lang.String S_LOCAL_STORAGE_NAME
+    private static final java.lang.String S_LOCAL_STORAGE_KEY
+    private static final java.lang.String S_GLOBAL_PERSISTENT_CONFIG_KEY
+com.ta.utdid2.device.UTUtdidHelper:
+    63:67:public static java.lang.String generateRandomUTDID()
+com.umeng.common.message.Log:
+    8:8:public Log()
+    50:53:public static void c(java.lang.String,java.lang.String,java.lang.Exception)
+    56:59:public static void d(java.lang.String,java.lang.String)
+    62:65:public static void d(java.lang.String,java.lang.String,java.lang.Exception)
+com.umeng.common.message.UmengMessageDeviceConfig:
+    protected static final java.lang.String b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    public static final int DEFAULT_TIMEZONE
+    65:73:public static boolean isAppInstalled(java.lang.String,android.content.Context)
+    83:84:public static boolean isChinese(android.content.Context)
+    94:101:public static java.util.Set getInstalledPackages(android.content.Context)
+    111:114:public static boolean isScreenPortrait(android.content.Context)
+    174:183:public static java.lang.String getAppLabel(android.content.Context)
+    194:202:public static java.lang.String[] getGPU(javax.microedition.khronos.opengles.GL10)
+    321:321:public static java.lang.String getDeviceIdUmengMD5(android.content.Context)
+    336:345:public static java.lang.String getNetworkOperatorName(android.content.Context)
+    357:370:public static java.lang.String getDisplayResolution(android.content.Context)
+    411:411:public static boolean isWiFiAvailable(android.content.Context)
+    425:458:public static android.location.Location getLocation(android.content.Context)
+    473:481:public static boolean isOnline(android.content.Context)
+    491:495:public static boolean isSdCardWrittenable()
+    745:747:public static java.lang.String getTimeString(java.util.Date)
+    756:759:public static java.lang.String getToday()
+    770:774:public static java.util.Date toTime(java.lang.String)
+    786:794:public static int getIntervalSeconds(java.util.Date,java.util.Date)
+    859:861:public static boolean isDebug(android.content.Context)
+com.umeng.common.message.a
+com.umeng.common.message.b:
+    public static final java.lang.String C
+    public static final java.lang.String D
+    55:102:public b(java.lang.String,java.lang.String)
+    106:122:private void d(org.json.JSONObject)
+    125:137:private void e(org.json.JSONObject)
+    140:145:private void f(org.json.JSONObject)
+    148:150:private void g(org.json.JSONObject)
+    153:156:private void h(org.json.JSONObject)
+    159:162:private void i(org.json.JSONObject)
+    165:169:private void j(org.json.JSONObject)
+    172:183:public void a(org.json.JSONObject)
+    319:329:public boolean a()
+    409:413:public boolean b()
+com.umeng.common.message.c:
+    private java.lang.String d
+    128:128:public int a(java.lang.String)
+    139:139:public int b(java.lang.String)
+    161:161:public int d(java.lang.String)
+    172:172:public int e(java.lang.String)
+    183:183:public int f(java.lang.String)
+    194:194:public int g(java.lang.String)
+    242:243:public void i(java.lang.String)
+    246:249:public java.lang.String a()
+com.umeng.message.MessageSharedPrefs:
+    601:616:void a(java.lang.String,boolean)
+com.umeng.message.MessageStore:
+    private static final java.lang.String d
+    private static final java.lang.String e
+    private static final int f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final java.lang.String j
+    private static final java.lang.String k
+    private static final java.lang.String l
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final java.lang.String o
+    private static final java.lang.String p
+    private static final java.lang.String q
+    private static final java.lang.String r
+    35:47:boolean a(com.umeng.message.entity.UMessage)
+    52:52:boolean a(java.lang.String)
+    56:56:boolean b(java.lang.String)
+    60:68:boolean a(java.lang.String,int)
+com.umeng.message.MsgConstant:
+    static final long b
+    protected static final java.lang.String c
+com.umeng.message.MsgLogStore:
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final int j
+    private static final java.lang.String k
+    private static final java.lang.String l
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final java.lang.String o
+com.umeng.message.UTrack:
+    515:520:private org.json.JSONObject a(org.json.JSONObject,java.lang.String)
+com.umeng.message.UmengDownloadResourceService:
+    private static final java.lang.String d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    private static final int g
+    private static final int h
+    private static final long i
+    private static final long j
+    private static final int k
+    private static final int l
+com.umeng.message.UmengMessageBootReceiver:
+    private static final java.lang.String c
+com.umeng.message.UmengMessageHandler:
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+com.umeng.message.UmengRegistrar:
+    private static final java.lang.String a
+com.umeng.message.entity.UMessage:
+    public static final java.lang.String DISPLAY_TYPE_CUSTOM
+    public static final java.lang.String DISPLAY_TYPE_NOTIFICATION
+    public static final java.lang.String DISPLAY_TYPE_AUTOUPDATE
+    public static final java.lang.String NOTIFICATION_GO_ACTIVITY
+    public static final java.lang.String NOTIFICATION_GO_APP
+    public static final java.lang.String NOTIFICATION_GO_URL
+    public static final java.lang.String NOTIFICATION_GO_CUSTOM
+com.umeng.message.local.UmengCalendar:
+    8:8:public UmengCalendar()
+    216:224:public static java.lang.String solarTolunar(java.lang.String)
+    285:329:private static java.util.Date b(java.lang.String)
+com.umeng.message.local.UmengLocalNotification:
+    public static final int NEW_YEAR_DAY
+    public static final int CHINESE_NEW_YEAR_EVE
+    public static final int CHINESE_NEW_YEAR
+    public static final int LANTERN
+    public static final int QINGMING_FESTIVAL
+    public static final int LABOR_DAY
+    public static final int DRAGON_BOAT_FESTIVAL
+    public static final int QIXI_FESTIVAL
+    public static final int MID_AUTUMN_FESTIVAL
+    public static final int NATIONAL_DAY
+    public static final int CHUNG_YEUNG_FESTIVAL
+    public static final int LABA_FESTIVAL
+    public static final int REPEATING_UNIT_YEAR
+    public static final int REPEATING_UNIT_MONTH
+    public static final int REPEATING_UNIT_DAY
+    public static final int REPEATING_UNIT_HOUR
+    public static final int REPEATING_UNIT_MINUTE
+    public static final int REPEATING_UNIT_SECOND
+    private static final java.lang.String b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final java.lang.String j
+    private static final java.lang.String k
+    private static final java.lang.String l
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final java.lang.String o
+    186:187:public void setRepeatingUnit(int)
+    194:195:public void setRepeatingInterval(int)
+    202:205:public void setSpecialDay(int)
+    212:213:public void setTitle(java.lang.String)
+    220:221:public void setContent(java.lang.String)
+    228:229:public void setTicker(java.lang.String)
+    273:291:public void setDateTime(java.lang.String)
+    298:304:public void setLunarDateTime(java.lang.String)
+    550:571:public java.lang.String getRepeatingUnitName()
+    575:614:public java.lang.String getSpecialDayName()
+com.umeng.message.local.UmengLocalNotificationManager:
+    public static final java.lang.String DISPLAY_LOCAL_NOTIFICATION
+    public static final java.lang.String ADD_LOCAL_NOTIFICATION
+    public static final java.lang.String UPDATE_LOCAL_NOTIFICATION
+    public static final java.lang.String DELETE_LOCAL_NOTIFICATION
+    public static final java.lang.String CLEAR_LOCAL_NOTIFICATION
+    public static final java.lang.String LOCAL_NOTIFICATION_ID
+    public static final java.lang.String LOCAL_NOTIFICATION_TYPE
+com.umeng.message.local.UmengLocalNotificationService:
+    25:27:public UmengLocalNotificationService(java.lang.String)
+com.umeng.message.local.UmengLocalNotificationStore:
+    private static final java.lang.String f
+    private static final int g
+    private static final java.lang.String h
+    private static final java.lang.String i
+com.umeng.message.local.UmengNotificationBuilder:
+    private static final int b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final java.lang.String j
+    private static final java.lang.String k
+    private static final java.lang.String l
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final java.lang.String o
+    private static final java.lang.String p
+    private static final java.lang.String q
+    private static final java.lang.String r
+    private static final java.lang.String s
+    private static final java.lang.String t
+    private static final java.lang.String u
+    406:407:public void setId(java.lang.String)
+    423:423:public int getDefaults()
+    427:428:public void setDefaults(int)
+    431:431:public int getFlags()
+    435:436:public void setFlags(int)
+    439:439:public int getLayoutId()
+    443:444:public void setLayoutId(int)
+    447:447:public int getLayoutTitleId()
+    451:452:public void setLayoutTitleId(int)
+    455:455:public int getLayoutContentId()
+    459:460:public void setLayoutContentId(int)
+    463:463:public int getLayoutIconId()
+    467:468:public void setLayoutIconId(int)
+    471:471:public int getLayoutIconDrawableId()
+    475:476:public void setLayoutIconDrawableId(int)
+    479:479:public java.lang.String getSmallIconDrawable()
+    483:484:public void setSmallIconDrawable(java.lang.String)
+    487:487:public java.lang.String getLargeIconDrawable()
+    491:492:public void setLargeIconDrawable(java.lang.String)
+    495:495:public java.lang.String getSoundDrawable()
+    499:500:public void setSoundDrawable(java.lang.String)
+    503:503:public boolean isPlayVibrate()
+    507:508:public void setPlayVibrate(boolean)
+    511:511:public boolean isPlayLights()
+    515:516:public void setPlayLights(boolean)
+    519:519:public boolean isPlaySound()
+    523:524:public void setPlaySound(boolean)
+    527:527:public boolean isScreenOn()
+    531:532:public void setScreenOn(boolean)
+com.umeng.message.proguard.A:
+    private static final java.lang.String a
+    private static final java.lang.String b
+    private static final java.lang.String c
+    private static final int d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final java.lang.String j
+    private static final java.lang.String k
+    private static final java.lang.String l
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final int o
+    private static final int p
+    156:157:public void a()
+    163:184:public void a(int)
+    187:204:public void a(java.lang.String)
+    267:312:public void b()
+com.umeng.message.proguard.B:
+    38:41:long d()
+    45:48:long e()
+com.umeng.message.proguard.C:
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final java.lang.String o
+    private static final java.lang.String p
+    private static final java.lang.String q
+    private static final java.lang.String r
+    private static final java.lang.String s
+    private static final java.lang.String t
+    private static final java.lang.String u
+    private static final java.lang.String v
+    private static final java.lang.String w
+    private static final java.lang.String x
+    private static final java.lang.String y
+    private static final java.lang.String z
+    private static final java.lang.String A
+    private static final java.lang.String B
+    private static final java.lang.String C
+    private static final int D
+    private static final int E
+    private static final int F
+    private static final long G
+    private static final long H
+    private static final int I
+    public static final java.lang.String g
+    public static final java.lang.String h
+    public static final java.lang.String i
+    public static final java.lang.String j
+    public static final java.lang.String k
+    private static final java.lang.String ae
+    481:483:private void d(android.content.Context,android.content.Intent)
+    802:803:private final void b(long,java.lang.String)
+com.umeng.message.proguard.C$1:
+    583:583:public void onCommand(java.lang.Object,long,java.lang.String,byte[])
+com.umeng.message.proguard.D:
+    private static final java.lang.String z
+    static final java.lang.String a
+    static final java.lang.String b
+    static final java.lang.String c
+    static final java.lang.String d
+    static final java.lang.String e
+    static final java.lang.String f
+    static final java.lang.String g
+    static final java.lang.String h
+    static final java.lang.String i
+    static final java.lang.String j
+    static final java.lang.String k
+    static final java.lang.String l
+    static final java.lang.String m
+    static final java.lang.String n
+    static final java.lang.String o
+    static final java.lang.String p
+    static final java.lang.String q
+    static final java.lang.String r
+    static final java.lang.String s
+    static final java.lang.String t
+    static final java.lang.String u
+    static final java.lang.String v
+    static final java.lang.String w
+    static final java.lang.String x
+    static final java.lang.String y
+    221:253:public static org.apache.http.HttpHost b(android.content.Context)
+com.umeng.message.proguard.F:
+    public static final java.lang.String a
+    public static final java.lang.String b
+    private static final java.lang.String i
+    public static final java.lang.String c
+    public static final java.lang.String d
+    private static final java.lang.String j
+    private static final java.lang.String k
+    private static final int l
+    public static final int f
+    public static final int g
+    489:505:public void a(int)
+com.umeng.message.proguard.G:
+    public static final java.lang.String a
+    public static final java.lang.String b
+    8:8:public G()
+com.umeng.message.proguard.H:
+    8:8:public H()
+    112:140:public static final java.lang.String b(byte[])
+com.umeng.message.proguard.I:
+    17:17:public I()
+com.umeng.message.proguard.J:
+    13:13:public J()
+com.umeng.message.proguard.K:
+    public static final int a
+    public static final int b
+    public static final int c
+    public static final int d
+    public static final int e
+    public static final int f
+    public static final int g
+    private static final int h
+    private static final byte i
+    private static final byte j
+    private static final java.lang.String k
+    private static final byte l
+    private static final byte m
+    5:5:public K()
+    323:323:public static final java.lang.String a(byte[],int,int)
+    428:428:public static final byte[] a(java.lang.String)
+com.umeng.message.proguard.L:
+    6:6:public L()
+    18:22:public static final long a(java.lang.String)
+com.umeng.message.proguard.M:
+    private static final java.lang.String a
+    private static final java.lang.String b
+    private static final java.lang.String c
+    20:20:public M()
+    26:34:public static final java.lang.String a(java.lang.String)
+    38:46:public static final java.lang.String b(java.lang.String)
+    50:58:public static final java.lang.String c(java.lang.String)
+    77:80:public static final java.lang.String b(java.io.InputStream)
+    104:107:public static final java.lang.String c(java.io.InputStream)
+    111:111:public static final java.lang.String a(byte[])
+    116:121:private static java.lang.String a(byte[],java.lang.String)
+com.umeng.message.proguard.N:
+    private static final java.lang.String e
+    public static final int a
+    private static final java.lang.String j
+    public static final int b
+    public static final int c
+    public static final int d
+    14:14:public N()
+    70:73:public static final byte[] a(byte[],byte[],int)
+com.umeng.message.proguard.O
+com.umeng.message.proguard.P
+com.umeng.message.proguard.Q:
+    private static final java.lang.String a
+    7:7:public Q()
+    9:15:public static final java.lang.String a(java.lang.String)
+    19:28:public static final java.lang.String b(java.lang.String)
+    35:38:public static final java.lang.String c(java.lang.String)
+    43:47:private static final byte a(byte,byte)
+    53:58:public static final byte[] d(java.lang.String)
+    81:92:public static final byte[] e(java.lang.String)
+    98:98:private static final byte a(char)
+com.umeng.message.proguard.R:
+    31:31:public R()
+com.umeng.message.proguard.S:
+    private static final java.lang.String e
+    public static final java.lang.String a
+    public static final java.lang.String b
+    public static final java.lang.String c
+    private static final java.lang.String f
+    public static final java.lang.String d
+    24:24:public S()
+com.umeng.message.proguard.T:
+    public static final java.lang.String a
+    public static final java.lang.String b
+    public static final java.lang.String c
+    public static final java.lang.String d
+    private static final java.lang.String e
+    9:9:public T()
+com.umeng.message.proguard.U:
+    public static final java.lang.String a
+    21:21:public U()
+    37:48:public static final java.lang.String a(java.util.Collection,char)
+com.umeng.message.proguard.V:
+    private static final java.lang.String a
+    6:6:public V()
+com.umeng.message.proguard.W
+com.umeng.message.proguard.X$a:
+    private static final java.lang.String b
+    static final int a
+    14:16:public X$a()
+    34:34:public android.os.IBinder asBinder()
+com.umeng.message.proguard.X$a$a:
+    70:70:public java.lang.String a()
+com.umeng.message.proguard.a:
+    33:33:public a()
+    48:48:public static byte[] a(java.lang.String)
+    64:64:public static byte[] b(java.lang.String)
+    80:80:public static byte[] c(java.lang.String)
+    96:96:public static byte[] d(java.lang.String)
+    112:112:public static byte[] e(java.lang.String)
+    128:128:public static byte[] f(java.lang.String)
+    151:157:public static byte[] a(java.lang.String,java.lang.String)
+    207:207:public static java.lang.String a(byte[])
+    222:222:public static java.lang.String b(byte[])
+    237:237:public static java.lang.String c(byte[])
+    252:252:public static java.lang.String d(byte[])
+    267:267:public static java.lang.String e(byte[])
+com.umeng.message.proguard.b:
+    15:15:public b()
+    59:64:public static java.lang.String a(java.lang.String,java.lang.String)
+com.umeng.message.proguard.c:
+    private static final int m
+    private static final int n
+    private static final int o
+    private static final int s
+    305:305:public boolean a()
+    477:477:public static boolean a(byte)
+    491:491:public static boolean a(java.lang.String)
+    505:505:public static boolean a(byte[])
+    519:524:public static boolean b(byte[])
+    563:563:public static byte[] e(byte[])
+    576:576:public static java.lang.String f(byte[])
+    587:587:public static byte[] g(byte[])
+    667:667:public static byte[] b(java.lang.String)
+    693:693:public static java.math.BigInteger i(byte[])
+    707:710:public static byte[] a(java.math.BigInteger)
+    721:741:static byte[] b(java.math.BigInteger)
+com.umeng.message.proguard.d:
+    public static final int b
+    public static final int c
+    private static final int a
+    private static final int m
+    protected static final int d
+    protected static final byte e
+    144:144:boolean b()
+    222:229:protected static boolean c(byte)
+    256:259:public java.lang.Object a(java.lang.Object)
+    270:270:public java.lang.String j(byte[])
+    284:289:public java.lang.Object b(java.lang.Object)
+    301:301:public byte[] c(java.lang.String)
+    350:350:public java.lang.String m(byte[])
+    378:384:public boolean b(byte[],boolean)
+    397:397:public boolean d(java.lang.String)
+com.umeng.message.proguard.e
+com.umeng.message.proguard.f
+com.umeng.message.proguard.g:
+    private static final java.lang.String b
+    53:53:public g()
+    98:114:public static java.lang.String b(java.lang.String)
+    124:143:public static java.lang.String a(java.io.File)
+    165:177:public static java.lang.String a(android.content.Context,long)
+    181:200:public static java.lang.String c(java.lang.String)
+    211:214:public static void a(android.content.Context,java.lang.String)
+    226:232:public static boolean b(android.content.Context,java.lang.String)
+    256:261:public static boolean e(java.lang.String)
+    271:272:public static java.lang.String a()
+    281:284:public static java.lang.String a(java.util.Date)
+    295:312:public static boolean a(android.content.Context)
+    350:355:public static void a(java.io.OutputStream)
+com.umeng.message.proguard.h
+com.umeng.message.proguard.i:
+    8:10:public i(android.content.Context)
+    13:14:public static void a(android.content.Context)
+    28:28:public static int b(float)
+    36:36:public static int c(float)
+    44:44:public static int d(float)
+com.umeng.message.proguard.j
+com.umeng.message.proguard.k:
+    public static final java.lang.String a
+    public static final java.lang.String b
+    public static final java.lang.String c
+    public static final java.lang.String d
+    public static final java.lang.String e
+    public static final java.lang.String f
+    public static final java.lang.String g
+    public static final java.lang.String h
+    public static final java.lang.String i
+    public static final java.lang.String j
+    public static final java.lang.String k
+    public static final java.lang.String l
+    public static final java.lang.String m
+    public static final java.lang.String n
+    public static final java.lang.String o
+    public static final java.lang.String p
+    public static final java.lang.String q
+    public static final java.lang.String r
+    public static final java.lang.String s
+    public static final java.lang.String t
+    public static final java.lang.String u
+    public static final java.lang.String v
+    public static final java.lang.String w
+    public static final java.lang.String x
+    public static final java.lang.String y
+    public static final java.lang.String z
+    public static final java.lang.String A
+    public static final java.lang.String B
+    public static final java.lang.String C
+    public static final java.lang.String D
+    private static final java.lang.String E
+    private static final java.lang.String F
+    private static final java.lang.String G
+    private static javax.net.ssl.SSLSocketFactory I
+    private static javax.net.ssl.HostnameVerifier J
+    private com.umeng.message.proguard.k$g O
+    private boolean P
+    private boolean Q
+    private boolean R
+    private boolean S
+    private int T
+    261:264:private static java.lang.String v(java.lang.String)
+    269:296:private static javax.net.ssl.SSLSocketFactory R()
+    300:308:private static javax.net.ssl.HostnameVerifier S()
+    317:319:private static java.lang.StringBuilder a(java.lang.String,java.lang.StringBuilder)
+    325:331:private static java.lang.StringBuilder b(java.lang.String,java.lang.StringBuilder)
+    375:379:public static void a(com.umeng.message.proguard.k$c)
+    797:818:public static java.lang.String a(java.lang.CharSequence)
+    833:862:public static java.lang.String a(java.lang.CharSequence,java.util.Map)
+    877:906:public static varargs java.lang.String a(java.lang.CharSequence,java.lang.Object[])
+    918:918:public static com.umeng.message.proguard.k b(java.lang.CharSequence)
+    929:929:public static com.umeng.message.proguard.k a(java.net.URL)
+    948:949:public static com.umeng.message.proguard.k a(java.lang.CharSequence,java.util.Map,boolean)
+    969:970:public static varargs com.umeng.message.proguard.k a(java.lang.CharSequence,boolean,java.lang.Object[])
+    982:982:public static com.umeng.message.proguard.k c(java.lang.CharSequence)
+    993:993:public static com.umeng.message.proguard.k b(java.net.URL)
+    1012:1013:public static com.umeng.message.proguard.k b(java.lang.CharSequence,java.util.Map,boolean)
+    1033:1034:public static varargs com.umeng.message.proguard.k b(java.lang.CharSequence,boolean,java.lang.Object[])
+    1046:1046:public static com.umeng.message.proguard.k d(java.lang.CharSequence)
+    1057:1057:public static com.umeng.message.proguard.k c(java.net.URL)
+    1076:1077:public static com.umeng.message.proguard.k c(java.lang.CharSequence,java.util.Map,boolean)
+    1097:1098:public static varargs com.umeng.message.proguard.k c(java.lang.CharSequence,boolean,java.lang.Object[])
+    1110:1110:public static com.umeng.message.proguard.k e(java.lang.CharSequence)
+    1121:1121:public static com.umeng.message.proguard.k d(java.net.URL)
+    1140:1141:public static com.umeng.message.proguard.k d(java.lang.CharSequence,java.util.Map,boolean)
+    1161:1162:public static varargs com.umeng.message.proguard.k d(java.lang.CharSequence,boolean,java.lang.Object[])
+    1174:1174:public static com.umeng.message.proguard.k f(java.lang.CharSequence)
+    1185:1185:public static com.umeng.message.proguard.k e(java.net.URL)
+    1204:1205:public static com.umeng.message.proguard.k e(java.lang.CharSequence,java.util.Map,boolean)
+    1225:1226:public static varargs com.umeng.message.proguard.k e(java.lang.CharSequence,boolean,java.lang.Object[])
+    1238:1238:public static com.umeng.message.proguard.k g(java.lang.CharSequence)
+    1249:1249:public static com.umeng.message.proguard.k f(java.net.URL)
+    1261:1261:public static com.umeng.message.proguard.k h(java.lang.CharSequence)
+    1272:1272:public static com.umeng.message.proguard.k g(java.net.URL)
+    1283:1284:public static void a(boolean)
+    1295:1297:public static void a(java.lang.String)
+    1308:1311:public static void a(int)
+    1323:1332:public static varargs void a(java.lang.String[])
+    1345:1359:private static java.lang.String j(java.lang.String,java.lang.String)
+    1362:1399:public k(java.lang.CharSequence,java.lang.String)
+    1362:1412:public k(java.net.URL,java.lang.String)
+    1458:1459:public com.umeng.message.proguard.k b(boolean)
+    1469:1469:public boolean b()
+    1480:1483:public int c()
+    1497:1498:public com.umeng.message.proguard.k a(java.util.concurrent.atomic.AtomicInteger)
+    1508:1508:public boolean d()
+    1518:1518:public boolean e()
+    1528:1528:public boolean f()
+    1538:1538:public boolean g()
+    1548:1548:public boolean h()
+    1558:1558:public boolean i()
+    1569:1572:public java.lang.String j()
+    1582:1583:public com.umeng.message.proguard.k k()
+    1593:1594:public com.umeng.message.proguard.k b(int)
+    1609:1612:public com.umeng.message.proguard.k c(int)
+    1623:1623:public int l()
+    1645:1646:public com.umeng.message.proguard.k c(boolean)
+    1655:1659:protected java.io.ByteArrayOutputStream m()
+    1673:1678:public java.lang.String b(java.lang.String)
+    1690:1690:public java.lang.String n()
+    1702:1703:public com.umeng.message.proguard.k a(java.util.concurrent.atomic.AtomicReference)
+    1716:1717:public com.umeng.message.proguard.k a(java.util.concurrent.atomic.AtomicReference,java.lang.String)
+    1728:1728:public boolean o()
+    1738:1744:public byte[] p()
+    1755:1755:public java.io.BufferedInputStream q()
+    1766:1788:public java.io.InputStream r()
+    1805:1807:public java.io.InputStreamReader c(java.lang.String)
+    1819:1819:public java.io.InputStreamReader s()
+    1834:1834:public java.io.BufferedReader d(java.lang.String)
+    1846:1846:public java.io.BufferedReader t()
+    1859:1869:public com.umeng.message.proguard.k a(java.io.File)
+    1882:1884:public com.umeng.message.proguard.k a(java.io.OutputStream)
+    1897:1897:public com.umeng.message.proguard.k a(java.io.PrintStream)
+    1909:1923:public com.umeng.message.proguard.k a(java.lang.Appendable)
+    1934:1941:public com.umeng.message.proguard.k a(java.io.Writer)
+    1951:1952:public com.umeng.message.proguard.k d(int)
+    1962:1963:public com.umeng.message.proguard.k e(int)
+    1974:1975:public com.umeng.message.proguard.k a(java.lang.String,java.lang.String)
+    1986:1986:public com.umeng.message.proguard.k a(java.lang.String,java.lang.Number)
+    1997:2000:public com.umeng.message.proguard.k a(java.util.Map)
+    2010:2010:public com.umeng.message.proguard.k a(java.util.Map$Entry)
+    2021:2022:public java.lang.String e(java.lang.String)
+    2032:2033:public java.util.Map u()
+    2045:2045:public long f(java.lang.String)
+    2059:2060:public long a(java.lang.String,long)
+    2072:2072:public int g(java.lang.String)
+    2087:2088:public int a(java.lang.String,int)
+    2098:2106:public java.lang.String[] h(java.lang.String)
+    2117:2117:public java.lang.String b(java.lang.String,java.lang.String)
+    2130:2130:public java.util.Map i(java.lang.String)
+    2140:2175:protected java.util.Map j(java.lang.String)
+    2186:2218:protected java.lang.String c(java.lang.String,java.lang.String)
+    2227:2227:public java.lang.String v()
+    2237:2237:public com.umeng.message.proguard.k k(java.lang.String)
+    2247:2247:public com.umeng.message.proguard.k l(java.lang.String)
+    2257:2258:public com.umeng.message.proguard.k d(boolean)
+    2268:2268:public com.umeng.message.proguard.k m(java.lang.String)
+    2278:2278:public com.umeng.message.proguard.k w()
+    2288:2288:public com.umeng.message.proguard.k n(java.lang.String)
+    2297:2297:public java.lang.String x()
+    2306:2306:public java.lang.String y()
+    2315:2315:public long z()
+    2324:2324:public java.lang.String A()
+    2333:2333:public java.lang.String B()
+    2342:2342:public long C()
+    2351:2351:public long D()
+    2360:2360:public java.lang.String E()
+    2370:2370:public com.umeng.message.proguard.k o(java.lang.String)
+    2380:2380:public com.umeng.message.proguard.k p(java.lang.String)
+    2392:2392:public com.umeng.message.proguard.k d(java.lang.String,java.lang.String)
+    2404:2404:public com.umeng.message.proguard.k e(java.lang.String,java.lang.String)
+    2414:2415:public com.umeng.message.proguard.k a(long)
+    2425:2425:public com.umeng.message.proguard.k q(java.lang.String)
+    2435:2435:public com.umeng.message.proguard.k r(java.lang.String)
+    2446:2450:public com.umeng.message.proguard.k f(java.lang.String,java.lang.String)
+    2459:2459:public java.lang.String F()
+    2468:2468:public int G()
+    2478:2478:public com.umeng.message.proguard.k s(java.lang.String)
+    2488:2489:public com.umeng.message.proguard.k f(int)
+    2499:2499:public com.umeng.message.proguard.k t(java.lang.String)
+    2508:2508:public com.umeng.message.proguard.k H()
+    2521:2531:protected com.umeng.message.proguard.k a(java.io.InputStream,java.io.OutputStream)
+    2544:2554:protected com.umeng.message.proguard.k a(java.io.Reader,java.io.Writer)
+    2565:2578:protected com.umeng.message.proguard.k I()
+    2590:2592:protected com.umeng.message.proguard.k J()
+    2603:2610:protected com.umeng.message.proguard.k K()
+    2620:2626:protected com.umeng.message.proguard.k L()
+    2639:2639:protected com.umeng.message.proguard.k g(java.lang.String,java.lang.String)
+    2653:2661:protected com.umeng.message.proguard.k a(java.lang.String,java.lang.String,java.lang.String)
+    2672:2672:public com.umeng.message.proguard.k h(java.lang.String,java.lang.String)
+    2686:2686:public com.umeng.message.proguard.k b(java.lang.String,java.lang.String,java.lang.String)
+    2703:2709:public com.umeng.message.proguard.k a(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    2722:2722:public com.umeng.message.proguard.k b(java.lang.String,java.lang.Number)
+    2736:2736:public com.umeng.message.proguard.k a(java.lang.String,java.lang.String,java.lang.Number)
+    2749:2749:public com.umeng.message.proguard.k a(java.lang.String,java.io.File)
+    2763:2763:public com.umeng.message.proguard.k a(java.lang.String,java.lang.String,java.io.File)
+    2781:2785:public com.umeng.message.proguard.k a(java.lang.String,java.lang.String,java.lang.String,java.io.File)
+    2798:2798:public com.umeng.message.proguard.k a(java.lang.String,java.io.InputStream)
+    2816:2822:public com.umeng.message.proguard.k a(java.lang.String,java.lang.String,java.lang.String,java.io.InputStream)
+    2835:2835:public com.umeng.message.proguard.k i(java.lang.String,java.lang.String)
+    2848:2852:public com.umeng.message.proguard.k b(java.io.File)
+    2863:2863:public com.umeng.message.proguard.k a(byte[])
+    2877:2882:public com.umeng.message.proguard.k a(java.io.InputStream)
+    2896:2908:public com.umeng.message.proguard.k a(java.io.Reader)
+    2923:2928:public com.umeng.message.proguard.k i(java.lang.CharSequence)
+    2939:2942:public java.io.OutputStreamWriter M()
+    2957:2957:public com.umeng.message.proguard.k b(java.util.Map)
+    2971:2971:public com.umeng.message.proguard.k b(java.util.Map$Entry)
+    2987:2987:public com.umeng.message.proguard.k a(java.util.Map$Entry,java.lang.String)
+    3003:3003:public com.umeng.message.proguard.k a(java.lang.Object,java.lang.Object)
+    3020:3037:public com.umeng.message.proguard.k a(java.lang.Object,java.lang.Object,java.lang.String)
+    3050:3053:public com.umeng.message.proguard.k a(java.util.Map,java.lang.String)
+    3065:3069:public com.umeng.message.proguard.k N()
+    3082:3086:public com.umeng.message.proguard.k O()
+    3116:3121:public com.umeng.message.proguard.k b(java.lang.String,int)
+    3132:3133:public com.umeng.message.proguard.k e(boolean)
+    95:95:static synthetic java.lang.String u(java.lang.String)
+    95:95:static synthetic int a(com.umeng.message.proguard.k)
+com.umeng.message.proguard.k$1
+com.umeng.message.proguard.k$10
+com.umeng.message.proguard.k$2
+com.umeng.message.proguard.k$3
+com.umeng.message.proguard.k$4
+com.umeng.message.proguard.k$5
+com.umeng.message.proguard.k$6
+com.umeng.message.proguard.k$7
+com.umeng.message.proguard.k$8
+com.umeng.message.proguard.k$9
+com.umeng.message.proguard.k$a
+com.umeng.message.proguard.k$b
+com.umeng.message.proguard.k$d
+com.umeng.message.proguard.k$f
+com.umeng.message.proguard.k$g
+com.umeng.message.proguard.l:
+    public static final int a
+    public static final int b
+    public static final int c
+    93:115:private boolean a()
+com.umeng.message.proguard.m
+com.umeng.message.proguard.n
+com.umeng.message.proguard.o:
+    private static final java.lang.String b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    private static final java.lang.String e
+    15:15:public o()
+com.umeng.message.proguard.p:
+    private static final java.lang.String a
+    18:18:public p()
+com.umeng.message.proguard.q:
+    private static final java.lang.String a
+    14:14:public q()
+    71:81:public static boolean c(android.content.Context)
+    85:100:public static boolean d(android.content.Context)
+com.umeng.message.proguard.r:
+    private static final int a
+    private static final int b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final java.lang.String j
+    private static final java.lang.String k
+    private static final java.lang.String l
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final java.lang.String o
+    private static final java.lang.String p
+    private static final java.lang.String q
+    private static final java.lang.String r
+    private static final java.lang.String s
+    private static final java.lang.String t
+    private static final java.lang.String u
+    private static final java.lang.String v
+    private static final java.lang.String w
+    private static final java.lang.String x
+    private static final java.lang.String y
+    private static final java.lang.String z
+    private static final java.lang.String A
+    private static final java.lang.String B
+    private static final java.lang.String C
+    private static final java.lang.String D
+    private static final java.lang.String E
+    private static final java.lang.String F
+    private static final java.lang.String G
+    private static final java.lang.String H
+    private static final java.lang.String I
+    private static final java.lang.String J
+    private static final java.lang.String K
+    private static final java.lang.String L
+    private static final java.lang.String O
+    private static final java.lang.String P
+    22:22:public r()
+    104:110:public static final void a(java.lang.Throwable)
+    144:153:public static final void a(android.content.Context,java.lang.String)
+    192:201:public static final void e(android.content.Context)
+    206:216:public static final void f(android.content.Context)
+    222:231:public static final void a(android.content.Context,java.lang.String,java.lang.String)
+    257:267:public static final void c(android.content.Context,java.lang.String)
+    318:329:public static final void a(android.content.Context,java.lang.String,long,long)
+    340:348:public static final void f(android.content.Context,java.lang.String)
+    368:375:public static final void h(android.content.Context)
+    381:392:public static final void b(android.content.Context,java.lang.String,long,long)
+    489:498:public static final void a(android.content.Context,int,java.lang.String)
+    516:525:public static final void j(android.content.Context)
+    544:553:public static final varargs void a(android.content.Context,java.lang.Object,java.lang.String[])
+    723:735:public static final void p(android.content.Context)
+com.umeng.message.proguard.t
+com.umeng.message.proguard.t$a
+com.umeng.message.proguard.u:
+    private static final java.lang.String b
+    private static final java.lang.String c
+com.umeng.message.proguard.v:
+    private static final java.lang.String b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    56:62:public static final void a(java.lang.String,java.lang.String,java.lang.Throwable)
+com.umeng.message.proguard.w:
+    public abstract void c(java.lang.String,java.lang.String,java.lang.Throwable)
+com.umeng.message.proguard.x:
+    private static final int a
+    private static final int b
+    159:163:public final void c(java.lang.String,java.lang.String,java.lang.Throwable)
+com.umeng.message.proguard.y:
+    protected static final java.lang.String a
+    private static final java.lang.String h
+    80:80:public java.lang.String c()
+    public abstract void e()
+    public abstract boolean f()
+com.umeng.message.protobuffer.PushRequest:
+    private static final long a
+com.umeng.message.protobuffer.PushResponse:
+    private static final long a
+com.umeng.message.protobuffer.PushResponse$Info:
+    private static final long a
+com.umeng.message.tag.TagManager:
+    private static final java.lang.String b
+    private static final java.lang.String c
+    70:103:public varargs com.umeng.message.tag.TagManager$Result add(java.lang.String[])
+    107:141:public varargs com.umeng.message.tag.TagManager$Result update(java.lang.String[])
+    145:167:public varargs com.umeng.message.tag.TagManager$Result delete(java.lang.String[])
+    174:192:public com.umeng.message.tag.TagManager$Result reset()
+    196:215:public java.util.List list()
+    220:228:private static varargs java.lang.String a(java.lang.String[])
+    233:241:private static java.lang.String a(java.util.List)
+    245:255:private org.json.JSONObject a()
+    260:265:private static org.json.JSONObject a(org.json.JSONObject,java.lang.String)
+    317:327:private boolean b()
+    336:342:private boolean c()
+    346:351:private com.umeng.message.tag.TagManager$Result d()
+com.umeng.message.tag.TagManager$Result
+com.umeng.message.tag.a
+com.umeng.message.tag.b
+com.ut.device.AidCallback
+com.ut.device.a
+com.ut.device.b
+org.android.Config:
+    public static final java.lang.String PREFERENCES
+    public static final int DEFAULT_BACKOFF_MS
+    public static final java.lang.String PROPERTY_DEVICE_TOKEN
+    public static final java.lang.String PROPERTY_APP_VERSION
+    public static final java.lang.String PROPERTY_APP_KEY
+    public static final java.lang.String PROPERTY_APP_SECRET
+    public static final java.lang.String PROPERTY_TT_ID
+    public static final java.lang.String PROPERTY_DEVICE_TOKEN_TEMP
+    public static final java.lang.String PROPERTY_APP_KEY_TEMP
+    public static final java.lang.String PROPERTY_APP_SECRET_TEMP
+    public static final java.lang.String PROPERTY_TT_ID_TEMP
+    public static final java.lang.String UNREGISTER_FLAG
+    public static final java.lang.String PROPERTY_PUSH_USER_TOKEN
+    public static final java.lang.String PROPERTY_AGOO_START_TIME
+    public static final java.lang.String PROPERTY_AGOO_AUTOUPDATE
+    public static final java.lang.String PROPERTY_AGOO_MULTIPLEX
+    public static final java.lang.String PROPERTY_AGOO_SPDY
+    public static final java.lang.String PROPERTY_AGOO_UPDATECYCLE
+    public static final java.lang.String PROPERTY_AGOO_POSTDATA
+    public static final java.lang.String PROPERTY_AGOO_UPDATE_TIME
+    public static final java.lang.String PROPERTY_AGOO_IFNEEDNOTAUTOUPDATE
+    public static final java.lang.String PROPERTY_AGOO_IFNEEDAUTOUPDATE
+    public static final java.lang.String PROPERTY_AGOO_END_TIME
+    public static final java.lang.String PROPERTY_AGOO_SECURITY_MODE
+    public static final java.lang.String PROPERTY_AGOO_MODE
+    public static final java.lang.String PROPERTY_APP_DEBUG
+    public static final java.lang.String PROPERTY_APP_LOG2FIlE
+    public static final java.lang.String PROPERTY_LOGGER_CLASSNAME
+    public static final java.lang.String AGOO_RELEASE_TIME
+    public static final java.lang.String PROPERTY_AGOO_SERVICE_MODE
+    public static final java.lang.String PROPERTY_AGOO_SPDY_CONNECT
+    public static final java.lang.String PROPERTY_AGOO_HTTP_CONNECT
+    public static final java.lang.String UPDATE_APP_LAST_APP_VERSION
+    public static final java.lang.String AGOO_PING_MESSAGE
+    public static final java.lang.String AGOO_SERVICE_PROTECT
+    public static final java.lang.String AGOO_PUSH_ERRORID
+    public static final java.lang.String AGOO_PUSH_PATH
+    public static final java.lang.String AGOO_CONNECT_TYPE
+    public static final java.lang.String AGOO_DNS_ERRORID
+    public static final java.lang.String AGOO_DNS_PATH
+    public static final java.lang.String AGOO_DNS_EVENTID
+    public static final java.lang.String PROPERTY_XTOKEN
+    public static final java.lang.String PROPERTY_PUSH_TEST_PORT
+    public static final java.lang.String PROPERTY_PUSH_TEST_HOST
+    private static final java.lang.String PROPERTY_OLD_DEVICE_TOKEN
+    public static final java.lang.String AGOO_NOTIC_ELECTION_RESULT
+    public static final java.lang.String AGOO_SO_MANGAGER_TIMEOUT
+    14:14:public Config()
+    90:96:public static final void setXToken(android.content.Context,java.lang.String)
+    121:128:public static final void setLastAppVersion(android.content.Context,int)
+    131:137:public static int getLastAppVersion(android.content.Context)
+    246:254:public static void setTestHostAndPort(android.content.Context,java.lang.String,int)
+    267:274:public static java.lang.String getOldDeviceToken(android.content.Context)
+    312:318:public static void setUTClassName(android.content.Context,java.lang.String)
+    397:407:public static void setAvailableTime(android.content.Context,int,int,int,int)
+    416:422:public static java.lang.String getAppVersionName(android.content.Context)
+    441:448:public static void setNeedNotAutoUpdate(android.content.Context,boolean)
+    451:458:public static boolean ifNeedNotAutoUpdate(android.content.Context)
+    564:571:public static boolean isEnablePostData(android.content.Context)
+    589:595:public static boolean getPingMessage(android.content.Context)
+    749:776:public static java.util.LinkedHashMap getConnectError(android.content.Context)
+org.android.agoo.IUpdateService:
+    public abstract boolean checkUpdateJar(int,java.lang.String)
+org.android.agoo.IVoteService
+org.android.agoo.a:
+    public static final int a
+    public static final int b
+    public static final int c
+    public static final int d
+    public static final long e
+    public static final long f
+    public static final long g
+    public static final long h
+    public static final long i
+    public static final long j
+    public static final long k
+    public static final long l
+    public static final long m
+    public static final long n
+    public static final long o
+    public static final long p
+    public static final long q
+    public static final long r
+    public static final long s
+    public static final long t
+    public static final long u
+    public static final long v
+    public static final long w
+    public static final long x
+    public static final long y
+    public static final long z
+    private static final java.lang.String E
+    private static final java.lang.String F
+    public static final java.lang.String A
+    public static final java.lang.String B
+    public static final java.lang.String C
+    public static final java.lang.String D
+    private static final java.lang.String G
+    private static final java.lang.String H
+    private static final java.lang.String I
+    private static final java.lang.String J
+    private static final java.lang.String K
+    private static final int L
+    private static final java.lang.String M
+    private static final java.lang.String N
+    private static final java.lang.String O
+    private static final java.lang.String P
+    private static final java.lang.String Q
+    private static final java.lang.String R
+    private static final java.lang.String S
+    private static final java.lang.String T
+    private static final java.lang.String U
+    private static final java.lang.String V
+    private static final java.lang.String W
+    private static final java.lang.String X
+    private static final java.lang.String Y
+    private static final java.lang.String Z
+    private static final java.lang.String aa
+    private static final java.lang.String ab
+    private static final java.lang.String ac
+    private static final java.lang.String ad
+    private static final java.lang.String ae
+    private static final java.lang.String af
+    private static final long ag
+    20:20:public a()
+    120:121:public static final void a(android.content.Context,java.lang.String)
+    426:434:public static final void a(android.content.Context,boolean,long)
+    437:457:public static final boolean A(android.content.Context)
+    538:544:public static final void d(android.content.Context,java.lang.String)
+org.android.agoo.callback.IControlCallBack:
+    public abstract void callUserHandleIntent(android.content.Context,android.content.Intent)
+    public abstract void callDeletedMessages(android.content.Context,int)
+org.android.agoo.client.BaseConstants
+org.android.agoo.client.BaseIntentService:
+    private static final java.lang.String TAG
+    private static final java.lang.String AGOO_COMMAND_LOADUPDATEJAR
+    55:55:protected boolean onRecoverableError(android.content.Context,java.lang.String)
+org.android.agoo.client.BaseRegistrar:
+    private static final java.lang.String AGOO_COMMAND_REGISTRATION
+    private static final java.lang.String AGOO_COMMAND_UNREGISTRATION
+    102:108:protected static void setAgooGroup(android.content.Context,java.lang.String)
+    112:118:protected static final void setUTVersion(android.content.Context,org.android.agoo.client.UT)
+    182:183:protected static final void set(android.content.Context,boolean,boolean,boolean,long,boolean)
+org.android.agoo.client.MessageReceiverService:
+    private static final java.lang.String TAG
+org.android.agoo.client.MtopProxyRequest:
+    private volatile java.lang.String ttId
+    private volatile java.lang.String ecode
+    private volatile java.lang.String appKey
+    private java.lang.String appSecret
+    36:36:public final boolean isHasSigin()
+    40:41:public final void setHasSigin(boolean)
+    44:44:public final long getTime()
+    48:49:public final void setTime(long)
+    55:56:public final void putSysParams(java.lang.String,java.lang.String)
+    59:59:public final java.lang.String getTtId()
+    63:64:public final void setTtId(java.lang.String)
+    87:88:public final void setSId(java.lang.String)
+    91:91:public final java.lang.String getEcode()
+    95:96:public final void setEcode(java.lang.String)
+    107:107:public final java.lang.String getAppKey()
+    111:112:public final void setAppKey(java.lang.String)
+    115:115:public final java.lang.String getAppSecret()
+    119:120:public final void setAppSecret(java.lang.String)
+org.android.agoo.client.MtopSyncResult:
+    42:42:public final java.lang.String getRetDesc()
+    56:56:public final java.lang.String getRetCode()
+org.android.agoo.client.UT
+org.android.agoo.client.UT$1
+org.android.agoo.client.UT$2
+org.android.agoo.client.UT$3
+org.android.agoo.impl.ControlService:
+    private static final java.lang.String a
+    private static final java.lang.String b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    private static final int f
+    private static final int g
+    private static final java.lang.String h
+    1301:1311:private final void d(android.content.Context)
+org.android.agoo.impl.PushService:
+    private static final java.lang.String a
+    private static final int b
+    private static final java.lang.String c
+    private static final int d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final int h
+    private static final int i
+    private static final int j
+    private static final int k
+    private static final int l
+    private static final int m
+    private static volatile boolean C
+org.android.agoo.impl.a:
+    private static final java.lang.String a
+    private static final java.lang.String d
+    private static final java.lang.String e
+    private static final java.lang.String m
+    private static final java.lang.String n
+    private static final java.lang.String o
+    1054:1054:private static final boolean d(android.content.Context,java.lang.String)
+    1059:1059:private static final boolean a(android.content.Context,java.lang.String,int)
+org.android.agoo.intent.IntentUtil:
+    private static final java.lang.String INTENT_FROM_AGOO_COMMAND
+    private static final java.lang.String INTENT_FROM_AGOO_START
+    private static final java.lang.String INTENT_FROM_AGOO_COCKROACH
+    private static final java.lang.String AGOO_PACKAGE_NAME
+    private static final java.lang.String AGOO_ACTION
+    public static final java.lang.String INTENT_FROM_AGOO_MESSAGE
+    public static final java.lang.String INTENT_FROM_AGOO_ELECTION_RESULT
+    public static final java.lang.String INTENT_FROM_AGOO_PING
+    public static final java.lang.String INTENT_FROM_AGOO_SEND
+    public static final java.lang.String AGOO_COMMAND
+    public static final java.lang.String AGOO_COMMAND_RE_BIND_USER
+    public static final java.lang.String AGOO_COMMAND_REGISTRATION_CALLBACK
+    public static final java.lang.String AGOO_COMMAND_RESTART_SUDO
+    public static final java.lang.String AGOO_COMMAND_OTHER_CHANNEL
+    public static final java.lang.String AGOO_COMMAND_RESTART_SUDO_APP
+    public static final java.lang.String OTHER_CHANNEL_ANDROID_DEVICE_TOKEN
+    public static final java.lang.String OTHER_CHANNEL_ANDROID_DEVICE_TYPE
+    public static final java.lang.String AGOO_COMMAND_BIND_USER
+    public static final java.lang.String AGOO_COMMAND_UNBIND_USER
+    public static final java.lang.String AGOO_COMMAND_BIND_USER_XTOKEN
+    private static final java.lang.String TAG
+    13:13:public IntentUtil()
+    110:121:public static final void sendOtherChannel(android.content.Context,java.lang.String,java.lang.String)
+    126:135:public static final void sendOtherMessage(android.content.Context,android.content.Intent,java.lang.String)
+org.android.agoo.net.async.AsyncHttpClient:
+    private static final java.lang.String c
+    35:45:public final void cancelRequests(android.content.Context,boolean)
+    49:50:public final void get(android.content.Context,java.lang.String,org.apache.http.HttpHost,org.android.agoo.net.async.AsyncHttpResponseHandler)
+    54:55:public final void get(android.content.Context,org.apache.http.HttpHost,java.lang.String,org.android.agoo.net.async.RequestParams,org.android.agoo.net.async.AsyncHttpResponseHandler)
+    58:59:public final void get(android.content.Context,java.lang.String,org.android.agoo.net.async.AsyncHttpResponseHandler)
+    78:79:public final void post(android.content.Context,java.lang.String,org.android.agoo.net.async.RequestParams,java.lang.String,org.android.agoo.net.async.AsyncHttpResponseHandler)
+    83:90:public final void post(android.content.Context,java.lang.String,org.apache.http.Header[],org.android.agoo.net.async.RequestParams,java.lang.String,org.android.agoo.net.async.AsyncHttpResponseHandler)
+    93:97:private org.apache.http.HttpEntity a(org.android.agoo.net.async.RequestParams)
+org.android.agoo.net.async.AsyncHttpResponseHandler:
+    protected static final int c
+    protected static final int d
+    protected static final int e
+    protected static final int f
+    private static final java.lang.String a
+org.android.agoo.net.async.RequestParams:
+    private static final java.lang.String b
+    private static final java.lang.String c
+    private static final java.lang.String d
+    48:54:public RequestParams(java.util.Map)
+    65:69:public RequestParams(java.lang.String,java.lang.String)
+    92:93:public final void remove(java.lang.String)
+    114:121:public final org.apache.http.HttpEntity getEntity()
+    129:136:protected java.util.List a()
+org.android.agoo.net.async.SyncHttpClient:
+    private static final java.lang.String a
+org.android.agoo.net.async.a:
+    private static final int a
+    private static final int b
+    private static final int c
+    private static final int d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    138:139:public final void addRequestInterceptor(org.apache.http.HttpRequestInterceptor)
+    150:151:public final void setCookieStore(org.apache.http.client.CookieStore)
+    154:155:public final void setUserAgent(java.lang.String)
+    158:162:public final void setTimeout(int)
+    165:167:public final void setSSLSocketFactory(org.apache.http.conn.ssl.SSLSocketFactory)
+    170:171:public final void addHeader(java.lang.String,java.lang.String)
+    174:176:public final void setBasicAuth(java.lang.String,java.lang.String)
+    179:183:public final void setBasicAuth(java.lang.String,java.lang.String,org.apache.http.auth.AuthScope)
+org.android.agoo.net.async.b:
+    private static final java.lang.String a
+org.android.agoo.net.async.c:
+    21:21:public void b(java.util.LinkedHashMap)
+org.android.agoo.net.async.d
+org.android.agoo.net.channel.ChannelManager:
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final java.lang.String j
+    public static final int a
+    public static final int b
+    public static final int c
+    public static final int d
+    public static final int e
+    private static final int I
+org.android.agoo.net.channel.ChannelManager$Builder:
+    185:186:public final org.android.agoo.net.channel.ChannelManager$Builder putParams(java.lang.String,java.lang.String)
+    190:191:public final org.android.agoo.net.channel.ChannelManager$Builder putParams(java.util.Map)
+    205:206:public final org.android.agoo.net.channel.ChannelManager$Builder addHeaders(java.util.Map)
+    210:210:public final org.android.agoo.net.channel.ChannelManager$Builder addServiceStartTime(long)
+org.android.agoo.net.channel.DNSManager:
+    private static final java.lang.String d
+    private static final java.lang.String e
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final java.lang.String h
+    private static final java.lang.String i
+    private static final java.lang.String j
+    public static final java.lang.String a
+    public static final java.lang.String b
+    public static final java.lang.String c
+    87:88:public final void a(java.lang.String,java.lang.String,long)
+org.android.agoo.net.channel.IDataChannel:
+    public abstract void syncDisconnect()
+org.android.agoo.net.channel.IPushHandler:
+    public abstract void onCommand(java.lang.Object,long,java.lang.String,byte[])
+org.android.agoo.net.channel.SignHelper:
+    private static final java.lang.String f
+    private static final java.lang.String g
+    private static final byte h
+    private static final byte i
+    private static final byte j
+    private static final byte k
+    private static final byte l
+    private static final byte m
+    private static final byte n
+    private static final byte o
+    private static final byte p
+    static final java.lang.String a
+    static final java.lang.String b
+    static final java.lang.String c
+    static final java.lang.String d
+    30:30:public SignHelper()
+org.android.agoo.net.channel.chunked.HttpURLChunkedChannel:
+    private static final java.lang.String k
+    public static final java.lang.String h
+    public static final java.lang.String i
+    public static final java.lang.String j
+org.android.agoo.net.channel.chunked.a:
+    private static final char h
+    private static final char i
+    private static final java.lang.String j
+    private static final java.lang.String k
+    protected static final int g
+    239:240:public static final char byteToChar(byte[])
+org.android.agoo.net.channel.spdy.SpdyChannel:
+    private static final java.lang.String f
+    private static final java.lang.String g
+    public static final java.lang.String b
+    public static final java.lang.String c
+    public static final java.lang.String d
+    185:189:public final void syncDisconnect()
+org.android.agoo.net.mtop.IMtopSynClient:
+    public abstract org.android.agoo.net.async.SyncHttpClient$a get(android.content.Context,java.lang.String,org.android.agoo.net.async.RequestParams)
+org.android.agoo.net.mtop.MtopAsyncClientV3:
+    private static final java.lang.String a
+org.android.agoo.net.mtop.MtopRequest:
+    public static final java.lang.String a
+    43:44:public final void setHasSigin(boolean)
+    51:52:public final void setTime(long)
+    84:85:public final void putSysParams(java.lang.String,java.lang.String)
+    136:137:public final void setEcode(java.lang.String)
+org.android.agoo.net.mtop.MtopRequestHelper:
+    private static final java.lang.String b
+    public static final java.lang.String a
+    20:20:public MtopRequestHelper()
+org.android.agoo.net.mtop.MtopResponseHandler:
+    private static final java.lang.String a
+org.android.agoo.net.mtop.MtopResponseHelper:
+    public static final java.lang.String a
+    public static final java.lang.String b
+    private static final java.lang.String c
+    18:18:public MtopResponseHelper()
+org.android.agoo.proxy.ProxyFactroy:
+    private static final java.lang.String TAG
+    6:6:public ProxyFactroy()
+org.android.agoo.ut.UT:
+    public static final int AGOO_EVENT_ID
+    public static final int NEW_EVENT_ID
+    public abstract void onCaughException(java.lang.Throwable)
+    public abstract void commitEvent(int,java.lang.Object)
+    public abstract java.lang.String getUtdId(android.content.Context)
+org.android.agoo.ut.UTFactroy:
+    private static final java.lang.String AGOO_EVENT_ANDROID_MODULE
+org.android.agoo.ut.impl.UcwebUT
+org.android.agoo.ut.impl.UmengUT
+org.android.agoo.ut.impl.Usertrace

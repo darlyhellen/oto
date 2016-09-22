@@ -11,24 +11,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.base.APPEnum;
+import com.darly.dlclent.common.ImageLoaderUtil;
 import com.darly.dlclent.model.MainMessageModel;
 import com.darly.dlclent.widget.roundedimage.RoundedImageView;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * @author zhangyh2 XListAdapter 下午2:00:32 TODO
  */
 public class XListAdapter extends ParentAdapter<MainMessageModel> {
-	private ImageLoader imageLoader;
-
-	private DisplayImageOptions options;
 
 	/**
 	 * 下午2:01:36
@@ -40,13 +36,6 @@ public class XListAdapter extends ParentAdapter<MainMessageModel> {
 		// TODO Auto-generated constructor stub
 	}
 
-	public XListAdapter(List<MainMessageModel> data, int resID,
-			Context context, ImageLoader imageLoader,
-			DisplayImageOptions options) {
-		super(data, resID, context);
-		this.imageLoader = imageLoader;
-		this.options = options;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -89,7 +78,7 @@ public class XListAdapter extends ParentAdapter<MainMessageModel> {
 		} else {
 			hocker.title.setVisibility(View.GONE);
 			hocker.content.setVisibility(View.VISIBLE);
-			imageLoader.displayImage(t.getUrl(), hocker.iv, options);
+			ImageLoaderUtil.getInstance().loadImageNor(t.getUrl(), hocker.iv);
 			hocker.name.setText(t.getName());
 			hocker.descrip.setText(t.getDescription());
 			hocker.price.setText(t.getPrice() + "¥");

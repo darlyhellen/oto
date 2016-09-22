@@ -20,6 +20,7 @@ import cn.com.bean.ClientVideo;
 import cn.com.bean.MainCarouselModel;
 import cn.com.bean.MainMenuModel;
 import cn.com.bean.MainMessageModel;
+import cn.com.bean.Main_Flower;
 import cn.com.bean.UserAddress;
 import cn.com.bean.UserEcAccount;
 import cn.com.bean.UserInfoData;
@@ -31,6 +32,7 @@ import cn.com.dao.ClientVideoMapper;
 import cn.com.dao.MainCarouselModelMapper;
 import cn.com.dao.MainMenuModelMapper;
 import cn.com.dao.MainMessageModelMapper;
+import cn.com.dao.Main_FlowerMapper;
 import cn.com.dao.UserAddressMapper;
 import cn.com.dao.UserEcAccountMapper;
 import cn.com.dao.UserInfoDataMapper;
@@ -64,6 +66,8 @@ public class MainServiceImp implements MainService {
 	private ClientCompHomePageMapper mapClientComp;
 	@Resource
 	private Action_ThemeMapper mapAction;
+	@Resource
+	private Main_FlowerMapper mapFlower;
 
 	/*
 	 * (non-Javadoc)
@@ -320,6 +324,17 @@ public class MainServiceImp implements MainService {
 	public List<Action_Theme> findAction_Themes(int page) {
 		// TODO Auto-generated method stub
 		return mapAction.selectPage((page - 1) * 10, 10);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cn.com.service.MainService#findMain_Flower(java.lang.String, int)
+	 */
+	@Override
+	public List<Main_Flower> findMain_Flower(String goup, int page) {
+		// TODO Auto-generated method stub
+		return mapFlower.selectFromPageAndGroup((page - 1) * 10, 10, goup);
 	}
 
 }

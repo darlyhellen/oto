@@ -15,6 +15,7 @@ import cn.com.bean.ClientVideo;
 import cn.com.bean.MainCarouselModel;
 import cn.com.bean.MainMenuModel;
 import cn.com.bean.MainMessageModel;
+import cn.com.bean.Main_Flower;
 import cn.com.bean.UserAddress;
 import cn.com.bean.UserEcAccount;
 import cn.com.bean.UserInfoData;
@@ -186,4 +187,11 @@ public interface MainService {
 	 * @author zhangyh2 TODO 查找数据
 	 */
 	List<Action_Theme> findAction_Themes(int page);
+
+	/**
+	 * 下午4:49:08
+	 * 
+	 * @author zhangyh2 TODO 查找花海首页参数
+	 */
+	public List<Main_Flower> findMain_Flower(String group, int page);
 }

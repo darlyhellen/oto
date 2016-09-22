@@ -17,7 +17,9 @@ public class AddressModel implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private String _id;
+	
+	private String id;
 
 	private String name;
 
@@ -30,6 +32,8 @@ public class AddressModel implements Serializable {
 	private String district;
 
 	private String zipcode;
+	
+	private String usertel;
 
 	/**
 	 * 下午2:34:06
@@ -40,9 +44,9 @@ public class AddressModel implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AddressModel(int id, String name, String tel, String province,
+	public AddressModel(String _id, String name, String tel, String province,
 			String city, String district, String zipcode) {
-		this.id = id;
+		this._id = _id;
 		this.name = name;
 		this.tel = tel;
 		this.province = province;
@@ -51,11 +55,18 @@ public class AddressModel implements Serializable {
 		this.zipcode = zipcode;
 	}
 
-	public int getId() {
-		return id;
+	public String get_Id() {
+		return _id;
 	}
 
-	public void setId(int id) {
+	public void set_Id(String id) {
+		this._id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -111,4 +122,12 @@ public class AddressModel implements Serializable {
 		return serialVersionUID;
 	}
 
+	public String getUsertel() {
+		return usertel;
+	}
+
+	public void setUsertel(String usertel) {
+		this.usertel = usertel;
+	}
+	
 }

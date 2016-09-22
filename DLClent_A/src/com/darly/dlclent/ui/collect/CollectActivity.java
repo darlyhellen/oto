@@ -119,7 +119,7 @@ public class CollectActivity extends BaseActivity implements OnClickListener,
 			if (new Random().nextBoolean()) {
 				for (int i = 0; i < IMAGES.length; i++) {
 					data.add(new MainMessageModel(i, null, "商品" + i, "描述商品信息"
-							+ i, IMAGES[i], i * 110, i * 100, i, "商品"));
+							+ i, IMAGES[i], i * 110, i * 100, i, "商品", i + 3));
 				}
 				MainMessageBase base = new MainMessageBase(200, "", data, null);
 				json = JsonUtil.pojo2Json(base);
@@ -164,7 +164,8 @@ public class CollectActivity extends BaseActivity implements OnClickListener,
 	protected void loadData() {
 		// TODO Auto-generated method stub
 		adapter = new XListAdapter(null, R.layout.item_main_fragment_xlist,
-				this, imageLoader, options);
+				this);
+
 		lv.setAdapter(adapter);
 		// 进来后获取数据
 		getCollections();

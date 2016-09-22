@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,19 +13,19 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <ListView
+        <com.darly.dlclent.widget.listview.WholeListView
             android:id="@+id/fragment_center_list"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="@null" >
-        </ListView>
+        </com.darly.dlclent.widget.listview.WholeListView>
 
-        <ListView
+        <com.darly.dlclent.widget.listview.WholeListView
             android:id="@+id/fragment_center_sec_list"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="@null" >
-        </ListView>
+        </com.darly.dlclent.widget.listview.WholeListView>
     </RelativeLayout>
 
 </LinearLayout>

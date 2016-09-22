@@ -1,4 +1,6 @@
-/**下午3:09:20
+/**
+ * 下午3:09:20
+ *
  * @author zhangyh2
  * MainController.java
  * TODO
@@ -39,9 +41,13 @@ import cn.com.bean.ClientVideo;
 import cn.com.bean.MainCarouselModel;
 import cn.com.bean.MainMenuModel;
 import cn.com.bean.MainMessageModel;
+import cn.com.bean.Main_Flower;
 import cn.com.bean.UserAddress;
 import cn.com.bean.UserEcAccount;
 import cn.com.bean.UserInfoData;
+import cn.com.sax.AppVersionHandler;
+import cn.com.sax.SaxParser;
+import cn.com.sax.VersionUpdateModel;
 import cn.com.service.MainService;
 import cn.com.shtr.model.BaseHomePageModel;
 import cn.com.shtr.model.BaseModel;
@@ -96,7 +102,7 @@ public class MainController {
 
 	/**
 	 * 下午3:22:25
-	 * 
+	 *
 	 * @author zhangyh2 TODO 测试接口
 	 */
 	@ResponseBody
@@ -124,7 +130,7 @@ public class MainController {
 
 	/**
 	 * 下午2:17:47
-	 * 
+	 *
 	 * @author zhangyh2 TODO 客户端和服务器时间同步接口
 	 */
 	@ResponseBody
@@ -135,7 +141,7 @@ public class MainController {
 
 	/**
 	 * 下午2:18:08
-	 * 
+	 *
 	 * @author zhangyh2 TODO 客户端主题版本号接口
 	 */
 	@ResponseBody
@@ -148,7 +154,7 @@ public class MainController {
 
 	/**
 	 * 下午2:18:30
-	 * 
+	 *
 	 * @author zhangyh2 TODO 修改主题
 	 */
 	@ResponseBody
@@ -165,7 +171,7 @@ public class MainController {
 
 	/**
 	 * 下午2:18:39
-	 * 
+	 *
 	 * @author zhangyh2 TODO 客户端首页版本接口
 	 */
 	@ResponseBody
@@ -178,7 +184,7 @@ public class MainController {
 
 	/**
 	 * 下午2:18:53
-	 * 
+	 *
 	 * @author zhangyh2 TODO 修改首页
 	 */
 	@RequestMapping("/comphome")
@@ -214,7 +220,7 @@ public class MainController {
 
 	/**
 	 * 下午3:22:11
-	 * 
+	 *
 	 * @author zhangyh2 TODO 获取首页广告接口
 	 */
 	@RequestMapping(value = "/homebannar", method = RequestMethod.GET)
@@ -235,7 +241,7 @@ public class MainController {
 
 	/**
 	 * 下午3:21:57
-	 * 
+	 *
 	 * @author zhangyh2 TODO获取首页商品接口
 	 */
 	@RequestMapping("/homegoods")
@@ -259,7 +265,7 @@ public class MainController {
 
 	/**
 	 * 上午10:42:06
-	 * 
+	 *
 	 * @author zhangyh2 TODO 用户登录接口
 	 */
 	@ResponseBody
@@ -278,7 +284,8 @@ public class MainController {
 
 				infodata.setToken(Base64.encode((names.get("username"))
 						.getBytes()));
-				if (names.get("sim").contains(infodata.getSim())) {
+				if (names.get("sim") != null
+						&& names.get("sim").contains(infodata.getSim())) {
 					infodata.setSame("true");
 					infodata.setLogin("true");
 				} else {
@@ -301,7 +308,7 @@ public class MainController {
 
 	/**
 	 * 上午10:32:12
-	 * 
+	 *
 	 * @author zhangyh2 TODO 用户登录完成后，由于条件差异，有的需要进行验证。故而验证完毕后。才会进行登录情况改变
 	 */
 	@ResponseBody
@@ -318,7 +325,7 @@ public class MainController {
 
 	/**
 	 * 下午4:35:27
-	 * 
+	 *
 	 * @author zhangyh2 TODO 用户退出接口
 	 */
 	@ResponseBody
@@ -359,7 +366,7 @@ public class MainController {
 
 	/**
 	 * 下午4:21:47
-	 * 
+	 *
 	 * @author zhangyh2 TODO 用户注册接口
 	 */
 	@RequestMapping(value = "/register")
@@ -412,12 +419,69 @@ public class MainController {
 
 		}
 	}
+	
+	
+	/**
+	 * 下午4:21:47
+	 *
+	 * @author zhangyh2 TODO 用户多参数调用注册接口
+	 */
+	@RequestMapping(value = "/argsregister")
+	@ResponseBody
+	public BaseModel<UserInfoData> userArgsRegister(
+			@RequestBody() Map<String, String> params) {
+		synchronized (this) {
+			System.out.println(params.get("tel") + params.get("pass"));
+			// 由于要同步云通讯，故而进行绑定。pass
+			UserInfoData user = service.findUser(params.get("tel"));
+			double money = 0;
+			if (user == null) {
+				// 用户不存在，可以注册
+				// 对云通讯进行初始化。
+				HashMap<String, Object> result = null;
+				CCPRestSDK restAPI = new CCPRestSDK();
+				restAPI.init(ECDataHelper.HTTPHOST, ECDataHelper.PORT);// 初始化服务器地址和端口，格式如下，服务器地址不需要写https://
+				restAPI.setAccount(ECDataHelper.ACCOUNTSID,
+						ECDataHelper.ACCOUNTTOKEN);// 初始化主帐号和主帐号TOKEN
+				restAPI.setAppId(ECDataHelper.AppId);// 初始化应用ID
+				// 插入数据库
+				int insUser = service.insertRegistUser(new UserInfoData(params
+						.get("tel"), params.get("pass"), params.get("tel"), "",
+						"", money, "", "", params.get("tel"), "", "false"));
+				System.out.println(insUser + "用户资料插入数据库");
+				// 注册完成后，获取对应用户资料
+				result = restAPI.createSubAccount(params.get("tel"));
+				System.out.println("云通讯生成用户" + result);
+				if ("000000".equals(result.get("statusCode"))) {
+					// 正常返回输出data包体信息（map）
+					@SuppressWarnings("unchecked")
+					HashMap<String, Object> data = (HashMap<String, Object>) result
+							.get("data");
+					String ec = data.get("SubAccount").toString();
+					UserEcAccount ecUsers = showECUser(params.get("tel"), ec);
+					// 保存用户信息
+					int insEc = service.insertRegistEcAccount(ecUsers);
+					System.out.println(insEc + "用户云通讯账号插入数据库");
+				} else {
+					// 异常返回输出错误码和错误信息
+					System.out.println(result.get("statusCode") + ""
+							+ result.get("statusMsg"));
+				}
+				return new BaseModel<UserInfoData>(200, "注册完成",
+						new UserInfoData());
+			} else {
+				// 用户存在，直接登录
+				return new BaseModel<UserInfoData>(202, "该用户已注册，请直接登录", null);
+			}
+
+		}
+	}
 
 	/**
 	 * 下午3:32:14
-	 * 
-	 * @author zhangyh2 TODO 通过解析字符串。获取用户。
+	 *
 	 * @param ec2
+	 * @author zhangyh2 TODO 通过解析字符串。获取用户。
 	 */
 	private UserEcAccount showECUser(String name, String ec) {
 		// TODO Auto-generated method stub
@@ -447,7 +511,7 @@ public class MainController {
 
 	/**
 	 * 下午5:09:15
-	 * 
+	 *
 	 * @author zhangyh2 TODO 修改用户信息接口
 	 */
 	@ResponseBody
@@ -492,7 +556,7 @@ public class MainController {
 
 	/**
 	 * 上午11:49:32
-	 * 
+	 *
 	 * @author zhangyh2 TODO 用户图像上传接口
 	 */
 	@RequestMapping(value = "/upimage", method = RequestMethod.POST)
@@ -505,6 +569,13 @@ public class MainController {
 		String pathcacth = request.getSession().getServletContext()
 				.getRealPath("");
 		String path = pathcacth.split("shtr")[0] + "\\ImageIcon\\";
+		// 在图片保存之前，应该先剔除以前老的旧的图片。防止空间爆满
+		File er = new File(path);
+		File fils[] = er.listFiles();
+		for (File fil : fils) {
+			if (fil.getName().startsWith(user))
+				fil.delete();
+		}
 		for (int i = 0; i < files.size(); i++) {
 			MultipartFile file = files.get(i);
 			String name = file.getOriginalFilename();
@@ -533,8 +604,141 @@ public class MainController {
 	}
 
 	/**
+	 * 上午11:49:32
+	 *
+	 * @author zhangyh2 TODO 用户未注册头像上传接口
+	 */
+	@RequestMapping(value = "/headicon", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseModel<String> headImageIcon(HttpServletRequest request)
+			throws ServletException {
+		String icon = null;
+		String user = request.getParameter("user");
+		List<MultipartFile> files = ((MultipartHttpServletRequest) request)
+				.getFiles("file");
+		String pathcacth = request.getSession().getServletContext()
+				.getRealPath("");
+		String path = pathcacth.split("shtr")[0] + "\\ImageIcon\\";
+		// 在图片保存之前，应该先剔除以前老的旧的图片。防止空间爆满
+		File er = new File(path);
+		File fils[] = er.listFiles();
+		for (File fil : fils) {
+			if (fil.getName().startsWith(user))
+				fil.delete();
+		}
+		for (int i = 0; i < files.size(); i++) {
+			MultipartFile file = files.get(i);
+			String name = file.getOriginalFilename();
+			if (!file.isEmpty()) {
+				try {
+					byte[] bytes = file.getBytes();
+					BufferedOutputStream stream = new BufferedOutputStream(
+							new FileOutputStream(new File(path + user + name)));
+					stream.write(bytes);
+					stream.close();
+				} catch (Exception e) {
+					return new BaseModel<String>(201, "图片上传失败", null);
+				}
+				icon = request.getScheme() + "://"
+						+ request.getServerName() + ":"
+						+ request.getServerPort() + "/ImageIcon/" + user + name;
+			} else {
+				return new BaseModel<String>(201, "图片为空", null);
+			}
+		}
+		return new BaseModel<String>(200, "图片上传成功", icon);
+	}
+
+	/**
+	 * 上午11:49:32
+	 *
+	 * @author zhangyh2 TODO 用户崩溃日志上传接口
+	 */
+	@RequestMapping(value = "/exceptionupload", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseModel<String> exceptionUpload(HttpServletRequest request)
+			throws ServletException {
+		String icon = null;
+		List<MultipartFile> files = ((MultipartHttpServletRequest) request)
+				.getFiles("file");
+		String pathcacth = request.getSession().getServletContext()
+				.getRealPath("");
+		String path = pathcacth.split("shtr")[0] + "\\UserBug\\";
+		File exfile = new File(path);
+		if (!exfile.exists()) {
+			exfile.mkdir();
+		}
+		System.out.println(path);
+		for (int i = 0; i < files.size(); i++) {
+			MultipartFile file = files.get(i);
+			String name = file.getOriginalFilename();
+			if (!file.isEmpty()) {
+				try {
+					byte[] bytes = file.getBytes();
+					BufferedOutputStream stream = new BufferedOutputStream(
+							new FileOutputStream(new File(path + name)));
+					stream.write(bytes);
+					stream.close();
+				} catch (Exception e) {
+					return new BaseModel<String>(201, "文件上传失败", null);
+				}
+				
+				icon = request.getScheme() + "://"
+						+ request.getServerName() + ":"
+						+ request.getServerPort() + "/UserBug/"+ name;
+			} else {
+				return new BaseModel<String>(201, "文件为空", null);
+			}
+		}
+		return new BaseModel<String>(200, "日志上传成功",icon);
+	}
+
+	/**
+	 * 上午11:49:32
+	 *
+	 * @author zhangyh2 TODO 用户执照上传接口
+	 */
+	@RequestMapping(value = "/certificate", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseModel<String> userCertificate(HttpServletRequest request)
+			throws ServletException {
+		String icon = null;
+		List<MultipartFile> files = ((MultipartHttpServletRequest) request)
+				.getFiles("file");
+		String pathcacth = request.getSession().getServletContext()
+				.getRealPath("");
+		String path = pathcacth.split("shtr")[0] + "\\Certificate\\";
+		File exfile = new File(path);
+		if (!exfile.exists()) {
+			exfile.mkdir();
+		}
+		System.out.println(path);
+		for (int i = 0; i < files.size(); i++) {
+			MultipartFile file = files.get(i);
+			String name = file.getOriginalFilename();
+			if (!file.isEmpty()) {
+				try {
+					byte[] bytes = file.getBytes();
+					BufferedOutputStream stream = new BufferedOutputStream(
+							new FileOutputStream(new File(path + name)));
+					stream.write(bytes);
+					stream.close();
+				} catch (Exception e) {
+					return new BaseModel<String>(201, "文件上传失败", null);
+				}
+				icon = request.getScheme() + "://"
+						+ request.getServerName() + ":"
+						+ request.getServerPort() + "/Certificate/" +  name;
+			} else {
+				return new BaseModel<String>(201, "文件为空", null);
+			}
+		}
+		return new BaseModel<String>(200,"图片上传成功",icon);
+	}
+
+	/**
 	 * 下午2:11:48
-	 * 
+	 *
 	 * @author zhangyh2 TODO 查找用户所有地址接口
 	 */
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
@@ -576,9 +780,9 @@ public class MainController {
 
 	/**
 	 * 下午2:11:38
-	 * 
-	 * @author zhangyh2 TODO 更新用户地址接口。
+	 *
 	 * @throws UnsupportedEncodingException
+	 * @author zhangyh2 TODO 更新用户地址接口。
 	 */
 	@RequestMapping(value = "/address", method = RequestMethod.POST)
 	@ResponseBody
@@ -649,7 +853,7 @@ public class MainController {
 
 	/**
 	 * 下午2:11:48
-	 * 
+	 *
 	 * @author zhangyh2 TODO 删除地址接口
 	 */
 	@RequestMapping(value = "/deleteAddress", method = RequestMethod.POST)
@@ -730,7 +934,7 @@ public class MainController {
 
 	/**
 	 * 上午10:28:32
-	 * 
+	 *
 	 * @author zhangyh2 TODO 获取网络视频连接地址
 	 */
 	@RequestMapping("/video")
@@ -746,7 +950,7 @@ public class MainController {
 
 	/**
 	 * 上午9:50:38
-	 * 
+	 *
 	 * @author zhangyh2 TODO 获取活动页面 商品列表
 	 */
 	@RequestMapping("/act")
@@ -768,5 +972,78 @@ public class MainController {
 		// }
 		return new BaseModel<List<Action_Theme>>(200, "第" + page + "页数据返回成功",
 				service.findAction_Themes(page));
+	}
+
+	@RequestMapping(value = "/mainflower", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseModel<List<Main_Flower>> findMainFlower(
+			@Param("group") String group, @Param("page") int page) {
+		System.out.println("mainflower is run" + group + page);
+		List<Main_Flower> main = service.findMain_Flower(group, page);
+		if (main != null && main.size() > 0) {
+			return new BaseModel<List<Main_Flower>>(200,
+					"第" + page + "页数据返回成功", main);
+		} else {
+			return new BaseModel<List<Main_Flower>>(201, "查无此数据", null);
+		}
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseModel<VersionUpdateModel> versionUpdate(
+			@Param("version") String version, @Param("type") String type,
+			@Param("channel") String channel, HttpServletRequest request) {
+		System.out.println(version + type + channel);
+		// // 测试数据一组，进行SAX解析测试。
+		// String path = request.getServletContext().getRealPath("sax.xml");
+		// SaxParser factory = null;
+		// try {
+		// factory = new SaxParser();
+		// List<Group> groupList = null;
+		// int lenth = factory.getXMLLines(path);
+		//
+		// for (int i = 0; i < lenth; i++) {
+		// if (i == (lenth - 1)) {
+		// groupList = ((ResourceHandler) factory.getHandlers("test",
+		// path)).getResult();
+		// } else {
+		// factory.getHandlers("test", path);
+		// }
+		// }
+		// for (Group group : groupList) {
+		// System.out.println(group);
+		// }
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// }
+		// // 测试数据一组，进行SAX解析测试。
+		String paths = request.getServletContext().getRealPath(
+				"androidAppVersion.xml");
+		SaxParser factorys = null;
+		try {
+			factorys = new SaxParser();
+			List<VersionUpdateModel> groupList = null;
+			int lenth = factorys.getXMLLines(paths);
+			for (int i = 0; i < lenth; i++) {
+				if (i == (lenth - 1)) {
+					groupList = ((AppVersionHandler) factorys.getHandlers(
+							"version", paths)).getResult();
+				} else {
+					factorys.getHandlers("version", paths);
+				}
+			}
+			for (VersionUpdateModel group : groupList) {
+				if (channel.equals(group.getSource())) {
+					return new BaseModel<VersionUpdateModel>(200, "获取到版本更新的数据",
+							group);
+				}
+			}
+			return new BaseModel<VersionUpdateModel>(201, "未找到对应渠道信息", null);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return new BaseModel<VersionUpdateModel>(202, "查找出错，暂无信息", null);
 	}
 }

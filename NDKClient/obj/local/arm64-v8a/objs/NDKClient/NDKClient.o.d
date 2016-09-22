@@ -1,4 +1,4 @@
-obj/local/arm64-v8a/objs/NDKClient/NDKClient.o: jni/NDKClient.cpp \
+obj/local/arm64-v8a/objs/ndkClient/ndkClient.o: jni/ndkClient.cpp \
  D:/AndroidTools64/android-ndk64-r10-windows-x86_64/android-ndk-r10/platforms/android-L/arch-arm64/usr/include/jni.h \
  D:/AndroidTools64/android-ndk64-r10-windows-x86_64/android-ndk-r10/platforms/android-L/arch-arm64/usr/include/sys/cdefs.h \
  D:/AndroidTools64/android-ndk64-r10-windows-x86_64/android-ndk-r10/platforms/android-L/arch-arm64/usr/include/sys/cdefs_elf.h \

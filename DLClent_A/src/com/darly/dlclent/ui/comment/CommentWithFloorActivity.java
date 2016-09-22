@@ -25,7 +25,9 @@ import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.HttpClient;
+import com.darly.dlclent.common.ImageLoaderUtil;
 import com.darly.dlclent.common.JsonUtil;
+import com.darly.dlclent.common.SharePreferCache;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.model.BaseModel;
@@ -181,7 +183,7 @@ public class CommentWithFloorActivity extends BaseActivity implements
 				.parse(cmt.getDate())));
 		floor_username.setText(cmt.getUserName());
 		floor_content.setText(cmt.getContent());
-		imageLoader.displayImage(cmt.getIcon(), floor_icon);
+		ImageLoaderUtil.getInstance().loadImageNor(cmt.getIcon(), floor_icon);
 		FloorView subFloors = (FloorView) floor.findViewById(R.id.sub_floors);
 		if (cmt.getParentId() != Comment.NULL_PARENT) {
 
@@ -259,7 +261,7 @@ public class CommentWithFloorActivity extends BaseActivity implements
 			} else {
 				// 轮播假数据
 				String json = null;
-				boolean time = false/*new Random().nextBoolean()*/;
+				boolean time = false/* new Random().nextBoolean() */;
 				if (time) {
 					BaseModel<List<Comment>> model = new BaseModel<List<Comment>>(
 							200, "", datas);
@@ -291,12 +293,12 @@ public class CommentWithFloorActivity extends BaseActivity implements
 				.paserJson(json, new TypeToken<List<Comment>>() {
 				});
 		if (data != null && data.getCode() == 200) {
-			SharePreferHelp.putValue(APPEnum.FLOOR.getDec(), json);
+			SharePreferCache.putValue(SharePreferHelp.getValue(APPEnum.USERVOIP.getDec(), null)+SharePreferCache.CACHE,APPEnum.FLOOR.getDec(), json);
 			for (Comment cmt : data.getData()) {
 				addComment(cmt, data.getData());
 			}
 		} else {
-			paserFloor(SharePreferHelp.getValue(APPEnum.FLOOR.getDec(), null));
+			paserFloor(SharePreferCache.getValue(SharePreferHelp.getValue(APPEnum.USERVOIP.getDec(), null)+SharePreferCache.CACHE,APPEnum.FLOOR.getDec(), null));
 			ToastApp.showToast(data.getMsg());
 		}
 	}

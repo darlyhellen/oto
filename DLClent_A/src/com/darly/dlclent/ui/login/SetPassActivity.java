@@ -7,6 +7,9 @@
  */
 package com.darly.dlclent.ui.login;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -15,8 +18,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.BaseActivity;
+import com.darly.dlclent.base.ConsHttpUrl;
+import com.darly.dlclent.common.HttpClient;
+import com.darly.dlclent.common.ToastApp;
+import com.darly.dlclent.model.BaseModel;
+import com.darly.dlclent.model.BaseModelPaser;
+import com.darly.dlclent.model.UserInfoData;
 import com.darly.dlclent.widget.clearedit.LoginClearEdit;
+import com.darly.dlclent.widget.load.ProgressDialogUtil;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -35,6 +51,8 @@ public class SetPassActivity extends BaseActivity implements OnClickListener {
 	private Button register;
 
 	private String tel;
+
+	private ProgressDialogUtil util;
 
 	/*
 	 * (non-Javadoc)
@@ -61,6 +79,7 @@ public class SetPassActivity extends BaseActivity implements OnClickListener {
 		if (tel == null || tel.length() == 0) {
 			tel = savedInstanceState.getString("tel");
 		}
+
 	}
 
 	/*
@@ -86,7 +105,8 @@ public class SetPassActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void loadData() {
 		// TODO Auto-generated method stub
-
+		util = new ProgressDialogUtil(this);
+		util.setMessage(R.string.xlistview_header_hint_loading);
 	}
 
 	/*
@@ -110,11 +130,83 @@ public class SetPassActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.act_pass_register:
-
+			// 调用接口注册完成。
+			completeRegest();
 			break;
 
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * 下午2:22:21
+	 * 
+	 * @author zhangyh2 TODO
+	 */
+	private void completeRegest() {
+		// TODO Auto-generated method stub
+		String paseword = pass.getText().getText().toString();
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		}
+		if (paseword == null || paseword.length() == 0) {
+			ToastApp.showToast("密码不为空");
+			return;
+		}
+		if (!APP.isNetworkConnected(this)) {
+			ToastApp.showToast(R.string.neterror);
+			return;
+		}
+		JSONObject ob = new JSONObject();
+		try {
+			ob.put("tel", tel);
+			ob.put("pass", paseword);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HttpClient.post(ConsHttpUrl.USERREGISTER, ob.toString(),
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						// TODO Auto-generated method stub
+						util.cancel();
+						isRegest(arg0.result);
+					}
+
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						// TODO Auto-generated method stub
+						arg0.printStackTrace();
+						util.cancel();
+						ToastApp.showToast(R.string.neterror_norespanse);
+					}
+				});
+	}
+
+	/**
+	 * 下午2:28:20
+	 * 
+	 * @author zhangyh2 TODO
+	 */
+	protected void isRegest(String result) {
+		// TODO Auto-generated method stub
+		if (result == null) {
+			return;
+		}
+		LogUtils.i(result);
+		BaseModel<UserInfoData> data = new BaseModelPaser<UserInfoData>()
+				.paserJson(result, new TypeToken<UserInfoData>() {
+				});
+		if (data != null && data.getCode() == 200) {
+			// 结束Login
+			ToastApp.showToast(data.getMsg());
+			finish();
+		} else {
+			ToastApp.showToast(data.getMsg());
 		}
 	}
 

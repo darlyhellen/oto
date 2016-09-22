@@ -9,7 +9,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
@@ -25,6 +24,7 @@ import com.darly.dlclent.R;
 import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
+import com.darly.dlclent.base.ConsHttpUrl;
 import com.darly.dlclent.common.HttpClient;
 import com.darly.dlclent.common.IDCardUtils;
 import com.darly.dlclent.common.JsonUtil;
@@ -218,24 +218,25 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 		}
 		String resul = result.getText().toString().trim();
 		btn.setClickable(false);
-		String url = "";
+		String url = ConsHttpUrl.RESETUSERINFO;
 		if (url != null && url.length() > 0) {
-			JSONObject param = new JSONObject();
+			JSONObject ob = new JSONObject();
+
 			try {
+				ob.put("tel", odInfo.getTel());
 				switch (requestCode) {
 				case APPEnum.CENTER_NAME:
-					param.put("name", resul);
+					ob.put("name", resul);
 					break;
 				case APPEnum.CENTER_TEL:
-					param.put("tel", resul);
 					break;
 				case APPEnum.CENTER_SEX:
 					switch (rg.getCheckedRadioButtonId()) {
 					case R.id.reset_info_boy:
-						param.put("sex", boy.getText().toString());
+						ob.put("sex", boy.getText().toString());
 						break;
 					case R.id.reset_info_girl:
-						param.put("sex", girl.getText().toString());
+						ob.put("sex", girl.getText().toString());
 						break;
 
 					default:
@@ -243,30 +244,28 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 					}
 					break;
 				case APPEnum.CENTER_CARD:
-					param.put("card", resul);
+					ob.put("card", resul);
 					break;
 				default:
 					break;
 				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-			HttpClient.post(url, param.toString(),
-					new RequestCallBack<String>() {
+			HttpClient.post(url, ob.toString(), new RequestCallBack<String>() {
 
-						@Override
-						public void onSuccess(ResponseInfo<String> arg0) {
-							// TODO Auto-generated method stub
-							saveOK(arg0.result);
-						}
+				@Override
+				public void onSuccess(ResponseInfo<String> arg0) {
+					// TODO Auto-generated method stub
+					saveOK(arg0.result);
+				}
 
-						@Override
-						public void onFailure(HttpException arg0, String arg1) {
-							// TODO Auto-generated method stub
+				@Override
+				public void onFailure(HttpException arg0, String arg1) {
+					// TODO Auto-generated method stub
 
-						}
-					});
+				}
+			});
 		} else {
 			// 造假数据
 			String jsonString = null;
@@ -277,12 +276,12 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 					user = new UserInfoData(resul, odInfo.getIcon(),
 							odInfo.getTel(), odInfo.getSex(),
 							odInfo.getIdCard(), odInfo.getMoney(),
-							odInfo.getToken());
+							odInfo.getToken(), "true");
 					break;
 				case APPEnum.CENTER_TEL:
 					user = new UserInfoData(odInfo.getName(), odInfo.getIcon(),
 							resul, odInfo.getSex(), odInfo.getIdCard(),
-							odInfo.getMoney(), odInfo.getToken());
+							odInfo.getMoney(), odInfo.getToken(), "true");
 
 					break;
 				case APPEnum.CENTER_SEX:
@@ -292,14 +291,14 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 								odInfo.getIcon(), odInfo.getTel(), boy
 										.getText().toString(),
 								odInfo.getIdCard(), odInfo.getMoney(),
-								odInfo.getToken());
+								odInfo.getToken(), "true");
 						break;
 					case R.id.reset_info_girl:
 						user = new UserInfoData(odInfo.getName(),
 								odInfo.getIcon(), odInfo.getTel(), girl
 										.getText().toString(),
 								odInfo.getIdCard(), odInfo.getMoney(),
-								odInfo.getToken());
+								odInfo.getToken(), "true");
 						break;
 
 					default:
@@ -309,7 +308,7 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 				case APPEnum.CENTER_CARD:
 					user = new UserInfoData(odInfo.getName(), odInfo.getIcon(),
 							odInfo.getTel(), odInfo.getSex(), resul,
-							odInfo.getMoney(), odInfo.getToken());
+							odInfo.getMoney(), odInfo.getToken(), "true");
 					break;
 				default:
 					break;
@@ -339,6 +338,7 @@ public class ResetInfoActivity extends BaseActivity implements OnClickListener {
 			btn.setClickable(true);
 			return;
 		}
+		LogUtils.i(json);
 		BaseModel<UserInfoData> data = new BaseModelPaser<UserInfoData>()
 				.paserJson(json, new TypeToken<UserInfoData>() {
 				});

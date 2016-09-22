@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <com.hellen.widget.header.HeaderView
+        android:id="@+id/regist_header_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" >
+    </com.hellen.widget.header.HeaderView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/app_login_shape"
+        android:orientation="vertical" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center" >
+
+            <com.hellen.widget.clearedit.LoginClearEdit
+                android:id="@+id/act_register_tel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="3" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/wel_back_color" />
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center" >
+
+            <com.hellen.widget.clearedit.LoginClearEdit
+                android:id="@+id/act_register_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/act_register_clickcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/app_login_shape"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/register_next" />
+        </TableRow>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/act_register_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_select"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

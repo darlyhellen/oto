@@ -19,3 +19,114 @@
 	
 2016.1.25
 	使用友盟更新，添加强制更新。
+2016.1.28
+	针对服务器端进行修改。友盟强制更新新SDK存在问题，OnlineCongif这个包出现混淆后
+	无法正常请求，故而将在线参数更新变换为旧版本。
+	
+2016.2.1
+   MD5 : B0:DE:CA:0D:94:87:2A:3B:7B:7A:9F:33:68:DE:26:14
+   SHA1: DF:93:A3:F6:9F:80:DF:6F:2D:B5:94:D8:D3:49:D6:E5:FB:94:C4:26
+   
+   
+ 2016.2.23
+ 	将项目中的所有网络请求，变更为OKhttp架包。
+ 	
+ 2016.2.24
+ 	使用OKhttp架包进行网络请求。感觉并没有多大区别。
+ 	
+ 2016.2.25
+ 	暂时不使用OKHTTP进行网络请求，对注册页面进行网络接口添加。
+ 	
+ 2016.3.2
+ 	修改用户新增地址。对接接口。并进行数据的CRUD，并且更深层的了解Mongo数据库
+ 	
+ 2016.3.3
+ 	添加WebView页面。首页几个按钮，分别进入不同的页面。
+	
+ 2016.3.7
+ 	添加第二个活动主题页面，进行页面设计，页面刷新，页面分页加载。
+ 	
+ 2016.3.10
+ 	添加简单的购物车页面，还没有编辑适配器，先占住存在位置。
+ 	
+ 2016.3.11
+ 	添加融联云通讯客户端。
+ 	
+ 2016.3.14
+ 	用户登录后，融联云通讯 平台自动分配用户登录。从而不用再次进行用户登录操作。
+ 	
+ 2016.3.22
+ 	修改首页样式，或许可以将融联通讯的东西提取到前方页面。
+ 	
+ 2016.3.23
+ 	用户进行用户图标设置，解决Activity传递参数到Fragment。
+ 	
+ 2016.3.24
+ 	用户传递头像，服务端进行存储。并使用ImageLoader对图片进行圆角处理。
+ 	
+ 2016.3.25
+ 	消息列表中，修改会话对方的图像。用户登录时，云通讯登录同步，无论云通讯是否登录成功。用户登录不受影响
+	
+	
+ 2016.4.5
+ 	登录接口接入新的服务器地址。
+ 	将所有POST请求参数全部替换为JSON格式进行传输。
+ 	
+ 2016.4.7
+ 	public static String uploadFiles(String url,String tel,List<File> files) throws Exception {
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		httpClient.getParams().setParameter(
+				CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+		HttpPost httpRequest = new HttpPost(url);
+		String strResult = "doPostError";
+		MultipartEntity mEntity = new MultipartEntity();
+		mEntity.addPart("user", new StringBody(tel));
+		for (File file : files) {
+			ContentBody cBody = new FileBody(file);
+			mEntity.addPart("file", cBody);
+		}
+		System.out.println("file length----->" + mEntity.getContentLength());
+		httpRequest.setEntity(mEntity);
+		HttpResponse httpResponse = httpClient.execute(httpRequest);
+		if (httpResponse.getStatusLine().getStatusCode() == 200) {
+			strResult = EntityUtils.toString(httpResponse.getEntity());
+		} else {
+			strResult = "Error Response:"
+					+ httpResponse.getStatusLine().toString();
+		}
+		httpClient.getConnectionManager().shutdown();
+		return strResult;
+	}
+	添加图片上传功能。
+	
+ 2016.4.20
+	开始添加对视频进行的加载和处理
+	第一步：添加视频Activity并实现其Video控件页面。
+	第二步：查找网上资料，查看详细解决方案。
+	
+ 2016.4.21
+ 	公司项目首页进行替换展示,使用ListView，GridView进行首页加载。方便后台直接修改。
+ 	对接服务端首页接口，当然现在只展示了一个广告页面
+ 	给服务端提供页面类时，需要全部给定完整的包名加类名，可以直接跳转到类。
+ 	
+ 2016.4.22
+ 	由于APK每次打开，首页的主题都要请求一次。所以呢，给定主题一个版本，开始只请求版本即可，版本请求
+ 	完成后，于本地缓存进行对比，不同则更新，相同则只加载缓存，因为服务端没有任何变化，无需访问网络。
+ 	当然首页，同样也可以进行此操作。
+ 	
+ 2016.05.05
+ 	给ViewPager添加渐变背景色--com.darly.dlclent.widget.guidebackgroundcoloranimation
+ 	使用bezier实现粘连效果--com.darly.dlclent.widget.springindicator水滴粘连效果
+ 	添加气泡效果拉伸消失--com.darly.dlclent.widget.bezier
+ 	
+ 2016.05.10	
+ 	新增Junit测试类进行正规尝试。并对项目进行Junit4测试。
+ 	
+ 2016.05.11
+ 	新增23种设计模式，熟悉利用常见设计模式详细情况见包design.patterns
+ 	
+ 2016.05.13
+ 	重新对Git进行分支。此分支主要功能为进行对象的深入了解。
+	
+	
+	

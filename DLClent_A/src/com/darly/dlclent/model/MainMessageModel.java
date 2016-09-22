@@ -43,9 +43,11 @@ public class MainMessageModel {
 	 */
 	private List<DetailsGoodsPro> data;
 
+	private int quantity;
+
 	public MainMessageModel(int id, String title, String name,
 			String description, String url, double price, double original,
-			long commodityID, String type) {
+			long commodityID, String type, int quantity) {
 		this.id = id;
 		this.title = title;
 		this.name = name;
@@ -55,12 +57,14 @@ public class MainMessageModel {
 		this.original = original;
 		this.commodityID = commodityID;
 		this.type = type;
+		this.quantity = quantity;
 	}
 
 	public MainMessageModel(int id, String title, String name,
 			String description, String url, double price, double original,
 			long commodityID, String type, String collect,
-			List<DetailsGoodsShow> showinfo, List<DetailsGoodsPro> data) {
+			List<DetailsGoodsShow> showinfo, List<DetailsGoodsPro> data,
+			int quantity) {
 		this.id = id;
 		this.title = title;
 		this.name = name;
@@ -73,6 +77,7 @@ public class MainMessageModel {
 		this.collect = collect;
 		this.showinfo = showinfo;
 		this.data = data;
+		this.quantity = quantity;
 	}
 
 	public int getId() {
@@ -171,4 +176,11 @@ public class MainMessageModel {
 		this.data = data;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 }

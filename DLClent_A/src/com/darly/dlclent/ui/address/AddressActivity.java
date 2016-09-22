@@ -8,8 +8,6 @@ package com.darly.dlclent.ui.address;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.darly.dlclent.R;
@@ -26,17 +23,20 @@ import com.darly.dlclent.adapter.AddressAdapter;
 import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
+import com.darly.dlclent.base.ConsHttpUrl;
 import com.darly.dlclent.common.HttpClient;
-import com.darly.dlclent.common.JsonUtil;
+import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.common.ToastApp;
 import com.darly.dlclent.db.DBUtilsHelper;
 import com.darly.dlclent.model.AddressModel;
 import com.darly.dlclent.model.BaseModel;
 import com.darly.dlclent.model.BaseModelPaser;
 import com.darly.dlclent.widget.loginout.LoginOutDialg;
+import com.darly.dlclent.widget.pulltozoomlistsimple.PullToZoomListView;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
@@ -56,7 +56,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 	@ViewInject(R.id.header_btn)
 	private Button btn;
 	@ViewInject(R.id.address_lv)
-	private ListView lv;
+	private PullToZoomListView lv;
 	@ViewInject(R.id.address_addnew)
 	private Button addnew;
 
@@ -103,60 +103,35 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 		data = new ArrayList<AddressModel>();
 		adapter = new AddressAdapter(data, R.layout.item_activity_address, this);
 		lv.setAdapter(adapter);
+
+		lv.getHeaderView().setImageResource(R.drawable.ic_login_table_bg);
+		lv.getHeaderView().setScaleType(ImageView.ScaleType.CENTER_CROP);
+
 		if (!APP.isNetworkConnected(this)) {
 			ToastApp.showToast(R.string.neterror);
 			return;
 		}
-		String url = "";
-		if (url != null && url.length() > 0) {
-			// 进行网络请求
-			JSONObject param = new JSONObject();
-			try {
-				param.put("use", "");
-				param.put("page", 1);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			HttpClient.post(url, param.toString(),
-					new RequestCallBack<String>() {
+		// 进行网络请求
+		RequestParams param = new RequestParams();
+		param.addQueryStringParameter("page", 1 + "");
+		param.addQueryStringParameter("tel",
+				SharePreferHelp.getValue(APPEnum.USERTEL.getDec(), null));
+		HttpClient.get(this, ConsHttpUrl.USERADDRESS, param,
+				new RequestCallBack<String>() {
 
-						@Override
-						public void onSuccess(ResponseInfo<String> arg0) {
-							// TODO Auto-generated method stub
-							setList(arg0.result);
-						}
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						// TODO Auto-generated method stub
+						setList(arg0.result);
+					}
 
-						@Override
-						public void onFailure(HttpException arg0, String arg1) {
-							// TODO Auto-generated method stub
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						// TODO Auto-generated method stub
 
-						}
-					});
+					}
+				});
 
-		} else {
-			// 制造假数据
-			String jsonString = null;
-			List<AddressModel> lis = null;
-			try {
-				lis = DBUtilsHelper.getInstance().getDb()
-						.findAll(AddressModel.class);
-			} catch (DbException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (lis == null) {
-				lis = new ArrayList<AddressModel>();
-				BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
-						100, "用户暂无地址", lis);
-				jsonString = JsonUtil.pojo2Json(mo);
-			} else {
-				BaseModel<List<AddressModel>> mo = new BaseModel<List<AddressModel>>(
-						200, "", lis);
-				jsonString = JsonUtil.pojo2Json(mo);
-			}
-			LogUtils.i(jsonString);
-			setList(jsonString);
-		}
 	}
 
 	/**
@@ -169,6 +144,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 		if (json == null) {
 			return;
 		}
+		LogUtils.i(json);
 		BaseModel<List<AddressModel>> base = new BaseModelPaser<List<AddressModel>>()
 				.paserJson(json, new TypeToken<List<AddressModel>>() {
 				});
@@ -315,10 +291,9 @@ public class AddressActivity extends BaseActivity implements OnClickListener,
 	 * android.content.Intent)
 	 */
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent datas) {
+	public void onActivityResult(int requestCode, int resultCode, Intent datas) {
 		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, datas);
+		// super.onActivityResult(requestCode, resultCode, datas);
 		if (resultCode == APPEnum.ADDRESS_NEW) {
 			// 新增地址
 			AddressModel addressModel = (AddressModel) datas

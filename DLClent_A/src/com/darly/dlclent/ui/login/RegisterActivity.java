@@ -105,7 +105,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		case R.id.act_register_register:
 			util.show();
 			Intent intent = new Intent(this, SetPassActivity.class);
-			intent.putExtra("tel", tel.getText().toString().trim());
+			intent.putExtra("tel", tel.getText().getText().toString().trim());
 			startActivity(intent);
 			util.cancel();
 			finish();

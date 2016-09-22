@@ -8,6 +8,8 @@
 package com.darly.dlclent.ui.welcome;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -19,10 +21,14 @@ import com.darly.dlclent.R;
 import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
+import com.darly.dlclent.base.ConsHttpUrl;
+import com.darly.dlclent.common.ImageLoaderUtil;
+import com.darly.dlclent.common.ImageLoaderUtil.Loading;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.ui.MainActivity;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 
 /**
  * @author zhangyh2 Welcome $ 上午11:20:38 TODO
@@ -43,6 +49,38 @@ public class Welcome extends BaseActivity implements AnimationListener {
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+
+		ImageLoaderUtil.getInstance().load(ConsHttpUrl.SINGLEWEL,
+				new Loading() {
+
+					@Override
+					public void onStarted(String arg0, View arg1) {
+						// TODO Auto-generated method stub
+						view.setBackground(getResources().getDrawable(
+								R.drawable.ic_welcome));
+					}
+
+					@Override
+					public void onFailed(String arg0, View arg1, FailReason arg2) {
+						// TODO Auto-generated method stub
+						view.setBackground(getResources().getDrawable(
+								R.drawable.ic_welcome));
+					}
+
+					@Override
+					public void onComplete(String arg0, View arg1, Bitmap arg2) {
+						// TODO Auto-generated method stub
+						view.setBackground(new BitmapDrawable(getResources(),
+								arg2));
+					}
+
+					@Override
+					public void onCancelled(String arg0, View arg1) {
+						// TODO Auto-generated method stub
+						view.setBackground(getResources().getDrawable(
+								R.drawable.ic_welcome));
+					}
+				});
 
 		Animation animation = new ScaleAnimation(1f, 1.2f, 1f, 1.2f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
@@ -123,7 +161,8 @@ public class Welcome extends BaseActivity implements AnimationListener {
 	public void onAnimationEnd(Animation animation) {
 		// TODO Auto-generated method stub
 		boolean isFirstCome = SharePreferHelp.getValue(
-				APPEnum.ISFIRSTCOME.getDec(), true);
+				APPEnum.ISFIRSTCOME.getDec() + APP.getInstance().getVersion(),
+				true);
 		if (isFirstCome) {
 			// 第一次使用
 			intoGuide();

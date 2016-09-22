@@ -112,4 +112,15 @@ public class ServController {
 		request.setAttribute("userinfo", users);
 		return "/userinfo";
 	}
+
+	/** 下午2:45:36
+	 * @author zhangyh2
+	 * TODO尝试下载地址变更后能否继续连接下载。
+	 */
+	@RequestMapping(value = "/down")
+	public String findDown() {
+		System.out.println("findDown");
+		return "/openUrl";
+	}
+
 }

@@ -24,6 +24,8 @@ public class UserInfoData {
 
 	private String token;
 
+	private String same;
+
 	/**
 	 * 下午2:34:29
 	 * 
@@ -34,7 +36,7 @@ public class UserInfoData {
 	}
 
 	public UserInfoData(String name, String icon, String tel, String sex,
-			String idCard, String money, String token) {
+			String idCard, String money, String token, String same) {
 		this.name = name;
 		this.icon = icon;
 		this.tel = tel;
@@ -42,6 +44,7 @@ public class UserInfoData {
 		this.idCard = idCard;
 		this.money = money;
 		this.token = token;
+		this.same = same;
 	}
 
 	public String getName() {
@@ -98,6 +101,14 @@ public class UserInfoData {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getSame() {
+		return same;
+	}
+
+	public void setSame(String same) {
+		this.same = same;
 	}
 
 }

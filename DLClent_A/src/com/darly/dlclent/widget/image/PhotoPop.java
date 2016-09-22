@@ -98,10 +98,12 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
 		case R.id.item_popupwindows_camera:
 			// 照相功能
 			capPhoto();
+			LogUtils.i("item_popupwindows_camera");
 			break;
 		case R.id.item_popupwindows_Photo:
 			// 相册功能
 			albumPhoto();
+			LogUtils.i("item_popupwindows_Photo");
 			break;
 		case R.id.item_popupwindows_cancel:
 			// 取消
@@ -124,6 +126,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
 		intent.setAction(Intent.ACTION_PICK);
 		((Activity) context).startActivityForResult(intent,
 				APPEnum.REQUESTCODE_CAM);
+		LogUtils.i("albumPhoto");
 	}
 
 	/**
@@ -156,6 +159,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
 				Uri.fromFile(new File(capUri)));
 		((Activity) context).startActivityForResult(openCameraIntent,
 				APPEnum.REQUESTCODE_CAP);
+		LogUtils.i("capPhoto");
 
 	}
 
@@ -177,6 +181,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
 		intent.putExtra("return-data", true);
 		((Activity) context).startActivityForResult(intent,
 				APPEnum.REQUESTCODE_CUT);
+		LogUtils.i("cropPhoto");
 	}
 
 	/**
@@ -189,7 +194,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
 		if (data == null) {
 			return null;
 		}
-
+		LogUtils.i("PopActivityResult");
 		switch (requestCode) {
 		case APPEnum.REQUESTCODE_CAP:
 			Bitmap tempBitmap = BitmapFactory.decodeFile(APPEnum.HEAD);
@@ -234,10 +239,10 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
 	 * @author Zhangyuhui PhotoPop.java TODO 回调方法获取图片路径
 	 */
 	public String PopStringActivityResult(Intent data, int tag) {
+		LogUtils.i("PopStringActivityResult");
 		switch (tag) {
 		case APPEnum.REQUESTCODE_CAP:
 			// 照相机程序返回的
-			LogUtils.i(getImagePathForCAP(capUri));
 			return /* capUri */getImagePathForCAP(capUri);
 		case APPEnum.REQUESTCODE_CAM:
 			// 照片的原始资源地址

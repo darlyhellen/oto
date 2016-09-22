@@ -14,10 +14,14 @@
 		<result column="tel" property="tel" jdbcType="VARCHAR" />
 		<result column="token" property="token" jdbcType="VARCHAR" />
 		<result column="login" property="login" jdbcType="VARCHAR" />
+		<result column="certificate" property="certificate" jdbcType="VARCHAR" />
+		<result column="section" property="section" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="createdate" property="createdate" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, name, pass, sim, icon, idCard, money, same, sex, tel,
-		token, login
+		token, login,certificate,section,title,createdate
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
@@ -59,7 +63,7 @@
 		name, pass,
 		sim, icon, idCard,
 		money, same, sex, tel,
-		token, login)
+		token, login,certificate,section,title,createdate)
 		values ( #{name,jdbcType=VARCHAR},
 		#{pass,jdbcType=VARCHAR},
 		#{sim,jdbcType=VARCHAR},
@@ -70,7 +74,11 @@
 		#{sex,jdbcType=VARCHAR},
 		#{tel,jdbcType=VARCHAR},
 		#{token,jdbcType=VARCHAR},
-		#{login,jdbcType=VARCHAR})
+		#{login,jdbcType=VARCHAR},
+		#{certificate,jdbcType=VARCHAR},
+		#{section,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{createdate,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="cn.com.bean.UserInfoData">
 		insert into user_user_info
@@ -111,6 +119,18 @@
 			<if test="login != null">
 				login,
 			</if>
+			<if test="login != null">
+				certificate,
+			</if>
+			<if test="login != null">
+				section,
+			</if>
+			<if test="login != null">
+				title,
+			</if>
+			<if test="login != null">
+				createdate,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -148,6 +168,18 @@
 			</if>
 			<if test="login != null">
 				#{login,jdbcType=VARCHAR},
+			</if>
+			<if test="certificate != null">
+				#{certificate,jdbcType=VARCHAR},
+			</if>
+			<if test="section != null">
+				#{section,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				#{createdate,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -187,6 +219,19 @@
 			<if test="login != null">
 				login = #{login,jdbcType=VARCHAR},
 			</if>
+			<if test="certificate != null">
+				certificate = #{certificate,jdbcType=VARCHAR},
+			</if>
+			<if test="section != null">
+				section = #{section,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="createdate != null">
+				createdate = #{createdate,jdbcType=VARCHAR},
+			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
@@ -208,7 +253,11 @@
 		tel = #{tel,jdbcType=VARCHAR},
 		token =
 		#{token,jdbcType=VARCHAR},
-		login = #{login,jdbcType=VARCHAR}
+		login = #{login,jdbcType=VARCHAR},
+		certificate = #{certificate,jdbcType=VARCHAR},
+		section = #{section,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		createdate = #{createdate,jdbcType=VARCHAR}
 		where id =
 		#{id,jdbcType=INTEGER}
 	</update>
@@ -230,7 +279,11 @@
 		tel = #{tel,jdbcType=VARCHAR},
 		token =
 		#{token,jdbcType=VARCHAR},
-		login = #{login,jdbcType=VARCHAR}
+		login = #{login,jdbcType=VARCHAR},
+		certificate = #{certificate,jdbcType=VARCHAR},
+		section = #{section,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		createdate = #{createdate,jdbcType=VARCHAR}
 		where tel =
 		#{tel,jdbcType=VARCHAR}
 	</update>

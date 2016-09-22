@@ -21,14 +21,14 @@ import com.darly.dlclent.base.APP;
  * SharePreferHelp
  * $
  * 下午3:31:38
- * TODO 缓存文件类
+ * TODO 缓存文件类(包括登录用户的信息，一些固定缓存) 
  */
 public class SharePreferHelp {
 
 	private static final Context context = APP.getInstance()
 			.getApplicationContext();
 
-	public static final String SETTING = "dlclent";
+	public static String SETTING = "userinfo";
 
 	/**
 	 * @param key

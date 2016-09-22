@@ -29,7 +29,12 @@ public enum APPEnum {
 			0), WIDTH("screen width", 0), HEIGHT("screen height", 0), CHECKISUPDATE(
 			"CHECKUPDATACACHE", 0), NOTUPDATE("", 0), STORAGE_ROOT_DIR(
 			"dlclient", 0), ISLOGIN("islogin", 0), USERINFO("userinfo", 0), CARSOUL(
-			"carsoul", 0), MAINMMSG("mainmsg", 0), FLOOR("commentFloor",0);
+			"carsoul", 0), MAINMMSG("mainmsg", 0), FLOOR("commentFloor", 0), TOKEN(
+			"token", 0), PHONO("phono", 0), THEME("Theme", 0), ECCONTACTS(
+			"ECContacts_friend", 0), USERVOIP("uservoip", 0), USERTEL(
+			"usertel", 0), THEMECHANGE("themechange", 0), COMPHOMEPAGE(
+			"comphomepage", 0), THEMEVERSION("themeversion", 0), COMPVERSION(
+			"home_version", 0);
 
 	public static final int DB_SELECT = 0x0001;
 

@@ -1,0 +1,269 @@
+-optimizationpasses 7  #指定代码的压缩级别 0 - 7
+-dontusemixedcaseclassnames  #是否使用大小写混合
+-dontskipnonpubliclibraryclasses  #如果应用程序引入的有jar包，并且想混淆jar包里面的class
+-verbose #混淆时是否记录日志（混淆后生产映射文件&nbsp;map&nbsp;类名 -> 转化后类名的映射
+-dontwarn   #如果有警告也不终止 
+-dontshrink
+-dontoptimize
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);  #保持自定义控件类不被混淆，指定格式的构造方法不去混淆
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keep public class * extends android.view.View {  #保持自定义控件指定规则的方法不被混淆
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public void set*(...);
+}
+
+-keepclassmembers enum * {  #保持枚举 enum 不被混淆
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {  #保持 Parcelable 不被混淆（aidl文件不能去混淆）
+    public static final android.os.Parcelable$Creator *;
+}
+
+-keepnames class * implements java.io.Serializable #需要序列化和反序列化的类不能被混淆（注：Java反射用到的类也不能被混淆）
+
+-keepclassmembers class * implements java.io.Serializable { #保护实现接口Serializable的类中，指定规则的类成员不被混淆
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    !static !transient <fields>;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+-keepattributes Signature  #过滤泛型（不写可能会出现类型转换错误，一般情况把这个加上就是了）
+
+-keepattributes *Annotation*  #假如项目中有用到注解，应加入这行配置
+
+-keep class **.R$* { *; }  #保持R文件不被混淆，否则，你的反射是获取不到资源id的
+
+-keep class **.Webview2JsInterface { *; }  #保护WebView对HTML页面的API不被混淆
+-keepclassmembers class * extends android.webkit.WebViewClient {  #如果你的项目中用到了webview的复杂操作 ，最好加入
+ 		 	public void *(android.webkit.WebView,java.lang.String,android.graphics.Bitmap);
+      		public boolean *(android.webkit.WebView,java.lang.String);
+}
+-keepclassmembers class * extends android.webkit.WebChromeClient {  #如果你的项目中用到了webview的复杂操作 ，最好加入
+	public void *(android.webkit.WebView,java.lang.String);
+}
+#对WebView的简单说明下：经过实战检验,做腾讯QQ登录，如果引用他们提供的jar，若不加防止WebChromeClient混淆的代码，oauth认证无法回调，反编译基代码后可看到他们有用到WebChromeClient，加入此代码即可。
+
+##################################################################
+# 下面都是项目中引入的第三方 jar 包。第三方 jar 包中的代码不是我们的目标和关心的对象，故而对此我们全部忽略不进行混淆。
+##################################################################
+
+
+-keep public class * extends android.app.Fragment 
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.support.v4.**
+-keep public class com.android.vending.licensing.ILicensingService
+
+-keep class com.hellen.base.** { *; }
+-keep class com.hellen.bean.** { *; }
+
+
+-dontwarn com.ut.mini.**
+-dontwarn okio.**
+-dontwarn com.xiaomi.**
+-dontwarn com.squareup.wire.**
+-dontwarn android.support.v4.**
+-keepattributes *Annotation*
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.app.** { *; }
+-keep class okio.** {*;}
+-keep class com.squareup.wire.** {*;}
+-keep class com.umeng.message.protobuffer.* {
+	 public <fields>;
+         public <methods>;
+}
+-keep class com.umeng.message.* {
+	 public <fields>;
+         public <methods>;
+}
+-keep class org.android.agoo.impl.* {
+	 public <fields>;
+         public <methods>;
+}
+-keep class org.android.agoo.service.* {*;}
+-keep class org.android.spdy.**{*;}
+-keep public class **.R$*{
+    public static final int *;
+}
+
+#友盟分享混淆
+-dontwarn com.google.android.maps.**
+-dontwarn android.webkit.WebView
+-dontwarn com.umeng.**
+-dontwarn com.tencent.weibo.sdk.**
+-dontwarn com.facebook.**
+-keep public class javax.**
+-keep public class android.webkit.**
+-dontwarn android.support.v4.**
+-keep enum com.facebook.**
+-keepattributes Exceptions,InnerClasses,Signature
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep public interface com.facebook.**
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public interface com.umeng.socialize.sensor.**
+-keep public interface com.umeng.scrshot.**
+-keep public class com.umeng.socialize.* {*;}
+-keep class com.facebook.**
+-keep class com.facebook.** { *; }
+-keep class com.umeng.scrshot.**
+-keep public class com.tencent.** {*;}
+-keep class com.umeng.socialize.sensor.**
+-keep class com.umeng.socialize.handler.**
+-keep class com.umeng.socialize.handler.*
+-keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
+-keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
+-keep class im.yixin.sdk.api.YXMessage {*;}
+-keep class im.yixin.sdk.api.** implements im.yixin.sdk.api.YXMessage$YXMessageData{*;}
+-dontwarn twitter4j.**
+-keep class twitter4j.** { *; }
+-keep class com.tencent.** {*;}
+-dontwarn com.tencent.**
+-keep public class com.umeng.soexample.R$*{
+    public static final int *;
+}
+-keep public class com.umeng.soexample.R$*{
+    public static final int *;
+}
+-keep class com.tencent.open.TDialog$*
+-keep class com.tencent.open.TDialog$* {*;}
+-keep class com.tencent.open.PKDialog
+-keep class com.tencent.open.PKDialog {*;}
+-keep class com.tencent.open.PKDialog$*
+-keep class com.tencent.open.PKDialog$* {*;}
+-keep class com.sina.** {*;}
+-dontwarn com.sina.**
+-keep class  com.alipay.share.sdk.** {
+   *;
+}
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+-keep class com.linkedin.** { *; }
+-keepattributes Signature
+#友盟统计混淆
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
+#友盟微社区混淆
+-dontpreverify
+-dontwarn com.umeng.commm.**
+-dontwarn com.umeng.commm.**
+-dontwarn com.google.android.maps.**
+-dontwarn android.webkit.WebView
+-keep class  activeandroid.** {*;}
+-keep class com.umeng.** {*;}
+-keep class android.** {*;}
+-keepattributes *Annotation*
+
+
+-ignorewarnings
+-keep class org.apache.http.** {*;}
+-dontwarn  org.apache.http.**
+-keep class org.apache.http.* {*;}
+-dontwarn  org.apache.http.*
+-keep,allowshrinking class org.android.agoo.service.* {
+    public <fields>;
+    public <methods>;
+}
+-keep,allowshrinking class com.umeng.message.* {
+    public <fields>;
+    public <methods>;
+}
+
+
+-keep class com.umeng.commm.push.UmengPushImpl {
+    public * ;
+}
+-keep class android.support.v4.** {*;}
+-dontwarn android.webkit.WebView
+
+-dontwarn com.tencent.weibo.sdk.**
+-keepattributes Exceptions,InnerClasses,Signature
+-keepattributes SourceFile,LineNumberTable
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public class com.umeng.socialize.* {*;}
+-keep public class javax.**
+-keep public class android.webkit.**
+-keep public class com.tencent.** {*;}
+-keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
+-keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
+
+# adding push
+-keep class com.umeng.message.* {
+        public <fields>;
+        public <methods>;
+}
+
+-keep class com.umeng.message.protobuffer.* {
+        public <fields>;
+        public <methods>;
+}
+
+-keep class com.squareup.wire.* {
+        public <fields>;
+        public <methods>;
+}
+
+-keep class com.umeng.message.local.* {
+        public <fields>;
+        public <methods>;
+}
+-keep class org.android.agoo.impl.*{
+        public <fields>;
+        public <methods>;
+}
+
+-dontwarn com.xiaomi.**
+
+-dontwarn com.ut.mini.**
+
+-keep class org.android.agoo.service.* {*;}
+
+-keep class org.android.spdy.**{*;}
+-keepattributes Exceptions,InnerClasses,Signature,EnclosingMethod
+-keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*
+
+#分享相关混淆
+-dontwarn android.webkit.WebView
+-dontwarn com.umeng.**
+-dontwarn com.tencent.weibo.sdk.**
+-keepattributes Exceptions,InnerClasses,Signature
+-keepattributes SourceFile,LineNumberTable
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public class com.umeng.socialize.* {*;}
+-keep public class javax.**
+-keep public class android.webkit.**
+-keep public class com.tencent.** {*;}
+-keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
+-keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
+-keep class com.sina.** {*;}
+-dontwarn com.sina.**
+
+
+
+

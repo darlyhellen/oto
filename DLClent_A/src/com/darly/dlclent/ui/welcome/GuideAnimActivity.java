@@ -22,10 +22,12 @@ import android.widget.LinearLayout;
 
 import com.darly.dlclent.R;
 import com.darly.dlclent.adapter.ImageAdapter;
+import com.darly.dlclent.base.APP;
 import com.darly.dlclent.base.APPEnum;
 import com.darly.dlclent.base.BaseActivity;
 import com.darly.dlclent.common.SharePreferHelp;
 import com.darly.dlclent.ui.MainActivity;
+import com.darly.dlclent.widget.guidebackgroundcoloranimation.ColorAnimationView;
 import com.darly.dlclent.widget.welcome_anim.CubeTransformer;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
@@ -35,10 +37,14 @@ import com.lidroid.xutils.view.annotation.ViewInject;
  * @author zhangyh2 GuideAnim $ 下午3:05:15 TODO
  */
 @ContentView(R.layout.activity_guide)
-public class GuideAnimActivity extends BaseActivity implements OnPageChangeListener {
+public class GuideAnimActivity extends BaseActivity implements
+		OnPageChangeListener {
 
 	@ViewInject(R.id.viewpager)
 	public ViewPager viewPager;
+
+	@ViewInject(R.id.coloranimationview)
+	private ColorAnimationView colview;
 
 	private ArrayList<View> list;
 
@@ -60,7 +66,8 @@ public class GuideAnimActivity extends BaseActivity implements OnPageChangeListe
 		initViewPager();// 初始化ViewPager对象
 		initPoint();// 初始化导航小圆点
 		// 设置非第一次使用
-		SharePreferHelp.putValue(APPEnum.ISFIRSTCOME.getDec(), false);
+		SharePreferHelp.putValue(APPEnum.ISFIRSTCOME.getDec()
+				+ APP.getInstance().getVersion(), false);
 
 	}
 
@@ -88,15 +95,17 @@ public class GuideAnimActivity extends BaseActivity implements OnPageChangeListe
 
 	private void initViewPager() {
 		list = getList(this);
-
 		// 设置适配器
-		ImageAdapter adapter = new ImageAdapter(list);
+		ImageAdapter adapter = new ImageAdapter(list,this);
 		// 绑定适配器
 		viewPager.setAdapter(adapter);
+		// colview.setmViewPager(viewPager, list.size());
 
 		viewPager.setPageTransformer(true, new CubeTransformer());
+		
 		// 设置页卡切换监听
 		viewPager.setOnPageChangeListener(this);
+		// colview.setOnPageChangeListener(this);
 	}
 
 	private void initPoint() {

@@ -1,0 +1,274 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="11" android:versionName="1.1.1" package="com.hellen.flower">
+
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="18"/>
+
+    <!-- 鐢ㄤ簬杩涜缃戠粶瀹氫綅 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 鐢ㄤ簬璁块棶GPS瀹氫綅 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 鑾峰彇杩愯惀鍟嗕俊鎭紝鐢ㄤ簬鏀寔鎻愪緵杩愯惀鍟嗕俊鎭浉鍏崇殑鎺ュ彛 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 鐢ㄤ簬璁块棶wifi缃戠粶淇℃伅锛寃ifi淇℃伅浼氱敤浜庤繘琛岀綉缁滃畾浣�-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 杩欎釜鏉冮檺鐢ㄤ簬鑾峰彇wifi鐨勮幏鍙栨潈闄愶紝wifi淇℃伅浼氱敤鏉ヨ繘琛岀綉缁滃畾浣�-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- 鐢ㄤ簬璁块棶缃戠粶锛岀綉缁滃畾浣嶉渶瑕佷笂缃�-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 鐢ㄤ簬璇诲彇鎵嬫満褰撳墠鐨勭姸鎬�-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 鍐欏叆鎵╁睍瀛樺偍锛屽悜鎵╁睍鍗″啓鍏ユ暟鎹紝鐢ㄤ簬鍐欏叆缂撳瓨瀹氫綅鏁版嵁 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 鐩告満鏉冮檺 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <!-- 寰ぞ鍖烘潈闄�-->
+    <!-- 浣跨敤鐩告満 -->
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <!-- 瀹氫綅鎵�渶鐨勬潈闄�-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 鎺ㄩ�鐩稿叧鐨勬潈闄�-->
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <!-- QQ鐧诲綍鎵�渶鏉冮檺 -->
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
+    <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:name="com.hellen.base.APP" android:theme="@style/UmengDefault">
+        <activity android:label="@string/app_name" android:name="com.hellen.flower.wel.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.hellen.flower.MainActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.login.LoginActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.login.RegisterActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.login.SetPassActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.AutoNavActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.WebViewActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.flatbuffer.FlatBufferActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.CircleActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.camera.CameraActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hellen.flower.userinfo.ChangeUserInfoActivity" android:screenOrientation="portrait">
+        </activity>
+1
+
+        <service android:enabled="true" android:name="com.hellen.flower.service.MainService" android:process=":service">
+        </service>
+        <service android:enabled="true" android:name="com.hellen.flower.service.UpdateService">
+        </service>
+
+        <activity android:name="com.hellen.wxapi.WXEntryActivity">
+        </activity>
+        <activity android:name="com.hellen.wxapi.WXPayEntryActivity">
+        </activity>
+        <!-- 鏀粯瀹濈幆澧�-->
+        <activity android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:name="com.alipay.sdk.app.H5PayActivity" android:screenOrientation="behind">
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:name="com.alipay.sdk.auth.AuthActivity" android:screenOrientation="behind">
+        </activity>
+
+        <receiver android:name="com.hellen.flower.broadcast.BaseCastReceiver">
+            <intent-filter>
+                <action android:name="android.app.action.ACTION_TIME_TICK"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.amap.api.location.APSService">
+        </service>
+        <!-- //寮�彂鑰呯敵璇风殑key -->
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="53f4ca3f6e734eb5fc16f6d89e4285ae">
+        </meta-data>
+
+        <!-- 鍙嬬洘寮�彂骞冲彴鍙傛暟 -->
+        <meta-data android:name="UMENG_APPKEY" android:value="5784a3c967e58e49ef00185d">
+        </meta-data>
+        <meta-data android:name="UMENG_MESSAGE_SECRET" android:value="556c2f80c6ba32429ad531d0227ea65d">
+        </meta-data>
+        <meta-data android:name="UMENG_CHANNEL" android:value="@string/huawei">
+        </meta-data>
+        <!-- 寰ぞ鍖烘敞鍐�-->
+        <!-- 寰崥鐗坅ctivity缁勪欢 start -->
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.FindActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.UserInfoActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.TopicDetailActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <!-- 璇濋 -->
+
+        <activity android:alwaysRetainTaskState="true" android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.FeedsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <!-- 鎼滅储缁撴灉Activity -->
+
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.RelativeUserActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.community.login.DefaultLoginActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.community.login.RegisterActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:exported="true" android:name="com.umeng.comm.ui.activities.PostFeedActivity" android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <!-- topic picker -->
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.TopicPickActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <!-- forward -->
+
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.ForwardActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <!-- 鎼滅储Activity -->
+
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.SearchActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <!-- searchtopic -->
+
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.comm.ui.activities.SearchTopicActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:launchMode="singleTask" android:name="com.umeng.comm.ui.activities.FeedDetailActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:launchMode="singleTask" android:name="com.umeng.comm.ui.activities.GuideActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <!-- feed璇︽儏椤甸潰 -->
+
+
+        <!-- 璁剧疆椤甸潰activity -->
+        <activity android:name="com.umeng.common.ui.activities.SettingActivity"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.common.ui.activities.LoginSimplifyActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.umeng.common.ui.activities.RegisterActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing"/>
+        <!-- 鍙嬬洘鐧诲綍鐣岄潰 -->
+        <activity android:name="com.umeng.community.login.LoginActivity"/>
+        <activity android:name="com.umeng.comm.ui.activities.LocationFeedActivity"/>
+        <!-- ##################鍒嗕韩鐩稿叧#################### -->
+        <!-- 鍒嗕韩鍐呭缂栬緫椤�-->
+
+        <activity android:launchMode="singleTask" android:name="com.tencent.tauth.AuthActivity" android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent1104606393"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.tencent.connect.common.AssistActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!-- 寰俊鍥炶皟activity -->
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.hellen.flower.wxapi.WXEntryActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.umeng.common.ui.activities.AlbumActivity"/>
+        <activity android:name="com.umeng.comm.ui.activities.FollowedTopicActivity"/>
+        <activity android:name="com.umeng.comm.ui.activities.NotificationActivity"/>
+        <activity android:name="com.umeng.comm.ui.activities.NewMsgActivity"/>
+
+        <!-- 鍥剧墖閫夋嫨鐩稿叧 -->
+
+        <activity android:name="com.umeng.common.ui.imagepicker.PhotoSelectorActivity"/>
+        <activity android:name="com.umeng.common.ui.imagepicker.PhotoPreviewActivity"/>
+        <activity android:name="com.umeng.common.ui.activities.MessageChatActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name="com.hellen.flower.WBShareActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.umeng.common.ui.activities.BrowserActivity"/>
+        <!-- ##################### 鎺ㄩ�鐩稿叧 ##################### -->
+        <receiver android:exported="false" android:name="com.umeng.message.NotificationProxyBroadcastReceiver">
+        </receiver>
+        <receiver android:name="com.umeng.message.SystemReceiver" android:process=":push">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.umeng.message.MessageReceiver" android:process=":push">
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.umeng.message.ElectionReceiver" android:process=":push">
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.ELECTION_RESULT_V4"/>
+
+                <category android:name="umeng"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.umeng.message.UmengMessageBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.umeng.message.UmengIntentService" android:process=":push">
+        </service>
+        <service android:exported="true" android:name="com.umeng.message.UmengMessageIntentReceiverService" android:process=":push">
+            <intent-filter>
+                <action android:name="org.android.agoo.client.MessageReceiverService"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.android.agoo.client.ElectionReceiverService"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.umeng.message.UmengMessageCallbackHandlerService">
+            <intent-filter>
+                <action android:name="com.umeng.messge.registercallback.action"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.unregistercallback.action"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.message.handler.action"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.autoupdate.handler.action"/>
+            </intent-filter>
+        </service>
+        <!-- If you donot want to use the standard notification bar in SDK, you can define IntentService instead to handle message. -->
+        <service android:exported="false" android:name="com.umeng.message.UmengDownloadResourceService"/>
+        <service android:exported="false" android:name="com.umeng.message.local.UmengLocalNotificationService"/>
+
+        <service android:exported="true" android:label="PushService" android:name="com.umeng.message.UmengService" android:process=":push">
+            <intent-filter>
+                <action android:name="com.hellen.flower.intent.action.START"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.hellen.flower.intent.action.COCKROACH"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.PING_V4"/>
+
+                <category android:name="umeng"/>
+            </intent-filter>
+        </service>
+        <receiver android:exported="false" android:name="com.umeng.message.RegistrationReceiver">
+            <intent-filter>
+                <action android:name="com.hellen.flower.intent.action.COMMAND"/>
+            </intent-filter>
+        </receiver>
+    </application>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <!-- 鍙� -->
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_ADDED"/>
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED"/>
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL"/>
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED"/>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+
+</manifest>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/app_dialog_shape"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/description_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/actionbar_selector_color"
+        android:textSize="@dimen/textview_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/textview_normal" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            style="android:attr/buttonBarButtonStyle"
+            android:id="@+id/sure"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_select"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textview_lnnear" />
+
+        <Button
+            style="android:attr/buttonBarButtonStyle"
+            android:id="@+id/notsure"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_select"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textview_lnnear" />
+    </TableRow>
+
+</LinearLayout>

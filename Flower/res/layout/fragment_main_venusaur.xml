@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ven_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.hellen.widget.header.HeaderView
+            android:id="@+id/ven_headerview"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" >
+        </com.hellen.widget.header.HeaderView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ven_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/ven_tv"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:drawableRight="@drawable/ic_more"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/venusaur" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+    </LinearLayout>
+
+    <com.hellen.widget.listview.WholeListView
+        android:id="@+id/ven_wlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.hellen.widget.listview.WholeListView>
+
+</LinearLayout>

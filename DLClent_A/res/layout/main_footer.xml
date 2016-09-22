@@ -6,28 +6,25 @@
     android:background="@color/app_main_header_bg"
     android:orientation="horizontal" >
 
-    <RadioButton
+    <com.darly.dlclent.widget.theme.ButtonRadio
         android:id="@+id/main_footer_main"
-        style="@style/RadioBase"
-        android:drawableTop="@drawable/ic_index"
-        android:text="@string/footer_main" />
+        style="@style/RadioBase"/>
 
-    <RadioButton
-        android:id="@+id/main_footer_list"
-        style="@style/RadioBase"
-        android:drawableTop="@drawable/ic_me"
-        android:text="@string/footer_list" />
-
-    <RadioButton
+    <com.darly.dlclent.widget.theme.ButtonRadio
         android:id="@+id/main_footer_act"
-        style="@style/RadioBase"
-        android:drawableTop="@drawable/ic_me_press"
-        android:text="@string/footer_act" />
+        style="@style/RadioBase" />
 
-    <RadioButton
-        android:id="@+id/main_footer_center"
+    <com.darly.dlclent.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_conversion"
         style="@style/RadioBase"
-        android:drawableTop="@drawable/ic_set_press"
-        android:text="@string/footer_center" />
+        android:padding="4dp" />
+
+    <com.darly.dlclent.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_list"
+        style="@style/RadioBase" />
+
+    <com.darly.dlclent.widget.theme.ButtonRadio
+        android:id="@+id/main_footer_center"
+        style="@style/RadioBase" />
 
 </RadioGroup>

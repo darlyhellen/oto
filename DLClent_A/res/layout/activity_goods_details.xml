@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,7 +35,8 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <include        android:id="@+id/details_title_name"
+    <include
+        android:id="@+id/details_title_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/details_title"
